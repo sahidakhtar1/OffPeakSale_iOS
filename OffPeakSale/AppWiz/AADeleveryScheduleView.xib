@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="gTj-6a-Mow" customClass="AADeleveryScheduleView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" id="EsK-sc-trp">
+                    <rect key="frame" x="10" y="120" width="300" height="386"/>
+                    <autoresizingMask key="autoresizingMask"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" id="K6v-yZ-7BK" customClass="AAThemeView">
+                            <rect key="frame" x="0.0" y="87" width="299" height="2"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <animations/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        </view>
+                        <textField opaque="NO" clipsSubviews="YES" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="11" borderStyle="line" minimumFontSize="17" id="TQl-hZ-lWu" customClass="AAThemeValidationTextField">
+                            <rect key="frame" x="9" y="134" width="52" height="35"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <animations/>
+                            <rect key="contentStretch" x="1" y="0.0" width="1" height="1"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <action selector="tfDeliveyDatePressed:" destination="gTj-6a-Mow" eventType="touchUpInside" id="Q5H-Vl-i6p"/>
+                                <outlet property="delegate" destination="gTj-6a-Mow" id="OYa-va-3xb"/>
+                            </connections>
+                        </textField>
+                        <textField opaque="NO" clipsSubviews="YES" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="11" borderStyle="line" minimumFontSize="17" id="i1R-jY-w75" customClass="AAThemeValidationTextField">
+                            <rect key="frame" x="65" y="134" width="135" height="35"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <animations/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <action selector="tfDeliveyDatePressed:" destination="gTj-6a-Mow" eventType="touchUpInside" id="7VP-B8-S9X"/>
+                                <outlet property="delegate" destination="gTj-6a-Mow" id="OXH-Ob-ziO"/>
+                            </connections>
+                        </textField>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Earlist date of Delivery" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tC1-CX-dmu">
+                            <rect key="frame" x="39" y="20" width="215" height="24"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <animations/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="11-May-2015, 09:30AM-11:30AM" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NrA-AL-QvL">
+                            <rect key="frame" x="39" y="40" width="253" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <animations/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Prefered Delivery Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="L31-ue-nKe">
+                            <rect key="frame" x="9" y="94" width="283" height="35"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <animations/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <textField opaque="NO" clipsSubviews="YES" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="11" borderStyle="line" minimumFontSize="17" id="JAy-ZA-99B" customClass="AAThemeValidationTextField">
+                            <rect key="frame" x="208" y="134" width="83" height="35"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <animations/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <action selector="tfDeliveyDatePressed:" destination="gTj-6a-Mow" eventType="touchUpInside" id="6yU-Qc-zRG"/>
+                                <outlet property="delegate" destination="gTj-6a-Mow" id="MB7-Jn-UtT"/>
+                            </connections>
+                        </textField>
+                        <textField opaque="NO" clipsSubviews="YES" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="11" borderStyle="line" minimumFontSize="17" id="deV-T1-eJo" customClass="AAThemeValidationTextField">
+                            <rect key="frame" x="9" y="214" width="282" height="35"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <animations/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <action selector="tfTimePressed:" destination="gTj-6a-Mow" eventType="touchUpInside" id="DdZ-tu-lws"/>
+                                <outlet property="delegate" destination="gTj-6a-Mow" id="Nxi-ui-0yX"/>
+                            </connections>
+                        </textField>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delivery Time Interval" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tRf-cx-0yb">
+                            <rect key="frame" x="9" y="174" width="282" height="35"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <animations/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="info" id="8lB-Lc-P1c">
+                            <rect key="frame" x="9" y="18" width="28" height="28"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <animations/>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2Zk-VQ-baD" customClass="AAThemeGlossyButton">
+                            <rect key="frame" x="93" y="338" width="106" height="40"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <animations/>
+                            <state key="normal" title="Done">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="btnDonePressed:" destination="gTj-6a-Mow" eventType="touchUpInside" id="c2d-eF-TGK"/>
+                            </connections>
+                        </button>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="updown" id="4e5-zD-ChN">
+                            <rect key="frame" x="47" y="144" width="8" height="16"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <animations/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="updown" id="1hv-mq-s4k">
+                            <rect key="frame" x="277" y="224" width="8" height="16"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <animations/>
+                        </imageView>
+                        <textField opaque="NO" clipsSubviews="YES" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" id="T4X-t6-bT5" userLabel="tf-Collection Adress" customClass="AAThemeValidationTextField">
+                            <rect key="frame" x="10" y="294" width="282" height="35"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <animations/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <action selector="tfCollectionAddressPressed:" destination="gTj-6a-Mow" eventType="touchUpInside" id="dTj-NP-GLG"/>
+                                <outlet property="delegate" destination="gTj-6a-Mow" id="SqM-T2-2Sz"/>
+                            </connections>
+                        </textField>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Collection Address" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="U4d-Dz-01Y">
+                            <rect key="frame" x="10" y="254" width="282" height="35"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <animations/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="updown" id="VOD-Z8-iFa">
+                            <rect key="frame" x="278" y="305" width="7" height="16"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <animations/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="updown" id="0jb-2c-C3w">
+                            <rect key="frame" x="186" y="144" width="8" height="16"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <animations/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="updown" id="OZm-JE-ZN7">
+                            <rect key="frame" x="277" y="144" width="8" height="16"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <animations/>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="KmV-uc-i85">
+                            <rect key="frame" x="268" y="2" width="29" height="28"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <animations/>
+                            <state key="normal" backgroundImage="close_popup">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="btnCloseTapped:" destination="gTj-6a-Mow" eventType="touchUpInside" id="Udw-La-SMN"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <animations/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                </view>
+            </subviews>
+            <animations/>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.35999999999999999" colorSpace="calibratedRGB"/>
+            <connections>
+                <outlet property="btnDone" destination="2Zk-VQ-baD" id="TsG-fN-FEF"/>
+                <outlet property="imgTimeUpdown" destination="1hv-mq-s4k" id="rha-5H-1Hx"/>
+                <outlet property="imgUpdown" destination="VOD-Z8-iFa" id="q7V-lu-2rx"/>
+                <outlet property="lblCollectionAddressTitle" destination="U4d-Dz-01Y" id="mV2-VZ-6qo"/>
+                <outlet property="lblDeleveryTitle" destination="tC1-CX-dmu" id="qDh-Lw-Coc"/>
+                <outlet property="lblDeliveryDateTitle" destination="L31-ue-nKe" id="Gep-Zb-5Sj"/>
+                <outlet property="lblDeliveryTimeTitle" destination="tRf-cx-0yb" id="PmA-2J-15j"/>
+                <outlet property="lblSelectedSchedule" destination="NrA-AL-QvL" id="rYo-MF-wSt"/>
+                <outlet property="tfCollectionAddress" destination="T4X-t6-bT5" id="LSA-NS-k0J"/>
+                <outlet property="tfDay" destination="TQl-hZ-lWu" id="8ku-5a-7Oh"/>
+                <outlet property="tfMonth" destination="i1R-jY-w75" id="lnb-V8-hjs"/>
+                <outlet property="tfTime" destination="deV-T1-eJo" id="0Xa-Ps-hJJ"/>
+                <outlet property="tfYear" destination="JAy-ZA-99B" id="Ysd-0W-e3d"/>
+                <outlet property="vwContainerView" destination="EsK-sc-trp" id="iTW-v4-r8g"/>
+            </connections>
+            <point key="canvasLocation" x="-152" y="273"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="close_popup" width="36" height="36"/>
+        <image name="info" width="24" height="24"/>
+        <image name="updown" width="8" height="16"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>
