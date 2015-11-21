@@ -12,6 +12,7 @@
 #import "AASideMenuViewController.h"
 #import "SWRevealViewController.h"
 #import "AAEShopViewController.h"
+#import "AAEShopViewController.h"
 @implementation AAAppDelegate
 //@synthesize cartItems;
 -(void)getString{
@@ -156,10 +157,16 @@
 {
     [AAAppGlobals sharedInstance].locationHandler = [[AALocationHandler alloc] init];
        UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    AAHomeViewController* mainViewController = [storyboard instantiateViewControllerWithIdentifier:@"AAHomeViewController"];
+//    AAHomeViewController* mainViewController = [storyboard instantiateViewControllerWithIdentifier:@"AAHomeViewController"];
+    AACategoryDataModel *item = [[AACategoryDataModel alloc] init];
+    item.categoryName = @"OffPeakSale";
+    item.categoryId = @"279";
+    AAEShopViewController *eshopVC = [storyboard instantiateViewControllerWithIdentifier:@"AAEShopViewController"];
+    eshopVC.category = item;
+
     AASideMenuViewController *sideMenuVC = [storyboard instantiateViewControllerWithIdentifier:@"AASideMenuVC"];
     
-    UINavigationController *frontNavigationController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
+    UINavigationController *frontNavigationController = [[UINavigationController alloc] initWithRootViewController:eshopVC];
     UINavigationController *rearNavigationController = [[UINavigationController alloc] initWithRootViewController:sideMenuVC];
     
     self.revealController = [[SWRevealViewController alloc] initWithRearViewController:rearNavigationController frontViewController:frontNavigationController];

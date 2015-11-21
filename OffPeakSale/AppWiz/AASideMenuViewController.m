@@ -19,6 +19,8 @@
 #import "AAMenuItem.h"
 #import "AALookBookViewController.h"
 #import "AAOrderHistoryViewController.h"
+#import "AACategoryDataModel.h"
+#import "AAEShopViewController.h"
 @interface AASideMenuViewController ()
 
 @end
@@ -104,9 +106,18 @@
             break;
         case ESHOP:
                 {
-                    AASecondaryMenuViewController *secondaryOption = [self.storyboard instantiateViewControllerWithIdentifier:@"AASecondaryMenuViewController"];
-                    secondaryOption.itemType = ESHOP;
-                    [self.navigationController pushViewController:secondaryOption animated:YES];
+//                    AASecondaryMenuViewController *secondaryOption = [self.storyboard instantiateViewControllerWithIdentifier:@"AASecondaryMenuViewController"];
+//                    secondaryOption.itemType = ESHOP;
+//                    [self.navigationController pushViewController:secondaryOption animated:YES];
+                    
+                    AACategoryDataModel *item = [[AACategoryDataModel alloc] init];
+                    item.categoryName = @"OffPeakSale";
+                    item.categoryId = @"279";
+                    AAEShopViewController *eshopVC = [self.storyboard instantiateViewControllerWithIdentifier:@"AAEShopViewController"];
+                    eshopVC.category = item;
+                    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:eshopVC];
+                    navigationController.navigationBarHidden=YES;
+                    [self.revealViewController pushFrontViewController:navigationController animated:YES];
                 }
             break;
         case FEATUREDSTORE:
@@ -168,16 +179,25 @@
             break;
         case ABOUTUS:
             {
-                AASecondaryMenuViewController *secondaryOption = [self.storyboard instantiateViewControllerWithIdentifier:@"AASecondaryMenuViewController"];
-                secondaryOption.itemType = ABOUTUS;
-                [self.navigationController pushViewController:secondaryOption animated:YES];
+//                AASecondaryMenuViewController *secondaryOption = [self.storyboard instantiateViewControllerWithIdentifier:@"AASecondaryMenuViewController"];
+//                secondaryOption.itemType = ABOUTUS;
+//                [self.navigationController pushViewController:secondaryOption animated:YES];
+                
+                AAMenuWebViewController* vcRetailerStore = [self.storyboard instantiateViewControllerWithIdentifier:@"AAMenuWebViewController"];
+                    [vcRetailerStore setWebPageUrl:[AAAppGlobals sharedInstance].retailer.aboutUrl];
+                    [vcRetailerStore setWebPageTitle:menuItem.itemName];
+                
+                
+                UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:vcRetailerStore];
+                navigationController.navigationBarHidden=YES;
+                [self.revealViewController pushFrontViewController:navigationController     animated:YES];
             }
             break;
         case TERMSOFUSE:
             {
                     AAMenuWebViewController* vcRetailerStore = [self.storyboard instantiateViewControllerWithIdentifier:@"AAMenuWebViewController"];
                     [vcRetailerStore setWebPageUrl:[AAAppGlobals sharedInstance].retailer.termsUrl];
-                    [vcRetailerStore setWebPageTitle:@"Terms of Use"];
+                    [vcRetailerStore setWebPageTitle:menuItem.itemName];
                     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:vcRetailerStore];
                     navigationController.navigationBarHidden=YES;
                 [self.revealViewController pushFrontViewController:navigationController     animated:YES];
@@ -230,81 +250,88 @@
 -(void)populateMenuItems{
     
     [arrMenuItems removeAllObjects];
-    NSArray *menuList = [AAAppGlobals sharedInstance].retailer.menuList;
-    for (NSDictionary *menu in menuList) {
-        NSString *itemOrgName = [menu valueForKey:@"origName"];
-        NSString *itemDisplayName = [menu valueForKey:@"displayName"];
-        if ([itemOrgName compare:@"index" options:NSCaseInsensitiveSearch] == NSOrderedSame) {
-            AAMenuItem *home = [[AAMenuItem alloc] init];
-            home.itemName = itemDisplayName;
-            home.itemType = HOME;
-            home.showArrow = NO;
-            home.iconName = @"home-1";
-            [arrMenuItems addObject:home];
-        }
-        if ([itemOrgName compare:@"eshop" options:NSCaseInsensitiveSearch] == NSOrderedSame) {
-            AAMenuItem *eshop = [[AAMenuItem alloc] init];
-            eshop.itemName = itemDisplayName;
-            eshop.itemType = ESHOP;
-            eshop.showArrow = YES;
-            eshop.iconName = @"eshop-1";
-            [arrMenuItems addObject:eshop];
-            
-//            if ([[AAAppGlobals sharedInstance].retailer.featuredStores count]>0) {
-//                AAMenuItem *featuredStore = [[AAMenuItem alloc] init];
-//                featuredStore.itemName = @"Featured Store";
-//                featuredStore.itemType = FEATUREDSTORE;
-//                featuredStore.showArrow = YES;
-//                featuredStore.iconName = @"featured_store";
-//                [arrMenuItems addObject:featuredStore];
-//            }
-
-        }
-        if ([itemOrgName compare:@"loyalty" options:NSCaseInsensitiveSearch] == NSOrderedSame) {
-            AAMenuItem *layalty = [[AAMenuItem alloc] init];
-            layalty.itemName = itemDisplayName;
-            layalty.itemType = LOYAITY;
-            layalty.showArrow = NO;
-            layalty.iconName = @"loyalty-1";
-            [arrMenuItems addObject:layalty];
-        }
-        if ([itemOrgName compare:@"feedback" options:NSCaseInsensitiveSearch] == NSOrderedSame) {
-            AAMenuItem *feedback = [[AAMenuItem alloc] init];
-            feedback.itemName = itemDisplayName;
-            feedback.itemType = FEEDBACK;
-            feedback.showArrow = NO;
-            feedback.iconName = @"feedback-1";
-            [arrMenuItems addObject:feedback];
-        }
-        if ([itemOrgName compare:@"lookbook" options:NSCaseInsensitiveSearch] == NSOrderedSame) {
-            AAMenuItem *lookbook = [[AAMenuItem alloc] init];
-            lookbook.itemName = itemDisplayName;
-            lookbook.itemType = LOOKBOOK;
-            lookbook.showArrow = NO;
-            lookbook.iconName = @"lookbook";
-            [arrMenuItems addObject:lookbook];
-        }
-        if ([itemOrgName compare:@"contact" options:NSCaseInsensitiveSearch] == NSOrderedSame) {
-            AAMenuItem *locateus = [[AAMenuItem alloc] init];
-            locateus.itemName = itemDisplayName;
-            locateus.itemType = LOCATEUS;
-            locateus.showArrow = NO;
-            locateus.iconName = @"locate_us";
-            [arrMenuItems addObject:locateus];
-            
-        }
-        if ([itemOrgName compare:@"calendar" options:NSCaseInsensitiveSearch] == NSOrderedSame) {
-            AAMenuItem *calendar = [[AAMenuItem alloc] init];
-            calendar.itemName = itemDisplayName;
-            calendar.itemType = CALENDAR;
-            calendar.showArrow = NO;
-            calendar.iconName = @"ic_calendar";
-            [arrMenuItems addObject:calendar];
-        }
-    }
+//    NSArray *menuList = [AAAppGlobals sharedInstance].retailer.menuList;
+//    for (NSDictionary *menu in menuList) {
+//        NSString *itemOrgName = [menu valueForKey:@"origName"];
+//        NSString *itemDisplayName = [menu valueForKey:@"displayName"];
+//        if ([itemOrgName compare:@"index" options:NSCaseInsensitiveSearch] == NSOrderedSame) {
+//            AAMenuItem *home = [[AAMenuItem alloc] init];
+//            home.itemName = itemDisplayName;
+//            home.itemType = HOME;
+//            home.showArrow = NO;
+//            home.iconName = @"home-1";
+//            [arrMenuItems addObject:home];
+//        }
+//        if ([itemOrgName compare:@"eshop" options:NSCaseInsensitiveSearch] == NSOrderedSame) {
+//            AAMenuItem *eshop = [[AAMenuItem alloc] init];
+//            eshop.itemName = itemDisplayName;
+//            eshop.itemType = ESHOP;
+//            eshop.showArrow = YES;
+//            eshop.iconName = @"eshop-1";
+//            [arrMenuItems addObject:eshop];
+//            
+////            if ([[AAAppGlobals sharedInstance].retailer.featuredStores count]>0) {
+////                AAMenuItem *featuredStore = [[AAMenuItem alloc] init];
+////                featuredStore.itemName = @"Featured Store";
+////                featuredStore.itemType = FEATUREDSTORE;
+////                featuredStore.showArrow = YES;
+////                featuredStore.iconName = @"featured_store";
+////                [arrMenuItems addObject:featuredStore];
+////            }
+//
+//        }
+//        if ([itemOrgName compare:@"loyalty" options:NSCaseInsensitiveSearch] == NSOrderedSame) {
+//            AAMenuItem *layalty = [[AAMenuItem alloc] init];
+//            layalty.itemName = itemDisplayName;
+//            layalty.itemType = LOYAITY;
+//            layalty.showArrow = NO;
+//            layalty.iconName = @"loyalty-1";
+//            [arrMenuItems addObject:layalty];
+//        }
+//        if ([itemOrgName compare:@"feedback" options:NSCaseInsensitiveSearch] == NSOrderedSame) {
+//            AAMenuItem *feedback = [[AAMenuItem alloc] init];
+//            feedback.itemName = itemDisplayName;
+//            feedback.itemType = FEEDBACK;
+//            feedback.showArrow = NO;
+//            feedback.iconName = @"feedback-1";
+//            [arrMenuItems addObject:feedback];
+//        }
+//        if ([itemOrgName compare:@"lookbook" options:NSCaseInsensitiveSearch] == NSOrderedSame) {
+//            AAMenuItem *lookbook = [[AAMenuItem alloc] init];
+//            lookbook.itemName = itemDisplayName;
+//            lookbook.itemType = LOOKBOOK;
+//            lookbook.showArrow = NO;
+//            lookbook.iconName = @"lookbook";
+//            [arrMenuItems addObject:lookbook];
+//        }
+//        if ([itemOrgName compare:@"contact" options:NSCaseInsensitiveSearch] == NSOrderedSame) {
+//            AAMenuItem *locateus = [[AAMenuItem alloc] init];
+//            locateus.itemName = itemDisplayName;
+//            locateus.itemType = LOCATEUS;
+//            locateus.showArrow = NO;
+//            locateus.iconName = @"locate_us";
+//            [arrMenuItems addObject:locateus];
+//            
+//        }
+//        if ([itemOrgName compare:@"calendar" options:NSCaseInsensitiveSearch] == NSOrderedSame) {
+//            AAMenuItem *calendar = [[AAMenuItem alloc] init];
+//            calendar.itemName = itemDisplayName;
+//            calendar.itemType = CALENDAR;
+//            calendar.showArrow = NO;
+//            calendar.iconName = @"ic_calendar";
+//            [arrMenuItems addObject:calendar];
+//        }
+//    }
+    
+    AAMenuItem *eshop = [[AAMenuItem alloc] init];
+    eshop.itemName = @"Resturants Nearby";
+    eshop.itemType = ESHOP;
+    eshop.showArrow = NO;
+    eshop.iconName = @"eshop-1";
+    [arrMenuItems addObject:eshop];
     
     AAMenuItem *voucher = [[AAMenuItem alloc] init];
-    voucher.itemName = @"Voucher";
+    voucher.itemName = @"Notification";
     voucher.itemType = VOUCHER;
     voucher.showArrow = NO;
     voucher.iconName = @"voucher-1";
@@ -312,7 +339,7 @@
     
     
     AAMenuItem *myOrder = [[AAMenuItem alloc] init];
-    myOrder.itemName = @"My Orders";
+    myOrder.itemName = @"Order History";
     myOrder.itemType = MYORDER;
     myOrder.showArrow = NO;
     myOrder.iconName = @"icon_cart_black.png";
@@ -326,19 +353,22 @@
     profile.iconName = @"my_profile";
     [arrMenuItems addObject:profile];
     
-    AAMenuItem *aboutus = [[AAMenuItem alloc] init];
-    aboutus.itemName = [NSString stringWithFormat:@"About Us",[AAAppGlobals sharedInstance].retailer.retailerName ];
-    aboutus.itemType = ABOUTUS;
-    aboutus.showArrow = YES;
-    aboutus.iconName = @"about_us";
-    [arrMenuItems addObject:aboutus];
     
     AAMenuItem *termsOfUse = [[AAMenuItem alloc] init];
-    termsOfUse.itemName = @"Terms of Use";
+    termsOfUse.itemName = @"Terms & Consditions";
     termsOfUse.itemType = TERMSOFUSE;
     termsOfUse.showArrow = NO;
     termsOfUse.iconName = @"termsofuse";
-//    [arrMenuItems addObject:termsOfUse];
+    [arrMenuItems addObject:termsOfUse];
+    
+    AAMenuItem *aboutus = [[AAMenuItem alloc] init];
+    aboutus.itemName = @"Online Help";
+    aboutus.itemType = ABOUTUS;
+    aboutus.showArrow = NO;
+    aboutus.iconName = @"about_us";
+    [arrMenuItems addObject:aboutus];
+    
+    
     
 //    AAMenuItem *currency = [[AAMenuItem alloc] init];
 //    currency.itemName = @"Currency";
