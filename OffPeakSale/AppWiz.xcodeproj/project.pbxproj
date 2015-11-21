@@ -3028,7 +3028,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/AppWiz/PayPalMobile",
-					"/Users/ShahidAkhtar/Library/Developer/Xcode/DerivedData/Pods-bbboumzrlmfairccstxhnhcqlukt/Build/Products/Release$(EFFECTIVE_PLATFORM_NAME)",
+					"/Users/Litoo/Library/Developer/Xcode/DerivedData/Pods-ergcjqkjbhrjivbdfmswnsbqqaxo/Build/Products/Release$(EFFECTIVE_PLATFORM_NAME)",
 					"$(SRCROOT)/AppWiz",
 					"$(SRCROOT)/AppWiz/SDKExport",
 					"$(PROJECT_DIR)/AppWiz/SDKExport",
@@ -3080,7 +3080,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/AppWiz/PayPalMobile",
-					"/Users/ShahidAkhtar/Library/Developer/Xcode/DerivedData/Pods-bbboumzrlmfairccstxhnhcqlukt/Build/Products/Release$(EFFECTIVE_PLATFORM_NAME)",
+					"/Users/Litoo/Library/Developer/Xcode/DerivedData/Pods-ergcjqkjbhrjivbdfmswnsbqqaxo/Build/Products/Release$(EFFECTIVE_PLATFORM_NAME)",
 					"$(SRCROOT)/AppWiz",
 					"$(SRCROOT)/AppWiz/SDKExport",
 					"$(PROJECT_DIR)/AppWiz/SDKExport",

@@ -126,7 +126,7 @@
     if(self
        .splashScreenDelegate)
     {
-    [self.splashScreenDelegate onSplashScreenDisplayCompleted];
+       [self.splashScreenDelegate onSplashScreenDisplayCompleted];
     }
 }
 -(void)adjustLabels
