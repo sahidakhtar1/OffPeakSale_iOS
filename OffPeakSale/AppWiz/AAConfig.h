@@ -14,6 +14,11 @@
 #define BUTTON_FONTSIZE 16
 #define MENU_ITEM_FONTSIZE 17
 
+#define SCREEN_WIDTH [[UIScreen mainScreen] bounds].size.width
+#define SCREEN_HEIGHT [[UIScreen mainScreen] bounds].size.height
+#define APP_COLOR [UIColor colorWithRed:(0.0 / 255.0) green:(204.0 / 255.0) blue:(190.0 / 255.0) alpha:1.0]
+
+
 #define SHORTDESC_FONTSIZE 17
 #define FONT_SIZE_OLD_PRICE 14
 #define FONT_SIZE_NEW_PRICE 16

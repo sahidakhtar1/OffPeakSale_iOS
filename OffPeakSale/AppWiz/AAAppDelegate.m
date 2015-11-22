@@ -13,6 +13,8 @@
 #import "SWRevealViewController.h"
 #import "AAEShopViewController.h"
 #import "AAEShopViewController.h"
+#import "AATour_ViewController.h"
+
 @implementation AAAppDelegate
 //@synthesize cartItems;
 -(void)getString{
@@ -159,7 +161,7 @@
        UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
 //    AAHomeViewController* mainViewController = [storyboard instantiateViewControllerWithIdentifier:@"AAHomeViewController"];
     AACategoryDataModel *item = [[AACategoryDataModel alloc] init];
-    item.categoryName = @"OffPeakSale";
+    item.categoryName = @"OFF PEAK SALE";
     item.categoryId = @"279";
     AAEShopViewController *eshopVC = [storyboard instantiateViewControllerWithIdentifier:@"AAEShopViewController"];
     eshopVC.category = item;
@@ -203,11 +205,26 @@
     self.window.rootViewController = vcSplashScreen;
     [self.window makeKeyAndVisible];
 }
+-(void)showTourScreen
+{
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    AATour_ViewController* vcTourScreen = [storyboard instantiateViewControllerWithIdentifier:@"AATour_ViewController"];
+    self.window.rootViewController = vcTourScreen;
+    [self.window makeKeyAndVisible];
+}
 -(void)onSplashScreenDisplayCompleted
 {
+    int checkSplash= [[NSUserDefaults standardUserDefaults] integerForKey:@"Key_tourChk"];
+    NSLog(@"splash check ==%d",checkSplash);
     
+    if (checkSplash == 0)
+    {
+        [self showTourScreen];
+    }
+    else
+    {
         [self showMainScreen];
-    
+    }    
 }
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
 {

@@ -95,12 +95,14 @@ NSInteger const RATING_VIEW_WEIDTH = 105;
                                                     0,
                                                     QTY_INDICATOR_WIDTH,
                                                     QTY_INDICATOR_HEIGHT)];
-    self.vwQtyIndicator.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"btn_tab_default"]];
+//    self.vwQtyIndicator.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"btn_tab_default"]];
+    _vwQtyIndicator.backgroundColor = [UIColor blackColor];
+    _vwQtyIndicator.alpha = 0.5;
     [self.viewMainContent addSubview:self.vwQtyIndicator];
     
     self.lblQtyIndicator = [[UILabel alloc] initWithFrame:self.vwQtyIndicator.bounds];
     [self.lblQtyIndicator setTextAlignment:NSTextAlignmentCenter];
-    self.lblQtyIndicator.textColor = [UIColor blackColor];
+    self.lblQtyIndicator.textColor = [UIColor whiteColor];
     self.lblQtyIndicator.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont
                                                 size:QTY_INDICATOR_FONT];
     [self.vwQtyIndicator addSubview:self.lblQtyIndicator];
@@ -117,7 +119,7 @@ NSInteger const RATING_VIEW_WEIDTH = 105;
                                                            green:46.0f/255.0f
                                                             blue:37.0f/255.0f
                                                            alpha:1];
-    [self.viewMainContent addSubview:self.vwSaleIndicator];
+    //[self.viewMainContent addSubview:self.vwSaleIndicator];
     
     self.lblSaleIndicator = [[UILabel alloc] initWithFrame:self.vwSaleIndicator.bounds];
     [self.lblSaleIndicator setTextAlignment:NSTextAlignmentCenter];
@@ -125,7 +127,7 @@ NSInteger const RATING_VIEW_WEIDTH = 105;
     self.lblSaleIndicator.text = @"Sale";
     self.lblSaleIndicator.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont
                                                 size:QTY_INDICATOR_FONT];
-    [self.vwSaleIndicator addSubview:self.lblSaleIndicator];
+    //[self.vwSaleIndicator addSubview:self.lblSaleIndicator];
     
    
 }
@@ -299,15 +301,17 @@ NSInteger const RATING_VIEW_WEIDTH = 105;
     self.lblProductPreviousPrice.center = center1;
     
     if (self.eshopProduct.availQty != nil) {
-        if ([self.eshopProduct.availQty integerValue]<=0) {
-            self.lblQtyIndicator.text = @"Sold Out";
-            self.vwQtyIndicator.hidden = false;
-        }else if([self.eshopProduct.availQty integerValue]>5){
-            self.vwQtyIndicator.hidden = true;
-        }else{
-            self.lblQtyIndicator.text = [NSString stringWithFormat:@"%@ Left",self.eshopProduct.availQty];
-            self.vwQtyIndicator.hidden = false;
-        }
+        self.lblQtyIndicator.text = [NSString stringWithFormat:@"%@ sold",self.eshopProduct.availQty];
+        self.vwQtyIndicator.hidden = false;
+//        if ([self.eshopProduct.availQty integerValue]<=0) {
+//            self.lblQtyIndicator.text = @"Sold Out";
+//            self.vwQtyIndicator.hidden = false;
+//        }else if([self.eshopProduct.availQty integerValue]>5){
+//            self.vwQtyIndicator.hidden = true;
+//        }else{
+//            self.lblQtyIndicator.text = [NSString stringWithFormat:@"%@ Left",self.eshopProduct.availQty];
+//            self.vwQtyIndicator.hidden = false;
+//        }
     }
     
     if (self.eshopProduct.onSale != nil && [self.eshopProduct.onSale integerValue]==1) {

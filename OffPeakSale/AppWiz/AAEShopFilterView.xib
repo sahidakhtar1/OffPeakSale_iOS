@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -12,126 +12,77 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" id="gFT-nE-vyc">
-                    <rect key="frame" x="10" y="153" width="300" height="262"/>
+                    <rect key="frame" x="10" y="147" width="300" height="230"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <view contentMode="scaleToFill" id="n5T-W1-cZL" customClass="AAThemeView">
-                            <rect key="frame" x="0.0" y="50" width="299" height="2"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sort By" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8bZ-Cm-enk">
-                            <rect key="frame" x="15" y="19" width="215" height="24"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="HVB-rA-yMX" customClass="AAThemeGlossyButton">
-                            <rect key="frame" x="97" y="214" width="106" height="40"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="Filter">
+                            <rect key="frame" x="67" y="161" width="167" height="35"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Explore">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
                                 <action selector="btnDoneTapped:" destination="ATd-qs-2yd" eventType="touchUpInside" id="gVt-EP-q5t"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="cL7-Tu-sMc">
-                            <rect key="frame" x="268" y="2" width="29" height="28"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" backgroundImage="close_popup">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="btnCloseTapped:" destination="ATd-qs-2yd" eventType="touchUpInside" id="SVE-al-BF0"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="oeF-JT-6ut">
-                            <rect key="frame" x="15" y="178" width="277" height="25"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="None">
-                                <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="btnFilteSelected:" destination="ATd-qs-2yd" eventType="touchUpInside" id="tfa-gg-0s7"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Hty-DX-hnV">
-                            <rect key="frame" x="15" y="56" width="277" height="25"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="Popularity">
-                                <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="btnFilteSelected:" destination="ATd-qs-2yd" eventType="touchUpInside" id="nWU-Wn-VPQ"/>
-                            </connections>
-                        </button>
                         <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Oze-2t-1Ng">
-                            <rect key="frame" x="15" y="87" width="277" height="25"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="Latest">
+                            <rect key="frame" x="256" y="97" width="25" height="25"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <state key="normal">
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="btnFilteSelected:" destination="ATd-qs-2yd" eventType="touchUpInside" id="HBM-Ov-5sq"/>
+                                <action selector="btnFilteSelected:" destination="ATd-qs-2yd" eventType="touchUpInside" id="AhA-hs-xGV"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="6X1-SY-39h">
-                            <rect key="frame" x="15" y="118" width="277" height="25"/>
+                        <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Current Location" textAlignment="natural" minimumFontSize="17" id="IH7-6J-Syf">
+                            <rect key="frame" x="22" y="41" width="212" height="35"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="Lowest Price">
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="7s9-1Q-3hv"/>
+                            </connections>
+                        </textField>
+                        <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Target Location" textAlignment="natural" minimumFontSize="17" id="I4U-BO-Hef">
+                            <rect key="frame" x="22" y="92" width="212" height="35"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="4hQ-kW-9fM"/>
+                            </connections>
+                        </textField>
+                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Hty-DX-hnV">
+                            <rect key="frame" x="256" y="46" width="25" height="25"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <state key="normal">
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="btnFilteSelected:" destination="ATd-qs-2yd" eventType="touchUpInside" id="u05-Yh-qe0"/>
+                                <action selector="btnFilteSelected:" destination="ATd-qs-2yd" eventType="touchUpInside" id="l17-SR-u1e"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="veo-c5-NUw">
-                            <rect key="frame" x="15" y="149" width="277" height="25"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="Highest Price">
-                                <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="btnFilteSelected:" destination="ATd-qs-2yd" eventType="touchUpInside" id="7yw-PB-qhM"/>
-                            </connections>
-                        </button>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tick" id="sBy-9z-zUy">
-                            <rect key="frame" x="274" y="61" width="16" height="16"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        </imageView>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.35999999999999999" colorSpace="calibratedRGB"/>
             <connections>
-                <outlet property="btnDone" destination="HVB-rA-yMX" id="PXl-pb-KOD"/>
-                <outlet property="btnFilterHighestPrice" destination="veo-c5-NUw" id="c4x-Rq-GOc"/>
-                <outlet property="btnFilterLatest" destination="Oze-2t-1Ng" id="dmf-Tw-CPu"/>
-                <outlet property="btnFilterLowestPrice" destination="6X1-SY-39h" id="ybE-TI-TqH"/>
-                <outlet property="btnFilterNone" destination="oeF-JT-6ut" id="VzR-Dk-NgN"/>
-                <outlet property="btnFilterPopularity" destination="Hty-DX-hnV" id="TRo-ex-xmZ"/>
-                <outlet property="imgFilterIndicator" destination="sBy-9z-zUy" id="xOp-F5-XZL"/>
-                <outlet property="lblFilterTitle" destination="8bZ-Cm-enk" id="lgx-zh-S1v"/>
+                <outlet property="btnDone" destination="HVB-rA-yMX" id="l2D-M1-ENh"/>
+                <outlet property="curentRadioBtn" destination="Hty-DX-hnV" id="T8e-Iu-qVc"/>
+                <outlet property="curntLocation" destination="IH7-6J-Syf" id="aPK-x5-4uU"/>
+                <outlet property="targetLocation" destination="I4U-BO-Hef" id="jlO-z8-QX8"/>
+                <outlet property="targetRadioBtn" destination="Oze-2t-1Ng" id="EhO-C5-X9o"/>
                 <outlet property="vwContainerView" destination="gFT-nE-vyc" id="NF0-CY-V5M"/>
             </connections>
             <point key="canvasLocation" x="-213" y="267"/>
         </view>
     </objects>
-    <resources>
-        <image name="close_popup" width="36" height="36"/>
-        <image name="tick" width="16" height="16"/>
-    </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
 </document>

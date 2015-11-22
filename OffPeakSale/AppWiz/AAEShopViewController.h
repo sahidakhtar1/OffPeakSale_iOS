@@ -15,7 +15,7 @@
 #import "AACategoryDataModel.h"
 #import "AAEShopFilterView.h"
 #import "AAHeaderView.h"
-@interface AAEShopViewController : AAChildBaseViewController <UITableViewDataSource,UITableViewDelegate,AAEShopCategoryScrollViewDelegate,AALoginDailogDelegate>
+@interface AAEShopViewController : AAChildBaseViewController <UITableViewDataSource,UITableViewDelegate,AAEShopCategoryScrollViewDelegate,AALoginDailogDelegate, HeaderViewDelegate, EshopFilterDelegate>
 {
     NSMutableArray* productList_;
     AAHeaderView *headerView1;
@@ -36,4 +36,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblNoSearchFoundText;
 @property (nonatomic, strong) NSString* searchText;
 @property (nonatomic, strong) NSString* filterKey;
+@property (weak, nonatomic) IBOutlet UIButton *nearByBtn;
+@property (strong, nonatomic) IBOutlet UIView *locationAlertView;
+
+@property (weak, nonatomic) IBOutlet UIScrollView *ProductScroolView;
+
+@property (weak, nonatomic) IBOutlet AAEShopCategoriesScrollView *productTabs;
+
 @end

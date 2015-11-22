@@ -10,6 +10,10 @@
 #import "AAHeaderView.h"
 #import "UIViewController+AAShakeGestuew.h"
 #import "AAShoppingCartViewController.h"
+
+#define SCREEN_WIDTH [[UIScreen mainScreen] bounds].size.width
+#define SCREEN_HEIGHT [[UIScreen mainScreen] bounds].size.height
+
 @interface AAEShopViewController ()
 
 @end
@@ -51,10 +55,13 @@
     self.scrollViewCategoryList.eShopCategoryDelegate = self;
     self.scrollViewCategoryList.fontCategoryName = [AAFont eShopCategoryTextFont];
     [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(reloadTable) userInfo:nil repeats:NO];
+    
     headerView1 = [[AAHeaderView alloc] initWithFrame:self.vwHeaderView.frame];
     [self.vwHeaderView addSubview:headerView1];
+    
     [headerView1 setTitle:self.category.categoryName];
-    headerView1.showCart = true;
+    headerView1.backgroundColor = [UIColor redColor];
+    headerView1.showCart = false;
     headerView1.showBack = false;
     headerView1.delegate = self;
     [headerView1 setMenuIcons];
@@ -66,7 +73,45 @@
         self.tableViewEShopProductList.frame = frame;
         [headerView1 setTitle:self.searchText];
     }
+    
+    self.productTabs.eShopCategoryDelegate = self;
+    self.productTabs.backgroundColor=[UIColor whiteColor];
+    self.productTabs.fontCategoryName = [AAFont eShopCategoryTextFont];
+    [self populateCategories];
+//    [self popuateProductInfo];
+
 	// Do any additional setup after loading the view.
+    
+    //[self locationViewPopUp];
+}
+-(void)locationViewPopUp
+{
+    self.locationAlertView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    self.locationAlertView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:self.locationAlertView];
+    
+    UILabel *bgLbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    bgLbl.backgroundColor = [UIColor blackColor];
+    bgLbl.alpha = 0.3;
+    [self.locationAlertView addSubview:bgLbl];
+
+}
+-(void)populateCategories
+{
+    NSMutableArray *arr = [[NSMutableArray alloc] init];
+    [arr addObject:@"Morning"];
+    [arr addObject:@"Afternoon"];
+    [arr addObject:@"Night"];
+    [arr addObject:@"Midnight"];
+//    if (self.product.productWorkingInformation.length>0) {
+//        [arr addObject:@"How It Works"];
+//    }
+    self.productTabs.selectedCategory = @"Morning";
+    self.productTabs.categories = arr.mutableCopy;
+    [self.productTabs refreshScrollView];
+    [self onCategeorySelected:self.productTabs.selectedCategory];
+    
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -175,41 +220,42 @@
 }
 
 #pragma mark - Helpers
--(void)populateCategories
-{
-    NSArray* arrCategoryNames = [[AAAppGlobals sharedInstance].categoryList getCategoryNames];
-    if([arrCategoryNames count] >0)
-    {
-    if(self.selectedCategoryName==nil || ![[AAAppGlobals sharedInstance].categoryList doesCategoryNameExist:self.selectedCategoryName])
-    {
-        
-       
-        NSString* selectedCategoryName =[arrCategoryNames objectAtIndex:0];
-        self.scrollViewCategoryList.selectedCategory = selectedCategoryName;
-        self.selectedCategoryName = selectedCategoryName;
-        productList_ = [[AAAppGlobals sharedInstance].categoryList getProductListWithCategoryName:selectedCategoryName];
-    }
-    else
-    {
-        
-        productList_ = [[AAAppGlobals sharedInstance].categoryList getProductListWithCategoryName:self.selectedCategoryName];
-    }
-   
-   
-    self.scrollViewCategoryList.categories = arrCategoryNames.mutableCopy;
-    
-    
-    [self.scrollViewCategoryList refreshScrollView];
-    }
-}
+//-(void)populateCategories
+//{
+//    NSArray* arrCategoryNames = [[AAAppGlobals sharedInstance].categoryList getCategoryNames];
+//    if([arrCategoryNames count] >0)
+//    {
+//    if(self.selectedCategoryName==nil || ![[AAAppGlobals sharedInstance].categoryList doesCategoryNameExist:self.selectedCategoryName])
+//    {
+//        
+//       
+//        NSString* selectedCategoryName =[arrCategoryNames objectAtIndex:0];
+//        self.scrollViewCategoryList.selectedCategory = selectedCategoryName;
+//        self.selectedCategoryName = selectedCategoryName;
+//        productList_ = [[AAAppGlobals sharedInstance].categoryList getProductListWithCategoryName:selectedCategoryName];
+//    }
+//    else
+//    {
+//        
+//        productList_ = [[AAAppGlobals sharedInstance].categoryList getProductListWithCategoryName:self.selectedCategoryName];
+//    }
+//   
+//   
+//    self.scrollViewCategoryList.categories = arrCategoryNames.mutableCopy;
+//    
+//    
+//    [self.scrollViewCategoryList refreshScrollView];
+//    }
+//}
 
 #pragma mark - Scroll view  categories callbacks
 -(void)onCategeorySelected:(NSString *)categoryName
 {
-    AAEshopCategory* selectedCategory = [[AAAppGlobals sharedInstance].categoryList getCategoryWithCategoryName:categoryName];
-     productList_ = [selectedCategory getProductList];
-    self.selectedCategoryName = selectedCategory.categoryName;
-    [self.tableViewEShopProductList reloadData];
+    
+//    AAEshopCategory* selectedCategory = [[AAAppGlobals sharedInstance].categoryList getCategoryWithCategoryName:categoryName];
+//     productList_ = [selectedCategory getProductList];
+//    self.selectedCategoryName = selectedCategory.categoryName;
+//    [self.tableViewEShopProductList reloadData];
 }
 
 #pragma mark - Transition View controller management
@@ -257,15 +303,11 @@
                                           dispatch_async(dispatch_get_main_queue(), ^{
                                               //            [self populateCategories];
                                               [self.tableViewEShopProductList reloadData];
-                                          });
-                                          
-                                          
-                                          
+                                          });                                          
                                       }];
     }
     
 }
-
 - (void)cartButtonTapped {
     if ([AAAppGlobals sharedInstance].cartTotalItemCount == 0) {
         [[[UIAlertView alloc] initWithTitle:nil message:@"Your shopping cart is empty." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil] show];

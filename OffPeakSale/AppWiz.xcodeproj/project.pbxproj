@@ -365,6 +365,9 @@
 		4AD3DF1B1AFFED5F00585790 /* AACategoryDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD3DF1A1AFFED5F00585790 /* AACategoryDataModel.m */; };
 		4AE8087C1AFBE414007C6A95 /* AASecondaryMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8087B1AFBE414007C6A95 /* AASecondaryMenuViewController.m */; };
 		4AE8087F1AFBE43C007C6A95 /* AASecondaryMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8087E1AFBE43C007C6A95 /* AASecondaryMenuCell.m */; };
+		A18E45041C01CB30007BF9DE /* dropdown.png in Resources */ = {isa = PBXBuildFile; fileRef = A18E45021C01CB30007BF9DE /* dropdown.png */; settings = {ASSET_TAGS = (); }; };
+		A18E45051C01CB30007BF9DE /* logoSample.png in Resources */ = {isa = PBXBuildFile; fileRef = A18E45031C01CB30007BF9DE /* logoSample.png */; settings = {ASSET_TAGS = (); }; };
+		A19F64731C01876300A0D008 /* AATour_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A19F64721C01876300A0D008 /* AATour_ViewController.m */; settings = {ASSET_TAGS = (); }; };
 		E3F4EF861B01D74200CBC785 /* AAEShopFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F4EF851B01D74200CBC785 /* AAEShopFilterView.m */; };
 		E3F4EF881B01D75500CBC785 /* AAEShopFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3F4EF871B01D75500CBC785 /* AAEShopFilterView.xib */; };
 		F706E264192545DE00D58414 /* icon_cart.png in Resources */ = {isa = PBXBuildFile; fileRef = F706E263192545DE00D58414 /* icon_cart.png */; };
@@ -837,6 +840,10 @@
 		4AE8087B1AFBE414007C6A95 /* AASecondaryMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AASecondaryMenuViewController.m; sourceTree = "<group>"; };
 		4AE8087D1AFBE43C007C6A95 /* AASecondaryMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AASecondaryMenuCell.h; sourceTree = "<group>"; };
 		4AE8087E1AFBE43C007C6A95 /* AASecondaryMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AASecondaryMenuCell.m; sourceTree = "<group>"; };
+		A18E45021C01CB30007BF9DE /* dropdown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dropdown.png; sourceTree = "<group>"; };
+		A18E45031C01CB30007BF9DE /* logoSample.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logoSample.png; sourceTree = "<group>"; };
+		A19F64711C01876300A0D008 /* AATour_ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AATour_ViewController.h; sourceTree = "<group>"; };
+		A19F64721C01876300A0D008 /* AATour_ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AATour_ViewController.m; sourceTree = "<group>"; };
 		AD6D6DFE09224E7B92D24F62 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		E3F4EF841B01D74200CBC785 /* AAEShopFilterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAEShopFilterView.h; sourceTree = "<group>"; };
 		E3F4EF851B01D74200CBC785 /* AAEShopFilterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAEShopFilterView.m; sourceTree = "<group>"; };
@@ -1114,6 +1121,7 @@
 		4002B30F185F208B001ABEFF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A18E45011C01C66E007BF9DE /* NearByDropDown View */,
 				4A366C431BDD487000A2CF7D /* Login */,
 				4A96EE111AFE165C00798E04 /* ShoppingCart BottonView */,
 				4A8B18361AF5FB6900CDC38D /* WebView */,
@@ -1354,6 +1362,8 @@
 				F780EF73192BB2D7004AAB40 /* icon_cart@2x.png */,
 				4AAF01111AFE6A3C00E890B8 /* triangle_icon.png */,
 				F780EF71192BAC30004AAB40 /* icon_delete@2x.png */,
+				A18E45021C01CB30007BF9DE /* dropdown.png */,
+				A18E45031C01CB30007BF9DE /* logoSample.png */,
 				F7BC178019292DA1006825CC /* icon_delete.png */,
 				F706E263192545DE00D58414 /* icon_cart.png */,
 				F7C51BA11927449A00659422 /* Paypal button_smaller.png */,
@@ -1400,6 +1410,7 @@
 		404D9AFC185D7A0B00F6893A /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				A19F646D1C01856E00A0D008 /* Tor_ViewController */,
 				4A36A92F1BF8C9DB0073FEA1 /* Gift Wrap */,
 				4AA3B4BE1B028E8300D6A9DD /* ViewController Category */,
 				4002B2E2185DC04F001ABEFF /* BaseViewControllers */,
@@ -2200,6 +2211,22 @@
 			name = "Header View";
 			sourceTree = "<group>";
 		};
+		A18E45011C01C66E007BF9DE /* NearByDropDown View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "NearByDropDown View";
+			sourceTree = "<group>";
+		};
+		A19F646D1C01856E00A0D008 /* Tor_ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A19F64711C01876300A0D008 /* AATour_ViewController.h */,
+				A19F64721C01876300A0D008 /* AATour_ViewController.m */,
+			);
+			name = Tor_ViewController;
+			sourceTree = "<group>";
+		};
 		E3F4EF831B01D71400CBC785 /* FilterView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2461,6 +2488,7 @@
 				40CF5FC518841E2B00806551 /* test.gif in Resources */,
 				F70F6890194366790089600E /* OpenSans.ttf in Resources */,
 				F7229EDB190FF62600BD4595 /* AAOrderSucessView.xib in Resources */,
+				A18E45051C01CB30007BF9DE /* logoSample.png in Resources */,
 				F75C30C1190B91A200C38212 /* AACertVeiwCell.xib in Resources */,
 				40CF5FC01883F92500806551 /* AAStoreInfoWindow.xib in Resources */,
 				F70F688A194366790089600E /* Arial.ttf in Resources */,
@@ -2473,6 +2501,7 @@
 				F70F6895194366790089600E /* Trebuchet MS.ttf in Resources */,
 				4AA3B4BD1B02884D00D6A9DD /* icon_cart_black@2x.png in Resources */,
 				F7F3EC6F1A277BBD005074B8 /* BannerItem.xib in Resources */,
+				A18E45041C01CB30007BF9DE /* dropdown.png in Resources */,
 				F70F6889194366790089600E /* Arial-Bold.ttf in Resources */,
 				F70F6893194366790089600E /* Times New Roman.ttf in Resources */,
 				F70F688D194366790089600E /* Georgia-Bold.ttf in Resources */,
@@ -2763,6 +2792,7 @@
 				4002B2FD185DDB70001ABEFF /* AAEShopNavigationViewController.m in Sources */,
 				4A04EED31BF47F3C004A82B0 /* AAOrderItemCell.m in Sources */,
 				4ACFE1DC1AF4AE6F00CA9C63 /* AAHeaderView.m in Sources */,
+				A19F64731C01876300A0D008 /* AATour_ViewController.m in Sources */,
 				40BDB39518703AFE000948A5 /* AAThemeGlossyButton.m in Sources */,
 				40CF5FB2187EEF6700806551 /* NSObject+SBJSON.m in Sources */,
 				40C71BB218671FA700325938 /* AASplashPageHelper.m in Sources */,

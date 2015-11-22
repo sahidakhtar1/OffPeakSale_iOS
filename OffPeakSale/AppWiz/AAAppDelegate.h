@@ -26,6 +26,7 @@
 @property (strong,nonatomic) AAPushNotificationPopupView* pushNotificationPopupView;
 @property (nonatomic) NSInteger voucherIndex;
 
+
 -(void)openSideMenu;
 -(void)searchItemWithText:(NSString*)searchText;
 -(void)showVoucher;

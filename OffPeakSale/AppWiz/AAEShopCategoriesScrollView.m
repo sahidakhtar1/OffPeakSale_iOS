@@ -13,7 +13,7 @@
 @implementation AAEShopCategoriesScrollView
 NSInteger const BUTTON_TEXT_PADDING = 20;
 NSInteger  MAX_BUTTON_WIDTH = 180;
-NSInteger const SELECTIONINDICATOR_HEIGHT = 3;
+NSInteger const SELECTIONINDICATOR_HEIGHT = 5;
 
 @synthesize selectedCategory = selectedCategory_;
 @synthesize selectedIndicator;
@@ -57,8 +57,6 @@ NSInteger const SELECTIONINDICATOR_HEIGHT = 3;
 -(void)categorySelected: (id)sender
 {
     NSUInteger indexOfButton = [arrButtonViews_ indexOfObject:sender];
-    
-
     UIButton *btn = (UIButton*)sender;
     
     CGRect frame = self.selectedIndicator.frame;
@@ -66,19 +64,12 @@ NSInteger const SELECTIONINDICATOR_HEIGHT = 3;
     frame.origin.x = btn.frame.origin.x;
     self.selectedIndicator.frame = frame;
     
-    
     NSString* categoryName = [self.categories objectAtIndex:indexOfButton];
     self.selectedCategory = categoryName;
     [self.eShopCategoryDelegate onCategeorySelected:categoryName];
     [self updateSelectedCategory:NO];
     [sender setSelected:YES];
 }
-
-
-
-
-
-
 
 -(void)addCategoriesToScrollView
 {
@@ -93,15 +84,11 @@ NSInteger const SELECTIONINDICATOR_HEIGHT = 3;
         currentX+=btnCategory.frame.size.width;
     }
     
-    
-    
     for(int i = ([arrButtonViews_ count] - 1);i>=0;i--)
     {
         [self addSubview:[arrButtonViews_ objectAtIndex:i]];
     }
     
-    
-   
     
     [self setContentSize:CGSizeMake(currentX, self.frame.size.height)];
     
@@ -164,8 +151,9 @@ NSInteger const SELECTIONINDICATOR_HEIGHT = 3;
     
     AATabButton* btnCategory  =[[AATabButton alloc] init];
     [btnCategory setTitleColor:[AAColor sharedInstance].eShopCategoryTextColor forState:UIControlStateNormal];
+    [btnCategory setBackgroundColor:[UIColor redColor]];
     //[btnCategory setBackgroundImage:[UIImage imageNamed:@"first.png"] forState:UIControlStateNormal];
-     [btnCategory.titleLabel setFont:[UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:CATEGORY_FONTSIZE]];
+     [btnCategory.titleLabel setFont:[UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:FONT_SIZE_OLD_PRICE]];
     [btnCategory setTitle:categoryName forState:UIControlStateNormal];
     
     [btnCategory addTarget:self action:@selector(categorySelected:) forControlEvents:UIControlEventTouchUpInside];
@@ -180,7 +168,6 @@ NSInteger const SELECTIONINDICATOR_HEIGHT = 3;
 
 -(void)updateSelectedCategory :(BOOL)selected
 {
-    
     
         if([self.categories indexOfObject:self.selectedCategory]!=NSNotFound)
         {

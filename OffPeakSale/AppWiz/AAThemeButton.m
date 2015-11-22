@@ -26,6 +26,7 @@
     if(self)
     {
         [self initValues];
+        [self updateTheme];
     }
     
     return self;
@@ -40,7 +41,7 @@
 
 -(void)updateTheme
 {
-    [self setTitleColor:[AAColor sharedInstance].retailerThemeTextColor forState:UIControlStateNormal];
+    [self setTitleColor:[AAColor sharedInstance].retailerThemeBackgroundColor forState:UIControlStateNormal];
 }
 
 -(void)changeTheme
