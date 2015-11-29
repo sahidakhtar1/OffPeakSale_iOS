@@ -37,7 +37,7 @@ static NSString* const JSON_PRODUCT_SHORT_DESCRIPTION_KEY = @"short_desc";
             if([[NSUserDefaults standardUserDefaults] objectForKey:cid])
             {
                 NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:cid];
-                [AAAppGlobals sharedInstance].products = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+                [AAAppGlobals sharedInstance].categoryList = [NSKeyedUnarchiver unarchiveObjectWithData:data];
                 success();
             }
         }
@@ -68,7 +68,7 @@ static NSString* const JSON_PRODUCT_SHORT_DESCRIPTION_KEY = @"short_desc";
         success();
         if (keyword == nil && sortBy != nil && [sortBy isEqualToString:@"rate"]) {
             
-            NSData *data = [NSKeyedArchiver archivedDataWithRootObject:[AAAppGlobals sharedInstance].products];
+            NSData *data = [NSKeyedArchiver archivedDataWithRootObject:[AAAppGlobals sharedInstance].categoryList];
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
             [defaults setObject:data forKey:cid];
             [defaults synchronize];
@@ -197,7 +197,7 @@ static NSString* const JSON_PRODUCT_SHORT_DESCRIPTION_KEY = @"short_desc";
             {
                
                 NSArray* arrCategoryList = [response objectForKey:JSON_DATA_KEY];
-                [AAAppGlobals sharedInstance].products =  [self populateProducts:arrCategoryList];
+                [AAAppGlobals sharedInstance].categoryList =  [self populateProducts:arrCategoryList];
   
                 
             }
@@ -207,13 +207,31 @@ static NSString* const JSON_PRODUCT_SHORT_DESCRIPTION_KEY = @"short_desc";
     }
     
 }
++(AAEshopCategoryList*)populateProducts:(NSArray*)categoryList{
 //        NSArray* productList = [dictRetailer objectForKey:JSON_RETAILER_PRODUCTS_KEY];
-    NSMutableArray *products = [[NSMutableArray alloc] init];
+//    NSMutableArray *products = [[NSMutableArray alloc] init];
+    AAEshopCategoryList *categories = [[AAEshopCategoryList alloc] init];
+        for(NSDictionary* category in categoryList)
         {
+            AAEshopCategory* eShopCategory = [[AAEshopCategory alloc] init];
+            NSArray *productList = [category objectForKey:@"products"];
+            for (NSDictionary *product in productList) {
+                AAEShopProduct* eShopProduct = [self populateProduct:product];
+                [eShopCategory addProduct:eShopProduct];
+ 
+            }
             
             
+            
+            
+        if([category objectForKey:@"category"])
+            {
+                eShopCategory.categoryName = [category objectForKey:@"category"];
+                [categories addEshopProductCategory:eShopCategory];
+
+            }
         }
-    return products;
+    return categories;
 }
 +(AAEShopProduct*)populateProduct:(NSDictionary*)product{
     AAEShopProduct* eShopProduct = [[AAEShopProduct alloc] init];
@@ -234,6 +252,7 @@ static NSString* const JSON_PRODUCT_SHORT_DESCRIPTION_KEY = @"short_desc";
     }
     if ([product objectForKey:JSON_PRODUCT_NEW_PRICE_KEY]) {
         eShopProduct.currentProductPrice = [NSString stringWithFormat:@"%@", [product objectForKey:JSON_PRODUCT_NEW_PRICE_KEY]];
+        
     }
     if ([product objectForKey:JSON_PRODUCT_OLD_PRICE_KEY]) {
         eShopProduct.previousProductPrice =[NSString stringWithFormat:@"%@", [product objectForKey:JSON_PRODUCT_OLD_PRICE_KEY]];
@@ -261,6 +280,27 @@ static NSString* const JSON_PRODUCT_SHORT_DESCRIPTION_KEY = @"short_desc";
     }
     if ([product objectForKey:@"onSale"]) {
         eShopProduct.onSale = [product objectForKey:@"onSale"];
+    }
+    if ([product objectForKey:@"onSale"]) {
+        eShopProduct.onSale = [product objectForKey:@"onSale"];
+    }
+    if ([product objectForKey:@"outletName"]) {
+        eShopProduct.outletName = [product objectForKey:@"outletName"];
+    }
+    if ([product objectForKey:@"outletAddr"]) {
+        eShopProduct.outletAddr = [product objectForKey:@"outletAddr"];
+    }
+    if ([product objectForKey:@"outletContact"]) {
+        eShopProduct.outletContact = [product objectForKey:@"outletContact"];
+    }
+    if ([product objectForKey:@"outletLat"]) {
+        eShopProduct.outletLat = [product objectForKey:@"outletLat"];
+    }
+    if ([product objectForKey:@"outletLong"]) {
+        eShopProduct.outletLong = [product objectForKey:@"outletLong"];
+    }
+    if ([product objectForKey:@"offpeak_discount"]) {
+        eShopProduct.offpeak_discount = [product objectForKey:@"offpeak_discount"];
     }
     if ([product objectForKey:@"product_options"]) {
         NSArray *productOptions = [product objectForKey:@"product_options"];
