@@ -20,7 +20,7 @@ NSInteger const QTY_INDICATOR_HEIGHT = 30.0;
 
 NSInteger const RATING_VIEW_WEIDTH = 105;
 @synthesize eshopProduct = eShopProduct_;
-@synthesize ratingView,priceView;
+@synthesize priceView;
 @synthesize cartItem;
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -29,7 +29,6 @@ NSInteger const RATING_VIEW_WEIDTH = 105;
         [self.contentView.superview setClipsToBounds:NO];
         [self setUpCell];
     }
-    [self.ratingView setUserRatingOff];
     return self;
 }
 -(void) setProductForCart:(ItemDetail*)item{
@@ -42,14 +41,6 @@ NSInteger const RATING_VIEW_WEIDTH = 105;
     self.viewMainContent = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.contentView.frame.size.width, self.contentView.frame.size.height - MAIN_VIEW_PADDING)];
     [self.viewMainContent setBackgroundColor:[UIColor whiteColor]];
     
-//    [self.viewMainContent.layer setShadowColor:[UIColor blackColor].CGColor];
-//    [self.viewMainContent.layer setShadowOffset:CGSizeMake(0, 5) ];
-//    [self.viewMainContent.layer setShadowOpacity:0.8];
-//    [self.viewMainContent.layer setShadowRadius:5];
-//    [self.viewMainContent.layer setMasksToBounds:NO];
-    
-//    self.viewMainContent.layer.borderColor = BOARDER_COLOR.CGColor;
-//    self.viewMainContent.layer.borderWidth = 1.0f;
     
     [self.viewMainContent setAutoresizingMask:UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth ];
     [self.contentView addSubview:self.viewMainContent];
@@ -58,34 +49,41 @@ NSInteger const RATING_VIEW_WEIDTH = 105;
     self.lblProductCurrentPrice = [[UILabel alloc] init];
     self.lblProductShortDescription = [[UILabel alloc] init];
     self.lblProductName = [[UILabel alloc] init];
+    self.lblDistance = [[UILabel alloc] init];
+    
+    self.lblDistance.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].boldFont size:DISTANCE_FONTSIZE];
+    self.lblDistance.textColor = [AAColor sharedInstance].retailerThemeBackgroundColor;
     
     self.imgViewProductImage = [[UIImageView alloc] initWithFrame:CGRectMake(IMAGE_VIEW_PADDING, IMAGE_VIEW_PADDING, self.viewMainContent.frame.size.width - 2*IMAGE_VIEW_PADDING, [[AAAppGlobals sharedInstance] getImageHeight] - 2*IMAGE_VIEW_PADDING)];
      [self.imgViewProductImage setAutoresizingMask:UIViewAutoresizingFlexibleWidth ];
     [self.viewMainContent addSubview:self.imgViewProductImage];
     self.overlayView = [[UIView alloc] init];
-//    [self.viewMainContent addSubview:self.overlayView];
     
     
     self.overlayLayer = NO;
     float screenWidth = [UIScreen mainScreen].bounds.size.width - 25;
-    self.ratingView = [[RatingView alloc] initWithFrame:CGRectMake(screenWidth-RATING_VIEW_WEIDTH,
-                                                                   10,
-                                                                   RATING_VIEW_WEIDTH,
-                                                                   20) isRatingOff:YES];
+    self.lblAddress = [[UILabel alloc] init];
+    self.imgPin = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+    [self.imgPin setImage:[UIImage imageNamed:@"locate_us"]];
+//                         WithFrame:CGRectMake(screenWidth-RATING_VIEW_WEIDTH,
+//                                                                   10,
+//                                                                   RATING_VIEW_WEIDTH,
+//                                                                   20)];
     
-    [self.viewMainContent addSubview:self.ratingView];
-    [self.ratingView setBackgroundColor:[UIColor whiteColor]];
-    [self.ratingView setUserRatingOff];
+    [self.viewMainContent addSubview:self.locationView];
     
     self.priceView = [[UIView alloc] initWithFrame:CGRectMake(0,
                                                                  [[AAAppGlobals sharedInstance] getImageHeight],
                                                                  screenWidth+20,
                                                                  PRICE_VIEW_HEIGHT)];
     self.priceView.backgroundColor = [UIColor whiteColor];
-    [self.priceView addSubview:self.ratingView];
+//    [self.priceView addSubview:self.ratingView];
     [self.priceView addSubview:self.lblProductPreviousPrice];
     [self.priceView addSubview:self.lblProductCurrentPrice];
     [self.priceView addSubview:self.lblProductShortDescription];
+    [self.priceView addSubview:self.lblDistance];
+    [self.priceView addSubview:self.lblAddress];
+    [self.priceView addSubview:self.imgPin];
     [self.viewMainContent addSubview:self.priceView];
     
     float width = [UIScreen mainScreen].bounds.size.width;
@@ -127,13 +125,14 @@ NSInteger const RATING_VIEW_WEIDTH = 105;
     self.lblSaleIndicator.text = @"Sale";
     self.lblSaleIndicator.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont
                                                 size:QTY_INDICATOR_FONT];
+    self.lblAddress.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont
+                                           size:ADDRESS_FONTSIZE];
     //[self.vwSaleIndicator addSubview:self.lblSaleIndicator];
     
    
 }
 -(void)setEshopProduct:(AAEShopProduct *)eshopProduct
 {
-    [self.ratingView setUserRatingOff];
     eShopProduct_ = eshopProduct;
    
     [self populateViews];
@@ -191,7 +190,11 @@ NSInteger const RATING_VIEW_WEIDTH = 105;
         prodrating = self.eshopProduct.productRating;
     }
     
-    CGSize shortDescriptionLabelSize = [AAUtils getTextSizeWithFont:[UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:SHORTDESC_FONTSIZE] andText:prodDesc andMaxWidth:self.imgViewProductImage.frame.size.width- (2*MAIN_VIEW_PADDING ) ];
+    self.lblDistance.text = @"12KM";
+    CGSize disctanceSize = [AAUtils getTextSizeWithFont:self.lblDistance.font andText:self.lblDistance.text andMaxWidth:MAXFLOAT];
+    self.lblDistance.frame = CGRectMake(self.imgViewProductImage.frame.size.width - disctanceSize.width-15, 5, disctanceSize.width, disctanceSize.height);
+    
+    CGSize shortDescriptionLabelSize = [AAUtils getTextSizeWithFont:[UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:SHORTDESC_FONTSIZE] andText:prodDesc andMaxWidth:self.imgViewProductImage.frame.size.width- (2*MAIN_VIEW_PADDING )- disctanceSize.width -10 ];
     
     //TODO - Multiple Images issue
     NSURL* imageUrl = [NSURL URLWithString: imageUrlString];
@@ -230,13 +233,13 @@ NSInteger const RATING_VIEW_WEIDTH = 105;
         currentPriceOriginX = LABEL_VIEW_LEFT_PADDING;
     }
     
-    CGPoint center = self.ratingView.center;
-    center.y = self.lblProductPreviousPrice.center.y;
-    self.ratingView.center = center;
-    
-    CGRect ratingFrame = self.ratingView.frame;
-    ratingFrame.origin.x = self.imgViewProductImage.frame.size.width - ratingFrame.size.width-15;;
-    self.ratingView.frame = ratingFrame;
+//    CGPoint center = self.ratingView.center;
+//    center.y = self.lblProductPreviousPrice.center.y;
+//    self.ratingView.center = center;
+//    
+//    CGRect ratingFrame = self.ratingView.frame;
+//    ratingFrame.origin.x = self.imgViewProductImage.frame.size.width - ratingFrame.size.width-15;;
+//    self.ratingView.frame = ratingFrame;
     
     
     
@@ -260,6 +263,15 @@ NSInteger const RATING_VIEW_WEIDTH = 105;
     }else{
         bottomY = [[AAAppGlobals sharedInstance] getImageHeight];
     }
+    self.lblAddress.text = @"safafsdsd";
+    float maxwidth = SCREEN_WIDTH - self.lblProductCurrentPrice.frame.origin.x + currentPricelabelSize.width+10 - (2*LABEL_VIEW_LEFT_PADDING);
+    CGSize addressSize = [AAUtils getTextSizeWithFont:self.lblAddress.font andText:self.lblAddress.text andMaxWidth:maxwidth];
+    self.lblAddress.frame = CGRectMake(SCREEN_WIDTH-LABEL_VIEW_LEFT_PADDING-addressSize.width, shortDescriptionLabelSize.height+10, addressSize.width, 20);
+    CGRect imgFrame = self.imgPin.frame;
+    imgFrame.origin.x = self.lblAddress.frame.origin.x - imgFrame.size.width -5;
+    imgFrame.origin.y = self.lblAddress.frame.origin.y;
+    self.imgPin.frame = imgFrame;
+    
     
     [self.lblProductShortDescription setFrame:CGRectMake( LABEL_VIEW_LEFT_PADDING, 5, shortDescriptionLabelSize.width, shortDescriptionLabelSize.height)];
     [self.lblProductShortDescription setText:prodDesc];
@@ -286,15 +298,7 @@ NSInteger const RATING_VIEW_WEIDTH = 105;
     }
    
     [self.overlayView setAutoresizingMask:UIViewAutoresizingFlexibleTopMargin];
-    if ([AAAppGlobals sharedInstance].enableRating || [[AAAppGlobals sharedInstance].retailer.enableRating isEqualToString:@"1"]) {
-        [self.ratingView setHidden:NO];
-        [self.ratingView setUserRatingOff];
-        [self.ratingView setProductRating:[prodrating floatValue]];
-       // [self.ratingView setProductRating:3.5];
-        
-    }else{
-        [self.ratingView setHidden:YES];
-    }
+    
     
     CGPoint center1 = self.lblProductPreviousPrice.center;
     center1.y = self.lblProductCurrentPrice.center.y;
@@ -303,15 +307,7 @@ NSInteger const RATING_VIEW_WEIDTH = 105;
     if (self.eshopProduct.availQty != nil) {
         self.lblQtyIndicator.text = [NSString stringWithFormat:@"%@ sold",self.eshopProduct.availQty];
         self.vwQtyIndicator.hidden = false;
-//        if ([self.eshopProduct.availQty integerValue]<=0) {
-//            self.lblQtyIndicator.text = @"Sold Out";
-//            self.vwQtyIndicator.hidden = false;
-//        }else if([self.eshopProduct.availQty integerValue]>5){
-//            self.vwQtyIndicator.hidden = true;
-//        }else{
-//            self.lblQtyIndicator.text = [NSString stringWithFormat:@"%@ Left",self.eshopProduct.availQty];
-//            self.vwQtyIndicator.hidden = false;
-//        }
+
     }
     
     if (self.eshopProduct.onSale != nil && [self.eshopProduct.onSale integerValue]==1) {

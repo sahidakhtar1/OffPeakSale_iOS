@@ -48,7 +48,7 @@ NSInteger const SELECTIONINDICATOR_HEIGHT = 5;
     self.selectedIndicator = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height-SELECTIONINDICATOR_HEIGHT, MAX_BUTTON_WIDTH, SELECTIONINDICATOR_HEIGHT)];
     self.selectedIndicator.backgroundColor = [[AAColor sharedInstance].retailerThemeBackgroundColor colorWithAlphaComponent:.8];
     [self addSubview:self.selectedIndicator];
-    self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"btn_tab_default"]];
+//    self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"btn_tab_default"]];
     
 }
 
@@ -151,7 +151,7 @@ NSInteger const SELECTIONINDICATOR_HEIGHT = 5;
     
     AATabButton* btnCategory  =[[AATabButton alloc] init];
     [btnCategory setTitleColor:[AAColor sharedInstance].eShopCategoryTextColor forState:UIControlStateNormal];
-    [btnCategory setBackgroundColor:[UIColor redColor]];
+    [btnCategory setBackgroundColor:[UIColor whiteColor]];
     //[btnCategory setBackgroundImage:[UIImage imageNamed:@"first.png"] forState:UIControlStateNormal];
      [btnCategory.titleLabel setFont:[UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:FONT_SIZE_OLD_PRICE]];
     [btnCategory setTitle:categoryName forState:UIControlStateNormal];
@@ -186,7 +186,6 @@ NSInteger const SELECTIONINDICATOR_HEIGHT = 5;
                     [self setContentOffset:CGPointMake(0, 0) animated:YES];
                     break;
                 case 1:
-//                    [self setContentOffset:CGPointMake(MAX_BUTTON_WIDTH/2, 0) animated:YES];
                     [self setContentOffset:CGPointMake(self.contentSize.width/2-[UIScreen mainScreen].bounds.size.width/2, 0) animated:YES];
                     break;
                 case 2:

@@ -26,7 +26,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"Key_tourChk"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     PageControlBtns = [[NSMutableArray alloc] init];
     infoText_Arr = [[NSArray alloc] initWithObjects:@"Filter a resturant as per desired location and cuisine with your matching time slots for morning, afternoon and night",@"Filter a resturant as per desired location and cuisine with your matching time slots for morning, afternoon and night",@"Filter a resturant as per desired location and cuisine with your matching time slots for morning, afternoon and night", nil];
     

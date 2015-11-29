@@ -42,6 +42,7 @@
     [super viewDidLoad];
     self.filterKey = @"rate";
     self.selectedFilterIndex = 1;
+    selectedCategoryIndex = 1;
     [AAAppGlobals sharedInstance].products  = nil;
     [self.navigationController setNavigationBarHidden:YES];
     [self.tableViewEShopProductList registerClass:[AAEShopProductCell class] forCellReuseIdentifier:@"EShopProductCell"];
@@ -98,18 +99,29 @@
 }
 -(void)populateCategories
 {
+     AAEshopCategory *selectedCategory ;
     NSMutableArray *arr = [[NSMutableArray alloc] init];
-    [arr addObject:@"Morning"];
-    [arr addObject:@"Afternoon"];
-    [arr addObject:@"Night"];
-    [arr addObject:@"Midnight"];
-//    if (self.product.productWorkingInformation.length>0) {
-//        [arr addObject:@"How It Works"];
-//    }
-    self.productTabs.selectedCategory = @"Morning";
+    NSArray *categoryNames = [[AAAppGlobals sharedInstance].categoryList getCategoryNames];
+    for (int i = 0;i<[categoryNames count];i++) {
+        AAEshopCategory *category = [[AAAppGlobals sharedInstance].categoryList getCategoryWithCategoryName:[categoryNames objectAtIndex:i]];
+        [arr addObject:category.categoryName];
+        if (i == selectedCategoryIndex) {
+            selectedCategory = category;
+        }
+    }
+    if ([arr count ]== 0) {
+        return;
+    }
+    
+   
+    
+    
+    self.productTabs.selectedCategory = selectedCategory.categoryName;
     self.productTabs.categories = arr.mutableCopy;
     [self.productTabs refreshScrollView];
     [self onCategeorySelected:self.productTabs.selectedCategory];
+    
+    
     
     
 }
@@ -152,19 +164,11 @@
     [self.tableViewEShopProductList reloadData];
     [AAEShopHelper refreshEshopInformationForCategory:self.category.categoryId
                                            searchText:self.searchText
-                                               sortBy:self.filterKey
+                                               sortBy:@""
                                   WithCompletionBlock:^{
         dispatch_async(dispatch_get_main_queue(), ^{
-//            [self populateCategories];
-            [self.tableViewEShopProductList reloadData];
-            if (([AAAppGlobals sharedInstance].products == nil || [[AAAppGlobals sharedInstance].products count] == 0 )&& self.searchText != nil) {
-                self.lblNoSearchFoundText.hidden = false;
-                self.tableViewEShopProductList.hidden = true;
-            }else{
-                self.lblNoSearchFoundText.hidden = true;
-                self.tableViewEShopProductList.hidden = false;
-
-            }
+            [self populateCategories];
+            
         });
         
         
@@ -185,20 +189,20 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[AAAppGlobals sharedInstance].products count];
+    return [productList_ count];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     AAEShopProductCell* productCell = [self.tableViewEShopProductList dequeueReusableCellWithIdentifier:@"EShopProductCell" forIndexPath:indexPath];
     productCell.selectionStyle = UITableViewCellSelectionStyleNone;
-    productCell.eshopProduct = [[AAAppGlobals sharedInstance].products objectAtIndex:indexPath.row];
+    productCell.eshopProduct = [productList_ objectAtIndex:indexPath.row];
     return productCell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    self.selectedProduct = [[AAAppGlobals sharedInstance].products objectAtIndex:indexPath.row];
+    self.selectedProduct = [productList_ objectAtIndex:indexPath.row];
     
     AAProductInformationViewController*  vcProductInformation = [self.storyboard instantiateViewControllerWithIdentifier:@"AAProductInformationViewController"];
     vcProductInformation.product = self.selectedProduct;
@@ -210,7 +214,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    AAEShopProduct *product= [[AAAppGlobals sharedInstance].products objectAtIndex:indexPath.row];
+    AAEShopProduct *product= [productList_ objectAtIndex:indexPath.row];
     NSDictionary* attributes = @{
                                  NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]
                                  };
@@ -252,10 +256,20 @@
 -(void)onCategeorySelected:(NSString *)categoryName
 {
     
-//    AAEshopCategory* selectedCategory = [[AAAppGlobals sharedInstance].categoryList getCategoryWithCategoryName:categoryName];
-//     productList_ = [selectedCategory getProductList];
-//    self.selectedCategoryName = selectedCategory.categoryName;
-//    [self.tableViewEShopProductList reloadData];
+    AAEshopCategory* selectedCategory = [[AAAppGlobals sharedInstance].categoryList getCategoryWithCategoryName:categoryName];
+    productList_ = [selectedCategory getProductList];
+    self.selectedCategoryName = selectedCategory.categoryName;
+    [self.tableViewEShopProductList reloadData];
+    if ([productList_ count] == 0) {
+        self.lblNoSearchFoundText.hidden = false;
+        self.tableViewEShopProductList.hidden = true;
+    }else{
+        self.lblNoSearchFoundText.hidden = true;
+        self.tableViewEShopProductList.hidden = false;
+        
+    }
+    [self.tableViewEShopProductList reloadData];
+    
 }
 
 #pragma mark - Transition View controller management

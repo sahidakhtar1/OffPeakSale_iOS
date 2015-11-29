@@ -28,6 +28,12 @@
 @property (nonatomic, strong) NSString *giftMsg;
 @property (nonatomic, strong) NSString *giftFor;
 @property (nonatomic) Boolean giftWrapOpted;
+@property (nonatomic, strong) NSString *outletName;
+@property (nonatomic, strong) NSString *outletAddr;
+@property (nonatomic, strong) NSString *outletContact;
+@property (nonatomic, strong) NSString *outletLat;
+@property (nonatomic, strong) NSString *outletLong;
+@property (nonatomic, strong) NSString *offpeak_discount;
 
 @property (nonatomic,copy) NSString* previousProductPrice;
 @property (nonatomic,copy)

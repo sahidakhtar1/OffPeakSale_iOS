@@ -19,6 +19,7 @@
 {
     NSMutableArray* productList_;
     AAHeaderView *headerView1;
+    int selectedCategoryIndex;
 }
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) AACategoryDataModel *category;

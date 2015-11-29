@@ -365,9 +365,9 @@
 		4AD3DF1B1AFFED5F00585790 /* AACategoryDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD3DF1A1AFFED5F00585790 /* AACategoryDataModel.m */; };
 		4AE8087C1AFBE414007C6A95 /* AASecondaryMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8087B1AFBE414007C6A95 /* AASecondaryMenuViewController.m */; };
 		4AE8087F1AFBE43C007C6A95 /* AASecondaryMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8087E1AFBE43C007C6A95 /* AASecondaryMenuCell.m */; };
-		A18E45041C01CB30007BF9DE /* dropdown.png in Resources */ = {isa = PBXBuildFile; fileRef = A18E45021C01CB30007BF9DE /* dropdown.png */; settings = {ASSET_TAGS = (); }; };
-		A18E45051C01CB30007BF9DE /* logoSample.png in Resources */ = {isa = PBXBuildFile; fileRef = A18E45031C01CB30007BF9DE /* logoSample.png */; settings = {ASSET_TAGS = (); }; };
-		A19F64731C01876300A0D008 /* AATour_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A19F64721C01876300A0D008 /* AATour_ViewController.m */; settings = {ASSET_TAGS = (); }; };
+		A18E45041C01CB30007BF9DE /* dropdown.png in Resources */ = {isa = PBXBuildFile; fileRef = A18E45021C01CB30007BF9DE /* dropdown.png */; };
+		A18E45051C01CB30007BF9DE /* logoSample.png in Resources */ = {isa = PBXBuildFile; fileRef = A18E45031C01CB30007BF9DE /* logoSample.png */; };
+		A19F64731C01876300A0D008 /* AATour_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A19F64721C01876300A0D008 /* AATour_ViewController.m */; };
 		E3F4EF861B01D74200CBC785 /* AAEShopFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F4EF851B01D74200CBC785 /* AAEShopFilterView.m */; };
 		E3F4EF881B01D75500CBC785 /* AAEShopFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3F4EF871B01D75500CBC785 /* AAEShopFilterView.xib */; };
 		F706E264192545DE00D58414 /* icon_cart.png in Resources */ = {isa = PBXBuildFile; fileRef = F706E263192545DE00D58414 /* icon_cart.png */; };
@@ -3058,7 +3058,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/AppWiz/PayPalMobile",
-					"/Users/Litoo/Library/Developer/Xcode/DerivedData/Pods-ergcjqkjbhrjivbdfmswnsbqqaxo/Build/Products/Release$(EFFECTIVE_PLATFORM_NAME)",
+					"/Users/ShahidAkhtar/Library/Developer/Xcode/DerivedData/Pods-bbboumzrlmfairccstxhnhcqlukt/Build/Products/Release$(EFFECTIVE_PLATFORM_NAME)",
 					"$(SRCROOT)/AppWiz",
 					"$(SRCROOT)/AppWiz/SDKExport",
 					"$(PROJECT_DIR)/AppWiz/SDKExport",
@@ -3077,7 +3077,7 @@
 					"-lc++",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.offpeaksale.restaurants;
+				PRODUCT_BUNDLE_IDENTIFIER = com.offpeaksale.consumer;
 				PRODUCT_NAME = OffPeakSale;
 				PROVISIONING_PROFILE = "23b143c3-9a09-4974-9dab-1094368c7151";
 				VALID_ARCHS = "armv7 armv7s arm64";
@@ -3110,7 +3110,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/AppWiz/PayPalMobile",
-					"/Users/Litoo/Library/Developer/Xcode/DerivedData/Pods-ergcjqkjbhrjivbdfmswnsbqqaxo/Build/Products/Release$(EFFECTIVE_PLATFORM_NAME)",
+					"/Users/ShahidAkhtar/Library/Developer/Xcode/DerivedData/Pods-bbboumzrlmfairccstxhnhcqlukt/Build/Products/Release$(EFFECTIVE_PLATFORM_NAME)",
 					"$(SRCROOT)/AppWiz",
 					"$(SRCROOT)/AppWiz/SDKExport",
 					"$(PROJECT_DIR)/AppWiz/SDKExport",
@@ -3129,7 +3129,7 @@
 					"-lc++",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.offpeaksale.restaurants;
+				PRODUCT_BUNDLE_IDENTIFIER = com.offpeaksale.consumer;
 				PRODUCT_NAME = OffPeakSale;
 				PROVISIONING_PROFILE = "23b143c3-9a09-4974-9dab-1094368c7151";
 				VALID_ARCHS = "armv7 armv7s arm64";

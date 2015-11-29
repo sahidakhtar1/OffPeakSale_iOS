@@ -17,7 +17,8 @@
 @property (nonatomic,strong) UIView* viewMainContent;
 @property (nonatomic) CGFloat contentHeight;
 
-@property (nonatomic, strong) RatingView *ratingView;
+@property (nonatomic, strong) RatingView *locationView;
+@property (nonatomic,strong) UILabel* lblDistance;
 @property (nonatomic,strong) UILabel* lblProductName;
 @property (nonatomic,strong) UILabel* lblProductShortDescription;
 @property (nonatomic,strong) UILabel* lblProductCurrentPrice;
@@ -28,6 +29,8 @@
 @property (nonatomic, strong) UILabel *lblQtyIndicator;
 @property (nonatomic, strong) UIView *vwSaleIndicator;
 @property (nonatomic, strong) UILabel *lblSaleIndicator;
+@property (nonatomic, strong) UILabel *lblAddress;
+@property (nonatomic, strong) UIImageView *imgPin;
 
 
 @property (nonatomic,strong) UIView* overlayView;

@@ -39,9 +39,10 @@
 
 -(void)addBackgroundImages
 {
-    UIImage* defaultBackgroundImage = [UIImage imageNamed:@"btn_tab_default"];
-    
-    [self setBackgroundImage:[defaultBackgroundImage resizableImageWithCapInsets:UIEdgeInsetsMake(0,ceil(defaultBackgroundImage.size.width/2),0,ceil(defaultBackgroundImage.size.width/2) -1)] forState:UIControlStateNormal];
+    [self setBackgroundColor:[UIColor whiteColor]];
+//    UIImage* defaultBackgroundImage = [UIImage imageNamed:@"btn_tab_default"];
+//    
+//    [self setBackgroundImage:[defaultBackgroundImage resizableImageWithCapInsets:UIEdgeInsetsMake(0,ceil(defaultBackgroundImage.size.width/2),0,ceil(defaultBackgroundImage.size.width/2) -1)] forState:UIControlStateNormal];
     
 //    UIImage* selectedBackgroundImage = [UIImage imageNamed:@"btn_tab_selected"];
 //    

@@ -52,6 +52,12 @@
      [encoder encodeObject:self.reward_points forKey:@"reward_points"];
      [encoder encodeObject:self.availQty forKey:@"availQty"];
      [encoder encodeObject:self.onSale forKey:@"onSale"];
+    [encoder encodeObject:self.outletName forKey:@"outletName"];
+    [encoder encodeObject:self.outletAddr forKey:@"outletAddr"];
+    [encoder encodeObject:self.outletContact forKey:@"outletContact"];
+    [encoder encodeObject:self.outletLat forKey:@"outletLat"];
+    [encoder encodeObject:self.outletLong forKey:@"outletLong"];
+    [encoder encodeObject:self.offpeak_discount forKey:@"offpeak_discount"];
     
      }
 
@@ -74,6 +80,12 @@
         self.reward_points = [decoder decodeObjectForKey:@"reward_points"];
         self.availQty = [decoder decodeObjectForKey:@"availQty"];
         self.onSale = [decoder decodeObjectForKey:@"onSale"];
+        self.outletName = [decoder decodeObjectForKey:@"outletName"];
+        self.outletAddr = [decoder decodeObjectForKey:@"outletAddr"];
+        self.outletContact = [decoder decodeObjectForKey:@"outletContact"];
+        self.outletLat = [decoder decodeObjectForKey:@"outletLat"];
+        self.outletLong = [decoder decodeObjectForKey:@"outletLong"];
+        self.offpeak_discount = [decoder decodeObjectForKey:@"offpeak_discount"];
         
     }
     return self;
