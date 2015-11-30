@@ -181,20 +181,31 @@ NSInteger const SELECTIONINDICATOR_HEIGHT = 5;
             frame.size.width = btnSelectedCategory.frame.size.width;
             frame.origin.x = btnSelectedCategory.frame.origin.x;
             self.selectedIndicator.frame = frame;
-            switch (indexOfSelectedCat) {
-                case 0:
-                    [self setContentOffset:CGPointMake(0, 0) animated:YES];
-                    break;
-                case 1:
-                    [self setContentOffset:CGPointMake(self.contentSize.width/2-[UIScreen mainScreen].bounds.size.width/2, 0) animated:YES];
-                    break;
-                case 2:
-                    [self setContentOffset:CGPointMake(self.contentSize.width-[UIScreen mainScreen].bounds.size.width, 0) animated:YES];
-                    break;
-                    
-                default:
-                    break;
+            float  selectedItemX = self.selectedIndicator.frame.origin.x;
+            CGPoint contentOffset = self.contentOffset;
+            float targetOffsetX = selectedItemX-self.frame.size.width/2+MAX_BUTTON_WIDTH/2;
+            if (targetOffsetX + self.frame.size.width > self.contentSize.width){
+                targetOffsetX = self.contentSize.width - self.frame.size.width;
             }
+            if (targetOffsetX <= 0) {
+                targetOffsetX = 0;
+            }
+            contentOffset.x = targetOffsetX;
+            [self setContentOffset:contentOffset animated:YES];
+//            switch (indexOfSelectedCat) {
+//                case 0:
+//                    [self setContentOffset:CGPointMake(0, 0) animated:YES];
+//                    break;
+//                case 1
+//                    [self setContentOffset:CGPointMake(self.contentSize.width/2-[UIScreen mainScreen].bounds.size.width/2, 0) animated:YES];
+//                    break;
+//                case 2:
+//                    [self setContentOffset:CGPointMake(self.contentSize.width-[UIScreen mainScreen].bounds.size.width, 0) animated:YES];
+//                    break;
+//                    
+//                default:
+//                    break;
+//            }
             
         }
     
