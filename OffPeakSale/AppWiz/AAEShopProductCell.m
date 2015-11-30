@@ -16,6 +16,7 @@ NSInteger const OVERLAY_TOP_PADDING = 8.0;
 NSInteger const PRICE_VIEW_HEIGHT = 40.0;
 NSInteger const QTY_INDICATOR_WIDTH = 80.0;
 NSInteger const QTY_INDICATOR_HEIGHT = 30.0;
+NSInteger const CIRCULAR_VIEW_HEIGHT = 60.0;
 
 
 NSInteger const RATING_VIEW_WEIDTH = 105;
@@ -58,6 +59,32 @@ NSInteger const RATING_VIEW_WEIDTH = 105;
      [self.imgViewProductImage setAutoresizingMask:UIViewAutoresizingFlexibleWidth ];
     [self.viewMainContent addSubview:self.imgViewProductImage];
     self.overlayView = [[UIView alloc] init];
+    
+    self.discountView = [[AAThemeCircularView alloc]
+                         initWithFrame:CGRectMake(self.imgViewProductImage.frame.size.width -
+                                                  LABEL_VIEW_LEFT_PADDING -CIRCULAR_VIEW_HEIGHT
+                                                  ,self.imgViewProductImage.frame.size.height -
+                                                  LABEL_VIEW_LEFT_PADDING -CIRCULAR_VIEW_HEIGHT ,
+                                                  CIRCULAR_VIEW_HEIGHT,
+                                                  CIRCULAR_VIEW_HEIGHT)];
+    [self.discountView setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin];
+    [self.viewMainContent addSubview:self.discountView];
+    
+    self.lblDiscountPercentage = [[UILabel alloc] initWithFrame:CGRectMake(0,
+                                                                           CIRCULAR_VIEW_HEIGHT/2-20,
+                                                                           CIRCULAR_VIEW_HEIGHT,
+                                                                           20)];
+    [self.lblDiscountPercentage setFont:[UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:QTY_INDICATOR_FONT]];
+    [self.lblDiscountPercentage setTextAlignment:NSTextAlignmentCenter];
+    self.lblDiscountPercentage.textColor = [AAColor sharedInstance].retailerThemeTextColor;
+    [self.discountView addSubview:self.lblDiscountPercentage];
+    
+    UILabel *lblOff = [[UILabel alloc] initWithFrame:CGRectMake(0, CIRCULAR_VIEW_HEIGHT/2, CIRCULAR_VIEW_HEIGHT, 20)];
+    [lblOff setFont:[UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:QTY_INDICATOR_FONT]];
+    [lblOff setTextAlignment:NSTextAlignmentCenter];
+    lblOff.text = @"OFF";
+    lblOff.textColor = [AAColor sharedInstance].retailerThemeTextColor;
+    [self.discountView addSubview:lblOff];
     
     
     self.overlayLayer = NO;
@@ -156,11 +183,13 @@ NSInteger const RATING_VIEW_WEIDTH = 105;
     if (selectedCurrencyKey == nil) {
         selectedCurrencyKey = [AAAppGlobals sharedInstance].currency_code;
     }
+    selectedCurrencyKey = [AAAppGlobals sharedInstance].currency_symbol;
     float currencyMultiplier = [[[[AAAppGlobals sharedInstance] currecyDict] valueForKey:selectedCurrencyKey] floatValue];
     if (currencyMultiplier == 0) {
         currencyMultiplier = 1.0f;
-        selectedCurrencyKey = [AAAppGlobals sharedInstance].currency_code;
+        selectedCurrencyKey = [AAAppGlobals sharedInstance].currency_symbol;
     }
+    
     
     if ([AAAppGlobals sharedInstance].disablePayment && self.cartItem != nil) {
         imageUrlString = self.cartItem.productImageURLString;
@@ -190,7 +219,11 @@ NSInteger const RATING_VIEW_WEIDTH = 105;
         prodrating = self.eshopProduct.productRating;
     }
     
-    self.lblDistance.text = @"12KM";
+    NSString *distance = [[AAAppGlobals sharedInstance] getDisctanceFrom:[AAAppGlobals sharedInstance].locationHandler.currentLocation.coordinate.latitude
+                                                                 andLong:[AAAppGlobals sharedInstance].locationHandler.currentLocation.coordinate.longitude
+                                                                   toLat:[self.eshopProduct.outletLat doubleValue]
+                                                                 andLong:[self.eshopProduct.outletLong doubleValue]];
+    self.lblDistance.text = [NSString stringWithFormat:@"%@KM",distance];
     CGSize disctanceSize = [AAUtils getTextSizeWithFont:self.lblDistance.font andText:self.lblDistance.text andMaxWidth:MAXFLOAT];
     self.lblDistance.frame = CGRectMake(self.imgViewProductImage.frame.size.width - disctanceSize.width-15, 5, disctanceSize.width, disctanceSize.height);
     
@@ -204,6 +237,9 @@ NSInteger const RATING_VIEW_WEIDTH = 105;
 //    [self.imgViewProductImage setContentMode:
 //     UIViewContentModeScaleAspectFill];
     [self.imgViewProductImage setClipsToBounds:YES];
+    
+    self.lblDiscountPercentage.text = self.eshopProduct.offpeak_discount;
+    
     
     NSInteger bottomY = 0;
     
@@ -263,7 +299,7 @@ NSInteger const RATING_VIEW_WEIDTH = 105;
     }else{
         bottomY = [[AAAppGlobals sharedInstance] getImageHeight];
     }
-    self.lblAddress.text = @"safafsdsd";
+    self.lblAddress.text = self.eshopProduct.outletName;
     float maxwidth = SCREEN_WIDTH - self.lblProductCurrentPrice.frame.origin.x + currentPricelabelSize.width+10 - (2*LABEL_VIEW_LEFT_PADDING);
     CGSize addressSize = [AAUtils getTextSizeWithFont:self.lblAddress.font andText:self.lblAddress.text andMaxWidth:maxwidth];
     self.lblAddress.frame = CGRectMake(SCREEN_WIDTH-LABEL_VIEW_LEFT_PADDING-addressSize.width, shortDescriptionLabelSize.height+10, addressSize.width, 20);

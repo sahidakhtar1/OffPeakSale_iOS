@@ -12,6 +12,7 @@
 #import "UIImageView+WebCache.h"
 #import "RatingView.h"
 #import "ItemDetail.h"
+#import "AAThemeCircularView.h"
 @interface AAEShopProductCell : UITableViewCell
 @property (nonatomic,strong) AAEShopProduct* eshopProduct;
 @property (nonatomic,strong) UIView* viewMainContent;
@@ -31,6 +32,8 @@
 @property (nonatomic, strong) UILabel *lblSaleIndicator;
 @property (nonatomic, strong) UILabel *lblAddress;
 @property (nonatomic, strong) UIImageView *imgPin;
+@property (nonatomic, strong) AAThemeCircularView *discountView;
+@property (nonatomic, strong) UILabel *lblDiscountPercentage;
 
 
 @property (nonatomic,strong) UIView* overlayView;

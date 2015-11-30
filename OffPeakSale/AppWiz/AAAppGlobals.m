@@ -702,4 +702,18 @@ NSString* const GOOGLE_MAPS_API_KEY = @"AIzaSyAI11LvYDPIRY3rbVIlk-hGG8WwWYiUaLI"
         return [NSString stringWithFormat:@"%.0f",price];
     }
 }
+
+-(NSString*)getDisctanceFrom:(double)startLat
+                     andLong:(double)startLong
+                       toLat:(double)endLat
+                     andLong:(double)endLong{
+    NSString *distanceStr =@"";
+    CLLocation *locA = [[CLLocation alloc] initWithLatitude:startLat longitude:startLong];
+    
+    CLLocation *locB = [[CLLocation alloc] initWithLatitude:endLat longitude:endLong];
+    
+    CLLocationDistance distance = [locA distanceFromLocation:locB];
+    distanceStr = [NSString stringWithFormat:@"%.1f",distance/1000.0f];
+    return distanceStr;
+}
 @end

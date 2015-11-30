@@ -7,7 +7,7 @@
 //
 
 #import "AAEShopFilterView.h"
-
+#import "AFHTTPRequestOperation.h";
 @implementation AAEShopFilterView
 - (id)initWithFrame:(CGRect)frame
 {
@@ -16,59 +16,23 @@
         // Initialization code
         self = [self initialize];
         self.frame = frame;
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationUpdated:) name:NOTIFICATION_LOCATION_UPDATED object:nil];
+        CLLocation *currentLocation = [AAAppGlobals sharedInstance].locationHandler.currentLocation;
+        if (currentLocation) {
+            [self getAddressFromCoordinates:currentLocation];
+        }
         self.backgroundColor= [UIColor colorWithRed:0 green:0 blue:0 alpha:0.4];
         
-        
-        self.curentRadioBtn.layer.cornerRadius = self.curentRadioBtn.frame.size.height/2;
-        self.curentRadioBtn.layer.borderColor = [APP_COLOR CGColor];
-        self.curentRadioBtn.layer.borderWidth = 1.5f;
-        self.curentRadioBtn.layer.masksToBounds=YES;
-        
-        self.targetRadioBtn.layer.cornerRadius = self.curentRadioBtn.frame.size.height/2;
-        self.targetRadioBtn.layer.borderColor = [APP_COLOR CGColor];
-        self.targetRadioBtn.layer.borderWidth = 1.5f;
-        self.targetRadioBtn.layer.masksToBounds=YES;
-
-        self.curntLocation.layer.cornerRadius = 2;
-        self.curntLocation.layer.masksToBounds=YES;
-
-        self.targetLocation.layer.cornerRadius = 2;
-        self.targetLocation.layer.masksToBounds=YES;
-
-        self.curntLocation.layer.sublayerTransform = CATransform3DMakeTranslation(15, 0, 0);
-        self.targetLocation.layer.sublayerTransform = CATransform3DMakeTranslation(15, 0, 0);
 
         [self.vwContainerView setUserInteractionEnabled:YES];
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapOnScreen)];
         tapGesture.numberOfTapsRequired = 1;
-//        tapGesture.delegate = self;
         [self addGestureRecognizer:tapGesture];
 
         
         [self setFont];
-        //        [self setRightIconstoTestFields];
         CGRect rect = [UIScreen mainScreen].bounds;
         self.frame = rect;
-        CALayer *layer = self.vwContainerView.layer;
-        layer.shadowOffset = CGSizeMake(1, 1);
-        layer.shadowColor = [[UIColor blackColor] CGColor];
-        layer.shadowRadius = 2.0f;
-        layer.shadowOpacity = 0.80f;
-        layer.shadowPath = [[UIBezierPath bezierPathWithRect:layer.bounds] CGPath];
-//        self.vwContainerView.center = CGPointMake(self.center.x, rect.size.height/2);
-        self.vwContainerView.frame = CGRectMake(10, 147, SCREEN_WIDTH - 20, 230);
-        
-        
-        locationManager = [[CLLocationManager alloc] init];
-        locationManager.delegate = self;
-        locationManager.distanceFilter = kCLDistanceFilterNone;
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-        
-        if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
-            [locationManager requestWhenInUseAuthorization];
-        
-        [locationManager startUpdatingLocation];
-
         geocoder = [[CLGeocoder alloc] init];
 
 
@@ -77,12 +41,16 @@
     }
     return self;
 }
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+-(void)locationUpdated:(NSNotification*)notification
 {
-    CLLocation *location = [locations lastObject];
-    [locationManager stopUpdatingLocation];
-    NSLog(@"lat%f - lon%f", location.coordinate.latitude, location.coordinate.longitude);
-
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        
+        [self getAddressFromCoordinates:[AAAppGlobals sharedInstance].locationHandler.currentLocation];
+        
+    });
+}
+-(void)getAddressFromCoordinates:(CLLocation*)location{
     [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error)
      {
          if (!(error))
@@ -135,25 +103,28 @@
     return childView;
 }
 -(void)setFont{
-    self.curntLocation.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:13.0];
-    self.targetLocation.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:13.0];
-//    self.btnFilterPopularity.titleLabel.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:17.0];
-//    self.btnFilterLatest.titleLabel.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:17.0];
-//    self.btnFilterLowestPrice.titleLabel.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:17.0];
-//    self.btnFilterHighestPrice.titleLabel.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:17.0];
-    self.btnDone.titleLabel.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].boldFont size:13.0];
+    self.curntLocation.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:PROFILE_TF_FONTSIZE];
+    self.targetLocation.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:PROFILE_TF_FONTSIZE];
+    self.btnDone.titleLabel.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].boldFont size:BUTTON_FONTSIZE];
 }
 - (IBAction)btnFilteSelected:(id)sender {
     UIButton *button = (UIButton*)sender;
     self.selectedFilterIndex = [button tag];
-//    CGPoint center = self.imgFilterIndicator.center;
-//    center.y = button.center.y;
-//    self.imgFilterIndicator.center = center;
+    if (self.selectedFilterIndex == 0) {
+        [self.curentRadioBtn setSelected:YES];
+        [self.targetRadioBtn setSelected:NO];
+        [self.targetLocation resignFirstResponder];
+    }else{
+        [self.curentRadioBtn setSelected:NO];
+        [self.targetRadioBtn setSelected:YES];
+        [self.targetLocation becomeFirstResponder];
+    }
+    
 }
 
 - (IBAction)btnDoneTapped:(id)sender {
     if (self.delegate != nil && [self.delegate respondsToSelector:@selector(filterAppliedWith:)]) {
-        [self.delegate filterAppliedWith:self.selectedFilterIndex];
+//        [self.delegate filterAppliedWith:self.selectedFilterIndex];
     }
     [self removeFromSuperview];
 }
@@ -162,21 +133,34 @@
     [textField resignFirstResponder];
     return YES;
 }
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-{
-    if (textField.tag == 1)
-    {
 
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    if (self.selectedFilterIndex == 0) {
+       return false;
+    }else{
+        if (textField == self.targetLocation) {
+            return false;
+        }else{
+            return false;
+        }
     }
-    else
-    {
-        
-    }
-    return YES;
+    return false;
 }
-
 - (void)tapOnScreen
 {
     [self removeFromSuperview];
+}
+-(void)getAutocompleteWithText:(NSString*)text{
+    NSString *url  =[NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/autocomplete/json?input=%@&types=geocode&language=fr&key=AIzaSyDAIb7josxX55yT-aam9XpCnbPgKWjwIjs",text];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [manager.requestSerializer setValue:@"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.71 (KHTML, like Gecko) Version/6.1 Safari/537.71" forHTTPHeaderField:@"User-Agent"];
+    
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/html",nil];
+    AFHTTPRequestOperation *operation = [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"Response= %@",responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    }];
 }
 @end

@@ -12,6 +12,8 @@
 +(void)refreshEshopInformationForCategory:(NSString*)cid
                                searchText:(NSString*)keyword
                                    sortBy:(NSString*)sortBy
+                                   forLat:(NSString*)latitude
+                                  andLong:(NSString*)longitude
                      WithCompletionBlock : (void(^)(void))success;
 +(void)getEshopProductDetail:(NSString*)productId
         WithCompletionBlock : (void(^)(AAEShopProduct*))success;

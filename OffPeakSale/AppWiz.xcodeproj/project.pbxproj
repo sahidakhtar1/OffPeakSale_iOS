@@ -363,6 +363,8 @@
 		4AD3C3E81AFA79EA0001823C /* AAHowItWorksView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AD3C3E71AFA79EA0001823C /* AAHowItWorksView.xib */; };
 		4AD3DF181AFFEC6200585790 /* AACategoryHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD3DF171AFFEC6200585790 /* AACategoryHelper.m */; };
 		4AD3DF1B1AFFED5F00585790 /* AACategoryDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD3DF1A1AFFED5F00585790 /* AACategoryDataModel.m */; };
+		4AE5AC091C0C93BC007437B0 /* AAThemeCircularView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE5AC081C0C93BC007437B0 /* AAThemeCircularView.m */; settings = {ASSET_TAGS = (); }; };
+		4AE5AC0C1C0CB8EF007437B0 /* AAPlaceAutoCompleteHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE5AC0B1C0CB8EF007437B0 /* AAPlaceAutoCompleteHelper.m */; settings = {ASSET_TAGS = (); }; };
 		4AE8087C1AFBE414007C6A95 /* AASecondaryMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8087B1AFBE414007C6A95 /* AASecondaryMenuViewController.m */; };
 		4AE8087F1AFBE43C007C6A95 /* AASecondaryMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8087E1AFBE43C007C6A95 /* AASecondaryMenuCell.m */; };
 		A18E45041C01CB30007BF9DE /* dropdown.png in Resources */ = {isa = PBXBuildFile; fileRef = A18E45021C01CB30007BF9DE /* dropdown.png */; };
@@ -836,6 +838,10 @@
 		4AD3DF171AFFEC6200585790 /* AACategoryHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AACategoryHelper.m; sourceTree = "<group>"; };
 		4AD3DF191AFFED5F00585790 /* AACategoryDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AACategoryDataModel.h; sourceTree = "<group>"; };
 		4AD3DF1A1AFFED5F00585790 /* AACategoryDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AACategoryDataModel.m; sourceTree = "<group>"; };
+		4AE5AC071C0C93BC007437B0 /* AAThemeCircularView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAThemeCircularView.h; sourceTree = "<group>"; };
+		4AE5AC081C0C93BC007437B0 /* AAThemeCircularView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAThemeCircularView.m; sourceTree = "<group>"; };
+		4AE5AC0A1C0CB8EF007437B0 /* AAPlaceAutoCompleteHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAPlaceAutoCompleteHelper.h; sourceTree = "<group>"; };
+		4AE5AC0B1C0CB8EF007437B0 /* AAPlaceAutoCompleteHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAPlaceAutoCompleteHelper.m; sourceTree = "<group>"; };
 		4AE8087A1AFBE414007C6A95 /* AASecondaryMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AASecondaryMenuViewController.h; sourceTree = "<group>"; };
 		4AE8087B1AFBE414007C6A95 /* AASecondaryMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AASecondaryMenuViewController.m; sourceTree = "<group>"; };
 		4AE8087D1AFBE43C007C6A95 /* AASecondaryMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AASecondaryMenuCell.h; sourceTree = "<group>"; };
@@ -1536,6 +1542,8 @@
 			children = (
 				40BDB38C18703A11000948A5 /* AAThemeView.h */,
 				40BDB38D18703A11000948A5 /* AAThemeView.m */,
+				4AE5AC071C0C93BC007437B0 /* AAThemeCircularView.h */,
+				4AE5AC081C0C93BC007437B0 /* AAThemeCircularView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -2233,6 +2241,8 @@
 				E3F4EF841B01D74200CBC785 /* AAEShopFilterView.h */,
 				E3F4EF851B01D74200CBC785 /* AAEShopFilterView.m */,
 				E3F4EF871B01D75500CBC785 /* AAEShopFilterView.xib */,
+				4AE5AC0A1C0CB8EF007437B0 /* AAPlaceAutoCompleteHelper.h */,
+				4AE5AC0B1C0CB8EF007437B0 /* AAPlaceAutoCompleteHelper.m */,
 			);
 			name = FilterView;
 			sourceTree = "<group>";
@@ -2658,6 +2668,7 @@
 				4A9BFE4E1AF7E58300FF2DC5 /* AABillBoardCell.m in Sources */,
 				40CF5FB3187EEF6700806551 /* NSString+SBJSON.m in Sources */,
 				4002B2EE185DC194001ABEFF /* AAEShopViewController.m in Sources */,
+				4AE5AC091C0C93BC007437B0 /* AAThemeCircularView.m in Sources */,
 				4002B32518603287001ABEFF /* AAFont.m in Sources */,
 				F7F3EC6D1A277B9D005074B8 /* AABannerItem.m in Sources */,
 				4002B306185ED623001ABEFF /* AAEShopHelper.m in Sources */,
@@ -2728,6 +2739,7 @@
 				F7121D5D19095C5600774280 /* AALoginDailogView.m in Sources */,
 				40BDB3E218755B23000948A5 /* AAMerchantAuthenticationPopupView.m in Sources */,
 				40C71B6D186413EA00325938 /* AACountriesHelper.m in Sources */,
+				4AE5AC0C1C0CB8EF007437B0 /* AAPlaceAutoCompleteHelper.m in Sources */,
 				40BDB3DE18754E48000948A5 /* AACouponButton.m in Sources */,
 				40BDB3BC1871E422000948A5 /* AAThemeValidationTextView.m in Sources */,
 				F75C30D6190BCB1200C38212 /* ImageDownloader.m in Sources */,

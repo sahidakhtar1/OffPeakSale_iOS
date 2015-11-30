@@ -133,4 +133,8 @@ extern NSString* const GOOGLE_MAPS_API_KEY;
 -(NSString*)convertDateToString:(NSDate*)date;
 -(NSString*)getPriceStrfromFromPrice:(float)price;
 -(NSMutableArray*)conver12HourFormat:(NSArray*)timeSlots;
+-(NSString*)getDisctanceFrom:(double)startLat
+                     andLong:(double)startLong
+                       toLat:(double)endLat
+                     andLong:(double)endLong;
 @end

@@ -15,7 +15,10 @@
 #define SCREEN_HEIGHT [[UIScreen mainScreen] bounds].size.height
 
 @interface AAEShopViewController ()
-
+@property (nonatomic) long currentLat;
+@property (nonatomic) long currentLong;
+@property (nonatomic) long targetLat;
+@property (nonatomic) long targetLong;
 @end
 #import "AALoginDailogView.h"
 @implementation AAEShopViewController
@@ -40,6 +43,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationUpdated:) name:NOTIFICATION_LOCATION_UPDATED object:nil];
+    self.currentLat = [AAAppGlobals sharedInstance].locationHandler.currentLocation.coordinate.latitude;
+    self.currentLong = [AAAppGlobals sharedInstance].locationHandler.currentLocation.coordinate.longitude;
+    self.targetLat = self.currentLat;
+    self.targetLong = self.currentLong;
     self.filterKey = @"rate";
     self.selectedFilterIndex = 1;
     selectedCategoryIndex = 1;
@@ -79,11 +87,6 @@
     self.productTabs.backgroundColor=[UIColor whiteColor];
     self.productTabs.fontCategoryName = [AAFont eShopCategoryTextFont];
     [self populateCategories];
-//    [self popuateProductInfo];
-
-	// Do any additional setup after loading the view.
-    
-    //[self locationViewPopUp];
 }
 -(void)locationViewPopUp
 {
@@ -133,9 +136,14 @@
     //[self refreshView];
     [self cat_viewDidAppear:YES];
     [self.tableViewEShopProductList reloadData];
-    [self populateView];
-    [[AAAppGlobals sharedInstance] calculateCartTotalItemCount];
-    headerView1.lblCartTotal.text = [NSString stringWithFormat:@"%d",[AAAppGlobals sharedInstance].cartTotalItemCount];
+    if (self.targetLat == 0 && self.targetLong == 0) {
+        
+    }else{
+       [self populateView];
+    }
+    
+//    [[AAAppGlobals sharedInstance] calculateCartTotalItemCount];
+//    headerView1.lblCartTotal.text = [NSString stringWithFormat:@"%d",[AAAppGlobals sharedInstance].cartTotalItemCount];
     
     
 }
@@ -165,7 +173,8 @@
     [AAEShopHelper refreshEshopInformationForCategory:self.category.categoryId
                                            searchText:self.searchText
                                                sortBy:@""
-                                  WithCompletionBlock:^{
+                                               forLat:[NSString stringWithFormat:@"%ld",self.targetLat]
+                                              andLong:[NSString stringWithFormat:@"%ld",self.targetLong]                                  WithCompletionBlock:^{
         dispatch_async(dispatch_get_main_queue(), ^{
             [self populateCategories];
             
@@ -307,18 +316,18 @@
 }
 -(void)filterAppliedWith:(NSInteger)filterIndex{
     if (self.selectedFilterIndex != filterIndex) {
-        self.selectedFilterIndex = filterIndex;
-        NSArray *filterKeyArray = [NSArray arrayWithObjects:@"none",@"rate",@"new",@"low",@"high", nil];
-        self.filterKey = [filterKeyArray objectAtIndex:self.selectedFilterIndex];
-        [AAEShopHelper refreshEshopInformationForCategory:self.category.categoryId
-                                               searchText:nil
-                                                   sortBy:self.filterKey
-                                      WithCompletionBlock:^{
-                                          dispatch_async(dispatch_get_main_queue(), ^{
-                                              //            [self populateCategories];
-                                              [self.tableViewEShopProductList reloadData];
-                                          });                                          
-                                      }];
+//        self.selectedFilterIndex = filterIndex;
+//        NSArray *filterKeyArray = [NSArray arrayWithObjects:@"none",@"rate",@"new",@"low",@"high", nil];
+//        self.filterKey = [filterKeyArray objectAtIndex:self.selectedFilterIndex];
+//        [AAEShopHelper refreshEshopInformationForCategory:self.category.categoryId
+//                                               searchText:nil
+//                                                   sortBy:self.filterKey
+//                                      WithCompletionBlock:^{
+//                                          dispatch_async(dispatch_get_main_queue(), ^{
+//                                              //            [self populateCategories];
+//                                              [self.tableViewEShopProductList reloadData];
+//                                          });                                          
+//                                      }];
     }
     
 }
@@ -333,5 +342,14 @@
 -(void)hideKeyBoard{
     [self.tableViewEShopProductList reloadData];
 }
-
+-(void)locationUpdated:(NSNotification*)notification
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.currentLat = [AAAppGlobals sharedInstance].locationHandler.currentLocation.coordinate.latitude;
+        self.currentLong = [AAAppGlobals sharedInstance].locationHandler.currentLocation.coordinate.longitude;
+        self.targetLat = self.currentLat;
+        self.targetLong = self.currentLong;
+        [self populateView];
+    });
+}
 @end

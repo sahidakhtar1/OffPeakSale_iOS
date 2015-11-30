@@ -14,14 +14,14 @@
 -(void)filterAppliedWith:(NSInteger)filterIndex;
 
 @end
-@interface AAEShopFilterView : UIView <CLLocationManagerDelegate, UITextFieldDelegate>
+@interface AAEShopFilterView : UIView <CLLocationManagerDelegate, UITextFieldDelegate,UISearchControllerDelegate>
 
 {
-    CLLocationManager *locationManager;
     CLGeocoder *geocoder;
     CLPlacemark *placemark;
 
 }
+
 @property (strong, nonatomic) IBOutlet UIView *vwContainerView;
 @property (weak, nonatomic) IBOutlet UITextField *curntLocation;
 @property (weak, nonatomic) IBOutlet UITextField *targetLocation;
