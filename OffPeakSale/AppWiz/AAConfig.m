@@ -14,6 +14,7 @@ NSString* const PNKEY = @"kPnOn";
 NSString* const RETAILER_ID = @"MerchantA1";
 NSString* const DESFAULT_DISCOUNT_TYPE = @"Percentage";//@"UC003343434";
 NSString* const KEY_IS_LOGGED_IN = @"kLoggedIn";
+NSString* const API_KEY=@"AIzaSyDAIb7josxX55yT-aam9XpCnbPgKWjwIjs";
 #ifdef DEV
 //NSString* const BASE_URL = @"http://223.25.237.175/appwizlive/";
 NSString* const BASE_URL = @"http://inceptionlive.com/"

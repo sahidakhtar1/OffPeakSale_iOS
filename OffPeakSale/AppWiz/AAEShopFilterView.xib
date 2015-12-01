@@ -78,15 +78,6 @@
                     <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
-                <searchBar hidden="YES" contentMode="redraw" id="vVj-5k-iDh">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                    <animations/>
-                    <textInputTraits key="textInputTraits"/>
-                    <connections>
-                        <outlet property="delegate" destination="ATd-qs-2yd" id="XiW-3m-n3r"/>
-                    </connections>
-                </searchBar>
             </subviews>
             <animations/>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.35999999999999999" colorSpace="calibratedRGB"/>
@@ -94,18 +85,12 @@
                 <outlet property="btnDone" destination="HVB-rA-yMX" id="l2D-M1-ENh"/>
                 <outlet property="curentRadioBtn" destination="Hty-DX-hnV" id="T8e-Iu-qVc"/>
                 <outlet property="curntLocation" destination="yG3-0F-qBK" id="ncU-8w-d2l"/>
-                <outlet property="searchDisplayController" destination="vVj-5k-iDh" id="2Y9-c1-jFc"/>
                 <outlet property="targetLocation" destination="MSP-1n-N5J" id="hbM-S6-tHu"/>
                 <outlet property="targetRadioBtn" destination="Oze-2t-1Ng" id="EhO-C5-X9o"/>
                 <outlet property="vwContainerView" destination="gFT-nE-vyc" id="NF0-CY-V5M"/>
             </connections>
-            <point key="canvasLocation" x="-327" y="268"/>
+            <point key="canvasLocation" x="-706" y="269"/>
         </view>
-        <searchDisplayController id="s1U-LM-ejr">
-            <connections>
-                <outlet property="searchBar" destination="vVj-5k-iDh" id="wCC-f0-OW9"/>
-            </connections>
-        </searchDisplayController>
     </objects>
     <resources>
         <image name="rd_normal" width="64" height="64"/>

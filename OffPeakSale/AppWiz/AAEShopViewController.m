@@ -15,10 +15,7 @@
 #define SCREEN_HEIGHT [[UIScreen mainScreen] bounds].size.height
 
 @interface AAEShopViewController ()
-@property (nonatomic) long currentLat;
-@property (nonatomic) long currentLong;
-@property (nonatomic) long targetLat;
-@property (nonatomic) long targetLong;
+
 @end
 #import "AALoginDailogView.h"
 @implementation AAEShopViewController
@@ -44,10 +41,10 @@
 {
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationUpdated:) name:NOTIFICATION_LOCATION_UPDATED object:nil];
-    self.currentLat = [AAAppGlobals sharedInstance].locationHandler.currentLocation.coordinate.latitude;
-    self.currentLong = [AAAppGlobals sharedInstance].locationHandler.currentLocation.coordinate.longitude;
-    self.targetLat = self.currentLat;
-    self.targetLong = self.currentLong;
+    [AAAppGlobals sharedInstance].currentLat = [AAAppGlobals sharedInstance].locationHandler.currentLocation.coordinate.latitude;
+    [AAAppGlobals sharedInstance].currentLong = [AAAppGlobals sharedInstance].locationHandler.currentLocation.coordinate.longitude;
+    [AAAppGlobals sharedInstance].targetLat = [AAAppGlobals sharedInstance].currentLat;
+    [AAAppGlobals sharedInstance].targetLong = [AAAppGlobals sharedInstance].currentLong;
     self.filterKey = @"rate";
     self.selectedFilterIndex = 1;
     selectedCategoryIndex = 1;
@@ -136,7 +133,7 @@
     //[self refreshView];
     [self cat_viewDidAppear:YES];
     [self.tableViewEShopProductList reloadData];
-    if (self.targetLat == 0 && self.targetLong == 0) {
+    if ([AAAppGlobals sharedInstance].targetLat == 0 && [AAAppGlobals sharedInstance].targetLong == 0) {
         
     }else{
        [self populateView];
@@ -173,8 +170,8 @@
     [AAEShopHelper refreshEshopInformationForCategory:self.category.categoryId
                                            searchText:self.searchText
                                                sortBy:@""
-                                               forLat:[NSString stringWithFormat:@"%ld",self.targetLat]
-                                              andLong:[NSString stringWithFormat:@"%ld",self.targetLong]                                  WithCompletionBlock:^{
+                                               forLat:[NSString stringWithFormat:@"%f",[AAAppGlobals sharedInstance].targetLat]
+                                              andLong:[NSString stringWithFormat:@"%f",[AAAppGlobals sharedInstance].targetLong]                                  WithCompletionBlock:^{
         dispatch_async(dispatch_get_main_queue(), ^{
             [self populateCategories];
             
@@ -315,20 +312,7 @@
     [keyWindow addSubview:self.filetrView];
 }
 -(void)filterAppliedWith:(NSInteger)filterIndex{
-    if (self.selectedFilterIndex != filterIndex) {
-//        self.selectedFilterIndex = filterIndex;
-//        NSArray *filterKeyArray = [NSArray arrayWithObjects:@"none",@"rate",@"new",@"low",@"high", nil];
-//        self.filterKey = [filterKeyArray objectAtIndex:self.selectedFilterIndex];
-//        [AAEShopHelper refreshEshopInformationForCategory:self.category.categoryId
-//                                               searchText:nil
-//                                                   sortBy:self.filterKey
-//                                      WithCompletionBlock:^{
-//                                          dispatch_async(dispatch_get_main_queue(), ^{
-//                                              //            [self populateCategories];
-//                                              [self.tableViewEShopProductList reloadData];
-//                                          });                                          
-//                                      }];
-    }
+    [self populateView];
     
 }
 - (void)cartButtonTapped {
@@ -345,10 +329,10 @@
 -(void)locationUpdated:(NSNotification*)notification
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        self.currentLat = [AAAppGlobals sharedInstance].locationHandler.currentLocation.coordinate.latitude;
-        self.currentLong = [AAAppGlobals sharedInstance].locationHandler.currentLocation.coordinate.longitude;
-        self.targetLat = self.currentLat;
-        self.targetLong = self.currentLong;
+        [AAAppGlobals sharedInstance].currentLat = [AAAppGlobals sharedInstance].locationHandler.currentLocation.coordinate.latitude;
+        [AAAppGlobals sharedInstance].currentLong = [AAAppGlobals sharedInstance].locationHandler.currentLocation.coordinate.longitude;
+        [AAAppGlobals sharedInstance].targetLat = [AAAppGlobals sharedInstance].currentLat;
+        [AAAppGlobals sharedInstance].targetLong = [AAAppGlobals sharedInstance].currentLong;
         [self populateView];
     });
 }

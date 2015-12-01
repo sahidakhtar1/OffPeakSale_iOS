@@ -162,7 +162,7 @@
        UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
 //    AAHomeViewController* mainViewController = [storyboard instantiateViewControllerWithIdentifier:@"AAHomeViewController"];
     AACategoryDataModel *item = [[AACategoryDataModel alloc] init];
-    item.categoryName = @"OFF PEAK SALE";
+    item.categoryName = @"OffPeakSale";
     item.categoryId = @"279";
     AAEShopViewController *eshopVC = [storyboard instantiateViewControllerWithIdentifier:@"AAEShopViewController"];
     eshopVC.category = item;

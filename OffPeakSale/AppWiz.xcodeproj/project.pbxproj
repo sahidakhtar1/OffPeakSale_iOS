@@ -365,6 +365,8 @@
 		4AD3DF1B1AFFED5F00585790 /* AACategoryDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD3DF1A1AFFED5F00585790 /* AACategoryDataModel.m */; };
 		4AE5AC091C0C93BC007437B0 /* AAThemeCircularView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE5AC081C0C93BC007437B0 /* AAThemeCircularView.m */; settings = {ASSET_TAGS = (); }; };
 		4AE5AC0C1C0CB8EF007437B0 /* AAPlaceAutoCompleteHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE5AC0B1C0CB8EF007437B0 /* AAPlaceAutoCompleteHelper.m */; settings = {ASSET_TAGS = (); }; };
+		4AE5AC101C0CCDBC007437B0 /* AASearchDisplayControler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE5AC0E1C0CCDBC007437B0 /* AASearchDisplayControler.m */; settings = {ASSET_TAGS = (); }; };
+		4AE5AC111C0CCDBC007437B0 /* AASearchDisplayControler.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AE5AC0F1C0CCDBC007437B0 /* AASearchDisplayControler.xib */; settings = {ASSET_TAGS = (); }; };
 		4AE8087C1AFBE414007C6A95 /* AASecondaryMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8087B1AFBE414007C6A95 /* AASecondaryMenuViewController.m */; };
 		4AE8087F1AFBE43C007C6A95 /* AASecondaryMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8087E1AFBE43C007C6A95 /* AASecondaryMenuCell.m */; };
 		A18E45041C01CB30007BF9DE /* dropdown.png in Resources */ = {isa = PBXBuildFile; fileRef = A18E45021C01CB30007BF9DE /* dropdown.png */; };
@@ -842,6 +844,9 @@
 		4AE5AC081C0C93BC007437B0 /* AAThemeCircularView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAThemeCircularView.m; sourceTree = "<group>"; };
 		4AE5AC0A1C0CB8EF007437B0 /* AAPlaceAutoCompleteHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAPlaceAutoCompleteHelper.h; sourceTree = "<group>"; };
 		4AE5AC0B1C0CB8EF007437B0 /* AAPlaceAutoCompleteHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAPlaceAutoCompleteHelper.m; sourceTree = "<group>"; };
+		4AE5AC0D1C0CCDBC007437B0 /* AASearchDisplayControler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AASearchDisplayControler.h; sourceTree = "<group>"; };
+		4AE5AC0E1C0CCDBC007437B0 /* AASearchDisplayControler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AASearchDisplayControler.m; sourceTree = "<group>"; };
+		4AE5AC0F1C0CCDBC007437B0 /* AASearchDisplayControler.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AASearchDisplayControler.xib; sourceTree = "<group>"; };
 		4AE8087A1AFBE414007C6A95 /* AASecondaryMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AASecondaryMenuViewController.h; sourceTree = "<group>"; };
 		4AE8087B1AFBE414007C6A95 /* AASecondaryMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AASecondaryMenuViewController.m; sourceTree = "<group>"; };
 		4AE8087D1AFBE43C007C6A95 /* AASecondaryMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AASecondaryMenuCell.h; sourceTree = "<group>"; };
@@ -2243,6 +2248,9 @@
 				E3F4EF871B01D75500CBC785 /* AAEShopFilterView.xib */,
 				4AE5AC0A1C0CB8EF007437B0 /* AAPlaceAutoCompleteHelper.h */,
 				4AE5AC0B1C0CB8EF007437B0 /* AAPlaceAutoCompleteHelper.m */,
+				4AE5AC0D1C0CCDBC007437B0 /* AASearchDisplayControler.h */,
+				4AE5AC0E1C0CCDBC007437B0 /* AASearchDisplayControler.m */,
+				4AE5AC0F1C0CCDBC007437B0 /* AASearchDisplayControler.xib */,
 			);
 			name = FilterView;
 			sourceTree = "<group>";
@@ -2492,6 +2500,7 @@
 				E3F4EF881B01D75500CBC785 /* AAEShopFilterView.xib in Resources */,
 				F780EF74192BB2D7004AAB40 /* icon_cart@2x.png in Resources */,
 				4AD3C3E81AFA79EA0001823C /* AAHowItWorksView.xib in Resources */,
+				4AE5AC111C0CCDBC007437B0 /* AASearchDisplayControler.xib in Resources */,
 				F70F6892194366790089600E /* Times New Roman-Bold.ttf in Resources */,
 				F78A74D31A0AA6A5009E4F9D /* AAZoomViewController.xib in Resources */,
 				F7C51BA21927449A00659422 /* Paypal button_smaller.png in Resources */,
@@ -2772,6 +2781,7 @@
 				40D85B31187B121300146A8F /* AAShareActivityItemProvider.m in Sources */,
 				40C71B8C1865A0E200325938 /* UIImage+animatedGIF.m in Sources */,
 				4A96EE161AFE1BA000798E04 /* AAShoppingCartBottomView.m in Sources */,
+				4AE5AC101C0CCDBC007437B0 /* AASearchDisplayControler.m in Sources */,
 				F7121D6219097D2A00774280 /* AALoginHelper.m in Sources */,
 				F7BF21661A6D8B33008EE063 /* ActivityIndicator.m in Sources */,
 				40CEE7061868345D007ED35B /* AAServerRequestRetryQueue.m in Sources */,
@@ -3066,7 +3076,7 @@
 					LIVE,
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/AppWiz/AppWiz-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/AppWiz/PayPalMobile",
@@ -3118,7 +3128,7 @@
 					LIVE,
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/AppWiz/AppWiz-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/AppWiz/PayPalMobile",

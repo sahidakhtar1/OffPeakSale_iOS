@@ -70,7 +70,7 @@ static NSString* const JSON_PRODUCT_SHORT_DESCRIPTION_KEY = @"short_desc";
     [[AAAppGlobals sharedInstance].networkHandler sendJSONRequestToServerWithEndpoint:@"getProducts.php" withParams:dict withSuccessBlock:^(NSDictionary *response) {
         [AAEShopHelper populateCategories:response];
         success();
-        if (keyword == nil && sortBy != nil && [sortBy isEqualToString:@"rate"]) {
+        if (keyword == nil) {
             
             NSData *data = [NSKeyedArchiver archivedDataWithRootObject:[AAAppGlobals sharedInstance].categoryList];
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];

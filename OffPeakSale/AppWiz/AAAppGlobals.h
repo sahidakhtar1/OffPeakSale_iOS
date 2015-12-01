@@ -99,6 +99,12 @@ extern NSString* const GOOGLE_MAPS_API_KEY;
 @property (nonatomic, strong) NSString *appStoreUrl;
 @property (nonatomic) BOOL appUpdateAlertShown;
 @property (nonatomic) int deliveryOptonSelectedIndex;
+@property (nonatomic) double currentLat;
+@property (nonatomic) double currentLong;
+@property (nonatomic) double targetLat;
+@property (nonatomic) double targetLong;
+@property (nonatomic,strong) NSString *tagetedAddress;
+@property (nonatomic, strong) NSString *currentAddress;
 
 @property (nonatomic, strong) AAEarliestSchedule *earlieastSchedule;
 

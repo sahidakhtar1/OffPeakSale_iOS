@@ -7,7 +7,8 @@
 //
 
 #import "AAEShopFilterView.h"
-#import "AFHTTPRequestOperation.h";
+#import "AASearchDisplayControler.h"
+#import "AAAppDelegate.h"
 @implementation AAEShopFilterView
 - (id)initWithFrame:(CGRect)frame
 {
@@ -34,10 +35,11 @@
         CGRect rect = [UIScreen mainScreen].bounds;
         self.frame = rect;
         geocoder = [[CLGeocoder alloc] init];
-
-
-        [self getLocationFromAddressString:@"Bommnahalli"];
-
+//
+        
+        UINavigationController *searchResultsController = [[UINavigationController alloc] init];
+        
+        
     }
     return self;
 }
@@ -123,8 +125,17 @@
 }
 
 - (IBAction)btnDoneTapped:(id)sender {
+    if (self.selectedFilterIndex == 0) {
+        [AAAppGlobals sharedInstance].targetLat = [AAAppGlobals sharedInstance].locationHandler.currentLocation.coordinate.latitude;
+        [AAAppGlobals sharedInstance].targetLong = [AAAppGlobals sharedInstance].locationHandler.currentLocation.coordinate.longitude;
+        [AAAppGlobals sharedInstance].currentAddress = self.curntLocation.text;
+    }else{
+        [AAAppGlobals sharedInstance].targetLat = [targetLat doubleValue];
+        [AAAppGlobals sharedInstance].targetLong = [targetLong doubleValue];
+        [AAAppGlobals sharedInstance].tagetedAddress = tagetedAddress;
+    }
     if (self.delegate != nil && [self.delegate respondsToSelector:@selector(filterAppliedWith:)]) {
-//        [self.delegate filterAppliedWith:self.selectedFilterIndex];
+        [self.delegate filterAppliedWith:self.selectedFilterIndex];
     }
     [self removeFromSuperview];
 }
@@ -139,6 +150,7 @@
        return false;
     }else{
         if (textField == self.targetLocation) {
+            [self showSearchDisplayController];
             return false;
         }else{
             return false;
@@ -146,21 +158,43 @@
     }
     return false;
 }
+-(void)showSearchDisplayController{
+    self.searchDisplayVc = nil;
+    self.searchDisplayVc = [[AASearchDisplayControler alloc] initWithNibName:@"AASearchDisplayControler" bundle:nil];
+    self.searchDisplayVc.delegate = self;
+    UIWindow *keyWindow= [UIApplication sharedApplication].keyWindow;
+    [keyWindow addSubview:self.searchDisplayVc.view];
+}
 - (void)tapOnScreen
 {
     [self removeFromSuperview];
+    
 }
--(void)getAutocompleteWithText:(NSString*)text{
-    NSString *url  =[NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/autocomplete/json?input=%@&types=geocode&language=fr&key=AIzaSyDAIb7josxX55yT-aam9XpCnbPgKWjwIjs",text];
+-(void)getLatLongFromPlaceId:(NSString*)placeId{
+    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+    NSString *url =[NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/details/json?placeid=%@&key=%@",placeId, API_KEY];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     [manager.requestSerializer setValue:@"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.71 (KHTML, like Gecko) Version/6.1 Safari/537.71" forHTTPHeaderField:@"User-Agent"];
     
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/html",nil];
     AFHTTPRequestOperation *operation = [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+        NSDictionary *result = [responseObject objectForKey:@"result"];
+        tagetedAddress = [result valueForKey:@"formatted_address"];
+        NSDictionary *geometry = [result objectForKey:@"geometry"];
+        NSDictionary *location = [geometry objectForKey:@"location"];
+        targetLat = [location valueForKey:@"lat"];
+        targetLong = [location valueForKey:@"lng"];
+        self.targetLocation.text = tagetedAddress;
+        
         NSLog(@"Response= %@",responseObject);
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [[UIApplication sharedApplication] endIgnoringInteractionEvents];
     }];
+}
+-(void)selectedPlace:(NSDictionary*)selectedPace{
+    [self getLatLongFromPlaceId:[selectedPace valueForKey:@"place_id"]];
 }
 @end

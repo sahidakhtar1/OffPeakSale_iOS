@@ -76,6 +76,7 @@ extern NSString* const BASE_URL;
 extern NSString* const DESFAULT_DISCOUNT_TYPE;
 extern NSString* const KEY_SELECTED_CURRENCY;
 extern NSString* const KEY_IS_LOGGED_IN;
+extern NSString* const API_KEY;
 
 typedef enum MenuItem{
     HOME,

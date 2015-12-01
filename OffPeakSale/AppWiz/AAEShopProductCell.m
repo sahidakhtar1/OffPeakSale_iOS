@@ -154,7 +154,7 @@ NSInteger const RATING_VIEW_WEIDTH = 105;
                                                 size:QTY_INDICATOR_FONT];
     self.lblAddress.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont
                                            size:ADDRESS_FONTSIZE];
-    //[self.vwSaleIndicator addSubview:self.lblSaleIndicator];
+    [self.vwSaleIndicator addSubview:self.lblSaleIndicator];
     
    
 }

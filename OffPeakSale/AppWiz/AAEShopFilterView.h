@@ -8,20 +8,24 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
+#import "AAThemeView.h"
 
+@class AASearchDisplayControler;
 @protocol EshopFilterDelegate <NSObject>
 
 -(void)filterAppliedWith:(NSInteger)filterIndex;
 
 @end
-@interface AAEShopFilterView : UIView <CLLocationManagerDelegate, UITextFieldDelegate,UISearchControllerDelegate>
+@interface AAEShopFilterView : UIView <CLLocationManagerDelegate, UITextFieldDelegate>
 
 {
     CLGeocoder *geocoder;
     CLPlacemark *placemark;
-
+    NSString *targetLat,*targetLong,*tagetedAddress;
 }
 
+
+@property (nonatomic, strong) AASearchDisplayControler *searchDisplayVc;
 @property (strong, nonatomic) IBOutlet UIView *vwContainerView;
 @property (weak, nonatomic) IBOutlet UITextField *curntLocation;
 @property (weak, nonatomic) IBOutlet UITextField *targetLocation;
