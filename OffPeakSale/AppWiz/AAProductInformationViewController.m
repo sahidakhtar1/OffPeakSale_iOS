@@ -43,35 +43,35 @@
 
     [self populateProductPrices];
     [self refreshView];
-    [[AAAppGlobals sharedInstance] calculateCartTotalItemCount];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"updateCart" object:nil];
-    if (1 == 2 && ![AAAppGlobals sharedInstance].enableShoppingCart) {
-        [self.btnBuyProduct setTitle:@"Buy" forState:UIControlStateNormal];
-         [self.btnEnquiry setTitle:@"Email Order" forState:UIControlStateNormal];
-        
-    }else{
-        CGRect frame = self.btnBuyProduct.frame;
-        frame.origin.x += 3;
-        frame.size.width += 0;
-        self.btnBuyProduct.frame = frame;
-        NSString *buttonTitle = @"Add To Cart";
-        if (self.product.availQty != nil) {
-            if ([self.product.availQty integerValue]<=0) {
-                buttonTitle = @"Sold Out";
-                [self.btnBuyProduct setEnabled:false];
-            }
-        }
-        [self.btnBuyProduct setTitle:buttonTitle forState:UIControlStateNormal];
-        [self.btnEnquiry setTitle:@"Add To Order List" forState:UIControlStateNormal];
-    }
-    
-    if ([AAAppGlobals sharedInstance].disablePayment) {
-        self.vwBuy.hidden = TRUE;
-        self.vwEnquiry.hidden = FALSE;
-    }else{
-        self.vwBuy.hidden = FALSE;
-        self.vwEnquiry.hidden = TRUE;
-    }
+//    [[AAAppGlobals sharedInstance] calculateCartTotalItemCount];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"updateCart" object:nil];
+//    if (1 == 2 && ![AAAppGlobals sharedInstance].enableShoppingCart) {
+//        [self.btnBuyProduct setTitle:@"Buy" forState:UIControlStateNormal];
+//         [self.btnEnquiry setTitle:@"Email Order" forState:UIControlStateNormal];
+//        
+//    }else{
+//        CGRect frame = self.btnBuyProduct.frame;
+//        frame.origin.x += 3;
+//        frame.size.width += 0;
+//        self.btnBuyProduct.frame = frame;
+//        NSString *buttonTitle = @"Add To Cart";
+//        if (self.product.availQty != nil) {
+//            if ([self.product.availQty integerValue]<=0) {
+//                buttonTitle = @"Sold Out";
+//                [self.btnBuyProduct setEnabled:false];
+//            }
+//        }
+//        [self.btnBuyProduct setTitle:buttonTitle forState:UIControlStateNormal];
+//        [self.btnEnquiry setTitle:@"Add To Order List" forState:UIControlStateNormal];
+//    }
+//    
+//    if ([AAAppGlobals sharedInstance].disablePayment) {
+//        self.vwBuy.hidden = TRUE;
+//        self.vwEnquiry.hidden = FALSE;
+//    }else{
+//        self.vwBuy.hidden = FALSE;
+//        self.vwEnquiry.hidden = TRUE;
+//    }
     self.vwBuy.hidden = false;
     self.vwEnquiry.hidden = true;
     
@@ -108,6 +108,7 @@
     CGRect frameCurrentProductPrice = self.lblCurrentProductPrice.frame;
     frameCurrentProductPrice.size.width = self.lblQty.frame.origin.x-frameCurrentProductPrice.origin.x-5;
     self.lblCurrentProductPrice.frame = frameCurrentProductPrice;
+    [self.btnBuyProduct setTitle:@"Buy" forState:UIControlStateNormal];
     
 }
 -(void)setMenuIcons{

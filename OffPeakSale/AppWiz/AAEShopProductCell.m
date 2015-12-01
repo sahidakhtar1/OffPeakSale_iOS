@@ -9,16 +9,15 @@
 #import "AAEShopProductCell.h"
 
 @implementation AAEShopProductCell
+
 NSInteger const MAIN_VIEW_PADDING = 10.0;
 NSInteger const IMAGE_VIEW_PADDING = 0.0;
 NSInteger const LABEL_VIEW_LEFT_PADDING = 15.0;
 NSInteger const OVERLAY_TOP_PADDING = 8.0;
 NSInteger const PRICE_VIEW_HEIGHT = 40.0;
-NSInteger const QTY_INDICATOR_WIDTH = 80.0;
-NSInteger const QTY_INDICATOR_HEIGHT = 30.0;
-NSInteger const CIRCULAR_VIEW_HEIGHT = 60.0;
-
-
+static NSInteger const QTY_INDICATOR_WIDTH = 80.0;
+static NSInteger const QTY_INDICATOR_HEIGHT = 30.0;
+static NSInteger const CIRCULAR_VIEW_HEIGHT = 60.0;
 NSInteger const RATING_VIEW_WEIDTH = 105;
 @synthesize eshopProduct = eShopProduct_;
 @synthesize priceView;
@@ -219,8 +218,10 @@ NSInteger const RATING_VIEW_WEIDTH = 105;
         prodrating = self.eshopProduct.productRating;
     }
     
-    NSString *distance = [[AAAppGlobals sharedInstance] getDisctanceFrom:[AAAppGlobals sharedInstance].locationHandler.currentLocation.coordinate.latitude
-                                                                 andLong:[AAAppGlobals sharedInstance].locationHandler.currentLocation.coordinate.longitude
+    NSString *distance = [[AAAppGlobals sharedInstance] getDisctanceFrom:[AAAppGlobals
+                                                                          sharedInstance].targetLat
+                                                                 andLong:[AAAppGlobals
+                                                                          sharedInstance].targetLong
                                                                    toLat:[self.eshopProduct.outletLat doubleValue]
                                                                  andLong:[self.eshopProduct.outletLong doubleValue]];
     self.lblDistance.text = [NSString stringWithFormat:@"%@KM",distance];
@@ -344,6 +345,8 @@ NSInteger const RATING_VIEW_WEIDTH = 105;
         self.lblQtyIndicator.text = [NSString stringWithFormat:@"%@ sold",self.eshopProduct.availQty];
         self.vwQtyIndicator.hidden = false;
 
+    }else{
+        self.vwQtyIndicator.hidden = true;
     }
     
     if (self.eshopProduct.onSale != nil && [self.eshopProduct.onSale integerValue]==1) {

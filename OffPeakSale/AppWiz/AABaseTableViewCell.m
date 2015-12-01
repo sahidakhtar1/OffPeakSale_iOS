@@ -9,6 +9,7 @@
 #import "AABaseTableViewCell.h"
 
 @implementation AABaseTableViewCell
+
 static NSInteger const MAIN_VIEW_PADDING = 15.0;
 
 

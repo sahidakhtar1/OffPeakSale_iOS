@@ -13,12 +13,12 @@
 #import "AAMediaItem.h"
 #import "AABannerView.h"
 #import "AAEShopProductOptions.h"
-
+#import "AAThemeCircularView.h"
 @implementation AAProductInformationScrollView
 
 @synthesize banner;
 @synthesize option1,option2;
-
+static NSInteger const LABEL_VIEW_LEFT_PADDING = 15;
 static NSInteger const IMAGE_VIEW_MARGIN = 0;
 static NSInteger const IMAGE_VIEW_HEIGHT = 195;
 static NSInteger const IMAGE_VIEW_WIDTH = 300;
@@ -26,6 +26,9 @@ static NSInteger const PRODUCT__SHORT_DESCRIPTION_CONTAINER_MARGIN = 15;
 static NSInteger const PRODUCT__SHORT_DESCRIPTION_LABEL_TEXT_MARGIN = 5;
 static NSInteger const PRODUCT_HEADING_MARGIN = 20;
 static NSInteger const PRODOCT_BODY_MARGIN = 15;
+static NSInteger const QTY_INDICATOR_WIDTH = 80.0;
+static NSInteger const QTY_INDICATOR_HEIGHT = 30.0;
+static NSInteger const CIRCULAR_VIEW_HEIGHT = 60.0;
 //static NSInteger const INTERVIEW_SPACING = 20;
 - (id)initWithFrame:(CGRect)frame
 {
@@ -83,18 +86,18 @@ static NSInteger const PRODOCT_BODY_MARGIN = 15;
     if ([[AAAppGlobals sharedInstance].retailer.enableRewards isEqualToString:@"1"]) {
         currentY = [self addRewardsAtY:currentY];
     }
-    if ([AAAppGlobals sharedInstance].enableRating || [[AAAppGlobals sharedInstance].retailer.enableRating isEqualToString:@"1"]) {
-        currentY  = [self addProductRatingWithOrgY:currentY];
-    }
-    if ([self.product.product_options count]>0) {
-        AAEShopProductOptions *option1 = [self.product.product_options objectAtIndex:0];
-        currentY = [self addVariantOption1At:currentY withOption:option1.optionLabel];
-        if ([self.product.product_options count]>1) {
-            AAEShopProductOptions *option2 = [self.product.product_options objectAtIndex:1];
-            currentY = [self addVariantOption2At:currentY withOption:option2.optionLabel];
-            
-        }
-    }
+//    if ([AAAppGlobals sharedInstance].enableRating || [[AAAppGlobals sharedInstance].retailer.enableRating isEqualToString:@"1"]) {
+//        currentY  = [self addProductRatingWithOrgY:currentY];
+//    }
+//    if ([self.product.product_options count]>0) {
+//        AAEShopProductOptions *option1 = [self.product.product_options objectAtIndex:0];
+//        currentY = [self addVariantOption1At:currentY withOption:option1.optionLabel];
+//        if ([self.product.product_options count]>1) {
+//            AAEShopProductOptions *option2 = [self.product.product_options objectAtIndex:1];
+//            currentY = [self addVariantOption2At:currentY withOption:option2.optionLabel];
+//            
+//        }
+//    }
     
     
     currentY = [self addProductDetails:currentY];
@@ -112,29 +115,9 @@ static NSInteger const PRODOCT_BODY_MARGIN = 15;
     NSInteger imgContainerPadding = (self.frame.size.width - imageWidth - 2*IMAGE_VIEW_MARGIN)/2;
     UIView* viewImgContainer = [[UIView alloc] initWithFrame:CGRectMake(IMAGE_VIEW_MARGIN, IMAGE_VIEW_MARGIN, imageWidth, [[AAAppGlobals sharedInstance] getImageHeight])];
     
-//    viewImgContainer.layer.borderColor = BOARDER_COLOR.CGColor;
-//    viewImgContainer.layer.borderWidth = 1.0f;
-    
     viewImgContainer.tag = 100;
-    //[viewImgContainer.layer setShadowRadius:3];
     [viewImgContainer setBackgroundColor:[UIColor whiteColor]];
     [self addSubview:viewImgContainer];
-    
-    
-//    UIImageView* imgViewProductImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, imageWidth, IMAGE_VIEW_HEIGHT)];
-//    CGRect frame  = imgViewProductImage.frame;
-//    [imgViewProductImage setImageWithURL:imageURL completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-//        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-//        [btn setFrame:frame];
-//        [btn addTarget:self action:@selector(imageTapped) forControlEvents:UIControlEventTouchUpInside];
-//        [viewImgContainer addSubview:btn];
-//        prodImage = image;
-//    }];
-//    
-////    [imgViewProductImage setContentMode:
-////     UIViewContentModeScaleAspectFill];
-//    [imgViewProductImage setClipsToBounds:YES];
-//    imgViewProductImage.tag = 101;
     
     //TODO - Multiple Images issue
     AAMediaItem *mediaItem = [[AAMediaItem alloc] init];
@@ -147,10 +130,95 @@ static NSInteger const PRODOCT_BODY_MARGIN = 15;
     
     self.banner = [[AABannerView alloc] initWithFrame:viewImgContainer.bounds];
     self.banner.delegate = self;
-    self.banner.bannerItems = [NSArray arrayWithArray:self.product.product_imgs];//self.product.product_imgs;
+    self.banner.bannerItems = [NSArray arrayWithArray:self.product.product_imgs];
     [self.banner populateItems];
     [viewImgContainer addSubview:self.banner];
     CGFloat currentY = viewImgContainer.frame.origin.y + viewImgContainer.frame.size.height + 10;
+    
+    UIView *vwQtyIndicator;
+    UILabel *lblQtyIndicator;
+    UIView *vwSaleIndicator;
+    UILabel *lblSaleIndicator;
+    if (self.product.availQty != nil) {
+    vwQtyIndicator = [[UIView alloc]
+                           initWithFrame:CGRectMake(imageWidth-QTY_INDICATOR_WIDTH,
+                                                    0,
+                                                    QTY_INDICATOR_WIDTH,
+                                                    QTY_INDICATOR_HEIGHT)];
+    vwQtyIndicator.backgroundColor = [UIColor blackColor];
+    vwQtyIndicator.alpha = 0.5;
+    
+    lblQtyIndicator = [[UILabel alloc] initWithFrame:vwQtyIndicator.bounds];
+    [lblQtyIndicator setTextAlignment:NSTextAlignmentCenter];
+    lblQtyIndicator.textColor = [UIColor whiteColor];
+    lblQtyIndicator.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont
+                                                size:QTY_INDICATOR_FONT];
+    [vwQtyIndicator addSubview:lblQtyIndicator];
+
+    [viewImgContainer addSubview:vwQtyIndicator];
+    
+    lblQtyIndicator.text = [NSString stringWithFormat:@"%@ sold",self.product.availQty];
+    vwQtyIndicator.hidden = false;
+        
+    }else{
+//        vwQtyIndicator.hidden = true;
+    }
+    
+    if (self.product.onSale != nil && [self.product.onSale integerValue]==1) {
+        vwSaleIndicator = [[UIView alloc]
+                                initWithFrame:CGRectMake(0,
+                                                         
+                                                         0,
+                                                         QTY_INDICATOR_WIDTH,
+                                                         QTY_INDICATOR_HEIGHT)];
+        vwSaleIndicator.backgroundColor = [UIColor colorWithRed:230.0f/255.0f
+                                                               green:46.0f/255.0f
+                                                                blue:37.0f/255.0f
+                                                               alpha:1];
+        
+        lblSaleIndicator = [[UILabel alloc] initWithFrame:vwSaleIndicator.bounds];
+        [lblSaleIndicator setTextAlignment:NSTextAlignmentCenter];
+        lblSaleIndicator.textColor = [UIColor whiteColor];
+        lblSaleIndicator.text = @"Sale";
+        lblSaleIndicator.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont
+                                                     size:QTY_INDICATOR_FONT];
+        [vwSaleIndicator addSubview:lblSaleIndicator];
+        [viewImgContainer addSubview:vwQtyIndicator];
+        
+    vwSaleIndicator.hidden = false;
+    }else{
+        vwSaleIndicator.hidden = true;
+    }
+    
+    
+    AAThemeCircularView *discountView;
+    UILabel *lblDiscountPercentage;
+    discountView = [[AAThemeCircularView alloc]
+                         initWithFrame:CGRectMake(viewImgContainer.frame.size.width -
+                                                  LABEL_VIEW_LEFT_PADDING -CIRCULAR_VIEW_HEIGHT
+                                                  ,viewImgContainer.frame.size.height -
+                                                  LABEL_VIEW_LEFT_PADDING -CIRCULAR_VIEW_HEIGHT ,
+                                                  CIRCULAR_VIEW_HEIGHT,
+                                                  CIRCULAR_VIEW_HEIGHT)];
+    [discountView setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin];
+    [viewImgContainer addSubview:discountView];
+    
+    lblDiscountPercentage = [[UILabel alloc] initWithFrame:CGRectMake(0,
+                                                                           CIRCULAR_VIEW_HEIGHT/2-20,
+                                                                           CIRCULAR_VIEW_HEIGHT,
+                                                                           20)];
+    [lblDiscountPercentage setFont:[UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:QTY_INDICATOR_FONT]];
+    [lblDiscountPercentage setTextAlignment:NSTextAlignmentCenter];
+    lblDiscountPercentage.textColor = [AAColor sharedInstance].retailerThemeTextColor;
+    [discountView addSubview:lblDiscountPercentage];
+    lblDiscountPercentage.text = self.product.offpeak_discount;
+    
+    UILabel *lblOff = [[UILabel alloc] initWithFrame:CGRectMake(0, CIRCULAR_VIEW_HEIGHT/2, CIRCULAR_VIEW_HEIGHT, 20)];
+    [lblOff setFont:[UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:QTY_INDICATOR_FONT]];
+    [lblOff setTextAlignment:NSTextAlignmentCenter];
+    lblOff.text = @"OFF";
+    lblOff.textColor = [AAColor sharedInstance].retailerThemeTextColor;
+    [discountView addSubview:lblOff];
     
     return currentY;
     
@@ -163,16 +231,25 @@ static NSInteger const PRODOCT_BODY_MARGIN = 15;
 }
 -(CGFloat)addProductShortDescriptionWithOrgY : (CGFloat)orgY
 {
-    CGSize productTextSize = [AAUtils getTextSizeWithFont:self.fontProductShortDescription andText:self.product.productShortDescription andMaxWidth:self.frame.size.width - 2*PRODUCT__SHORT_DESCRIPTION_CONTAINER_MARGIN];
+    UILabel *lblDistance = [[UILabel alloc] init];
     
-    UIView* viewProductDescriptionContainer = [[UIView alloc] initWithFrame:CGRectMake(PRODUCT__SHORT_DESCRIPTION_CONTAINER_MARGIN, orgY, self.frame.size.width - 2*PRODUCT__SHORT_DESCRIPTION_CONTAINER_MARGIN, productTextSize.height + PRODUCT__SHORT_DESCRIPTION_LABEL_TEXT_MARGIN*2)];
+    lblDistance.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].boldFont size:DISTANCE_FONTSIZE];
+    lblDistance.textColor = [AAColor sharedInstance].retailerThemeBackgroundColor;
+    NSString *distance = [[AAAppGlobals sharedInstance] getDisctanceFrom:[AAAppGlobals
+                                                                          sharedInstance].targetLat
+                                                                 andLong:[AAAppGlobals
+                                                                          sharedInstance].targetLong
+                                                                   toLat:[self.product.outletLat doubleValue]
+                                                                 andLong:[self.product.outletLong doubleValue]];
+    lblDistance.text = [NSString stringWithFormat:@"%@KM",distance];
+    CGSize disctanceSize = [AAUtils getTextSizeWithFont:lblDistance.font andText:lblDistance.text andMaxWidth:MAXFLOAT];
+    lblDistance.frame = CGRectMake(self.frame.size.width - disctanceSize.width-15, orgY, disctanceSize.width, disctanceSize.height);
+    [self addSubview:lblDistance];
+    
+    CGSize productTextSize = [AAUtils getTextSizeWithFont:self.fontProductShortDescription andText:self.product.productShortDescription andMaxWidth:self.frame.size.width - 2*PRODUCT__SHORT_DESCRIPTION_CONTAINER_MARGIN - disctanceSize.width-10];
+    
+    UIView* viewProductDescriptionContainer = [[UIView alloc] initWithFrame:CGRectMake(PRODUCT__SHORT_DESCRIPTION_CONTAINER_MARGIN, orgY, self.frame.size.width - 2*PRODUCT__SHORT_DESCRIPTION_CONTAINER_MARGIN- disctanceSize.width-10, productTextSize.height + PRODUCT__SHORT_DESCRIPTION_LABEL_TEXT_MARGIN*2)];
     [viewProductDescriptionContainer setBackgroundColor:[UIColor whiteColor]];
-//    viewProductDescriptionContainer.layer.shadowOpacity = 0.5;
-//    viewProductDescriptionContainer.layer.shadowOffset = CGSizeMake(0, 0);
-//    viewProductDescriptionContainer.layer.shadowColor = [UIColor blackColor].CGColor;
-//    viewProductDescriptionContainer.layer.shadowRadius = 4.0;    //[viewProductDescriptionContainer setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
-//    viewProductDescriptionContainer.layer.borderColor = BOARDER_COLOR.CGColor;
-//    viewProductDescriptionContainer.layer.borderWidth = 1.0f;
 
     UILabel* lblProductShortDescription = [[UILabel alloc] initWithFrame:CGRectMake(0, PRODUCT__SHORT_DESCRIPTION_LABEL_TEXT_MARGIN, productTextSize.width, productTextSize.height )];
     [lblProductShortDescription setFont:self.fontProductShortDescription];
@@ -188,22 +265,115 @@ static NSInteger const PRODOCT_BODY_MARGIN = 15;
     return currentY;
 }
 -(CGFloat)addRewardsAtY:(CGFloat)orgY{
-    UILabel* lblBody = [[UILabel alloc] initWithFrame:CGRectMake(PRODOCT_BODY_MARGIN, orgY, 290, 20)];
-    [lblBody setFont:[UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:PRODUCTDETAIL_REWARDS_FONTSIZE]];
-    NSMutableAttributedString *hogan = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ Credit Points",self.product.reward_points]];
-    int length = [[NSString stringWithFormat:@"%@",self.product.reward_points] length];
-    [hogan addAttribute:NSFontAttributeName
-                  value:[UIFont fontWithName:[AAAppGlobals sharedInstance].boldFont size:PRODUCTDETAIL_REWARDS_FONTSIZE]
-                  range:NSMakeRange(0,length)];
-    [hogan addAttribute:NSFontAttributeName
-                  value:[UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:PRODUCTDETAIL_REWARDS_FONTSIZE]
-                  range:NSMakeRange(length+1,[@"Credit Points" length])];
-    [lblBody setAttributedText:hogan];
-//    [lblBody setText:[NSString stringWithFormat:@"%@ Reward Points",self.product.reward_points]];
-    [lblBody setNumberOfLines:0];
+    UILabel *lblProductPreviousPrice = [[UILabel alloc] init];
+    UILabel *lblProductCurrentPrice = [[UILabel alloc] init];
+    UILabel *lblAddress = [[UILabel alloc] init];
+    [self addSubview:lblProductPreviousPrice];
+    [self addSubview:lblProductCurrentPrice];
+    [self addSubview:lblAddress];
+
+    NSString *selectedCurrencyKey = [[NSUserDefaults standardUserDefaults] objectForKey:KEY_SELECTED_CURRENCY];
+    if (selectedCurrencyKey == nil) {
+        selectedCurrencyKey = [AAAppGlobals sharedInstance].currency_code;
+    }
+    selectedCurrencyKey = [AAAppGlobals sharedInstance].currency_symbol;
+    float currencyMultiplier = [[[[AAAppGlobals sharedInstance] currecyDict] valueForKey:selectedCurrencyKey] floatValue];
+    if (currencyMultiplier == 0) {
+        currencyMultiplier = 1.0f;
+        selectedCurrencyKey = [AAAppGlobals sharedInstance].currency_symbol;
+    }
+    NSString* previousProductPrice;
+    NSString* currentProductPrice;
+    float currentprice,prevprice;
+    if (self.product.previousProductPrice != nil) {
+        prevprice = [self.product.previousProductPrice floatValue]* currencyMultiplier;
+        NSString *prevpriceWithconverion = [[AAAppGlobals sharedInstance] getPriceStrfromFromPrice:prevprice];
+        previousProductPrice = [NSString stringWithFormat:@"%@%@",/*[AAAppGlobals sharedInstance].currency_code*/selectedCurrencyKey,prevpriceWithconverion];
+    }else{
+        prevprice = 0.0;
+        previousProductPrice = @"";
+    }
+    NSDictionary* attributes = @{
+                                 NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]
+                                 };
+    currentprice = [self.product.currentProductPrice floatValue]*currencyMultiplier;
     
-    [self addSubview:lblBody];
-    return orgY+20;
+    NSString *currenctPriceWithConversion = [[AAAppGlobals sharedInstance] getPriceStrfromFromPrice:currentprice];
+    
+    currentProductPrice = [NSString stringWithFormat:@"%@%@",selectedCurrencyKey,currenctPriceWithConversion];
+    float currentPriceOriginX;
+    if (self.product.previousProductPrice != nil) {
+        NSMutableAttributedString *attStringPreviousProductPrice = [[NSMutableAttributedString alloc] initWithString:previousProductPrice attributes:attributes];
+        
+        CGSize previousPricelabelSize = [AAUtils getTextSizeWithFont:[UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:FONT_SIZE_OLD_PRICE] andText:previousProductPrice andMaxWidth:175 ];
+        [lblProductPreviousPrice setFrame:CGRectMake(15,
+                                                          orgY,
+                                                          previousPricelabelSize.width,
+                                                          previousPricelabelSize.height)];
+        [lblProductPreviousPrice setAttributedText:attStringPreviousProductPrice];
+        [lblProductPreviousPrice setFont:[UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:FONT_SIZE_OLD_PRICE]];
+        [lblProductPreviousPrice setBackgroundColor:[UIColor clearColor]];
+        //[self.lblProductPreviousPrice setTextColor:[[AAColor sharedInstance] eShopCardTextColor]];
+        [lblProductPreviousPrice setAutoresizingMask:UIViewAutoresizingFlexibleTopMargin];
+        lblProductPreviousPrice.hidden = false;
+        currentPriceOriginX = lblProductPreviousPrice.frame.origin.x + lblProductPreviousPrice.frame.size.width + 3;
+    }else{
+        lblProductPreviousPrice.hidden = true;
+        currentPriceOriginX = LABEL_VIEW_LEFT_PADDING;
+    }
+    CGSize currentPricelabelSize = [AAUtils getTextSizeWithFont:[UIFont fontWithName:[AAAppGlobals sharedInstance].boldFont size:FONT_SIZE_NEW_PRICE] andText:currentProductPrice andMaxWidth:175];
+    [lblProductCurrentPrice setFrame:CGRectMake( currentPriceOriginX,
+                                                     orgY,
+                                                     currentPricelabelSize.width,
+                                                     currentPricelabelSize.height)];
+    [lblProductCurrentPrice setText:currentProductPrice];
+    [lblProductCurrentPrice setFont:[UIFont fontWithName:[AAAppGlobals sharedInstance].boldFont size:FONT_SIZE_NEW_PRICE]];
+    [lblProductCurrentPrice setBackgroundColor:[UIColor clearColor]];
+    lblAddress.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont
+                                      size:ADDRESS_FONTSIZE];
+    
+    UIImageView *imgPin = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+    [imgPin setImage:[UIImage imageNamed:@"locate_us"]];
+
+    lblAddress.text = self.product.outletName;
+    float maxwidth = SCREEN_WIDTH - lblProductCurrentPrice.frame.origin.x + currentPricelabelSize.width+10 - (2*LABEL_VIEW_LEFT_PADDING);
+    CGSize addressSize = [AAUtils getTextSizeWithFont:lblAddress.font andText:lblAddress.text andMaxWidth:maxwidth];
+    lblAddress.frame = CGRectMake(SCREEN_WIDTH-LABEL_VIEW_LEFT_PADDING-addressSize.width, orgY, addressSize.width, 20);
+    CGRect imgFrame = imgPin.frame;
+    imgFrame.origin.x = lblAddress.frame.origin.x - imgFrame.size.width -5;
+    imgFrame.origin.y = lblAddress.frame.origin.y;
+    imgPin.frame = imgFrame;
+    [self addSubview:imgPin];
+    
+    CGPoint centerPrevPrice = lblProductPreviousPrice.center;
+    CGPoint centerCurrectPrice = lblProductCurrentPrice.center;
+    centerCurrectPrice.y = centerPrevPrice.y;
+    lblProductCurrentPrice.center = centerCurrectPrice;
+    CGPoint centerimgPin = imgPin.center;
+    centerimgPin.y = centerPrevPrice.y;
+    imgPin.center = centerimgPin;
+    CGPoint centerAddress = lblAddress.center;
+    centerAddress.y = centerPrevPrice.y;
+    lblAddress.center = centerAddress;
+    
+    
+    
+//    UILabel* lblBody = [[UILabel alloc] initWithFrame:CGRectMake(PRODOCT_BODY_MARGIN, orgY, 290, 20)];
+//    [lblBody setFont:[UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:PRODUCTDETAIL_REWARDS_FONTSIZE]];
+//    NSMutableAttributedString *hogan = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ Credit Points",self.product.reward_points]];
+//    int length = [[NSString stringWithFormat:@"%@",self.product.reward_points] length];
+//    [hogan addAttribute:NSFontAttributeName
+//                  value:[UIFont fontWithName:[AAAppGlobals sharedInstance].boldFont size:PRODUCTDETAIL_REWARDS_FONTSIZE]
+//                  range:NSMakeRange(0,length)];
+//    [hogan addAttribute:NSFontAttributeName
+//                  value:[UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:PRODUCTDETAIL_REWARDS_FONTSIZE]
+//                  range:NSMakeRange(length+1,[@"Credit Points" length])];
+//    [lblBody setAttributedText:hogan];
+////    [lblBody setText:[NSString stringWithFormat:@"%@ Reward Points",self.product.reward_points]];
+//    [lblBody setNumberOfLines:0];
+//    
+//    [self addSubview:lblBody];
+    return orgY+currentPricelabelSize.height+8;
 }
 -(CGFloat)addProductRatingWithOrgY : (CGFloat)orgY
 {
@@ -398,10 +568,6 @@ static NSInteger const PRODOCT_BODY_MARGIN = 15;
     [self.optionDropDown removeFromSuperview];
     
 }
-//-(void)scrollRectToVisible:(CGRect)rect animated:(BOOL)animated{
-//    CGPoint currentOffset = self.contentOffset;
-//    
-//}
 -(void)hideDropDown{
     [self.optionDropDown removeFromSuperview];
 }
