@@ -54,8 +54,11 @@ static NSString* const JSON_PRODUCT_SHORT_DESCRIPTION_KEY = @"short_desc";
    
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
     [dict setValue:RETAILER_ID forKey:JSON_RETAILER_ID_KEY];
-    [dict setValue:latitude forKey:@"consumer_lat"];
-    [dict setValue:longitude forKey:@"consumer_long"];
+    if ([[AAAppGlobals sharedInstance].retailer.enableDiscovery isEqualToString:@"1"]) {
+        [dict setValue:latitude forKey:@"consumer_lat"];
+        [dict setValue:longitude forKey:@"consumer_long"];
+    }
+   
 //    if (cid != nil) {
 //       [dict setValue:cid forKey:@"cid"];
 //    }

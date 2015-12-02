@@ -48,7 +48,7 @@ NSInteger const SELECTIONINDICATOR_HEIGHT = 5;
     self.selectedIndicator = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height-SELECTIONINDICATOR_HEIGHT, MAX_BUTTON_WIDTH, SELECTIONINDICATOR_HEIGHT)];
     self.selectedIndicator.backgroundColor = [[AAColor sharedInstance].retailerThemeBackgroundColor colorWithAlphaComponent:.8];
     [self addSubview:self.selectedIndicator];
-//    self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"btn_tab_default"]];
+   self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"btn_tab_default"]];
     
 }
 

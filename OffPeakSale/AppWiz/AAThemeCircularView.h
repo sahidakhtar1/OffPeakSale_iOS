@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "AAThemeView.h"
-@interface AAThemeCircularView : AAThemeView
+@interface AAThemeCircularView : UIView
 
 @end

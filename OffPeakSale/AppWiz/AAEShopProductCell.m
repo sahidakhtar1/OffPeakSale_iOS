@@ -17,7 +17,8 @@ NSInteger const OVERLAY_TOP_PADDING = 8.0;
 NSInteger const PRICE_VIEW_HEIGHT = 40.0;
 static NSInteger const QTY_INDICATOR_WIDTH = 80.0;
 static NSInteger const QTY_INDICATOR_HEIGHT = 30.0;
-static NSInteger const CIRCULAR_VIEW_HEIGHT = 60.0;
+static NSInteger const CIRCULAR_VIEW_WIDTH = 90.0;
+static NSInteger const CIRCULAR_VIEW_HEIGHT = 50.0;
 NSInteger const RATING_VIEW_WEIDTH = 105;
 @synthesize eshopProduct = eShopProduct_;
 @synthesize priceView;
@@ -61,29 +62,38 @@ NSInteger const RATING_VIEW_WEIDTH = 105;
     
     self.discountView = [[AAThemeCircularView alloc]
                          initWithFrame:CGRectMake(self.imgViewProductImage.frame.size.width -
-                                                  LABEL_VIEW_LEFT_PADDING -CIRCULAR_VIEW_HEIGHT
+                                                  LABEL_VIEW_LEFT_PADDING -CIRCULAR_VIEW_WIDTH
                                                   ,self.imgViewProductImage.frame.size.height -
                                                   LABEL_VIEW_LEFT_PADDING -CIRCULAR_VIEW_HEIGHT ,
-                                                  CIRCULAR_VIEW_HEIGHT,
+                                                  CIRCULAR_VIEW_WIDTH,
                                                   CIRCULAR_VIEW_HEIGHT)];
+    self.discountView.backgroundColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:.5f];
     [self.discountView setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin];
     [self.viewMainContent addSubview:self.discountView];
     
-    self.lblDiscountPercentage = [[UILabel alloc] initWithFrame:CGRectMake(0,
-                                                                           CIRCULAR_VIEW_HEIGHT/2-20,
-                                                                           CIRCULAR_VIEW_HEIGHT,
-                                                                           20)];
-    [self.lblDiscountPercentage setFont:[UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:QTY_INDICATOR_FONT]];
-    [self.lblDiscountPercentage setTextAlignment:NSTextAlignmentCenter];
-    self.lblDiscountPercentage.textColor = [AAColor sharedInstance].retailerThemeTextColor;
+    self.lblDiscountPercentage = [[UILabel alloc] initWithFrame:CGRectMake(7,
+                                                                           CIRCULAR_VIEW_HEIGHT/2-15,
+                                                                           CIRCULAR_VIEW_WIDTH/2+2,
+                                                                           30)];
+    [self.lblDiscountPercentage setFont:[UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:QTY_DISCOUNT_VALUE_FONT]];
+    [self.lblDiscountPercentage setTextAlignment:NSTextAlignmentRight];
+    self.lblDiscountPercentage.textColor = [UIColor whiteColor];
     [self.discountView addSubview:self.lblDiscountPercentage];
     
-    UILabel *lblOff = [[UILabel alloc] initWithFrame:CGRectMake(0, CIRCULAR_VIEW_HEIGHT/2, CIRCULAR_VIEW_HEIGHT, 20)];
-    [lblOff setFont:[UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:QTY_INDICATOR_FONT]];
-    [lblOff setTextAlignment:NSTextAlignmentCenter];
-    lblOff.text = @"OFF";
-    lblOff.textColor = [AAColor sharedInstance].retailerThemeTextColor;
+
+    UILabel *lblOff = [[UILabel alloc] initWithFrame:CGRectMake(CIRCULAR_VIEW_WIDTH/2+10, CIRCULAR_VIEW_HEIGHT/2-4, CIRCULAR_VIEW_WIDTH/2, 15)];
+    [lblOff setFont:[UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:QTY_DISCOUNT_LBL_FONT]];
+    [lblOff setTextAlignment:NSTextAlignmentLeft];
+    lblOff.text = @"Off";
+    lblOff.textColor = [UIColor whiteColor];
     [self.discountView addSubview:lblOff];
+    
+    UILabel *percent = [[UILabel alloc] initWithFrame:CGRectMake(CIRCULAR_VIEW_WIDTH/2+10, CIRCULAR_VIEW_HEIGHT/2-15, CIRCULAR_VIEW_WIDTH/2, 15)];
+    [percent setFont:[UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:QTY_DISCOUNT_LBL_FONT]];
+    [percent setTextAlignment:NSTextAlignmentLeft];
+    percent.text = @"%";
+    percent.textColor = [UIColor whiteColor];
+    [self.discountView addSubview:percent];
     
     
     self.overlayLayer = NO;
@@ -120,8 +130,8 @@ NSInteger const RATING_VIEW_WEIDTH = 105;
                                                     QTY_INDICATOR_WIDTH,
                                                     QTY_INDICATOR_HEIGHT)];
 //    self.vwQtyIndicator.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"btn_tab_default"]];
-    _vwQtyIndicator.backgroundColor = [UIColor blackColor];
-    _vwQtyIndicator.alpha = 0.5;
+    _vwQtyIndicator.backgroundColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:.5f];
+//    _vwQtyIndicator.alpha = 0.5;
     [self.viewMainContent addSubview:self.vwQtyIndicator];
     
     self.lblQtyIndicator = [[UILabel alloc] initWithFrame:self.vwQtyIndicator.bounds];
@@ -217,16 +227,23 @@ NSInteger const RATING_VIEW_WEIDTH = 105;
         prodDesc = self.eshopProduct.productShortDescription;
         prodrating = self.eshopProduct.productRating;
     }
-    
-    NSString *distance = [[AAAppGlobals sharedInstance] getDisctanceFrom:[AAAppGlobals
-                                                                          sharedInstance].targetLat
-                                                                 andLong:[AAAppGlobals
-                                                                          sharedInstance].targetLong
-                                                                   toLat:[self.eshopProduct.outletLat doubleValue]
-                                                                 andLong:[self.eshopProduct.outletLong doubleValue]];
-    self.lblDistance.text = [NSString stringWithFormat:@"%@KM",distance];
-    CGSize disctanceSize = [AAUtils getTextSizeWithFont:self.lblDistance.font andText:self.lblDistance.text andMaxWidth:MAXFLOAT];
-    self.lblDistance.frame = CGRectMake(self.imgViewProductImage.frame.size.width - disctanceSize.width-15, 5, disctanceSize.width, disctanceSize.height);
+    CGSize disctanceSize;
+    if ([[AAAppGlobals sharedInstance].retailer.enableDiscovery isEqualToString:@"1"]) {
+        NSString *distance = [[AAAppGlobals sharedInstance] getDisctanceFrom:[AAAppGlobals
+                                                                              sharedInstance].targetLat
+                                                                     andLong:[AAAppGlobals
+                                                                              sharedInstance].targetLong
+                                                                       toLat:[self.eshopProduct.outletLat doubleValue]
+                                                                     andLong:[self.eshopProduct.outletLong doubleValue]];
+        self.lblDistance.text = [NSString stringWithFormat:@"%@KM",distance];
+        disctanceSize = [AAUtils getTextSizeWithFont:self.lblDistance.font andText:self.lblDistance.text andMaxWidth:MAXFLOAT];
+        self.lblDistance.frame = CGRectMake(self.imgViewProductImage.frame.size.width - disctanceSize.width-15, 5, disctanceSize.width, disctanceSize.height);
+            self.lblDistance.hidden = false;
+    }else{
+        disctanceSize.height = 0;
+        disctanceSize.width = 0;
+        self.lblDistance.hidden = true;
+    }
     
     CGSize shortDescriptionLabelSize = [AAUtils getTextSizeWithFont:[UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:SHORTDESC_FONTSIZE] andText:prodDesc andMaxWidth:self.imgViewProductImage.frame.size.width- (2*MAIN_VIEW_PADDING )- disctanceSize.width -10 ];
     
@@ -347,6 +364,7 @@ NSInteger const RATING_VIEW_WEIDTH = 105;
 
     }else{
         self.vwQtyIndicator.hidden = true;
+//        self.lblQtyIndicator.text = @"Sold";
     }
     
     if (self.eshopProduct.onSale != nil && [self.eshopProduct.onSale integerValue]==1) {

@@ -101,6 +101,7 @@ NSString* const STOP_TIMER = @"startTimer";
     
     [encoder encodeObject:self.enableGiftWrap forKey:@"enableGiftWrap"];
     [encoder encodeObject:self.gift_price forKey:@"gift_price"];
+    [encoder encodeObject:self.enableDiscovery forKey:@"enableDiscovery"];
 
 }
 
@@ -159,6 +160,7 @@ NSString* const STOP_TIMER = @"startTimer";
         self.collectionType = [decoder decodeObjectForKey:@"collectionType"];
         self.enableGiftWrap = [decoder decodeObjectForKey:@"enableGiftWrap"];
         self.gift_price = [decoder decodeObjectForKey:@"gift_price"];
+        self.enableDiscovery = [decoder decodeObjectForKey:@"enableDiscovery"];
     }
     return self;
 }

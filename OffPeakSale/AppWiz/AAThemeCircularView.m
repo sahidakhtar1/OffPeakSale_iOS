@@ -39,7 +39,11 @@
 }
 -(void)initView
 {
-    [self.layer setCornerRadius:self.frame.size.width/2];
+//    [self.layer setCornerRadius:self.frame.size.height];
+    UIBezierPath *path = [UIBezierPath bezierPathWithOvalInRect:self.bounds];
+    CAShapeLayer *maskLayer = [CAShapeLayer layer];
+    maskLayer.path = path.CGPath;
+    self.layer.mask = maskLayer;
     
 }
 @end

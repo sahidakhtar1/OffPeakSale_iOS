@@ -40,11 +40,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationUpdated:) name:NOTIFICATION_LOCATION_UPDATED object:nil];
-    [AAAppGlobals sharedInstance].currentLat = [AAAppGlobals sharedInstance].locationHandler.currentLocation.coordinate.latitude;
-    [AAAppGlobals sharedInstance].currentLong = [AAAppGlobals sharedInstance].locationHandler.currentLocation.coordinate.longitude;
-    [AAAppGlobals sharedInstance].targetLat = [AAAppGlobals sharedInstance].currentLat;
-    [AAAppGlobals sharedInstance].targetLong = [AAAppGlobals sharedInstance].currentLong;
+    
     self.filterKey = @"rate";
     self.selectedFilterIndex = 1;
     selectedCategoryIndex = 1;
@@ -84,6 +80,25 @@
     self.productTabs.backgroundColor=[UIColor whiteColor];
     self.productTabs.fontCategoryName = [AAFont eShopCategoryTextFont];
     [self populateCategories];
+    if ([[AAAppGlobals sharedInstance].retailer.enableDiscovery isEqualToString:@"1"]) {
+        self.nearByBtn.hidden = false;
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationUpdated:) name:NOTIFICATION_LOCATION_UPDATED object:nil];
+        [AAAppGlobals sharedInstance].currentLat = [AAAppGlobals sharedInstance].locationHandler.currentLocation.coordinate.latitude;
+        [AAAppGlobals sharedInstance].currentLong = [AAAppGlobals sharedInstance].locationHandler.currentLocation.coordinate.longitude;
+        [AAAppGlobals sharedInstance].targetLat = [AAAppGlobals sharedInstance].currentLat;
+        [AAAppGlobals sharedInstance].targetLong = [AAAppGlobals sharedInstance].currentLong;
+    }else{
+        self.nearByBtn.hidden = true;
+        CGRect categoryFrame =self.vwFilter.frame;
+        categoryFrame.origin.y = self.nearByBtn.frame.origin.y;
+        self.vwFilter.frame = categoryFrame;
+        
+        CGRect tableFrame = self.tableViewEShopProductList.frame;
+        tableFrame.origin.y -= self.nearByBtn.frame.size.height;
+        tableFrame.size.height += self.nearByBtn.frame.size.height;
+        self.tableViewEShopProductList.frame = tableFrame;
+        [self populateView];
+    }
 }
 -(void)locationViewPopUp
 {
@@ -274,6 +289,7 @@
         self.tableViewEShopProductList.hidden = false;
         
     }
+    [self.nearByBtn setTitle:[NSString stringWithFormat:@"Nearby %lu",(unsigned long)[productList_ count]] forState:UIControlStateNormal];
     [self.tableViewEShopProductList reloadData];
     
 }

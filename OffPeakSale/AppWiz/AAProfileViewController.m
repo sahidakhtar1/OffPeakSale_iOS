@@ -52,13 +52,14 @@ static NSString* const JSON_ERROR_CODE_KEY = @"errorCode";
     self = [super initWithCoder:aDecoder];
     if(self)
     {
-        self.heading = @"PROFILE";
+//        self.heading = @"PROFILE";
     }
     return self;
 }
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.heading = self.titleText;
 	// Do any additional setup after loading the view.
     [[NSNotificationCenter defaultCenter] postNotificationName:@"hideCart" object:nil];
     [self.scGender setTintColor:[AAColor sharedInstance].retailerThemeBackgroundColor];
@@ -159,7 +160,7 @@ static NSString* const JSON_ERROR_CODE_KEY = @"errorCode";
     
     AAHeaderView *headerView = [[AAHeaderView alloc] initWithFrame:self.vwHeaderView.frame];
     [self.vwHeaderView addSubview:headerView];
-    [headerView setTitle:@"Profile"];
+    [headerView setTitle:self.titleText];
     headerView.delegate = self;
     if(!self.showBuyButton
        && self.profileDelegate == nil)

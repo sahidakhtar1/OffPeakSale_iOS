@@ -342,6 +342,10 @@ static NSString* const JSON_PRODUCT_SHORT_DESCRIPTION_KEY = @"short_desc";
                 {
                      retailer.retailerFileType = [dictRetailer objectForKey:JSON_RETAILER_FILE_TYPE_KEY];
                 }
+    
+                if ([dictRetailer objectForKey:@"enableDiscovery"]) {
+                    retailer.enableDiscovery = [dictRetailer objectForKey:@"enableDiscovery"];
+                }
                 if([dictRetailer objectForKey:JSON_RETAILER_STORES_KEY])
                 {
                     NSArray* arrRetailerStores = [dictRetailer objectForKey:JSON_RETAILER_STORES_KEY];

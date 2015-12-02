@@ -61,6 +61,7 @@ extern NSString* const PRODUCT_AMOUNT_KEY;
 @property (nonatomic,strong) AAFilterDropDownScrollView* dropDownScrollViewIndustries;
 @property (nonatomic,strong) AADropDownScrollView* dropDownScrollViewPaymentType;
 @property (nonatomic, strong) NSString *productInformationString;
+@property (nonatomic, strong) NSString *titleText;
 
 
 @property (weak, nonatomic) IBOutlet UIView *vwHeaderView;
