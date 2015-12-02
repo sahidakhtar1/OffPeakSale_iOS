@@ -18,6 +18,7 @@
 #import "AAWechatActivity.h"
 #import "AAScannerViewController.h"
 #import "AAGiftWrapViewController.h"
+#import "AAMapView.h"
 @interface AAProductInformationViewController ()
 @property (nonatomic, strong) UIImageView *imageViewForAnimation;
 @property (nonatomic, strong) AAGiftWrapViewController *giftWrapDialog;
@@ -509,11 +510,12 @@
 {
     NSMutableArray *arr = [[NSMutableArray alloc] init];
     [arr addObject:@"Reviews"];
-    [arr addObject:@"Product Details"];
+    [arr addObject:@"Details"];
     if (self.product.productWorkingInformation.length>0) {
       [arr addObject:@"How It Works"];
     }
-    self.productTabs.selectedCategory = @"Product Details";
+    [arr addObject:@"Map"];
+    self.productTabs.selectedCategory = @"Details";
     self.productTabs.categories = arr.mutableCopy;
     [self.productTabs refreshScrollView];
     [self onCategeorySelected:self.productTabs.selectedCategory];
@@ -531,25 +533,41 @@
     [self.ProductScroolView addSubview:self.howItWorks];
     [self.howItWorks setHowItWorks:self.product.productWorkingInformation];
     
+    self.mapView = [self.storyboard instantiateViewControllerWithIdentifier:@"AARetailerStoreMapViewController"];
+    UIView *mapContainer = [[UIView alloc] initWithFrame:CGRectMake(3*width, 0, width, self.ProductScroolView.frame.size.height)];
+    [mapContainer addSubview:self.mapView.view];
+    [self.ProductScroolView addSubview:mapContainer];
+    self.mapView.view.frame = mapContainer.bounds;
+    self.mapView.mvRetailerStores.frame = mapContainer.bounds;
+    
+    AAMapView *mvRetailerStores = [[AAMapView alloc] initWithFrame:CGRectMake(15, 15, mapContainer.frame.size.width-30 , mapContainer.frame.size.height-30 )];
+//    mvRetailerStores.mapView.delegate = self;
+    [mapContainer addSubview:mvRetailerStores];
+    [mvRetailerStores addMarkerWithTitle:self.product.outletName address:self.product.outletAddr andConatct:self.product.outletContact atLat:self.product.outletLat lng:self.product.outletLong];
+
+    
     CGRect frame = self.scrollViewProductInformation.frame;
     frame.origin.x = width;
     frame.size.width = width;
     self.scrollViewProductInformation.frame = frame;
     
-    self.ProductScroolView.contentSize = CGSizeMake(3*width, self.ProductScroolView.contentSize.height);
+    self.ProductScroolView.contentSize = CGSizeMake(4*width, self.ProductScroolView.contentSize.height);
     
     
 }
+
 #pragma mark - Scroll view  categories callbacks
 -(void)onCategeorySelected:(NSString *)categoryName
 {
     CGPoint offset = self.ProductScroolView.contentOffset;
     if ([categoryName isEqualToString:@"Reviews"]) {
         offset.x = 0;
-    }else if ([categoryName isEqualToString:@"Product Details"]){
+    }else if ([categoryName isEqualToString:@"Details"]){
         offset.x = self.ProductScroolView.frame.size.width;
     }else if ([categoryName isEqualToString:@"How It Works"]){
         offset.x = 2*self.ProductScroolView.frame.size.width;
+    }else if ([categoryName isEqualToString:@"Map"]){
+        offset.x = 3*self.ProductScroolView.frame.size.width;
     }
     [self.ProductScroolView setContentOffset:offset animated:YES];
 }

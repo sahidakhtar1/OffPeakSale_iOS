@@ -24,7 +24,7 @@ NSString* const USER_DEFAULTS_FEEDBACK_KEY = @"feedback";
 NSString* const USER_DEFAULTS_LOYALTY_KEY = @"loyalty";
 NSString* const USER_DEFAULTS_ESHOP_KEY = @"eshop";
 NSString* const USER_DEFAULTS_ADD_PUBLISHER_ID_KEY = @"publisherId";
-NSString* const GOOGLE_MAPS_API_KEY = @"AIzaSyAI11LvYDPIRY3rbVIlk-hGG8WwWYiUaLI";//@"AIzaSyDAcq2Tr9Q1EkqZ0LiRPqdVYnTQLychiFI";
+NSString* const GOOGLE_MAPS_API_KEY = @"AIzaSyB3-2-YcL8bw7mqp6PQv4Hr6QsY84oXbpE";
 
 
 

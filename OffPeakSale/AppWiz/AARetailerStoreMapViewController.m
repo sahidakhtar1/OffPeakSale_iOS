@@ -32,13 +32,13 @@ static NSInteger const PADDING = 10;
 	// Do any additional setup after loading the view.
     [self addRetailerStoreMapView];
     //[self updateUserLocation];
-    AAHeaderView *headerView = [[AAHeaderView alloc] initWithFrame:self.vwHeaderView.frame];
-    [self.vwHeaderView addSubview:headerView];
-    [headerView setTitle:@"Locate Us"];
-    headerView.showCart = false;
-    headerView.showBack = false;
-    headerView.delegate = self;
-    [headerView setMenuIcons];
+//    AAHeaderView *headerView = [[AAHeaderView alloc] initWithFrame:self.vwHeaderView.frame];
+//    [self.vwHeaderView addSubview:headerView];
+//    [headerView setTitle:@"Locate Us"];
+//    headerView.showCart = false;
+//    headerView.showBack = false;
+//    headerView.delegate = self;
+//    [headerView setMenuIcons];
     
 }
 
@@ -77,18 +77,18 @@ static NSInteger const PADDING = 10;
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self cat_viewDidAppear:YES];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationUpdated:) name:NOTIFICATION_LOCATION_UPDATED object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationUpdated:) name:NOTIFICATION_LOCATION_UPDATED object:nil];
     
 
     id<AAChildNavigationControllerDelegate> nvcHome = (id<AAChildNavigationControllerDelegate>) self.navigationController;
 //    [nvcHome showBackButtonView];
-    [self getCurrentLocation];
+//    [self getCurrentLocation];
 
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFICATION_LOCATION_UPDATED object:nil];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFICATION_LOCATION_UPDATED object:nil];
 }
 - (void)didReceiveMemoryWarning
 {
@@ -101,7 +101,7 @@ static NSInteger const PADDING = 10;
 //    NSLog(@"Contaner Frame = %@",NSStringFromCGRect(self.viewStoreMapContainer.frame));
 //    CGRect frame = CGRectMake(PADDING, PADDING, self.viewStoreMapContainer.frame.size.width - 2*PADDING, self.viewStoreMapContainer.frame.size.height - 2*PADDING);
 //     NSLog(@"map Frame = %@",NSStringFromCGRect(frame));
-    self.mvRetailerStores = [[AAMapView alloc] initWithFrame:CGRectMake(PADDING, PADDING, self.viewStoreMapContainer.frame.size.width - 2*PADDING, self.viewStoreMapContainer.frame.size.height - 2*PADDING)];
+    self.mvRetailerStores = [[AAMapView alloc] initWithFrame:CGRectMake(PADDING, PADDING, self.view.frame.size.width - 2*PADDING, self.view.frame.size.height )];
     self.mvRetailerStores.mapView.delegate = self;
     [self.mvRetailerStores.mapView.settings setConsumesGesturesInView:NO];
    [AAHomePageHelper updateStoresMap:self.mvRetailerStores];
@@ -250,7 +250,7 @@ static NSInteger const PADDING = 10;
     dispatch_async(dispatch_get_main_queue(), ^{
         
         
-        [self updateUserLocation];
+//        [self updateUserLocation];
         
     });
 }

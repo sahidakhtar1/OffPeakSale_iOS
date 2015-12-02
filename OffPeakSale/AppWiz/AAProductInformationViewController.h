@@ -23,6 +23,7 @@
 #import "AAProfileUpdatePopupView.h"
 #import "AAProductReview.h"
 #import "AAHowItWorksView.h"
+#import "AARetailerStoreMapViewController.h"
 @interface AAProductInformationViewController : AAChildBaseViewController <AAProfileViewControllerDelegate,UITextFieldDelegate>
 @property (strong, nonatomic) IBOutlet UIView *vwEnquiry;
 @property (strong, nonatomic) IBOutlet AAThemeGlossyButton *btnEnquiry;
@@ -60,5 +61,6 @@
 - (IBAction)btnSearchTapped:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *btnSearch;
 @property (weak, nonatomic) IBOutlet UISearchBar *mSearchBar;
+@property (nonatomic,strong) AARetailerStoreMapViewController *mapView;
 
 @end
