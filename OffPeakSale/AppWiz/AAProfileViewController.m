@@ -933,6 +933,10 @@ static NSString* const JSON_ERROR_CODE_KEY = @"errorCode";
     
     [self updateFrameAfterLogin];
     [self.btnSaveConsumerProfile setTitle:@"Save" forState:UIControlStateNormal];
+    if([self.profileDelegate respondsToSelector:@selector(closeProfileViewController:)])
+    {
+        [self.profileDelegate closeProfileViewController:self];
+    }
 }
 -(void)updateFrameAfterLogin{
     [self.loginView removeFromSuperview];

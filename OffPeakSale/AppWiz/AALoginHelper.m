@@ -71,40 +71,40 @@ static NSString* const JSON_DATA_KEY = @"data";
         if (consumer == nil) {
             consumer = [[AAConsumer alloc] init];
         }
-        if ([dataDict objectForKey:@"address"]) {
-            consumer.address = [dataDict objectForKey:@"address"];
-        }
-        if ([dataDict objectForKey:@"city"]) {
-            consumer.city = [dataDict objectForKey:@"city"];
-        }
-        if ([response objectForKey:@"country"]) {
-            consumer.country = [response objectForKey:@"country"];
+//        if ([dataDict objectForKey:@"address"]) {
+//            consumer.address = [dataDict objectForKey:@"address"];
+//        }
+//        if ([dataDict objectForKey:@"city"]) {
+//            consumer.city = [dataDict objectForKey:@"city"];
+//        }
+        if ([dataDict objectForKey:@"country"]) {
+            consumer.country = [dataDict objectForKey:@"country"];
         }
         if ([dataDict objectForKey:@"fname"]) {
             consumer.firstName = [dataDict objectForKey:@"fname"];
         }
-        if ([dataDict objectForKey:@"lname"]) {
-            consumer.lastName = [dataDict objectForKey:@"lname"];
-        }
-        if ([dataDict objectForKey:@"dob"]) {
-            consumer.dateOfBirth = [dataDict objectForKey:@"dob"];
-        }
+//        if ([dataDict objectForKey:@"lname"]) {
+//            consumer.lastName = [dataDict objectForKey:@"lname"];
+//        }
+//        if ([dataDict objectForKey:@"dob"]) {
+//            consumer.dateOfBirth = [dataDict objectForKey:@"dob"];
+//        }
         if ([dataDict objectForKey:@"email"]) {
             consumer.email = [dataDict objectForKey:@"email"];
         }
-        if ([dataDict objectForKey:@"gender"]) {
-            consumer.gender = [dataDict objectForKey:@"gender"];
-        }
+//        if ([dataDict objectForKey:@"gender"]) {
+//            consumer.gender = [dataDict objectForKey:@"gender"];
+//        }
         if ([dataDict objectForKey:@"mobile_num"]) {
             consumer.mobileNumber = [[dataDict objectForKey:@"mobile_num"] integerValue];
         }
         
-        if ([dataDict objectForKey:@"zip"]) {
-            consumer.zip = [[dataDict objectForKey:@"zip"] integerValue];
-        }
-        if ([dataDict objectForKey:@"rewardPoints"]) {
-            consumer.rewardPoints = [dataDict objectForKey:@"rewardPoints"];
-        }
+//        if ([dataDict objectForKey:@"zip"]) {
+//            consumer.zip = [[dataDict objectForKey:@"zip"] integerValue];
+//        }
+//        if ([dataDict objectForKey:@"rewardPoints"]) {
+//            consumer.rewardPoints = [dataDict objectForKey:@"rewardPoints"];
+//        }
         
         [AAAppGlobals sharedInstance].consumer = consumer;
         

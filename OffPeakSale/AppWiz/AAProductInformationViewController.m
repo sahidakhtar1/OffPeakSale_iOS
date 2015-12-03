@@ -19,13 +19,16 @@
 #import "AAScannerViewController.h"
 #import "AAGiftWrapViewController.h"
 #import "AAMapView.h"
+#import "AAOrderSucessView.h"
+#import "ActivityIndicator.h"
 @interface AAProductInformationViewController ()
 @property (nonatomic, strong) UIImageView *imageViewForAnimation;
 @property (nonatomic, strong) AAGiftWrapViewController *giftWrapDialog;
+@property (nonatomic,strong) AAOrderSucessView *orderSucessAlert;
 @end
 
 @implementation AAProductInformationViewController
-
+static NSString* const JSON_RETAILER_ID_KEY = @"retailerId";
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -287,10 +290,14 @@
     profileViewController.showBuyButton = NO;
     [self.navigationController pushViewController:profileViewController animated:YES];
 }
+-(void)checkout{
+    
+}
 #pragma mark - profile view controller callbacks
 -(void)closeProfileViewController:(id)viewController
 {
     [self.navigationController popViewControllerAnimated:YES];
+    [self makePayment];
 }
 #pragma mark - UI Event Management
 - (IBAction)btnBuyProductTapped:(id)sender {
@@ -298,7 +305,7 @@
     if (!isLoggedIn) {
         [self showLoginView];
     }else{
-        
+        [self makePayment];
     }
     
 //    if (1== 2 && ![AAAppGlobals sharedInstance].enableShoppingCart) {
@@ -734,4 +741,197 @@
     AAAppDelegate *appDelegate = (AAAppDelegate*) [[UIApplication sharedApplication] delegate];
     [self presentViewController:scannerVC animated:YES completion:nil];
 }
+-(NSMutableDictionary*)createProductInfoDict{
+    
+    NSArray *allCartItems = [[AAAppGlobals sharedInstance] getAllProducts];
+    NSMutableArray *arr = [[NSMutableArray array] init];
+    AAEShopProduct *item = self.product;
+    NSMutableDictionary *tdict = [[NSMutableDictionary alloc] init];
+    [tdict setObject:[NSString stringWithFormat:@"%d",item.productId] forKey:PAYMENT_PRODUCT_ID_KEY];
+    
+    [tdict setObject:self.tfQty.text forKey:PAYMENT_QUANTITY_KEY];
+    [arr addObject:tdict];
+    
+    NSMutableDictionary *paymentDictionary  = [NSMutableDictionary dictionaryWithObject:arr forKey:@"products"];
+    
+    return paymentDictionary;
+}
+#pragma mark - Payment handler callbacks
+-(void)onPaymentSuccess : (NSDictionary*)response
+{
+    [AAAppGlobals sharedInstance].cod = false;
+    
+    NSString *cartTotal = self.lblCurrentProductPrice.text;
+    
+    NSMutableDictionary* paymentDictionary;
+//    if (![AAAppGlobals sharedInstance].enableShoppingCart) {
+//        CGFloat qty = [[self.productInformation objectForKey:PRODUCT_QUANTITY_KEY] floatValue];
+//        CGFloat unitiPrice = [[self.productInformation objectForKey:PRODUCT_AMOUNT_KEY] floatValue];
+//        CGFloat total = qty*unitiPrice;
+//        if ([AAAppGlobals sharedInstance].enableCreditCode) {
+//            
+//            float percent =  [[AAAppGlobals sharedInstance].discountPercent floatValue];
+//            float totalDiscount = ((float)total * percent) / 100.0;
+//            total =total- totalDiscount;
+//            
+//        }
+//        if (total>=[AAAppGlobals sharedInstance].freeAmount ) {
+//            
+//        }else{
+//            if ([AAAppGlobals sharedInstance].deliveryOptonSelectedIndex == 0) {
+//                total = total + [[AAAppGlobals sharedInstance].shippingCharge floatValue];
+//            }
+//            
+//        }
+//        total = total - [[AAAppGlobals sharedInstance].rewardPointsRedeemed integerValue];
+//        if ([AAAppGlobals sharedInstance].isDecimalAllowed) {
+//            cartTotal = [NSString stringWithFormat:@"%.2f",total];
+//        }else{
+//            cartTotal = [NSString stringWithFormat:@"%.0f",total];
+//        }
+//        paymentDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:[self.productInformation objectForKey:PRODUCT_ID_KEY] , JSON_PAYMENT_PRODUCT_ID_KEY,[self.productInformation objectForKey:PRODUCT_QUANTITY_KEY],JSON_PAYMENT_QUANTITY_KEY,[self.productInformation objectForKey:PRODUCT_AMOUNT_KEY],JSON_PAYMENT_ORDER_AMOUT_KEY,[response objectForKey:@"paymen_status"],JSON_PAYMENT_STATUS_KEY, nil];
+//    }else{
+////        if (tempTotal>=[AAAppGlobals sharedInstance].freeAmount) {
+////            
+////        }else{
+////            if ([AAAppGlobals sharedInstance].deliveryOptonSelectedIndex == 0) {
+////                tempTotal = tempTotal + [[AAAppGlobals sharedInstance].shippingCharge floatValue];
+////            }
+////            
+////        }
+////        tempTotal = tempTotal - [[AAAppGlobals sharedInstance].rewardPointsRedeemed integerValue];
+////        if ([AAAppGlobals sharedInstance].isDecimalAllowed) {
+////            cartTotal = [NSString stringWithFormat:@"%.2f",tempTotal];
+////        }else{
+////            cartTotal = [NSString stringWithFormat:@"%.0f",tempTotal];
+////        }
+    paymentDictionary = [self createProductInfoDict];
+    [paymentDictionary setObject:RETAILER_ID forKey:JSON_RETAILER_ID_KEY];
+    
+    [paymentDictionary setObject:cartTotal forKey:JSON_PAYMENT_ORDER_AMOUT_KEY];
+    [paymentDictionary setValue:[response objectForKey:@"paymen_status"] forKey:JSON_PAYMENT_STATUS_KEY];
+        
+//    }
+    NSString *placeOrderUrl = [response objectForKey:@"place_order_url"];
+    
+    [[ActivityIndicator sharedActivityIndicator] show];
+    [AAPaymentInfoHelper sendPaymentInfoWithDictionary:paymentDictionary
+                                              endPoint:placeOrderUrl
+                                   withCompletionBlock:^(NSDictionary *dictionary) {
+                                       [[ActivityIndicator sharedActivityIndicator] hide];
+                                       NSString *orderNo = [dictionary objectForKey:@"transactionId"];
+                                       NSString *paypal_transactionId = [dictionary objectForKey:@"paypal_transactionId"];
+                                       if (orderNo == nil) {
+                                           orderNo = [response objectForKey:@"invoiceId"];
+                                       }
+                                       [self showOrderSucessAlerwithrderNo:orderNo gateWayTransactionId:paypal_transactionId
+                                                            andGrandTtotal:cartTotal
+                                                            andIsByCreditL:NO];
+                                       
+                                   } andFailure:^(NSString *response) {
+                                       [[ActivityIndicator sharedActivityIndicator] hide];
+                                   }];
+    [AAAppGlobals sharedInstance].discountPercent = @"0";
+    
+}
+-(void)onPaymentFailure:(NSString *)errMessage
+{
+    UIAlertView* alertViewFailed = [[UIAlertView alloc] initWithTitle:@"Transaction Failed" message:errMessage delegate:Nil cancelButtonTitle:@"Okay" otherButtonTitles: nil];
+    [alertViewFailed show];
+}
+
+-(void)showOrderSucessAlerwithrderNo:(NSString*)orderNo
+                gateWayTransactionId:(NSString*)gateWayTransactionId
+                      andGrandTtotal:(NSString*)grandTotal
+                      andIsByCreditL:(BOOL)isByCredit{
+    NSMutableString * orderCNFMSG = [[NSMutableString alloc] initWithString:@"Order success. Email confirmation sent.\n\n"];
+    [orderCNFMSG appendFormat:@"Grand Total: %@",grandTotal];
+
+    [orderCNFMSG appendFormat:@"\n\nTransaction Id: %@",orderNo];
+//    [[AAAppGlobals sharedInstance] calculateCartTotalItemCount];
+    
+    if ([[AAAppGlobals sharedInstance].retailer.enableVerit isEqualToString:@"1"]) {
+        [orderCNFMSG appendFormat:@"\nVeritrans Id:: %@",gateWayTransactionId];
+    }else{
+        [orderCNFMSG appendFormat:@"\nPaypal Id: %@",gateWayTransactionId];
+    }
+    
+    self.orderSucessAlert = [[AAOrderSucessView alloc] initWithFrame:self.view.frame withOderNumber:orderNo grandTotal:orderCNFMSG andIsByCredit:NO];
+    
+    UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
+    [keyWindow addSubview:self.orderSucessAlert];
+    [self.orderSucessAlert refreshView];
+//    [[AAAppGlobals sharedInstance] deleteAllProducts];
+    [AAAppGlobals sharedInstance].rewardsPointEarned = @"0";
+    [AAAppGlobals sharedInstance].rewardPointsRedeemed = @"0";
+    
+    [self.navigationController popToRootViewControllerAnimated:NO];
+}
+-(void)makePayment
+{
+    NSString *emailId;
+    NSMutableDictionary* dictPayment = [[NSMutableDictionary alloc] init];
+    
+    emailId =[AAAppGlobals sharedInstance].consumer.email;
+    
+    NSMutableDictionary* paymentDictionary;
+
+    paymentDictionary = [self createProductInfoDict];
+    [paymentDictionary setObject:RETAILER_ID forKey:JSON_RETAILER_ID_KEY];
+    [paymentDictionary setObject:emailId forKey:PAYMENT_EMAIL_KEY];
+        
+        
+    if ([AAAppGlobals sharedInstance].enableCreditCode && [AAAppGlobals sharedInstance].discountPercent > 0) {
+        [paymentDictionary setValue:[AAAppGlobals sharedInstance].discountPercent forKey:@"discount"];
+        [paymentDictionary setValue:[AAAppGlobals sharedInstance].discountType forKey:@"discountType"];
+        [paymentDictionary setValue:[AAAppGlobals sharedInstance].discountCode forKey:@"discountCode"];
+    }
+//    if ([AAAppGlobals sharedInstance].shippingCharge > 0 && [AAAppGlobals sharedInstance].deliveryOptonSelectedIndex == 0) {
+//        if ([AAAppGlobals sharedInstance].freeAmount == 0 || [AAAppGlobals sharedInstance].freeAmount > [[AAAppGlobals sharedInstance] cartTotal]) {
+//            [paymentDictionary setObject:[NSString stringWithFormat:@"%.2f",[[AAAppGlobals sharedInstance].shippingCharge floatValue]] forKey:@"shippingAmt"];
+//        }
+//        
+//    }
+    //    if (!self.isCOD) {
+//    [paymentDictionary setObject:[AAAppGlobals sharedInstance].rewardPointsRedeemed forKey:@"redeemPoints"];
+//    //    }
+//    if ([[AAAppGlobals sharedInstance].enableDelivery isEqualToString:@"1"] && [AAAppGlobals sharedInstance].deliveryOptonSelectedIndex == 0) {
+//        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//        [formatter setDateFormat:@"dd MMM YYYY"];
+//        NSString *dateStr = [formatter stringFromDate:[AAAppGlobals sharedInstance].scheduledDate];
+//        
+//        [paymentDictionary setObject:[NSString stringWithFormat:@"%@,%@",dateStr,
+//                                      [AAAppGlobals sharedInstance].selectedTime]
+//                              forKey:@"deliveryDate"];
+//    }else if ([[AAAppGlobals sharedInstance].retailer.enableCollection isEqualToString:@"1"] && [AAAppGlobals sharedInstance].deliveryOptonSelectedIndex == 1) {
+//        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//        [formatter setDateFormat:@"dd MMM YYYY"];
+//        NSString *dateStr = [formatter stringFromDate:[AAAppGlobals sharedInstance].scheduledDate];
+//        
+//        [paymentDictionary setObject:[NSString stringWithFormat:@"%@,%@ at %@",dateStr,
+//                                      [AAAppGlobals sharedInstance].selectedTime,[AAAppGlobals sharedInstance].selectedCollectionAddress]
+//                              forKey:@"collectDate"];
+//    }
+    [AAAppGlobals sharedInstance].cod = false;
+    
+    [AAAppGlobals sharedInstance].paymentHandler.paymentHandlerDelegate = self;
+    [[AAAppGlobals sharedInstance].paymentHandler makePaymentWithDetails:paymentDictionary];
+//    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+//    [[ActivityIndicator sharedActivityIndicator] show];
+//    [AAConsumerProfileHelper saveConsumerProfileWithDictionary:self.consumer.JSONDictionaryProfileRepresentation.mutableCopy withCompletionBlock:^{
+//        [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+//        [[ActivityIndicator sharedActivityIndicator] hide];
+//        [self saveProfileToUserDefaults];
+//       
+//        
+//    } andFailure:^(NSString *errorMessage) {
+//        [[ActivityIndicator sharedActivityIndicator] hide];
+//        [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+//        [self saveProfileToUserDefaults];
+//        UIAlertView* alertViewFailed = [[UIAlertView alloc] initWithTitle:@"Transaction Failed" message:@"Cannot complete payment. Try again later." delegate:Nil cancelButtonTitle:@"Okay" otherButtonTitles: nil];
+//        [alertViewFailed show];
+//    }];
+    
+}
+
 @end

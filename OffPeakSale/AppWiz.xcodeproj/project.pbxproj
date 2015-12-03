@@ -333,6 +333,9 @@
 		4A539BA11BD1468300C6B9F6 /* AALookBookHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A539BA01BD1468300C6B9F6 /* AALookBookHelper.m */; };
 		4A539BA51BD14F2000C6B9F6 /* AALookBookResponseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A539BA41BD14F2000C6B9F6 /* AALookBookResponseObject.m */; };
 		4A539BA81BD14F3C00C6B9F6 /* AALookBookObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A539BA71BD14F3C00C6B9F6 /* AALookBookObject.m */; };
+		4A5577C31C10CBD9003E5DC5 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A5577C01C10CBD9003E5DC5 /* FBSDKCoreKit.framework */; };
+		4A5577C41C10CBDA003E5DC5 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A5577C11C10CBD9003E5DC5 /* FBSDKLoginKit.framework */; };
+		4A5577C51C10CBDA003E5DC5 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A5577C21C10CBD9003E5DC5 /* FBSDKShareKit.framework */; };
 		4A888FA21BF868E200A1DAE5 /* AAOrderDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A888FA11BF868E200A1DAE5 /* AAOrderDetailView.m */; };
 		4A888FA41BF868F400A1DAE5 /* AAOrderDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A888FA31BF868F400A1DAE5 /* AAOrderDetailView.xib */; };
 		4A8B18391AF5FBB200CDC38D /* AAMenuWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A8B18381AF5FBB200CDC38D /* AAMenuWebViewController.m */; };
@@ -363,10 +366,10 @@
 		4AD3C3E81AFA79EA0001823C /* AAHowItWorksView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AD3C3E71AFA79EA0001823C /* AAHowItWorksView.xib */; };
 		4AD3DF181AFFEC6200585790 /* AACategoryHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD3DF171AFFEC6200585790 /* AACategoryHelper.m */; };
 		4AD3DF1B1AFFED5F00585790 /* AACategoryDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD3DF1A1AFFED5F00585790 /* AACategoryDataModel.m */; };
-		4AE5AC091C0C93BC007437B0 /* AAThemeCircularView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE5AC081C0C93BC007437B0 /* AAThemeCircularView.m */; settings = {ASSET_TAGS = (); }; };
-		4AE5AC0C1C0CB8EF007437B0 /* AAPlaceAutoCompleteHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE5AC0B1C0CB8EF007437B0 /* AAPlaceAutoCompleteHelper.m */; settings = {ASSET_TAGS = (); }; };
-		4AE5AC101C0CCDBC007437B0 /* AASearchDisplayControler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE5AC0E1C0CCDBC007437B0 /* AASearchDisplayControler.m */; settings = {ASSET_TAGS = (); }; };
-		4AE5AC111C0CCDBC007437B0 /* AASearchDisplayControler.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AE5AC0F1C0CCDBC007437B0 /* AASearchDisplayControler.xib */; settings = {ASSET_TAGS = (); }; };
+		4AE5AC091C0C93BC007437B0 /* AAThemeCircularView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE5AC081C0C93BC007437B0 /* AAThemeCircularView.m */; };
+		4AE5AC0C1C0CB8EF007437B0 /* AAPlaceAutoCompleteHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE5AC0B1C0CB8EF007437B0 /* AAPlaceAutoCompleteHelper.m */; };
+		4AE5AC101C0CCDBC007437B0 /* AASearchDisplayControler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE5AC0E1C0CCDBC007437B0 /* AASearchDisplayControler.m */; };
+		4AE5AC111C0CCDBC007437B0 /* AASearchDisplayControler.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AE5AC0F1C0CCDBC007437B0 /* AASearchDisplayControler.xib */; };
 		4AE8087C1AFBE414007C6A95 /* AASecondaryMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8087B1AFBE414007C6A95 /* AASecondaryMenuViewController.m */; };
 		4AE8087F1AFBE43C007C6A95 /* AASecondaryMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8087E1AFBE43C007C6A95 /* AASecondaryMenuCell.m */; };
 		A18E45041C01CB30007BF9DE /* dropdown.png in Resources */ = {isa = PBXBuildFile; fileRef = A18E45021C01CB30007BF9DE /* dropdown.png */; };
@@ -790,6 +793,9 @@
 		4A539BA41BD14F2000C6B9F6 /* AALookBookResponseObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AALookBookResponseObject.m; sourceTree = "<group>"; };
 		4A539BA61BD14F3C00C6B9F6 /* AALookBookObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AALookBookObject.h; sourceTree = "<group>"; };
 		4A539BA71BD14F3C00C6B9F6 /* AALookBookObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AALookBookObject.m; sourceTree = "<group>"; };
+		4A5577C01C10CBD9003E5DC5 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "FB SDK/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
+		4A5577C11C10CBD9003E5DC5 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "FB SDK/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
+		4A5577C21C10CBD9003E5DC5 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "FB SDK/FBSDKShareKit.framework"; sourceTree = "<group>"; };
 		4A888FA01BF868E200A1DAE5 /* AAOrderDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAOrderDetailView.h; sourceTree = "<group>"; };
 		4A888FA11BF868E200A1DAE5 /* AAOrderDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAOrderDetailView.m; sourceTree = "<group>"; };
 		4A888FA31BF868F400A1DAE5 /* AAOrderDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AAOrderDetailView.xib; sourceTree = "<group>"; };
@@ -966,6 +972,7 @@
 			files = (
 				40C1DB581889263B0081C24B /* StoreKit.framework in Frameworks */,
 				F759E4AB1908364600E98AB1 /* libPods.a in Frameworks */,
+				4A5577C51C10CBDA003E5DC5 /* FBSDKShareKit.framework in Frameworks */,
 				40C1DB561889261A0081C24B /* AdSupport.framework in Frameworks */,
 				40C1DB54188926120081C24B /* AudioToolbox.framework in Frameworks */,
 				4075C95A186AB55C00F2723D /* libxml2.dylib in Frameworks */,
@@ -977,6 +984,7 @@
 				40C71BA01865C00500325938 /* QuartzCore.framework in Frameworks */,
 				40C71B9E1865BFFB00325938 /* OpenGLES.framework in Frameworks */,
 				40C71B9C1865BFF200325938 /* libc++.dylib in Frameworks */,
+				4A5577C41C10CBDA003E5DC5 /* FBSDKLoginKit.framework in Frameworks */,
 				40C71B9A1865BFE100325938 /* GLKit.framework in Frameworks */,
 				40C1DB8D188A5AA90081C24B /* libGoogleAdMobAds.a in Frameworks */,
 				40C71B981865BFDA00325938 /* CoreText.framework in Frameworks */,
@@ -989,6 +997,7 @@
 				404D9AC7185D6F0200F6893A /* CoreGraphics.framework in Frameworks */,
 				404D9AC9185D6F0200F6893A /* UIKit.framework in Frameworks */,
 				40C71B921865BF7C00325938 /* GoogleMaps.framework in Frameworks */,
+				4A5577C31C10CBD9003E5DC5 /* FBSDKCoreKit.framework in Frameworks */,
 				404D9AC5185D6F0200F6893A /* Foundation.framework in Frameworks */,
 				40D9A788186AB4720084761E /* libPayPalMobile.a in Frameworks */,
 			);
@@ -1286,6 +1295,7 @@
 		404D9AB8185D6F0200F6893A = {
 			isa = PBXGroup;
 			children = (
+				4A5577BF1C10CBAA003E5DC5 /* FB SDK */,
 				4A518AC51AE962C20063F653 /* SWRevealVC */,
 				F7990BA51940C4B3002579E4 /* Fonts */,
 				F75C30C7190BB77500C38212 /* AppWiz.xcdatamodeld */,
@@ -2129,6 +2139,16 @@
 				4A539BA71BD14F3C00C6B9F6 /* AALookBookObject.m */,
 			);
 			name = LookBook;
+			sourceTree = "<group>";
+		};
+		4A5577BF1C10CBAA003E5DC5 /* FB SDK */ = {
+			isa = PBXGroup;
+			children = (
+				4A5577C01C10CBD9003E5DC5 /* FBSDKCoreKit.framework */,
+				4A5577C11C10CBD9003E5DC5 /* FBSDKLoginKit.framework */,
+				4A5577C21C10CBD9003E5DC5 /* FBSDKShareKit.framework */,
+			);
+			name = "FB SDK";
 			sourceTree = "<group>";
 		};
 		4A8B18361AF5FB6900CDC38D /* WebView */ = {
@@ -3064,9 +3084,12 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Chien Ling Goh (7N4T9ZXSWB)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Chien Ling Goh (7N4T9ZXSWB)";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/**",
+					"$(PROJECT_DIR)/FB",
+					SDK,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AppWiz/AppWiz-Prefix.pch";
@@ -3116,9 +3139,12 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Chien Ling Goh (7N4T9ZXSWB)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Chien Ling Goh (7N4T9ZXSWB)";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/**",
+					"$(PROJECT_DIR)/FB",
+					SDK,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AppWiz/AppWiz-Prefix.pch";

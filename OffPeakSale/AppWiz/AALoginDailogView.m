@@ -8,6 +8,8 @@
 
 #import "AALoginDailogView.h"
 #import "AALoginHelper.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 static NSString* const JSON_RETAILER_ID_KEY = @"retailerId";
 @implementation AALoginDailogView
 
@@ -79,6 +81,31 @@ static NSString* const JSON_RETAILER_ID_KEY = @"retailerId";
             [[[UIAlertView alloc] initWithTitle:nil message:error delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil] show];
         }withParams:params];
     }
+}
+
+- (IBAction)btnFbTapped:(id)sender {
+    FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
+    [login
+     logInWithReadPermissions:@[@"public_profile", @"email"]
+     fromViewController:self
+     handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+         if (error) {
+             NSLog(@"Process error");
+         } else if (result.isCancelled) {
+             NSLog(@"Cancelled");
+         } else {
+             NSLog(@"Logged in");
+             
+             if ([FBSDKAccessToken currentAccessToken]) {
+                 [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{@"fields": @"email,name"}]
+                  startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+                      if (!error) {
+                          NSLog(@"fetched user:%@", result);
+                      }
+                  }];
+             }
+         }
+     }];
 }
 
 - (IBAction)btnNewuserTapped:(id)sender {

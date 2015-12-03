@@ -39,6 +39,7 @@ typedef enum FormType{
 @property (strong, nonatomic) IBOutlet AAThemeValidationTextField *tfFPEmailId;
 @property (strong, nonatomic) IBOutlet UIView *vwForgotPassordTitleBG;
 - (IBAction)btnGetPawwordTapped:(id)sender;
+- (IBAction)btnFbTapped:(id)sender;
 
 
 - (IBAction)btnNewuserTapped:(id)sender;
