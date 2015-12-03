@@ -9,5 +9,5 @@
 #import "AAValidationTextField.h"
 
 @interface AAThemeValidationTextField : AAValidationTextField
-
+@property (nonatomic) IBInspectable BOOL lightTextColor;
 @end

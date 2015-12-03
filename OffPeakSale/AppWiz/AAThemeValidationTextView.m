@@ -60,7 +60,7 @@
     self.layer.borderColor = [AAColor sharedInstance].retailerThemeDarkColor.CGColor;
     self.layer.borderWidth = 1.0f;
     self.layer.cornerRadius = 4.0f;
-    self.textColor = [UIColor blackColor];
+    self.textColor = [AAColor sharedInstance].retailerThemeTextColor;
 }
 -(void)dealloc
 {

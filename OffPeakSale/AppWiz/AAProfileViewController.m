@@ -66,13 +66,10 @@ static NSString* const JSON_ERROR_CODE_KEY = @"errorCode";
     self.btnSaveConsumerProfile.titleLabel.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].boldFont size:BUTTON_FONTSIZE];
     self.lblEnablePn.font =  [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:FOOTER_OPTIONS_FONTSIZE];
     
-    [self setProfileButtons];
     
     //set properties for text fields
     [self.tfMobileNumber setAllowOnlyNumbers:YES];
-    
-    //self.tfExpiryMonth.validationDelegate = self;
-    
+
     NSString * appType = [AAAppGlobals sharedInstance].retailer.retailerAppType ;
    
     [self registerForKeyboardNotifications];
@@ -131,28 +128,15 @@ static NSString* const JSON_ERROR_CODE_KEY = @"errorCode";
     [self.viewFieldsContainer setHidden:true];
     self.loginView.formType = FormTypeLogin;
 }
--(void)getEarnedRewards{
-}
--(void)setProfileButtons{
-//    float screenWidth = [UIScreen mainScreen].bounds.size.width;
-//    float buttonWidth ;
-//    
-//    buttonWidth = screenWidth;
-//    [self.btnSaveConsumerProfile setHidden:false];
-//    CGRect frame = self.btnSaveConsumerProfile.frame;
-//    frame.size.width = buttonWidth-30;
-//    self.btnSaveConsumerProfile.frame = frame;
-}
+
 -(void)backButtonTapped{
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-//    [[AAAppGlobals sharedInstance].paymentHandler initiateConnection];
 }
 -(void)viewWillDisappear:(BOOL)animated{
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"RewardsRedeemed" object:nil];
 }
 - (void)didReceiveMemoryWarning
 {
@@ -364,7 +348,6 @@ static NSString* const JSON_ERROR_CODE_KEY = @"errorCode";
         [self saveProfileToUserDefaults];
         [alertViewSuccess show];
             [self updateFrameAfterLogin];
-            [self getEarnedRewards];
         }
     } andFailure:^(NSString *errorMessage) {
          [[UIApplication sharedApplication] endIgnoringInteractionEvents];
@@ -672,11 +655,23 @@ static NSString* const JSON_ERROR_CODE_KEY = @"errorCode";
 
 -(BOOL)validationTextFieldShouldBeginEditing:(UITextField *)validatoinTextField
 {
+    if (validatoinTextField==self.tfCountry)
+    {
+        //[validatoinTextField resignFirstResponder];
+        //[self.view endEditing:YES];
+        
+        [self showCountriesDropDownMenu];
+        
+        return NO;
+        //[self.view endEditing:YES];
+    }
+    [self.dropDownScrollViewCountries removeFromSuperview];
     self.activeField = validatoinTextField;
     return YES;
 }
 -(void)validationTextFieldDidBeginEditing:(UITextField *)validatoinTextField
 {
+    
     [self hideDropDownMenus];
 }
 -(void)getString{
@@ -916,7 +911,7 @@ static NSString* const JSON_ERROR_CODE_KEY = @"errorCode";
     
     self.vwCreatePassword.hidden = false;
     frame = self.vwCreatePassword.frame;
-    frame.origin.y = self.tfMobileNumber.frame.origin.y + self.tfMobileNumber.frame.size.height;
+    frame.origin.y = self.tfCountry.frame.origin.y + self.tfCountry.frame.size.height;
     self.vwCreatePassword.frame = frame;
     
     frame = self.vwProfileinfo.frame;
@@ -933,16 +928,11 @@ static NSString* const JSON_ERROR_CODE_KEY = @"errorCode";
     
 }
 -(void)logionSucessful{
-//    self.consumer = [AAAppGlobals sharedInstance].consumer;
     [self populateFields];
     [self saveProfileToUserDefaults];
     
     [self updateFrameAfterLogin];
     [self.btnSaveConsumerProfile setTitle:@"Save" forState:UIControlStateNormal];
-    [self setProfileButtons];
-    
-    
-
 }
 -(void)updateFrameAfterLogin{
     [self.loginView removeFromSuperview];
@@ -956,7 +946,7 @@ static NSString* const JSON_ERROR_CODE_KEY = @"errorCode";
     self.vwCreatePassword.hidden = true;
     
     frame = self.vwProfileinfo.frame;
-    frame.origin.y = self.tfMobileNumber.frame.origin.y + self.tfMobileNumber.frame.size.height+8;
+    frame.origin.y = self.tfCountry.frame.origin.y + self.tfCountry.frame.size.height+8;
     self.vwProfileinfo.frame = frame;
     
     float vwHeight = frame.size.height + frame.origin.y;
@@ -971,6 +961,10 @@ static NSString* const JSON_ERROR_CODE_KEY = @"errorCode";
 
 - (IBAction)btnShowLoginFormTapped:(id)sender {
     [self showLoginView];
+}
+
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.dropDownScrollViewCountries removeFromSuperview];
 }
 
 @end

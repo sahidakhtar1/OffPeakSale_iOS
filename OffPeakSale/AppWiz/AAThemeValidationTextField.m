@@ -57,17 +57,22 @@
 
 -(void)updateTheme
 {
-//    [self setBackgroundColor:[AAColor sharedInstance].retailerThemeLightColor];
     [self setTextColor:[AAColor sharedInstance].profileTextFieldTextColor];
     self.layer.borderColor = [AAColor sharedInstance].retailerThemeDarkColor.CGColor;
     self.layer.borderWidth = 1.0f;
     self.layer.cornerRadius = 4.0f;
     self.layer.backgroundColor = [UIColor clearColor].CGColor;
 //    self.layer.borderColor = [UIColor greenColor].CGColor;
+    
 }
 -(void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFICATION_THEME_CHANGED object:nil];
+}
+-(void)setLightTextColor:(BOOL)lightTextColor{
+    [self setTextColor:[AAColor sharedInstance].retailerThemeTextColor];
+    [self setValue:[UIColor colorWithWhite:1 alpha:0.5f]
+        forKeyPath:@"_placeholderLabel.textColor"];
 }
 
 @end

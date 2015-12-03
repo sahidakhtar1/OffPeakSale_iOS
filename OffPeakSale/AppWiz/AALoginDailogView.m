@@ -251,14 +251,14 @@ static NSString* const JSON_RETAILER_ID_KEY = @"retailerId";
                             self.btnLogin.frame = frame;
                             yCod += (frame.size.height+15);
                             
-                            frame = self.btnForgotPassword.frame;
-                            frame.origin.y = yCod;
-                            self.btnForgotPassword.frame = frame;
-                            yCod += (frame.size.height+15);
-                            
-                            frame = self.btnNewUser.frame;
-                            frame.origin.y = yCod;
-                            self.btnNewUser.frame = frame;
+//                            frame = self.btnForgotPassword.frame;
+//                            frame.origin.y = yCod;
+//                            self.btnForgotPassword.frame = frame;
+//                            yCod += (frame.size.height+15);
+//                            
+//                            frame = self.btnNewUser.frame;
+//                            frame.origin.y = yCod;
+//                            self.btnNewUser.frame = frame;
                      }
                      completion:nil];
     
