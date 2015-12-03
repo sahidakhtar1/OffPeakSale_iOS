@@ -30,6 +30,7 @@
     NSNumber *lon = [NSNumber numberWithDouble:self.location.longitude];
     [encoder encodeObject:lat forKey:@"latitude"];
      [encoder encodeObject:lon forKey:@"longitude"];
+    [encoder encodeObject:self.name forKey:@"name"];
     
     
     
@@ -42,6 +43,7 @@
         self.storeContact =[decoder decodeObjectForKey:@"storeContact"];
         NSNumber *lat = [decoder decodeObjectForKey:@"latitude"];
         NSNumber *lon = [decoder decodeObjectForKey:@"longitude"];
+        self.name = [decoder decodeObjectForKey:@"name"];
         
         self.location  = CLLocationCoordinate2DMake([lat doubleValue],[lon doubleValue]);
       

@@ -19,6 +19,7 @@
 
 -(void)rateProductWithProductId:(NSString*)productId withRating:(NSString*)rating;
 -(void)presentImageZoomWithImage:(UIImage*)image;
+-(void)locationTapped;
 
 @end
 

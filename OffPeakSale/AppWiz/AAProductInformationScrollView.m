@@ -370,24 +370,21 @@ static NSInteger const CIRCULAR_VIEW_HEIGHT = 50.0;
     centerAddress.y = centerPrevPrice.y;
     lblAddress.center = centerAddress;
     
+    UIButton *locationBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [locationBtn setFrame:CGRectMake(lblAddress.frame.origin.x -20,
+                                     lblAddress.frame.origin.y-10,
+                                     lblAddress.frame.size.width+20,
+                                     lblAddress.frame.size.height+15)];
+    [self addSubview:locationBtn];
+    [locationBtn setBackgroundColor:[UIColor clearColor]];
+    [locationBtn addTarget:self action:@selector(locationTapped) forControlEvents:UIControlEventTouchUpInside];
     
-    
-//    UILabel* lblBody = [[UILabel alloc] initWithFrame:CGRectMake(PRODOCT_BODY_MARGIN, orgY, 290, 20)];
-//    [lblBody setFont:[UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:PRODUCTDETAIL_REWARDS_FONTSIZE]];
-//    NSMutableAttributedString *hogan = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ Credit Points",self.product.reward_points]];
-//    int length = [[NSString stringWithFormat:@"%@",self.product.reward_points] length];
-//    [hogan addAttribute:NSFontAttributeName
-//                  value:[UIFont fontWithName:[AAAppGlobals sharedInstance].boldFont size:PRODUCTDETAIL_REWARDS_FONTSIZE]
-//                  range:NSMakeRange(0,length)];
-//    [hogan addAttribute:NSFontAttributeName
-//                  value:[UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:PRODUCTDETAIL_REWARDS_FONTSIZE]
-//                  range:NSMakeRange(length+1,[@"Credit Points" length])];
-//    [lblBody setAttributedText:hogan];
-////    [lblBody setText:[NSString stringWithFormat:@"%@ Reward Points",self.product.reward_points]];
-//    [lblBody setNumberOfLines:0];
-//    
-//    [self addSubview:lblBody];
     return orgY+currentPricelabelSize.height+8;
+}
+-(void)locationTapped{
+    if ([self.delegate respondsToSelector:@selector(locationTapped)]) {
+        [self.delegate locationTapped];
+    }
 }
 -(CGFloat)addProductRatingWithOrgY : (CGFloat)orgY
 {

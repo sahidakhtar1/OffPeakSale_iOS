@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 @interface AARetailerStores : NSObject
+@property (nonatomic,copy) NSString* name;
 @property (nonatomic,copy) NSString* storeAddress;
 @property (nonatomic,copy) NSString* storeContact;
 @property (nonatomic) CLLocationCoordinate2D location;

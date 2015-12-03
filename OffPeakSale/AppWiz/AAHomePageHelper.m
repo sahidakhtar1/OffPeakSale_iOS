@@ -37,7 +37,7 @@
     
     for(AARetailerStores* retailerStore in [AAAppGlobals sharedInstance].retailer.stores)
     {
-        NSString* content = [NSString stringWithFormat:@"%@\nContact : %@",retailerStore.storeAddress,retailerStore.storeContact];
+        NSString* content = [NSString stringWithFormat:@"%@\n\n%@",retailerStore.storeAddress,retailerStore.storeContact];
         if (retailerStore.location.latitude == 0 || retailerStore.location.longitude == 0) {
             
         }else{

@@ -533,17 +533,13 @@
     [self.ProductScroolView addSubview:self.howItWorks];
     [self.howItWorks setHowItWorks:self.product.productWorkingInformation];
     
-    self.mapView = [self.storyboard instantiateViewControllerWithIdentifier:@"AARetailerStoreMapViewController"];
-    UIView *mapContainer = [[UIView alloc] initWithFrame:CGRectMake(3*width, 0, width, self.ProductScroolView.frame.size.height)];
-    [mapContainer addSubview:self.mapView.view];
+    UIView *mapContainer = [[UIView alloc] initWithFrame:CGRectMake(3*width+15, 15, width-30, self.ProductScroolView.frame.size.height-15)];
     [self.ProductScroolView addSubview:mapContainer];
-    self.mapView.view.frame = mapContainer.bounds;
-    self.mapView.mvRetailerStores.frame = mapContainer.bounds;
     
-    AAMapView *mvRetailerStores = [[AAMapView alloc] initWithFrame:CGRectMake(15, 15, mapContainer.frame.size.width-30 , mapContainer.frame.size.height-30 )];
-//    mvRetailerStores.mapView.delegate = self;
+    AAMapView *mvRetailerStores = [[AAMapView alloc] initWithFrame:CGRectMake(0,0, mapContainer.frame.size.width , mapContainer.frame.size.height )];
     [mapContainer addSubview:mvRetailerStores];
-    [mvRetailerStores addMarkerWithTitle:self.product.outletName address:self.product.outletAddr andConatct:self.product.outletContact atLat:self.product.outletLat lng:self.product.outletLong];
+    [self putPinsOnMap:mvRetailerStores];
+    [mvRetailerStores addMarkerWithTitle:self.product.productShortDescription address:self.product.outletAddr andConatct:self.product.outletContact atLat:self.product.outletLat lng:self.product.outletLong];
 
     
     CGRect frame = self.scrollViewProductInformation.frame;
@@ -554,6 +550,14 @@
     self.ProductScroolView.contentSize = CGSizeMake(4*width, self.ProductScroolView.contentSize.height);
     
     
+}
+-(void)putPinsOnMap:(AAMapView*)map{
+    CLLocationCoordinate2D currentLocation =
+    CLLocationCoordinate2DMake([AAAppGlobals sharedInstance].targetLat,
+                               [AAAppGlobals sharedInstance].targetLong);
+    [map addCurrentLocationMarkerWithCoordinate:[AAAppGlobals sharedInstance].locationHandler.currentLocation.coordinate
+                                      withTitle:@"Current Location"
+                                        andIcon:[UIImage imageNamed:@"current_location_marker"]];
 }
 
 #pragma mark - Scroll view  categories callbacks
@@ -657,6 +661,11 @@
     [self.btnBack setHidden:true];
     [self.btnShare setHidden:true];
     [self.mSearchBar becomeFirstResponder];
+}
+-(void)locationTapped{
+    self.productTabs.selectedCategory = @"Map";
+    [self.productTabs refreshScrollView];
+    [self onCategeorySelected:self.productTabs.selectedCategory];
 }
 #pragma mark -
 #pragma mark Search bar delegate

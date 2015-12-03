@@ -30,7 +30,6 @@
     
     self.coordinateBounds =  [[GMSCoordinateBounds alloc] init];
     self.markerCurrentLocation = [[GMSMarker alloc] init];
-    self.markerCurrentLocation = [[GMSMarker alloc] init];
     CLLocationCoordinate2D coordinates =  [AAAppGlobals sharedInstance].locationHandler.currentLocation.coordinate ;
     GMSCameraPosition *camera =
     [GMSCameraPosition cameraWithLatitude:coordinates.latitude
@@ -39,9 +38,10 @@
                                   bearing:30
                              viewingAngle:40];
     float mapHeight = [UIScreen mainScreen].bounds.size.height - 64;
-    self.mapView = [GMSMapView mapWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height-30) camera:camera];
+    self.mapView = [GMSMapView mapWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height) camera:camera];
     self.mapView.delegate = self;
     [self addSubview:self.mapView];
+    [self setBackgroundColor:[UIColor clearColor]];
     
 }
 -(void)addMarkerWithTitle:(NSString*)title
@@ -56,6 +56,7 @@
         AARetailerStores *retailerStore = [[AARetailerStores alloc] init];
         retailerStore.storeAddress = address;
         retailerStore.storeContact = contact;
+        retailerStore.name = title;
         retailerStore.location = CLLocationCoordinate2DMake([lat doubleValue], [lng doubleValue]);
         GMSMarker* marker =   [self addMarkerWithTitle:title andContent:content andCoordinate:retailerStore.location];
         [marker setIcon:[UIImage imageNamed:@"shoplocation"]];
@@ -143,7 +144,7 @@
         AARetailerStores* retailerStore =  marker.userData;
         storeInfoWindow.lblStoreContactNumber.text = retailerStore.storeContact;
         storeInfoWindow.lblStoreAddress.text = [NSString stringWithFormat:@"\n%@\n",retailerStore.storeAddress ];
-        storeInfoWindow.lblStoreName.text = [AAAppGlobals sharedInstance].retailer.retailerName;
+        storeInfoWindow.lblStoreName.text = retailerStore.name;
         [storeInfoWindow updateContainerSize:mapView.frame.size.width];
         self.phoneNumberTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(phoneNumberTap:)];
         self.phoneNumberTap.numberOfTapsRequired = 1;
@@ -190,7 +191,7 @@
     
     for(AARetailerStores* retailerStore in self.stores)
     {
-        NSString* content = [NSString stringWithFormat:@"%@\nContact : %@",retailerStore.storeAddress,retailerStore.storeContact];
+        NSString* content = [NSString stringWithFormat:@"%@\n\n%@",retailerStore.storeAddress,retailerStore.storeContact];
         if (retailerStore.location.latitude == 0 || retailerStore.location.longitude == 0) {
             
         }else{
