@@ -32,6 +32,7 @@
 
 -(void)initValues
 {
+    self.borderStyle = UITextBorderStyleLine;
     self.delegate = self;
     self.allowOnlyNumbers = NO;
     self.maxNumberOfCharacters = 200;

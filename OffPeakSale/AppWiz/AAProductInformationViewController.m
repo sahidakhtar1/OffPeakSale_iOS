@@ -280,63 +280,80 @@
     
     [self.view addSubview:confirmPurchasePopupView];
 }
-
+-(void)showLoginView{
+    AAProfileViewController* profileViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AAProfileViewController"];
+    [profileViewController setShowBuyButton:YES];
+    profileViewController.profileDelegate = self;
+    profileViewController.showBuyButton = NO;
+    [self.navigationController pushViewController:profileViewController animated:YES];
+}
+#pragma mark - profile view controller callbacks
+-(void)closeProfileViewController:(id)viewController
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 #pragma mark - UI Event Management
 - (IBAction)btnBuyProductTapped:(id)sender {
-    
-    if (1== 2 && ![AAAppGlobals sharedInstance].enableShoppingCart) {
-    
-   // NSString* currentProductPrice = [NSString stringWithFormat:@"%.2f",[[self removeCurrency:self.product.currentProductPrice] floatValue]*[self.tfQty.text integerValue]];
-        AAProfileViewController* profileViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AAProfileViewController"];
-        [profileViewController setShowBuyButton:YES];
-        [profileViewController setProfileDelegate:self];
-        [profileViewController setProductInformation:[[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInteger: self.product.productId],PRODUCT_ID_KEY,[NSNumber numberWithInt:[self.tfQty.text intValue]],PRODUCT_QUANTITY_KEY,self.product.productShortDescription,PRODUCT_SHORT_DESCRIPTION_KEY,self.product.currentProductPrice,PRODUCT_AMOUNT_KEY, nil]];
-    
-        [self.navigationController pushViewController:profileViewController animated:YES];
-
+    BOOL isLoggedIn = [[NSUserDefaults standardUserDefaults] boolForKey:KEY_IS_LOGGED_IN];
+    if (!isLoggedIn) {
+        [self showLoginView];
     }else{
-        if ([self.product.product_options count]>0) {
-            AAEShopProductOptions *option1 = [self.product.product_options objectAtIndex:0];
-            if (self.product.selectedOptionOne == nil) {
-                [[[UIAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"Please selct %@",option1.optionLabel] delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil] show];
-                return;
-            }
-        }
-        if ([self.product.product_options count]>1) {
-            AAEShopProductOptions *option1 = [self.product.product_options objectAtIndex:1];
-            if (self.product.selectedOptionOne == nil) {
-                [[[UIAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"Please selct %@",option1.optionLabel] delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil] show];
-                return;
-            }
-        }
-        BOOL isAdded =  [[AAAppGlobals sharedInstance] addProductToCart:self.product witnQuantity:self.tfQty.text];
-        if (isAdded) {
-            [self makeCartAniation];
-            
-            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-            NSString *path = [paths objectAtIndex:0];
-            path = [NSString stringWithFormat:@"%@/%d.png",path,self.product.productId];
-            NSFileManager* filemanager = [NSFileManager defaultManager];
-            if ([filemanager fileExistsAtPath:path]) {
-                
-            }else{
-                UIView *view = [self.scrollViewProductInformation viewWithTag:100];
-                UIImageView *imgView = [view viewWithTag:101];
-                if ([imgView isKindOfClass:[UIImageView class]]) {
-                    if (imgView.image != nil) {
-                        NSData *imageData = UIImagePNGRepresentation(imgView.image);
-                        [filemanager createFileAtPath:path contents:imageData attributes:nil];
-                    }
-                    
-                }
-                // NSData *imageData = UIImagePNGRepresentation();
-            }
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"updateCart" object:nil];
-        }else{
-           // [[[UIAlertView alloc]initWithTitle:@"Error" message:@"Unable to add the product to cart." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil] show];
-        }
         
     }
+    
+//    if (1== 2 && ![AAAppGlobals sharedInstance].enableShoppingCart) {
+//    
+//   // NSString* currentProductPrice = [NSString stringWithFormat:@"%.2f",[[self removeCurrency:self.product.currentProductPrice] floatValue]*[self.tfQty.text integerValue]];
+//        AAProfileViewController* profileViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AAProfileViewController"];
+//        [profileViewController setShowBuyButton:YES];
+//        [profileViewController setProfileDelegate:self];
+//        [profileViewController setProductInformation:[[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInteger: self.product.productId],PRODUCT_ID_KEY,[NSNumber numberWithInt:[self.tfQty.text intValue]],PRODUCT_QUANTITY_KEY,self.product.productShortDescription,PRODUCT_SHORT_DESCRIPTION_KEY,self.product.currentProductPrice,PRODUCT_AMOUNT_KEY, nil]];
+//    
+//        [self.navigationController pushViewController:profileViewController animated:YES];
+//
+//    }else{
+//        if ([self.product.product_options count]>0) {
+//            AAEShopProductOptions *option1 = [self.product.product_options objectAtIndex:0];
+//            if (self.product.selectedOptionOne == nil) {
+//                [[[UIAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"Please selct %@",option1.optionLabel] delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil] show];
+//                return;
+//            }
+//        }
+//        if ([self.product.product_options count]>1) {
+//            AAEShopProductOptions *option1 = [self.product.product_options objectAtIndex:1];
+//            if (self.product.selectedOptionOne == nil) {
+//                [[[UIAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"Please selct %@",option1.optionLabel] delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil] show];
+//                return;
+//            }
+//        }
+//        BOOL isAdded =  [[AAAppGlobals sharedInstance] addProductToCart:self.product witnQuantity:self.tfQty.text];
+//        if (isAdded) {
+//            [self makeCartAniation];
+//            
+//            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+//            NSString *path = [paths objectAtIndex:0];
+//            path = [NSString stringWithFormat:@"%@/%d.png",path,self.product.productId];
+//            NSFileManager* filemanager = [NSFileManager defaultManager];
+//            if ([filemanager fileExistsAtPath:path]) {
+//                
+//            }else{
+//                UIView *view = [self.scrollViewProductInformation viewWithTag:100];
+//                UIImageView *imgView = [view viewWithTag:101];
+//                if ([imgView isKindOfClass:[UIImageView class]]) {
+//                    if (imgView.image != nil) {
+//                        NSData *imageData = UIImagePNGRepresentation(imgView.image);
+//                        [filemanager createFileAtPath:path contents:imageData attributes:nil];
+//                    }
+//                    
+//                }
+//                // NSData *imageData = UIImagePNGRepresentation();
+//            }
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"updateCart" object:nil];
+//        }else{
+//           // [[[UIAlertView alloc]initWithTitle:@"Error" message:@"Unable to add the product to cart." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil] show];
+//        }
+//        
+//    }
     
 }
 

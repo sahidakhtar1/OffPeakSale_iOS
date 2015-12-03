@@ -621,8 +621,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="register_bg" id="6t8-06-z9P">
+                                <rect key="frame" x="0.0" y="64" width="327" height="416"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <animations/>
+                            </imageView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="GXb-dH-gUp">
-                                <rect key="frame" x="0.0" y="64" width="320" height="371"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="3sN-Pl-ER0">
@@ -630,7 +635,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <animations/>
                                         <state key="normal" title="Back to login">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -638,16 +643,9 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" id="Q88-BR-d35" userLabel="View reatil profile">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="509"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="342"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name" minimumFontSize="17" id="r70-Lq-3pP" customClass="AAThemeValidationTextField">
-                                                <rect key="frame" x="15" y="58" width="290" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                                <animations/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" minimumFontSize="17" id="Slu-bU-NQ5" customClass="AAThemeValidationTextField">
                                                 <rect key="frame" x="15" y="20" width="290" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -655,86 +653,40 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" segmentControlStyle="bordered" selectedSegmentIndex="0" id="HeK-Kg-z23">
-                                                <rect key="frame" x="235" y="96" width="70" height="29"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                                <animations/>
-                                                <segments>
-                                                    <segment title="M" width="35.5"/>
-                                                    <segment title="F"/>
-                                                </segments>
-                                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                            </segmentedControl>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Date of Birth" minimumFontSize="17" id="7XG-jc-RMX" customClass="AAThemeValidationTextField">
-                                                <rect key="frame" x="15" y="95" width="194" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                                <animations/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email Address" minimumFontSize="17" id="VqF-u4-4tE" customClass="AAThemeValidationTextField">
-                                                <rect key="frame" x="15" y="134" width="290" height="30"/>
+                                                <rect key="frame" x="15" y="56" width="290" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                 <animations/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Mailing and Shipping Address" minimumFontSize="17" id="KBq-dE-GSa" customClass="AAThemeValidationTextField">
-                                                <rect key="frame" x="15" y="171" width="290" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                                <animations/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="City" minimumFontSize="17" id="2Pa-r9-1VQ" customClass="AAThemeValidationTextField">
-                                                <rect key="frame" x="15" y="209" width="290" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                                <animations/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Postal Code" minimumFontSize="17" id="9qn-mW-NTI" customClass="AAThemeValidationTextField">
-                                                <rect key="frame" x="15" y="247" width="290" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                                <animations/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
-                                            </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Country" minimumFontSize="17" id="5Sz-RL-0cu" customClass="AAThemeValidationTextField">
-                                                <rect key="frame" x="15" y="285" width="290" height="30"/>
+                                                <rect key="frame" x="15" y="129" width="290" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                 <animations/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Mobile Number" minimumFontSize="17" id="3nG-WW-oAz" customClass="AAThemeValidationTextField">
-                                                <rect key="frame" x="15" y="323" width="290" height="30"/>
+                                                <rect key="frame" x="15" y="92" width="290" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                 <animations/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
                                             </textField>
                                             <view contentMode="scaleToFill" id="R0f-cD-d5m">
-                                                <rect key="frame" x="15" y="510" width="290" height="107"/>
+                                                <rect key="frame" x="15" y="159" width="290" height="77"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create Password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="upC-2v-IWp">
-                                                        <rect key="frame" x="8" y="8" width="223" height="25"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <animations/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" id="VM5-OR-hji" customClass="AAThemeValidationTextField">
-                                                        <rect key="frame" x="0.0" y="39" width="290" height="30"/>
+                                                        <rect key="frame" x="0.0" y="9" width="290" height="30"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                         <animations/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                     </textField>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm Password" minimumFontSize="17" id="I6y-6c-Dgh" customClass="AAThemeValidationTextField">
-                                                        <rect key="frame" x="0.0" y="76" width="290" height="30"/>
+                                                        <rect key="frame" x="0.0" y="46" width="290" height="30"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                         <animations/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -742,146 +694,52 @@
                                                     </textField>
                                                 </subviews>
                                                 <animations/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             </view>
                                             <view contentMode="scaleToFill" id="wai-jw-xku">
-                                                <rect key="frame" x="15" y="361" width="290" height="148"/>
+                                                <rect key="frame" x="15" y="234" width="290" height="49"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" id="BWa-Mj-q0d">
-                                                        <rect key="frame" x="0.0" y="77" width="290" height="33"/>
-                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                                        <subviews>
-                                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I agree to Terms of Use" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gHf-Yw-hi4">
-                                                                <rect key="frame" x="6" y="5" width="277" height="23"/>
-                                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                <animations/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" id="3xh-cQ-7S9">
-                                                                <rect key="frame" x="6" y="0.0" width="277" height="33"/>
-                                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                <animations/>
-                                                                <state key="normal">
-                                                                    <attributedString key="attributedTitle"/>
-                                                                </state>
-                                                                <connections>
-                                                                    <action selector="btnTermsOfUseTapped:" destination="Ftm-FZ-b4P" eventType="touchUpInside" id="cjW-K1-uZo"/>
-                                                                </connections>
-                                                            </button>
-                                                        </subviews>
-                                                        <animations/>
-                                                        <color key="backgroundColor" red="0.90980392156862744" green="0.9137254901960784" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
-                                                    </view>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enable Push Notification" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jXo-sh-qeH">
-                                                        <rect key="frame" x="7" y="5" width="218" height="22"/>
+                                                        <rect key="frame" x="7" y="13" width="218" height="22"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                         <animations/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="GcB-Vr-lEX">
-                                                        <rect key="frame" x="239" y="0.0" width="51" height="31"/>
+                                                        <rect key="frame" x="239" y="8" width="51" height="31"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                                         <animations/>
                                                         <connections>
                                                             <action selector="pnSwitchToggled:" destination="Ftm-FZ-b4P" eventType="valueChanged" id="v1h-Q7-i9z"/>
                                                         </connections>
                                                     </switch>
-                                                    <view contentMode="scaleToFill" id="887-fq-1n9" userLabel="Reward Pts Redeemd">
-                                                        <rect key="frame" x="0.0" y="39" width="290" height="30"/>
-                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                                        <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Credit Points" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="N27-ZD-5cm">
-                                                                <rect key="frame" x="8" y="1" width="161" height="30"/>
-                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                <animations/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="aSq-RC-z1r">
-                                                                <rect key="frame" x="182" y="0.0" width="106" height="30"/>
-                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                                                <animations/>
-                                                                <inset key="contentEdgeInsets" minX="0.0" minY="3" maxX="12" maxY="0.0"/>
-                                                                <state key="normal" title="0">
-                                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                                </state>
-                                                                <connections>
-                                                                    <action selector="btnReddemTapped:" destination="Ftm-FZ-b4P" eventType="touchUpInside" id="Zk9-UC-fnb"/>
-                                                                </connections>
-                                                            </button>
-                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="triangle_icon.png" id="kWh-Fi-Pti">
-                                                                <rect key="frame" x="273" y="15" width="15" height="15"/>
-                                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                                                <animations/>
-                                                            </imageView>
-                                                        </subviews>
-                                                        <animations/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </view>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cash on deliver no credit points" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="13I-HV-wMO" userLabel="No rewards">
-                                                        <rect key="frame" x="6" y="118" width="277" height="30"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <animations/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
                                                 </subviews>
                                                 <animations/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             </view>
                                         </subviews>
                                         <animations/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
                                 </subviews>
                                 <animations/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </scrollView>
-                            <view contentMode="scaleToFill" id="9Zs-ba-g2k" customClass="AAThemeView">
-                                <rect key="frame" x="0.0" y="436" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Lwx-Rh-zDz" customClass="AAThemeGlossyButton">
-                                        <rect key="frame" x="160" y="0.0" width="160" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                        <animations/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal" title="Send Enquiry">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="btnBuyProductTapped:" destination="Ftm-FZ-b4P" eventType="touchUpInside" id="c9K-ax-U2Y"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="frr-ly-23s" customClass="AAThemeGlossyButton">
-                                        <rect key="frame" x="0.0" y="0.0" width="160" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <animations/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal" title="Save">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="btnSaveConsumerProfileTapped:" destination="Ftm-FZ-b4P" eventType="touchUpInside" id="8VX-Zx-0Hv"/>
-                                        </connections>
-                                    </button>
-                                    <view contentMode="scaleToFill" id="Ow8-K1-dZf" customClass="AAThemeView">
-                                        <rect key="frame" x="160" y="0.0" width="1" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <animations/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </view>
-                                </subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="frr-ly-23s" customClass="AAThemeGlossyButton">
+                                <rect key="frame" x="80" y="353" width="160" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <animations/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Save">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="btnSaveConsumerProfileTapped:" destination="Ftm-FZ-b4P" eventType="touchUpInside" id="8VX-Zx-0Hv"/>
+                                </connections>
+                            </button>
                             <view contentMode="scaleToFill" id="qi6-rg-zLi">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -899,47 +757,24 @@
                     <tabBarItem key="tabBarItem" title="PROFILE" id="DqJ-yq-pUa"/>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
-                        <outlet property="btnBuyProduct" destination="Lwx-Rh-zDz" id="eYf-sQ-c6v"/>
-                        <outlet property="btnRedeem" destination="aSq-RC-z1r" id="lMR-q0-PNV"/>
                         <outlet property="btnSaveConsumerProfile" destination="frr-ly-23s" id="6Vr-RG-yPk"/>
                         <outlet property="btnShowLoginForm" destination="3sN-Pl-ER0" id="dzn-2S-G5U"/>
-                        <outlet property="btnTermsofUse" destination="3xh-cQ-7S9" id="cm3-VG-Wo3"/>
-                        <outlet property="imgTriangle" destination="kWh-Fi-Pti" id="OMT-6U-1am"/>
-                        <outlet property="lblCreatePwd" destination="upC-2v-IWp" id="Jcs-x3-xRc"/>
                         <outlet property="lblEnablePn" destination="jXo-sh-qeH" id="w7N-gH-yNr"/>
-                        <outlet property="lblRedeemRewards" destination="N27-ZD-5cm" id="ace-Bx-nKW"/>
-                        <outlet property="lblTermsOfUse" destination="gHf-Yw-hi4" id="fs6-wk-ya3"/>
                         <outlet property="pnSwitch" destination="GcB-Vr-lEX" id="Dsu-GR-yD5"/>
-                        <outlet property="scGender" destination="HeK-Kg-z23" id="QNB-0T-7ds"/>
                         <outlet property="scrollViewFieldsContainter" destination="GXb-dH-gUp" id="18t-zR-T6r"/>
-                        <outlet property="tfAddress" destination="KBq-dE-GSa" id="KBA-J0-oKE"/>
-                        <outlet property="tfCity" destination="2Pa-r9-1VQ" id="CIM-Zv-2Nj"/>
                         <outlet property="tfCnfPwd" destination="I6y-6c-Dgh" id="rMh-AQ-Cwi"/>
                         <outlet property="tfCountry" destination="5Sz-RL-0cu" id="uqb-ou-lQI"/>
-                        <outlet property="tfDateOfBirth" destination="7XG-jc-RMX" id="qVP-0J-DeZ"/>
                         <outlet property="tfEmail" destination="VqF-u4-4tE" id="Rc8-Js-R1h"/>
                         <outlet property="tfFirstName" destination="Slu-bU-NQ5" id="YZD-1H-RWp"/>
-                        <outlet property="tfLastName" destination="r70-Lq-3pP" id="uXM-LP-T2f"/>
                         <outlet property="tfMobileNumber" destination="3nG-WW-oAz" id="hcK-ax-C8u"/>
-                        <outlet property="tfPostalCode" destination="9qn-mW-NTI" id="R0O-C4-IhK"/>
                         <outlet property="tfPwd" destination="VM5-OR-hji" id="mQd-MT-VXw"/>
                         <outlet property="tpgrBackgrounvView" destination="hFQ-3a-aC8" id="a0l-Jh-1yz"/>
-                        <outlet property="tvNoReward" destination="13I-HV-wMO" id="mHg-A2-pJN"/>
-                        <outlet property="veDevider" destination="Ow8-K1-dZf" id="Lia-Wg-X2n"/>
-                        <outlet property="viewBottomBar" destination="9Zs-ba-g2k" id="1ui-o9-S1w"/>
                         <outlet property="viewFieldsContainer" destination="Q88-BR-d35" id="S9z-Pc-Jmx"/>
                         <outlet property="vwCreatePassword" destination="R0f-cD-d5m" id="DeB-Jx-AFs"/>
                         <outlet property="vwHeaderView" destination="qi6-rg-zLi" id="nNE-EF-vCh"/>
                         <outlet property="vwProfileinfo" destination="wai-jw-xku" id="frb-ig-IZc"/>
-                        <outlet property="vwRewards" destination="887-fq-1n9" id="z4k-va-Bm9"/>
-                        <outlet property="vwTermsOfUse" destination="BWa-Mj-q0d" id="Q0t-LB-hfS"/>
                         <outletCollection property="arrValidationFields" destination="Slu-bU-NQ5" id="iul-6p-N51"/>
-                        <outletCollection property="arrValidationFields" destination="r70-Lq-3pP" id="MLU-ZN-pi8"/>
-                        <outletCollection property="arrValidationFields" destination="7XG-jc-RMX" id="NMl-0B-zFN"/>
-                        <outletCollection property="arrValidationFields" destination="KBq-dE-GSa" id="cgi-eN-LEa"/>
-                        <outletCollection property="arrValidationFields" destination="2Pa-r9-1VQ" id="hbM-33-WRm"/>
                         <outletCollection property="arrValidationFields" destination="5Sz-RL-0cu" id="CfP-Nd-RVQ"/>
-                        <outletCollection property="arrValidationFields" destination="9qn-mW-NTI" id="7Em-qp-obU"/>
                         <outletCollection property="arrValidationFields" destination="VqF-u4-4tE" id="nDS-KQ-iVn"/>
                         <outletCollection property="arrValidationFields" destination="3nG-WW-oAz" id="egC-Ll-Sed"/>
                     </connections>
@@ -3113,9 +2948,9 @@
         <image name="menu_button" width="24" height="24"/>
         <image name="rd_normal" width="64" height="64"/>
         <image name="rd_selected" width="64" height="64"/>
+        <image name="register_bg" width="360" height="640"/>
         <image name="share_button" width="30" height="30"/>
         <image name="tick" width="16" height="16"/>
-        <image name="triangle_icon.png" width="300" height="300"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
