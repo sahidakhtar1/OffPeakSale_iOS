@@ -53,19 +53,6 @@
                                         <action selector="btnNewuserTapped:" destination="baz-cd-Ayl" eventType="touchUpInside" id="Z6j-qr-03f"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8WN-HY-ILA" customClass="AAThemeGlossyButton">
-                                    <rect key="frame" x="68" y="122" width="137" height="44"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                    <animations/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                    <state key="normal" title="Login">
-                                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="btnLogintapped:" destination="baz-cd-Ayl" eventType="touchUpInside" id="oxV-5g-bA2"/>
-                                    </connections>
-                                </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8d1-dv-IEd">
                                     <rect key="frame" x="2" y="316" width="137" height="34"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -86,15 +73,37 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Dba-Zt-bf5">
-                                    <rect key="frame" x="68" y="190" width="137" height="22"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view contentMode="scaleToFill" id="D0p-yR-7vl">
+                                    <rect key="frame" x="0.0" y="123" width="289" height="105"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8WN-HY-ILA" customClass="AAThemeGlossyButton">
+                                            <rect key="frame" x="0.0" y="0.0" width="288" height="44"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                            <animations/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <state key="normal" title="Login">
+                                                <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="btnLogintapped:" destination="baz-cd-Ayl" eventType="touchUpInside" id="oxV-5g-bA2"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Dba-Zt-bf5">
+                                            <rect key="frame" x="0.0" y="53" width="289" height="44"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                            <animations/>
+                                            <color key="backgroundColor" red="0.34901960784313724" green="0.45882352941176469" blue="0.69019607843137254" alpha="1" colorSpace="calibratedRGB"/>
+                                            <state key="normal" title="Log in with Facebook"/>
+                                            <connections>
+                                                <action selector="btnFbTapped:" destination="baz-cd-Ayl" eventType="touchUpInside" id="Hun-41-ili"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
                                     <animations/>
-                                    <color key="backgroundColor" red="0.21960784310000001" green="0.3803921569" blue="0.043137254899999998" alpha="1" colorSpace="calibratedRGB"/>
-                                    <connections>
-                                        <action selector="btnFbTapped:" destination="baz-cd-Ayl" eventType="touchUpInside" id="Hun-41-ili"/>
-                                    </connections>
-                                </button>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </view>
                             </subviews>
                             <animations/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -119,6 +128,7 @@
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="btnFBLogin" destination="Dba-Zt-bf5" id="Kvm-jQ-9fN"/>
                 <outlet property="btnForgotPassword" destination="8d1-dv-IEd" id="crH-F6-q0K"/>
                 <outlet property="btnLogin" destination="8WN-HY-ILA" id="L5C-bo-o24"/>
                 <outlet property="btnNewUser" destination="nrY-fy-Bbn" id="LmF-OX-U5t"/>
@@ -127,6 +137,7 @@
                 <outlet property="tfPassword" destination="bUG-VW-CMs" id="2MU-iZ-OmV"/>
                 <outlet property="tfemailaddress" destination="kF8-e4-3df" id="W3F-gd-uxp"/>
                 <outlet property="veForgotPasswordView" destination="BQU-MZ-Xtd" id="weU-oF-23c"/>
+                <outlet property="vwBtncontainer" destination="D0p-yR-7vl" id="8yR-GD-owi"/>
                 <outlet property="vwContainerView" destination="pzt-0p-SqU" id="Ims-TC-k2I"/>
                 <outlet property="vwForgotPassordTitleBG" destination="NuH-gC-1QP" id="GAo-6c-cHk"/>
             </connections>

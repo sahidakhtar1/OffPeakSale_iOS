@@ -8,8 +8,7 @@
 
 #import "AALoginDailogView.h"
 #import "AALoginHelper.h"
-#import <FBSDKCoreKit/FBSDKCoreKit.h>
-#import <FBSDKLoginKit/FBSDKLoginKit.h>
+
 static NSString* const JSON_RETAILER_ID_KEY = @"retailerId";
 @implementation AALoginDailogView
 
@@ -22,6 +21,8 @@ static NSString* const JSON_RETAILER_ID_KEY = @"retailerId";
         self = [self initialize];
         self.backgroundColor= [UIColor clearColor];
         self.frame = frame;
+        [self refreshView];
+        
     }
     return self;
 }
@@ -45,24 +46,22 @@ static NSString* const JSON_RETAILER_ID_KEY = @"retailerId";
     self.vwForgotPassordTitleBG.backgroundColor = [AAColor sharedInstance].retailerThemeBackgroundColor;
     self.tfemailaddress.text = @"";
     self.tfPassword.text = @"";
-//    CALayer *layer = self.vwContainerView.layer;
-//    layer.shadowOffset = CGSizeMake(1, 1);
-//    layer.shadowColor = [[UIColor blackColor] CGColor];
-//    layer.shadowRadius = 4.0f;
-//    layer.shadowOpacity = 0.80f;
-//    layer.shadowPath = [[UIBezierPath bezierPathWithRect:layer.bounds] CGPath];
-//    
-//    CALayer *layer1 = self.veForgotPasswordView.layer;
-//    layer1.shadowOffset = CGSizeMake(1, 1);
-//    layer1.shadowColor = [[UIColor blackColor] CGColor];
-//    layer1.shadowRadius = 4.0f;
-//    layer1.shadowOpacity = 0.80f;
-//    layer1.shadowPath = [[UIBezierPath bezierPathWithRect:layer1.bounds] CGPath];
-//    CGPoint centerPoint = self.veForgotPasswordView.center;
-//    centerPoint.y = rect.size.height/2;
-//    self.veForgotPasswordView.center = CGPointMake(160, rect.size.height/2);
-//    self.vwContainerView.center = CGPointMake(self.vwContainerView.center.x, rect.size.height/2);
+    
+    self.tfemailaddress.leftView = [self getLeftImageViewWithImage:@"email_black"];
+    self.tfemailaddress.leftViewMode = UITextFieldViewModeAlways;
+    self.tfPassword.leftView = [self getLeftImageViewWithImage:@"password_black"];
+    self.tfPassword.leftViewMode = UITextFieldViewModeAlways;
+    
+    _btnFBLogin.layer.cornerRadius = 4.0f;
 }
+-(UIView*)getLeftImageViewWithImage:(NSString*)imageName{
+    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 0, 20, 20)];
+    [imgView setImage:[UIImage imageNamed:imageName]];
+    UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 25, 20)];
+    [leftView addSubview:imgView];
+    return leftView;
+}
+
 - (IBAction)btnGetPawwordTapped:(id)sender {
     NSString *message = nil;
     if (![self validateEmailId:self.tfemailaddress.text]) {
@@ -84,28 +83,9 @@ static NSString* const JSON_RETAILER_ID_KEY = @"retailerId";
 }
 
 - (IBAction)btnFbTapped:(id)sender {
-    FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
-    [login
-     logInWithReadPermissions:@[@"public_profile", @"email"]
-     fromViewController:self
-     handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-         if (error) {
-             NSLog(@"Process error");
-         } else if (result.isCancelled) {
-             NSLog(@"Cancelled");
-         } else {
-             NSLog(@"Logged in");
-             
-             if ([FBSDKAccessToken currentAccessToken]) {
-                 [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{@"fields": @"email,name"}]
-                  startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-                      if (!error) {
-                          NSLog(@"fetched user:%@", result);
-                      }
-                  }];
-             }
-         }
-     }];
+    if ([self.delegate respondsToSelector:@selector(fBLoginTapped)]) {
+        [self.delegate fBLoginTapped];
+    }
 }
 
 - (IBAction)btnNewuserTapped:(id)sender {
@@ -273,9 +253,9 @@ static NSString* const JSON_RETAILER_ID_KEY = @"retailerId";
                             if (formType == FormTypeLogin) {
                                yCod = self.tfPassword.frame.origin.y+self.tfemailaddress.frame.size.height+8;
                             }
-                            frame = self.btnLogin.frame;
+                            frame = self.vwBtncontainer.frame;
                             frame.origin.y = yCod;
-                            self.btnLogin.frame = frame;
+                            self.vwBtncontainer.frame = frame;
                             yCod += (frame.size.height+15);
                             
 //                            frame = self.btnForgotPassword.frame;

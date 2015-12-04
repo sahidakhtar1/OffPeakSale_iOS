@@ -2,11 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "ic_location_filter_black-1.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Icon-60@2x.png",
+      "filename" : "ic_location_filter_black.png",
       "scale" : "2x"
     },
     {

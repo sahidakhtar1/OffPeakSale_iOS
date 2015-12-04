@@ -14,6 +14,7 @@
 -(void)loginButtonTappedwithemailId:(NSString*)email andPassword:(NSString*)password;
 -(void)logionSucessful;
 -(void)showregistrationPage;
+-(void)fBLoginTapped;
 
 @end
 typedef enum FormType{
@@ -38,6 +39,8 @@ typedef enum FormType{
 @property (strong, nonatomic) IBOutlet UILabel *lblForgotPasswordTitle;
 @property (strong, nonatomic) IBOutlet AAThemeValidationTextField *tfFPEmailId;
 @property (strong, nonatomic) IBOutlet UIView *vwForgotPassordTitleBG;
+@property (weak, nonatomic) IBOutlet UIView *vwBtncontainer;
+@property (weak, nonatomic) IBOutlet UIButton *btnFBLogin;
 - (IBAction)btnGetPawwordTapped:(id)sender;
 - (IBAction)btnFbTapped:(id)sender;
 

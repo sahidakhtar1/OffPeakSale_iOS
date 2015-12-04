@@ -16,6 +16,8 @@
 #import "AAHeaderView.h"
 #import "AAUserProfileHelper.h"
 #import "AALoginDailogView.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 
 static NSString* const PAYPAL_CHECKOUT = @"place_order.php";
 static NSString* const COD_CHECKOUT = @"enquiryMail.php";
@@ -116,7 +118,29 @@ static NSString* const JSON_ERROR_CODE_KEY = @"errorCode";
         headerView.showCart = false;
     }
     [headerView setMenuIcons];
+    [self setTfIcons];
     
+}
+-(void)setTfIcons{
+    self.tfFirstName.leftView = [self getLeftImageViewWithImage:@"name_white"];
+    self.tfFirstName.leftViewMode = UITextFieldViewModeAlways;
+    self.tfEmail.leftView = [self getLeftImageViewWithImage:@"email_white"];
+    self.tfEmail.leftViewMode = UITextFieldViewModeAlways;
+    self.tfMobileNumber.leftView = [self getLeftImageViewWithImage:@"phone_white"];
+    self.tfMobileNumber.leftViewMode = UITextFieldViewModeAlways;
+    self.tfCountry.leftView = [self getLeftImageViewWithImage:@"country_white"];
+    self.tfCountry.leftViewMode = UITextFieldViewModeAlways;
+    self.tfPwd.leftView = [self getLeftImageViewWithImage:@"password_white"];
+    self.tfPwd.leftViewMode = UITextFieldViewModeAlways;
+    self.tfCnfPwd.leftView = [self getLeftImageViewWithImage:@"password_white"];
+    self.tfCnfPwd.leftViewMode = UITextFieldViewModeAlways;
+}
+-(UIView*)getLeftImageViewWithImage:(NSString*)imageName{
+    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 0, 20, 20)];
+    [imgView setImage:[UIImage imageNamed:imageName]];
+    UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 25, 20)];
+    [leftView addSubview:imgView];
+    return leftView;
 }
 -(void)showLoginView{
     if (self.loginView == nil) {
@@ -443,7 +467,9 @@ static NSString* const JSON_ERROR_CODE_KEY = @"errorCode";
 
 -(void)populateConsumerAndPaymentInformation
 {
-    
+    if (self.consumer == nil) {
+        self.consumer = [[AAConsumer alloc] init];
+    }
     
     [self.consumer setFirstName:self.tfFirstName.text];
     [self.consumer setMobileNumber:self.tfMobileNumber.text.integerValue];
@@ -970,5 +996,36 @@ static NSString* const JSON_ERROR_CODE_KEY = @"errorCode";
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.dropDownScrollViewCountries removeFromSuperview];
 }
+-(void)fBLoginTapped{
+    FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
+    [login
+     logInWithReadPermissions:@[@"public_profile", @"email"]
+     fromViewController:self
+     handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+         if (error) {
+             NSLog(@"Process error");
+         } else if (result.isCancelled) {
+             NSLog(@"Cancelled");
+         } else {
+             NSLog(@"Logged in");
+             
+             if ([FBSDKAccessToken currentAccessToken]) {
+                 [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{@"fields": @"email,name"}]
+                  startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+                      if (!error) {
+                          NSLog(@"fetched user:%@", result);
+                          if ([result valueForKey:@"email"]) {
+                              self.tfEmail.text = [result valueForKey:@"email"];
+                          }
+                          if ([result valueForKey:@"name"]) {
+                              self.tfFirstName.text = [result valueForKey:@"name"];
+                          }
+                          [self saveConsumerProfile];
+                      }
+                  }];
+             }
+         }
+     }];
 
+}
 @end

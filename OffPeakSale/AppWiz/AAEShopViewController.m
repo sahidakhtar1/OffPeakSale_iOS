@@ -15,6 +15,7 @@
 #define SCREEN_HEIGHT [[UIScreen mainScreen] bounds].size.height
 
 @interface AAEShopViewController ()
+@property (weak, nonatomic) IBOutlet UIImageView *imgLocation;
 
 @end
 #import "AALoginDailogView.h"
@@ -87,6 +88,7 @@
         [AAAppGlobals sharedInstance].currentLong = [AAAppGlobals sharedInstance].locationHandler.currentLocation.coordinate.longitude;
         [AAAppGlobals sharedInstance].targetLat = [AAAppGlobals sharedInstance].currentLat;
         [AAAppGlobals sharedInstance].targetLong = [AAAppGlobals sharedInstance].currentLong;
+        [self.imgLocation setHidden:false];
     }else{
         self.nearByBtn.hidden = true;
         CGRect categoryFrame =self.vwFilter.frame;
@@ -97,7 +99,13 @@
         tableFrame.origin.y -= self.nearByBtn.frame.size.height;
         tableFrame.size.height += self.nearByBtn.frame.size.height;
         self.tableViewEShopProductList.frame = tableFrame;
+        [self.imgLocation setHidden:YES];
         [self populateView];
+    }
+    if ([[AAAppGlobals sharedInstance].retailer.appIconColor isEqualToString:@"White"]) {
+        [self.imgLocation setImage:[UIImage imageNamed:@"ic_location_filter_white"]];
+    }else{
+        [self.imgLocation setImage:[UIImage imageNamed:@"ic_location_filter_black"]];
     }
 }
 -(void)locationViewPopUp
