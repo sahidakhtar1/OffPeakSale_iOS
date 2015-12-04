@@ -25,6 +25,8 @@
 @property (nonatomic, strong) UIImageView *imageViewForAnimation;
 @property (nonatomic, strong) AAGiftWrapViewController *giftWrapDialog;
 @property (nonatomic,strong) AAOrderSucessView *orderSucessAlert;
+@property (nonatomic, strong) AACouponView *couponView;
+- (IBAction)btnCouponTapped:(id)sender;
 @end
 
 @implementation AAProductInformationViewController
@@ -44,47 +46,14 @@ static NSString* const JSON_RETAILER_ID_KEY = @"retailerId";
      self.tfQty.text = @"1";
 	// Do any additional setup after loading the view.
     [self styleSeparators];
-
+    
     [self populateProductPrices];
     [self refreshView];
-//    [[AAAppGlobals sharedInstance] calculateCartTotalItemCount];
-//    [[NSNotificationCenter defaultCenter] postNotificationName:@"updateCart" object:nil];
-//    if (1 == 2 && ![AAAppGlobals sharedInstance].enableShoppingCart) {
-//        [self.btnBuyProduct setTitle:@"Buy" forState:UIControlStateNormal];
-//         [self.btnEnquiry setTitle:@"Email Order" forState:UIControlStateNormal];
-//        
-//    }else{
-//        CGRect frame = self.btnBuyProduct.frame;
-//        frame.origin.x += 3;
-//        frame.size.width += 0;
-//        self.btnBuyProduct.frame = frame;
-//        NSString *buttonTitle = @"Add To Cart";
-//        if (self.product.availQty != nil) {
-//            if ([self.product.availQty integerValue]<=0) {
-//                buttonTitle = @"Sold Out";
-//                [self.btnBuyProduct setEnabled:false];
-//            }
-//        }
-//        [self.btnBuyProduct setTitle:buttonTitle forState:UIControlStateNormal];
-//        [self.btnEnquiry setTitle:@"Add To Order List" forState:UIControlStateNormal];
-//    }
-//    
-//    if ([AAAppGlobals sharedInstance].disablePayment) {
-//        self.vwBuy.hidden = TRUE;
-//        self.vwEnquiry.hidden = FALSE;
-//    }else{
-//        self.vwBuy.hidden = FALSE;
-//        self.vwEnquiry.hidden = TRUE;
-//    }
+
     self.vwBuy.hidden = false;
     self.vwEnquiry.hidden = true;
     
    
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(showProfilePageForPayment)
-//                                                 name:@"showProfilePageForPayment"
-//                                               object:nil];
-    
     self.btnBuyProduct.titleLabel.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].boldFont size:BUTTON_FONTSIZE];
     self.tfQty.font  = [UIFont fontWithName:[AAAppGlobals sharedInstance].boldFont size:PRODUCTDETAIL_QTY_FONTSIZE];
     self.lblQty.font  = [UIFont fontWithName:[AAAppGlobals sharedInstance].boldFont size:PRODUCTDETAIL_QTY_FONTSIZE];
@@ -133,10 +102,10 @@ static NSString* const JSON_RETAILER_ID_KEY = @"retailerId";
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(populateProductPrices)
-//                                                 name:@"couponApplied"
-//                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(couponApplied)
+                                                 name:@"couponApplied"
+                                               object:nil];
     
     id<AAChildNavigationControllerDelegate> nvcEShop = (id<AAChildNavigationControllerDelegate>)   self.navigationController;
     
@@ -169,6 +138,7 @@ static NSString* const JSON_RETAILER_ID_KEY = @"retailerId";
         [vcContentContainer hideShareButtonView];
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:@"hideEnterCode" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"couponApplied" object:nil];
 //    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"couponApplied" object:nil];
 }
 -(void)refreshView
@@ -236,33 +206,19 @@ static NSString* const JSON_RETAILER_ID_KEY = @"retailerId";
     NSString *price;
     float itemTotal  = [[self removeCurrency:self.product.currentProductPrice] floatValue]*[self.tfQty.text integerValue];
 
-    if ([AAAppGlobals sharedInstance].enableCreditCode) {
-        if ([AAAppGlobals sharedInstance].enableShoppingCart) {
-            
-        }else{
-            if (![[AAAppGlobals sharedInstance].discountType isEqualToString:DESFAULT_DISCOUNT_TYPE]) {
-                itemTotal =itemTotal- [[AAAppGlobals sharedInstance].discountPercent floatValue];
-                if (itemTotal<0) {
-                    itemTotal = 0;
-                }
-                
-            }else{
-                float percent =  [[AAAppGlobals sharedInstance].discountPercent floatValue];
-                float totalDiscount = ((float)itemTotal * percent) / 100.0;
-                itemTotal =itemTotal- totalDiscount;
-                }
-            
-            
+    if (![[AAAppGlobals sharedInstance].discountType isEqualToString:DESFAULT_DISCOUNT_TYPE]) {
+        itemTotal =itemTotal- [[AAAppGlobals sharedInstance].discountPercent floatValue];
+        if (itemTotal<0) {
+            itemTotal = 0;
         }
         
+    }else{
+        float percent =  [[AAAppGlobals sharedInstance].discountPercent floatValue];
+        float totalDiscount = ((float)itemTotal * percent) / 100.0;
+        itemTotal =itemTotal- totalDiscount;
     }
     itemTotal = itemTotal *currencyMultiplier;
-//    if (isDecimalAllowed) {
-//        
-//        price = [NSString stringWithFormat:@"%.2f",itemTotal];
-//    }else{
-//        price = [NSString stringWithFormat:@"%.0f",itemTotal];
-//    }
+
     price = [[AAAppGlobals sharedInstance] getPriceStrfromFromPrice:itemTotal];
     
     NSString* currentProductPrice = [NSString stringWithFormat:@"%@%@",[[AAAppGlobals sharedInstance] getCurrencySymbolWithCode:selectedCurrencyKey],price];
@@ -934,4 +890,14 @@ static NSString* const JSON_RETAILER_ID_KEY = @"retailerId";
     
 }
 
+- (IBAction)btnCouponTapped:(id)sender {
+    self.couponView = [[AACouponView alloc] init];
+    UIWindow *mainWindow = [UIApplication sharedApplication].keyWindow;
+    [mainWindow addSubview:self.couponView];
+    self.couponView.productId = [NSString stringWithFormat:@"%d",(int)self.product.productId];
+    [self.couponView refreshView];
+}
+-(void)couponApplied{
+    [self performSelectorOnMainThread:@selector(populateProductPrices) withObject:nil waitUntilDone:NO];
+}
 @end

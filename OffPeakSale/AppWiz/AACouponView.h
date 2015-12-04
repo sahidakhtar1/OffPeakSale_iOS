@@ -18,6 +18,6 @@
 @property (strong, nonatomic) IBOutlet UIImageView *imgResult;
 @property (strong, nonatomic) IBOutlet AAThemeGlossyButton *btnApplyCoupon;
 @property (strong, nonatomic) IBOutlet AAThemeGlossyButton *btnClose;
-
+@property (strong, nonatomic) NSString *productId;
 -(void)refreshView;
 @end

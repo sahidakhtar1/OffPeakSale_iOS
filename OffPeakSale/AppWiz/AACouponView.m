@@ -95,7 +95,7 @@ static NSString* const JSON_ERROR_CODE_KEY = @"errorCode";
 }
 -(void)validateouponCode{
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-     NSDictionary* params = [[NSDictionary alloc] initWithObjectsAndKeys:RETAILER_ID,JSON_RETAILER_ID_KEY,self.tfCouon.text,@"creditCode",[[AAAppGlobals sharedInstance] allProductsID],@"productId", nil];
+     NSDictionary* params = [[NSDictionary alloc] initWithObjectsAndKeys:RETAILER_ID,JSON_RETAILER_ID_KEY,self.tfCouon.text,@"creditCode",self.productId,@"productId", nil];
     [[AAAppGlobals sharedInstance].networkHandler sendJSONRequestToServerWithEndpoint:@"validateToken.php" withParams:params withSuccessBlock:^(NSDictionary *response) {
         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
         if([response objectForKey:JSON_ERROR_CODE_KEY])
@@ -115,25 +115,18 @@ static NSString* const JSON_ERROR_CODE_KEY = @"errorCode";
                 }
                 [AAAppGlobals sharedInstance].discountPercent = discount;
                 [[AAAppGlobals sharedInstance] calculateCartTotal];
-                if ([AAAppGlobals sharedInstance].cartTotal <= 0) {
-                    self.lblDiscount.text = [NSString stringWithFormat:@"Invalid Voucher"];
-                    self.imgResult.image = [UIImage imageNamed:@"fail"];
-                    [AAAppGlobals sharedInstance].discountPercent = 0;
-                    [AAAppGlobals sharedInstance].discountCode = nil;
-                    [[AAAppGlobals sharedInstance] calculateCartTotal];
+                [AAAppGlobals sharedInstance].discountCode = self.tfCouon.text;
+                if ([[AAAppGlobals sharedInstance].discountType isEqualToString:DESFAULT_DISCOUNT_TYPE]) {
+                    self.lblDiscount.text = [NSString stringWithFormat:@"%@ %@ discount awarded",discount,@"%"];
                 }else{
-                    [AAAppGlobals sharedInstance].discountCode = self.tfCouon.text;
-                    if ([[AAAppGlobals sharedInstance].discountType isEqualToString:DESFAULT_DISCOUNT_TYPE]) {
-                        self.lblDiscount.text = [NSString stringWithFormat:@"%@ %@ discount awarded",discount,@"%"];
-                    }else{
-                        self.lblDiscount.text = [NSString stringWithFormat:@"%@ %@ discount awarded",[AAAppGlobals sharedInstance].currency_code,discount];
-                    }
-                    
-                    self.imgResult.image = [UIImage imageNamed:@"success"];
-                    [[NSNotificationCenter defaultCenter] postNotificationName:@"couponApplied" object:nil];
-                    if([AAAppGlobals sharedInstance].enableShoppingCart){
-                        [[NSNotificationCenter defaultCenter] postNotificationName:@"showCartWithOutClick" object:nil];
-                    }
+                    self.lblDiscount.text = [NSString stringWithFormat:@"%@ %@ discount awarded",[AAAppGlobals sharedInstance].currency_code,discount];
+                }
+                
+                self.imgResult.image = [UIImage imageNamed:@"success"];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"couponApplied" object:nil];
+                if([AAAppGlobals sharedInstance].enableShoppingCart){
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"showCartWithOutClick" object:nil];
+                
                 }
                 
                 
