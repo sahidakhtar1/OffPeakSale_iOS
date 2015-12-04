@@ -105,7 +105,13 @@ static NSString* const JSON_ERROR_CODE_KEY = @"errorCode";
     
     AAHeaderView *headerView = [[AAHeaderView alloc] initWithFrame:self.vwHeaderView.frame];
     [self.vwHeaderView addSubview:headerView];
-    [headerView setTitle:self.titleText];
+    if (self.titleText == nil) {
+        [headerView setTitle:@"Profile"];
+    }else{
+       [headerView setTitle:self.titleText];
+    }
+    
+    
     headerView.delegate = self;
     if(!self.showBuyButton
        && self.profileDelegate == nil)
