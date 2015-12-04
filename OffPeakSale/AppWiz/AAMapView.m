@@ -107,12 +107,11 @@
     }
     else
     {
-    GMSCameraUpdate *update = [GMSCameraUpdate fitBounds:self.coordinateBounds withPadding:100.0f];
-    [self.mapView animateWithCameraUpdate:update];
+        GMSCameraUpdate *update = [GMSCameraUpdate fitBounds:self.coordinateBounds withPadding:100.0f];
+        [self.mapView animateWithCameraUpdate:update];
         [self.mapView animateToBearing:30];
         [self.mapView animateToViewingAngle:40];
     }
-    
 
 }
 

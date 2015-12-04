@@ -538,6 +538,7 @@ static NSString* const JSON_RETAILER_ID_KEY = @"retailerId";
     [map addCurrentLocationMarkerWithCoordinate:[AAAppGlobals sharedInstance].locationHandler.currentLocation.coordinate
                                       withTitle:@"Current Location"
                                         andIcon:[UIImage imageNamed:@"current_location_marker"]];
+    [map setStores:self.product.outlets];
 }
 
 #pragma mark - Scroll view  categories callbacks

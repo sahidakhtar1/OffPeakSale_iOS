@@ -62,6 +62,9 @@
 
 #define ORDER_HISTORY_FONTSIZE 13.0
 
+#define TOUR_TITLE_FONT_SIZE 30
+#define TOUR_DESC_FONT_SIZE 17
+
 #define BOARDER_COLOR [UIColor colorWithRed:182.0/255.0 green:182.0/255.0 blue:182.0/255.0 alpha:1]
 
 
@@ -69,6 +72,8 @@
 #define MARGIN 10
 #define RIGHTITEM_WIDTH 30
 #define ITEM_GAP 7
+
+
 
 @interface AAConfig : NSObject
 extern NSString* const PNKEY;

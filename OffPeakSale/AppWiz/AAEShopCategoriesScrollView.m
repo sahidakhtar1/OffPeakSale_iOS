@@ -37,6 +37,7 @@ NSInteger const SELECTIONINDICATOR_HEIGHT = 5;
        
         MAX_BUTTON_WIDTH = [UIScreen mainScreen].bounds.size.width/2 - 45;
         [self initValues];
+        
     }
     return self;
 }
@@ -48,6 +49,7 @@ NSInteger const SELECTIONINDICATOR_HEIGHT = 5;
     self.selectedIndicator = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height-SELECTIONINDICATOR_HEIGHT, MAX_BUTTON_WIDTH, SELECTIONINDICATOR_HEIGHT)];
     self.selectedIndicator.backgroundColor = [[AAColor sharedInstance].retailerThemeBackgroundColor colorWithAlphaComponent:.8];
     [self addSubview:self.selectedIndicator];
+    self.selectedIndicator.hidden = true;
    self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"btn_tab_default"]];
     
 }
@@ -63,6 +65,7 @@ NSInteger const SELECTIONINDICATOR_HEIGHT = 5;
     frame.size.width = btn.frame.size.width;
     frame.origin.x = btn.frame.origin.x;
     self.selectedIndicator.frame = frame;
+    self.selectedIndicator.hidden = false;
     
     NSString* categoryName = [self.categories objectAtIndex:indexOfButton];
     self.selectedCategory = categoryName;
@@ -96,7 +99,11 @@ NSInteger const SELECTIONINDICATOR_HEIGHT = 5;
     frame.size.width = MAX_BUTTON_WIDTH;
     self.selectedIndicator.frame = frame;
     [self bringSubviewToFront:self.selectedIndicator];
-    
+    if ([self.categories count]) {
+        self.selectedIndicator.hidden = false;
+    }else{
+        self.selectedIndicator.hidden = YES;
+    }
     
 }
 
@@ -159,10 +166,10 @@ NSInteger const SELECTIONINDICATOR_HEIGHT = 5;
     [btnCategory addTarget:self action:@selector(categorySelected:) forControlEvents:UIControlEventTouchUpInside];
     [btnCategory setFrame:frame];
     [btnCategory removeShadow];
-//    UIImage* selectedBackgroundImage = [UIImage imageNamed:@"menu_seletion"];
-//    
-//    [btnCategory setBackgroundImage:[selectedBackgroundImage resizableImageWithCapInsets:UIEdgeInsetsMake(0,0,0,0)] forState:UIControlStateSelected];
-    [btnCategory setBackgroundImage:nil forState:UIControlStateSelected];
+    UIImage* selectedBackgroundImage = [UIImage imageNamed:@"btn_tab_default"];
+    
+    [btnCategory setBackgroundImage:[selectedBackgroundImage resizableImageWithCapInsets:UIEdgeInsetsMake(0,0,0,0)] forState:UIControlStateSelected];
+//    [btnCategory setBackgroundImage:nil forState:UIControlStateSelected];
     return btnCategory;
 }
 

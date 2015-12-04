@@ -36,6 +36,7 @@ NSString* const STOP_TIMER = @"startTimer";
         self.home_imgArray = [[NSMutableArray alloc] init];
         self.products = [[NSMutableArray alloc] init];
         self.featuredStores = [[NSMutableArray alloc] init];
+        self.tutorialSlides = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -102,6 +103,7 @@ NSString* const STOP_TIMER = @"startTimer";
     [encoder encodeObject:self.enableGiftWrap forKey:@"enableGiftWrap"];
     [encoder encodeObject:self.gift_price forKey:@"gift_price"];
     [encoder encodeObject:self.enableDiscovery forKey:@"enableDiscovery"];
+    [encoder encodeObject:self.tutorialSlides forKey:@"tutorialSlides"];
 
 }
 
@@ -161,6 +163,7 @@ NSString* const STOP_TIMER = @"startTimer";
         self.enableGiftWrap = [decoder decodeObjectForKey:@"enableGiftWrap"];
         self.gift_price = [decoder decodeObjectForKey:@"gift_price"];
         self.enableDiscovery = [decoder decodeObjectForKey:@"enableDiscovery"];
+        self.tutorialSlides = [decoder decodeObjectForKey:@"tutorialSlides"];
     }
     return self;
 }

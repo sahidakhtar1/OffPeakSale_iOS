@@ -52,5 +52,14 @@
     return self;
 }
 
-
++(AARetailerStores*)retailStoreFromDict:(NSDictionary*)dict{
+    AARetailerStores *outlet = [[AARetailerStores alloc] init];
+    outlet.storeAddress = [dict valueForKey:@"outletAddr"];
+    outlet.name = [dict valueForKey:@"outletName"];
+    outlet.storeContact = [dict valueForKey:@"outletContact"];
+    NSString *lat = [dict valueForKey:@"outletLat"];
+    NSString *lng = [dict valueForKey:@"outletLong"];
+    outlet.location = CLLocationCoordinate2DMake([lat doubleValue], [lng doubleValue]);
+    return outlet;
+}
 @end

@@ -29,6 +29,7 @@
         self.availQty = nil;
         self.product_options = [[NSMutableArray alloc] init];
         self.product_imgs = [[NSMutableArray alloc] init];
+        self.outlets = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -58,6 +59,7 @@
     [encoder encodeObject:self.outletLat forKey:@"outletLat"];
     [encoder encodeObject:self.outletLong forKey:@"outletLong"];
     [encoder encodeObject:self.offpeak_discount forKey:@"offpeak_discount"];
+    [encoder encodeObject:self.outlets forKey:@"outlets"];
     
      }
 
@@ -86,6 +88,7 @@
         self.outletLat = [decoder decodeObjectForKey:@"outletLat"];
         self.outletLong = [decoder decodeObjectForKey:@"outletLong"];
         self.offpeak_discount = [decoder decodeObjectForKey:@"offpeak_discount"];
+        self.outlets = [decoder decodeObjectForKey:@"outlets"];
         
     }
     return self;

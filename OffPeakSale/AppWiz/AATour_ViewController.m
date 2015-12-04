@@ -8,13 +8,14 @@
 
 #import "AATour_ViewController.h"
 #import "AAAppDelegate.h"
-
+#import "AATourItem.h"
+#import "AATourSlideView.h"
 #define SCREEN_WIDTH [[UIScreen mainScreen] bounds].size.width
 #define SCREEN_HEIGHT [[UIScreen mainScreen] bounds].size.height
-
+#define PAGE_CONTROL_SIZE 10
 @interface AATour_ViewController ()
 {
-    UIScrollView *scroll;
+    IBOutlet UIScrollView *scroll;
     NSTimer *timer;
     NSArray *infoText_Arr;
     NSMutableArray *PageControlBtns;
@@ -31,30 +32,25 @@
     PageControlBtns = [[NSMutableArray alloc] init];
     infoText_Arr = [[NSArray alloc] initWithObjects:@"Filter a resturant as per desired location and cuisine with your matching time slots for morning, afternoon and night",@"Filter a resturant as per desired location and cuisine with your matching time slots for morning, afternoon and night",@"Filter a resturant as per desired location and cuisine with your matching time slots for morning, afternoon and night", nil];
     
-    [self.logo setFrame:CGRectMake((SCREEN_WIDTH/2)-34, 55, 68, 86)];
-    scroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, (SCREEN_HEIGHT/2) - 100, SCREEN_WIDTH, 200)];
-    [scroll setContentOffset:CGPointMake(0, 0)];
-    [scroll setContentSize:CGSizeMake(SCREEN_WIDTH * 3, 180)];
+    NSArray *slides = [AAAppGlobals sharedInstance].retailer.tutorialSlides;
+    [scroll setContentSize:CGSizeMake(SCREEN_WIDTH * [slides count], self.view.frame.size.height)];
     [scroll setPagingEnabled:YES];
     scroll.delegate = self;
     [scroll setShowsHorizontalScrollIndicator:NO];
     [scroll setBackgroundColor:[UIColor clearColor]];
-    [self.view addSubview:scroll];
     
     [self.homeBtn.layer setCornerRadius:self.homeBtn.frame.size.height/2];
 
     
-    int xpos = (SCREEN_WIDTH/2) - 30;
-    int xpos1 = 30;
+    int xpos = (SCREEN_WIDTH/2) - PAGE_CONTROL_SIZE*[slides count];
+    int xpos1 = PAGE_CONTROL_SIZE*[slides count];
     
-    for (int i = 0; i< infoText_Arr.count; i++)
+    for (int i = 0; i< [slides count]; i++)
     {
-        UILabel *titleLbl = [[UILabel alloc] initWithFrame:CGRectMake(xpos1, 0, SCREEN_WIDTH - 60, 200)];
-        titleLbl.text = [NSString stringWithFormat:@"%@",[infoText_Arr objectAtIndex:i]];
-        titleLbl.textColor = [UIColor whiteColor];
-        titleLbl.numberOfLines = 0;
-        titleLbl.textAlignment = NSTextAlignmentCenter;
-        [scroll addSubview:titleLbl];
+        AATourItem *tourItem = [slides objectAtIndex:i];
+        AATourSlideView *slideView = [[AATourSlideView alloc] initWithFrame:CGRectMake(i*SCREEN_WIDTH, 0, self.view.frame.size.width, self.view.frame.size.height)];
+        [slideView setTourItem:tourItem];
+        [scroll addSubview:slideView];
         
         xpos1 = xpos1 + SCREEN_WIDTH;
         

@@ -69,6 +69,7 @@ extern NSString* const STOP_TIMER;
 @property (nonatomic, strong) NSString *iosVersion;
 @property (nonatomic, strong) NSArray *menuList;
 @property (nonatomic, strong) NSString *calendarUrl;
+@property (nonatomic, strong) NSMutableArray *tutorialSlides;
 
 -(void)addRetailerStore:(AARetailerStores*)retailerStore;
 @end

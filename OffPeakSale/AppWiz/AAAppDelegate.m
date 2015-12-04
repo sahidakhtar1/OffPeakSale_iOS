@@ -17,47 +17,7 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 @implementation AAAppDelegate
-//@synthesize cartItems;
--(void)getString{
-//    NSMutableString *string = [[NSMutableString alloc] initWithString:@"[{"];
-//    [string appendString:@"\"productid\":\"2\""];
-//    [string appendString:@","];
-//    [string appendString:@"\"qunatity\":\"2\""];
-//    [string appendString:@"}]"];
-//    NSLog(@"String = %@", string);
-//    NSData *data = [string dataUsingEncoding:NSUTF8StringEncoding];
-//    id json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONWritingPrettyPrinted error:nil];
-//    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@"MerchantA1",@"retailerId",json,@"products",@"aa@aa.in",@"email", nil];
-    
-    
-    NSMutableArray *array = [[NSMutableArray alloc] init];
-    NSMutableDictionary *tdict = [[NSMutableDictionary alloc] init];
-    [tdict setObject:@"68" forKey:@"product"];
-    [tdict setObject:@"6" forKey:@"qty"];
-    
-     BOOL flag= [NSJSONSerialization isValidJSONObject:tdict];
-    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:tdict options:0 error:nil];
-    NSString * myString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    NSLog(@"myString = %@",myString);
-    NSMutableString *str = [NSMutableString stringWithString:@"["];
-    [str appendString:myString];
-    [str appendString:@","];
-    [str appendString:myString];
-    [str appendString:@"]"];
-    NSLog(@"str = %@",str);
-    
-    NSMutableArray *arr = [NSMutableArray arrayWithObjects:tdict,tdict, nil];
-     NSData * jsonDataarr = [NSJSONSerialization dataWithJSONObject:arr options:0 error:nil];
-    NSString * myString1 = [[NSString alloc] initWithData:jsonDataarr encoding:NSUTF8StringEncoding];
-    NSMutableDictionary *mdict = [[NSMutableDictionary alloc] init];
-    [mdict setObject:myString1 forKey:@"products"];
-    [mdict setObject:@"MerchantA1" forKey:@"retailerId"];
-    [mdict setObject:@"aa@aa.in" forKey:@"email"];
-    NSLog(@"dict = %@", mdict);
-    
-    
-    
-}
+//@synthesize cartItems
 -(void)printFontNames{
     for (NSString* family in [UIFont familyNames])
     {

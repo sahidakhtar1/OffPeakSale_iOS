@@ -10,6 +10,7 @@
 #import "AAMediaItem.h"
 #import "AAEShopProductOptions.h"
 #import "AAFeaturedStoreObject.h"
+#import "AATourItem.h"
 @implementation AARetailerInfoHelper
 static NSString* const JSON_RETAILER_ID_KEY = @"retailerId";
 static NSString* const JSON_ERROR_CODE_KEY = @"errorCode";
@@ -399,6 +400,14 @@ static NSString* const JSON_PRODUCT_SHORT_DESCRIPTION_KEY = @"short_desc";
                         item.storeUrl = [option objectForKey:@"storeUrl"];
                         item.storeName = [option objectForKey:@"storeName"];
                         [retailer.featuredStores addObject:item];
+                    }
+                }
+                if ([dictRetailer objectForKey:@"tutorialSlides"]) {
+                    NSArray *tutorialSlides = [dictRetailer objectForKey:@"tutorialSlides"];
+                    retailer.tutorialSlides = [[NSMutableArray alloc] init];
+                    for (NSDictionary *option in tutorialSlides) {
+                        AATourItem *item = [AATourItem createTourItemFrom:option];
+                        [retailer.tutorialSlides addObject:item];
                     }
                 }
                 if([dictRetailer objectForKey:JSON_RETAILER_PRODUCTS_KEY])

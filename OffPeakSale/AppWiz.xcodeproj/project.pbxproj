@@ -327,6 +327,9 @@
 		4A0534911AFE91F100BD8ED9 /* AARedeemRewardsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A0534901AFE91F100BD8ED9 /* AARedeemRewardsHelper.m */; };
 		4A0534951AFE9A5B00BD8ED9 /* AADeleveryScheduleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A0534941AFE9A5B00BD8ED9 /* AADeleveryScheduleView.m */; };
 		4A0534971AFE9A7000BD8ED9 /* AADeleveryScheduleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A0534961AFE9A7000BD8ED9 /* AADeleveryScheduleView.xib */; };
+		4A19EAC71C1211A10055C7C4 /* AATourItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A19EAC61C1211A10055C7C4 /* AATourItem.m */; };
+		4A19EACA1C12146A0055C7C4 /* AATourSlideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A19EAC91C12146A0055C7C4 /* AATourSlideView.m */; };
+		4A19EACC1C1214990055C7C4 /* TourSlideView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A19EACB1C1214990055C7C4 /* TourSlideView.xib */; };
 		4A36A9321BF8C9FA0073FEA1 /* AAGiftWrapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A36A9311BF8C9FA0073FEA1 /* AAGiftWrapViewController.m */; };
 		4A518ACC1AE964B90063F653 /* AASideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A518ACB1AE964B90063F653 /* AASideMenuViewController.m */; };
 		4A518ACF1AE96E830063F653 /* AASideMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A518ACE1AE96E830063F653 /* AASideMenuCell.m */; };
@@ -781,6 +784,11 @@
 		4A0534931AFE9A5B00BD8ED9 /* AADeleveryScheduleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AADeleveryScheduleView.h; sourceTree = "<group>"; };
 		4A0534941AFE9A5B00BD8ED9 /* AADeleveryScheduleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AADeleveryScheduleView.m; sourceTree = "<group>"; };
 		4A0534961AFE9A7000BD8ED9 /* AADeleveryScheduleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AADeleveryScheduleView.xib; sourceTree = "<group>"; };
+		4A19EAC51C1211A10055C7C4 /* AATourItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AATourItem.h; sourceTree = "<group>"; };
+		4A19EAC61C1211A10055C7C4 /* AATourItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AATourItem.m; sourceTree = "<group>"; };
+		4A19EAC81C12146A0055C7C4 /* AATourSlideView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AATourSlideView.h; sourceTree = "<group>"; };
+		4A19EAC91C12146A0055C7C4 /* AATourSlideView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AATourSlideView.m; sourceTree = "<group>"; };
+		4A19EACB1C1214990055C7C4 /* TourSlideView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TourSlideView.xib; sourceTree = "<group>"; };
 		4A36A9301BF8C9FA0073FEA1 /* AAGiftWrapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAGiftWrapViewController.h; sourceTree = "<group>"; };
 		4A36A9311BF8C9FA0073FEA1 /* AAGiftWrapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAGiftWrapViewController.m; sourceTree = "<group>"; };
 		4A518ACA1AE964B90063F653 /* AASideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AASideMenuViewController.h; sourceTree = "<group>"; };
@@ -1246,6 +1254,8 @@
 				402B23D8186076D2004FD193 /* AARetailerStores.m */,
 				F7F3EC701A277DCD005074B8 /* AAMediaItem.h */,
 				F7F3EC711A277DCD005074B8 /* AAMediaItem.m */,
+				4A19EAC51C1211A10055C7C4 /* AATourItem.h */,
+				4A19EAC61C1211A10055C7C4 /* AATourItem.m */,
 			);
 			name = Retailer;
 			sourceTree = "<group>";
@@ -2256,6 +2266,9 @@
 			children = (
 				A19F64711C01876300A0D008 /* AATour_ViewController.h */,
 				A19F64721C01876300A0D008 /* AATour_ViewController.m */,
+				4A19EAC81C12146A0055C7C4 /* AATourSlideView.h */,
+				4A19EAC91C12146A0055C7C4 /* AATourSlideView.m */,
+				4A19EACB1C1214990055C7C4 /* TourSlideView.xib */,
 			);
 			name = Tor_ViewController;
 			sourceTree = "<group>";
@@ -2542,6 +2555,7 @@
 				F7F3EC6F1A277BBD005074B8 /* BannerItem.xib in Resources */,
 				A18E45041C01CB30007BF9DE /* dropdown.png in Resources */,
 				F70F6889194366790089600E /* Arial-Bold.ttf in Resources */,
+				4A19EACC1C1214990055C7C4 /* TourSlideView.xib in Resources */,
 				F70F6893194366790089600E /* Times New Roman.ttf in Resources */,
 				F70F688D194366790089600E /* Georgia-Bold.ttf in Resources */,
 				F70F688F194366790089600E /* OpenSans-Bold.ttf in Resources */,
@@ -2712,6 +2726,7 @@
 				40BED3311861F14A00894B4C /* AAPaymentSelectorView.m in Sources */,
 				4002B2FA185DDB12001ABEFF /* AAProfileViewController.m in Sources */,
 				40CF5FE9188426F700806551 /* SDWebImageManager.m in Sources */,
+				4A19EACA1C12146A0055C7C4 /* AATourSlideView.m in Sources */,
 				F7F3EC681A27760E005074B8 /* AABannerView.m in Sources */,
 				40CF5FEB188426F700806551 /* UIButton+WebCache.m in Sources */,
 				40CF5FE4188426F700806551 /* SDImageCache.m in Sources */,
@@ -2772,6 +2787,7 @@
 				40BDB3DE18754E48000948A5 /* AACouponButton.m in Sources */,
 				40BDB3BC1871E422000948A5 /* AAThemeValidationTextView.m in Sources */,
 				F75C30D6190BCB1200C38212 /* ImageDownloader.m in Sources */,
+				4A19EAC71C1211A10055C7C4 /* AATourItem.m in Sources */,
 				402B23E91860BC65004FD193 /* AAProductInformationScrollView.m in Sources */,
 				4A518ACC1AE964B90063F653 /* AASideMenuViewController.m in Sources */,
 				F7D316221A47277A00D98513 /* AAVariantView.m in Sources */,

@@ -319,6 +319,13 @@ static NSString* const JSON_PRODUCT_SHORT_DESCRIPTION_KEY = @"short_desc";
             [eShopProduct.product_options addObject:item];
         }
     }
+    if ([product objectForKey:@"outlets"]) {
+        NSArray *outlets = [product objectForKey:@"outlets"];
+        for (NSDictionary *store in outlets) {
+            AARetailerStores *outlet = [AARetailerStores retailStoreFromDict:store];
+            [eShopProduct.outlets addObject:outlet];
+        }
+    }
     if ([product objectForKey:@"product_img"]) {
         eShopProduct.product_img = [product objectForKey:@"product_img"];
     }
