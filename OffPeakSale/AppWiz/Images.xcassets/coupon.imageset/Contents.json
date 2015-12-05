@@ -2,12 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "terms of use_36*36.png",
+      "filename" : "coupon_36*36.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "terms of use_72*72.png",
+      "filename" : "coupon@2x.png",
       "scale" : "2x"
     },
     {

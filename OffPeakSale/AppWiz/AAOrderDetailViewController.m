@@ -305,6 +305,7 @@ static NSString *products = @"products";
     
     if ([orderStatus isEqualToString:@"Redeemed"]) {
         self.orderDetailView.lblExpiry.attributedText =[self getAttributedString:@"Redeemed On" andValue:orderUsedOn];
+        [self.imgQRCode setImage:[UIImage imageNamed:@"redeemed_icon"]];
     }else if ([orderStatus isEqualToString:@"Expired"]){
         NSString *date =  orderUsedOn;
         NSArray *dateComp = [date componentsSeparatedByString:@" "];
@@ -312,6 +313,7 @@ static NSString *products = @"products";
             date = [dateComp objectAtIndex:0];
         }
         self.orderDetailView.lblExpiry.attributedText = [self getAttributedString:@"Expired On" andValue:date];
+        [self.imgQRCode setImage:[UIImage imageNamed:@"expired_icon"]];
     }else{
         NSString *date =  orderExpiry;
         NSArray *dateComp = [date componentsSeparatedByString:@" "];
