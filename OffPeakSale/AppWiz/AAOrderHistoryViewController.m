@@ -138,9 +138,19 @@
     if ([status isEqualToString:@"Redeemed"]) {
        cell.lblOrderExpiry.text = [NSString stringWithFormat:@"Redeemed On %@",orderUsedOn];
     }else if ([status isEqualToString:@"Expired"]){
-        cell.lblOrderExpiry.text = [NSString stringWithFormat:@"Expired On %@",orderUsedOn];
+        NSString *date =  orderUsedOn;
+        NSArray *dateComp = [date componentsSeparatedByString:@" "];
+        if ([dateComp count]>0) {
+            date = [dateComp objectAtIndex:0];
+        }
+        cell.lblOrderExpiry.text = [NSString stringWithFormat:@"Expired On %@",date];
     }else{
-        cell.lblOrderExpiry.text = [NSString stringWithFormat:@"Expiry Date %@",orderExpiry];
+        NSString *date =  orderExpiry;
+        NSArray *dateComp = [date componentsSeparatedByString:@" "];
+        if ([dateComp count]>0) {
+            date = [dateComp objectAtIndex:0];
+        }
+        cell.lblOrderExpiry.text = [NSString stringWithFormat:@"Expiry Date %@",date];
     }
 
     
