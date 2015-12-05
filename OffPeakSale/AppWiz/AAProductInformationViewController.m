@@ -519,6 +519,7 @@ static NSString* const JSON_RETAILER_ID_KEY = @"retailerId";
     AAMapView *mvRetailerStores = [[AAMapView alloc] initWithFrame:CGRectMake(0,0, mapContainer.frame.size.width , mapContainer.frame.size.height )];
     [mapContainer addSubview:mvRetailerStores];
     [self putPinsOnMap:mvRetailerStores];
+    mvRetailerStores.storeName = self.product.productShortDescription;
     [mvRetailerStores addMarkerWithTitle:self.product.productShortDescription address:self.product.outletAddr andConatct:self.product.outletContact atLat:self.product.outletLat lng:self.product.outletLong];
 
     

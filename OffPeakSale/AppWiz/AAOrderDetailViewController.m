@@ -122,20 +122,15 @@ static NSString *products = @"products";
     NSString *productShortDescription = [item valueForKey:name];
     NSString *oprionValue = [item valueForKey:prodOptions];
     NSString *rewardsValue = [item valueForKey:rewards];
+    NSString *discount = [item valueForKey:@"discountAmt"];
     
     float maxWidthForLbl = [UIScreen mainScreen].bounds.size.width - (MARGIN+PRODUCT_IMAGE_WIDTH+MARGIN + MARGIN+RIGHTITEM_WIDTH+MARGIN);
     CGSize productTextSize = [AAUtils getTextSizeWithFont:[UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:SHOPPINGCART_SHORTDESC_FONTSIZE] andText:productShortDescription andMaxWidth:maxWidthForLbl];
     height += productTextSize.height + ITEM_GAP;
-    
-    if ([oprionValue length] != 0) {
-        NSString *oprionStr = [NSString stringWithFormat:@"Options: %@",oprionValue];
-        
-        CGSize optionSize= [AAUtils getTextSizeWithFont:[UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:PRODUCTDETAIL_REWARDS_FONTSIZE] andText:oprionStr andMaxWidth:maxWidthForLbl ];
-        height +=optionSize.height+ITEM_GAP;
-    }
-    if ([[AAAppGlobals sharedInstance].retailer.enableRewards isEqualToString:@"1"] && [rewardsValue length] != 0) {
+    if (discount != nil) {
         height +=20+ITEM_GAP;
     }
+    
     height += 20+ITEM_GAP;
     if (height < 88) {
         height = 88;
@@ -156,6 +151,7 @@ static NSString *products = @"products";
     NSString *imageUrl = [item valueForKey:product_img];
     NSString *itemOldPrice = [item valueForKey:@"old_price"];
     NSString *itemPrice = [item valueForKey:new_price];
+    NSString *discount = [self.orderObj valueForKey:@"discountAmt"];
     
     
     float maxWidthForLbl = [UIScreen mainScreen].bounds.size.width - (MARGIN+PRODUCT_IMAGE_WIDTH+MARGIN + MARGIN+RIGHTITEM_WIDTH+MARGIN);
@@ -184,25 +180,25 @@ static NSString *products = @"products";
         cell.lblProductOptions.frame = productOptionFrame;
         cellHieght += optionSize.height+ITEM_GAP;
     }
-    if ([[AAAppGlobals sharedInstance].retailer.enableRewards isEqualToString:@"1"] && [rewardsValue length] != 0) {
-        cell.lblRewardPoints.hidden = false;
-        CGRect productOptionFrame = cell.lblRewardPoints.frame;
-        productOptionFrame.origin.y = cellHieght;
-        cell.lblRewardPoints.frame = productOptionFrame;
-        cellHieght += 20+ITEM_GAP;
-        NSMutableAttributedString *hogan = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%ld Credit Points",[qty integerValue ] * [rewardsValue integerValue]]];
-        NSUInteger length = [[NSString stringWithFormat:@"%ld",[qty integerValue ] * [rewardsValue integerValue]] length];
-        [hogan addAttribute:NSFontAttributeName
-                      value:[UIFont fontWithName:[AAAppGlobals sharedInstance].boldFont size:PRODUCTDETAIL_REWARDS_FONTSIZE]
-                      range:NSMakeRange(0,length)];
-        [hogan addAttribute:NSFontAttributeName
-                      value:[UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:PRODUCTDETAIL_REWARDS_FONTSIZE]
-                      range:NSMakeRange(length+1,[@"Credit Points" length])];
-        [cell.lblRewardPoints setAttributedText:hogan];
-    }else{
-        cell.lblRewardPoints.hidden = true;
-        
-    }
+//    if ([[AAAppGlobals sharedInstance].retailer.enableRewards isEqualToString:@"1"] && [rewardsValue length] != 0) {
+//        cell.lblRewardPoints.hidden = false;
+//        CGRect productOptionFrame = cell.lblRewardPoints.frame;
+//        productOptionFrame.origin.y = cellHieght;
+//        cell.lblRewardPoints.frame = productOptionFrame;
+//        cellHieght += 20+ITEM_GAP;
+//        NSMutableAttributedString *hogan = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%ld Credit Points",[qty integerValue ] * [rewardsValue integerValue]]];
+//        NSUInteger length = [[NSString stringWithFormat:@"%ld",[qty integerValue ] * [rewardsValue integerValue]] length];
+//        [hogan addAttribute:NSFontAttributeName
+//                      value:[UIFont fontWithName:[AAAppGlobals sharedInstance].boldFont size:PRODUCTDETAIL_REWARDS_FONTSIZE]
+//                      range:NSMakeRange(0,length)];
+//        [hogan addAttribute:NSFontAttributeName
+//                      value:[UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:PRODUCTDETAIL_REWARDS_FONTSIZE]
+//                      range:NSMakeRange(length+1,[@"Credit Points" length])];
+//        [cell.lblRewardPoints setAttributedText:hogan];
+//    }else{
+//        cell.lblRewardPoints.hidden = true;
+//        
+//    }
     
     
     NSString *itemTotal;
@@ -232,12 +228,27 @@ static NSString *products = @"products";
     
     
     
+    
+    
     CGRect itemTotalFrame = cell.lblItemTotal.frame;
     itemTotalFrame.origin.y = cellHieght;
     itemTotalFrame.size.width = [UIScreen mainScreen].bounds.size.width - (MARGIN+RIGHTITEM_WIDTH+MARGIN) - itemTotalFrame.origin.x;
     cell.lblItemTotal.frame = itemTotalFrame;
     
     cellHieght += 20+ITEM_GAP;
+    if (discount != nil) {
+        NSString *percentage = @"";
+        cell.lblRewardPoints.attributedText = [self getAttributedString:@"Dicsocunt" andValue:[NSString stringWithFormat:@"%@%@",currencySymbol,discount]];
+        cellHieght += 20+ITEM_GAP;
+        CGRect frame = cell.lblRewardPoints.frame;
+        frame.origin.x = cell.lblItemTotal.frame.origin.x;
+        frame.origin.y = itemTotalFrame.origin.y+itemTotalFrame.size.height + ITEM_GAP;
+        cell.lblRewardPoints.frame = frame;
+        cell.lblRewardPoints.hidden = false;
+    }else{
+        cell.lblRewardPoints.hidden = true;
+    }
+    
     
     [cell.imgProductImage setImageWithURL:[NSURL URLWithString:imageUrl]
                                 completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
@@ -311,7 +322,6 @@ static NSString *products = @"products";
         NSString *qrCodeUrl = [NSString stringWithFormat:@"https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=%@",orderId];
         [self.imgQRCode setImageWithURL:[NSURL URLWithString:qrCodeUrl]
                               completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-                                  NSLog(@"downloaded");
                               }];
     }
     
