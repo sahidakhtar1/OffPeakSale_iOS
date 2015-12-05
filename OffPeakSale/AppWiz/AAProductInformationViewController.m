@@ -836,6 +836,7 @@ static NSString* const JSON_RETAILER_ID_KEY = @"retailerId";
     paymentDictionary = [self createProductInfoDict];
     [paymentDictionary setObject:RETAILER_ID forKey:JSON_RETAILER_ID_KEY];
     [paymentDictionary setObject:emailId forKey:PAYMENT_EMAIL_KEY];
+    [paymentDictionary setObject:self.product.outletId forKey:@"outletId"];
         
         
     if ([AAAppGlobals sharedInstance].enableCreditCode && [AAAppGlobals sharedInstance].discountPercent > 0) {

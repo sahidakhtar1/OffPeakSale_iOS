@@ -300,6 +300,9 @@ static NSString* const JSON_PRODUCT_SHORT_DESCRIPTION_KEY = @"short_desc";
     if ([product objectForKey:@"outletContact"]) {
         eShopProduct.outletContact = [product objectForKey:@"outletContact"];
     }
+    if ([product objectForKey:@"outletId"]) {
+        eShopProduct.outletId = [product objectForKey:@"outletId"];
+    }
     if ([product objectForKey:@"outletLat"]) {
         eShopProduct.outletLat = [product objectForKey:@"outletLat"];
     }

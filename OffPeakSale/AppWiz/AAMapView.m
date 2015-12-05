@@ -143,7 +143,7 @@
         AARetailerStores* retailerStore =  marker.userData;
         storeInfoWindow.lblStoreContactNumber.text = retailerStore.storeContact;
         storeInfoWindow.lblStoreAddress.text = [NSString stringWithFormat:@"\n%@\n",retailerStore.storeAddress ];
-        storeInfoWindow.lblStoreName.text = retailerStore.name;
+        storeInfoWindow.lblStoreName.text = self.storeName;
         [storeInfoWindow updateContainerSize:mapView.frame.size.width];
         self.phoneNumberTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(phoneNumberTap:)];
         self.phoneNumberTap.numberOfTapsRequired = 1;

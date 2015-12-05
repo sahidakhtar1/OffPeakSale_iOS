@@ -31,6 +31,7 @@
     [encoder encodeObject:lat forKey:@"latitude"];
      [encoder encodeObject:lon forKey:@"longitude"];
     [encoder encodeObject:self.name forKey:@"name"];
+    [encoder encodeObject:self.outletId forKey:@"outletId"];
     
     
     
@@ -44,6 +45,7 @@
         NSNumber *lat = [decoder decodeObjectForKey:@"latitude"];
         NSNumber *lon = [decoder decodeObjectForKey:@"longitude"];
         self.name = [decoder decodeObjectForKey:@"name"];
+        self.outletId = [decoder decodeObjectForKey:@"outletId"];
         
         self.location  = CLLocationCoordinate2DMake([lat doubleValue],[lon doubleValue]);
       
@@ -57,6 +59,7 @@
     outlet.storeAddress = [dict valueForKey:@"outletAddr"];
     outlet.name = [dict valueForKey:@"outletName"];
     outlet.storeContact = [dict valueForKey:@"outletContact"];
+    outlet.outletId = [dict valueForKey:@"outletId"];
     NSString *lat = [dict valueForKey:@"outletLat"];
     NSString *lng = [dict valueForKey:@"outletLong"];
     outlet.location = CLLocationCoordinate2DMake([lat doubleValue], [lng doubleValue]);

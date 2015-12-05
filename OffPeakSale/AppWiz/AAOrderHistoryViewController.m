@@ -158,9 +158,21 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSDictionary *dict = [self.orders objectAtIndex:indexPath.row];
-    AAOrderDetailViewController *orderDetailVC = [self.storyboard instantiateViewControllerWithIdentifier:@"AAOrderDetailViewController"];
-    [orderDetailVC setOrderObj:dict];
-    [self.navigationController pushViewController:orderDetailVC animated:YES];
+    NSString *email = [AAAppGlobals sharedInstance].consumer.email;
+    [AAOrderHistoryHelper getOrderDetail : email
+                                  merchantEmail : [dict valueForKey:@"merchantEmail"]
+                                         orderId:[dict valueForKey:@"orderId"]
+                            withCompletionBlock:^(NSDictionary *orderDetail) {
+                                AAOrderDetailViewController *orderDetailVC = [self.storyboard instantiateViewControllerWithIdentifier:@"AAOrderDetailViewController"];
+                                orderDetailVC.pageTitle= self.pageTitle;
+                                [orderDetailVC setOrderObj:orderDetail];
+                                [self.navigationController pushViewController:orderDetailVC animated:YES];
+                                
+                            } andFailure:^(NSString *error) {
+                                
+                                
+                            }];
+   
 }
 - (IBAction)btnLoginTapped:(id)sender {
     [self showLoginView];

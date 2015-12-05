@@ -31,6 +31,14 @@
        
 //        [self.lblAddressValue setContentHuggingPriority:UILayoutPriorityRequired forAxis:(UILayoutConstraintAxisHorizontal)];
 //        [self.lblAddressValue setContentHuggingPriority:UILayoutPriorityRequired forAxis:(UILayoutConstraintAxisVertical)];
+        
+        self.lblOrderId.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:ORDER_HISTORY_FONTSIZE];
+         self.lblName.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:ORDER_HISTORY_FONTSIZE];
+         self.lblAddress.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:ORDER_HISTORY_FONTSIZE];
+         self.lblTelephone.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:ORDER_HISTORY_FONTSIZE];
+         self.lblDistance.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:ORDER_HISTORY_FONTSIZE];
+         self.lblStatus.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:ORDER_HISTORY_FONTSIZE];
+         self.lblExpiry.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:ORDER_HISTORY_FONTSIZE];
 
 
     }
@@ -46,5 +54,10 @@
 }
 -(void)setFont{
     
+}
+- (IBAction)btnNameTapped:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(nameTappaed)]) {
+        [self.delegate nameTappaed];
+    }
 }
 @end

@@ -8,20 +8,24 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol OrderDetailDelegate <NSObject>
+
+-(void)nameTappaed;
+
+@end
+
 @interface AAOrderDetailView : UIView
 @property (weak, nonatomic) IBOutlet UILabel *lblOrderId;
-@property (weak, nonatomic) IBOutlet UILabel *lblOrderStatus;
-@property (weak, nonatomic) IBOutlet UILabel *lblOrderDate;
-@property (weak, nonatomic) IBOutlet UILabel *lblOrderTotal;
-@property (weak, nonatomic) IBOutlet UILabel *lblCreditRedeemed;
-@property (weak, nonatomic) IBOutlet UILabel *lblDiscount;
-@property (weak, nonatomic) IBOutlet UILabel *lblShippingFee;
-@property (weak, nonatomic) IBOutlet UILabel *DeliveryDate;
+@property (weak, nonatomic) IBOutlet UILabel *lblName;
 @property (weak, nonatomic) IBOutlet UILabel *lblAddress;
-@property (weak, nonatomic) IBOutlet UILabel *lblAddressValue;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *addressHeight;
+@property (weak, nonatomic) IBOutlet UILabel *lblTelephone;
+@property (weak, nonatomic) IBOutlet UILabel *lblDistance;
+@property (weak, nonatomic) IBOutlet UILabel *lblExpiry;
+@property (weak, nonatomic) IBOutlet UILabel *lblStatus;
+
 @property (weak, nonatomic) IBOutlet UIView *vwDevider;
-@property (weak, nonatomic) IBOutlet UILabel *lblInstruction;
-@property (weak, nonatomic) IBOutlet UILabel *lblInstructionValue;
+@property (nonatomic, unsafe_unretained) id<OrderDetailDelegate> delegate;
+- (IBAction)btnNameTapped:(id)sender;
+
 
 @end

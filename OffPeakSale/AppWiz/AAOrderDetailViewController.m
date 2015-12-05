@@ -27,6 +27,7 @@ static NSString *products = @"products";
 @property (weak, nonatomic) IBOutlet UIView *vwHeader;
 @property (weak, nonatomic) IBOutlet UITableView *tbOrderItems;
 @property (nonatomic, strong) NSArray *orderedItems;
+@property (nonatomic, strong) UIImageView *imgQRCode;
 
 @property (nonatomic, strong) AAOrderDetailView *orderDetailView;
 - (IBAction)btnBackTapped:(id)sender;
@@ -39,6 +40,7 @@ static NSString *products = @"products";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.lblTitle.text = self.pageTitle;
     [self.lblTitle setFont:[UIFont fontWithName:[AAAppGlobals sharedInstance].boldFont size:TITLE_FONTSIZE]];
     [self.btnQRCode.titleLabel setFont:[UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:BUTTON_FONTSIZE]];
     [self.btnQRCode setTitleColor:[AAColor sharedInstance].retailerThemeTextColor forState:UIControlStateNormal];
@@ -50,12 +52,26 @@ static NSString *products = @"products";
         
         [self.btnBack setImage:[UIImage imageNamed:@"back_button_black"] forState:UIControlStateNormal];
     }
+    self.imgQRCode = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40, 150, 150)];
+    CGPoint center = self.imgQRCode.center;
+    center.x = self.view.frame.size.width/2;
+    self.imgQRCode.center = center;
+    UIView *tbFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 250)];
+    [tbFooterView addSubview:self.imgQRCode];
+    [tbFooterView setBackgroundColor:[UIColor clearColor]];
+    [self.tbOrderItems setTableFooterView:tbFooterView];
+
     self.orderedItems = [[NSArray alloc] initWithArray:[self.orderObj objectForKey:products]];
     [self.tbOrderItems reloadData];
-    self.orderDetailView = [[AAOrderDetailView alloc] initWithFrame:CGRectMake(0,0, self.view.frame.size.width, 235)];
+    self.orderDetailView = [[AAOrderDetailView alloc] initWithFrame:CGRectMake(0,0, self.view.frame.size.width, 209)];
+    self.orderDetailView.delegate = self;
     [self populateOrderInfo];
     [self.tbOrderItems setTableHeaderView:self.orderDetailView];
-    [self.tbOrderItems setTableFooterView:[[UIView alloc]init]];
+    
+    
+    
+    
+    //    [self.view addSubview:tbFooterView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -83,7 +99,17 @@ static NSString *products = @"products";
     [self.navigationController pushViewController:qrCodeVC animated:YES];
     [qrCodeVC setCouponCode:[self.orderObj valueForKey:@"qrCode"]];
 }
-
+-(void)nameTappaed{
+    AAQRCodeViewController *qrCodeVC = [self.storyboard instantiateViewControllerWithIdentifier:@"AAQRCodeViewController"];
+    
+    if ([self.orderedItems count]) {
+        NSDictionary* item = [self.orderedItems objectAtIndex:0];
+        qrCodeVC.pageTitle = [item valueForKey:@"name"];
+        qrCodeVC.orderObj = self.orderObj;
+    }
+    [self.navigationController pushViewController:qrCodeVC animated:YES];
+//    [qrCodeVC setCouponCode:[self.orderObj valueForKey:@"qrCode"]];
+}
 #pragma mark -
 #pragma mark UITableView Delegate and DataSources
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -128,7 +154,9 @@ static NSString *products = @"products";
     NSString *rewardsValue = [item valueForKey:rewards];
     NSString *qty = [item valueForKey:quantity];
     NSString *imageUrl = [item valueForKey:product_img];
+    NSString *itemOldPrice = [item valueForKey:@"old_price"];
     NSString *itemPrice = [item valueForKey:new_price];
+    
     
     float maxWidthForLbl = [UIScreen mainScreen].bounds.size.width - (MARGIN+PRODUCT_IMAGE_WIDTH+MARGIN + MARGIN+RIGHTITEM_WIDTH+MARGIN);
     CGSize productTextSize = [AAUtils getTextSizeWithFont:[UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:SHOPPINGCART_SHORTDESC_FONTSIZE] andText:productShortDescription andMaxWidth:maxWidthForLbl];
@@ -184,7 +212,23 @@ static NSString *products = @"products";
         itemTotal = [NSString stringWithFormat:@"%.0f",[qty integerValue ] * [itemPrice floatValue]];
     }
     itemTotal = [[AAAppGlobals sharedInstance] getPriceStrfromFromPrice:[itemTotal floatValue]];
-    cell.lblItemTotal.text = [NSString stringWithFormat:@"%@x%@ = %@%@",qty,itemPrice,[AAAppGlobals sharedInstance].currency_symbol, itemTotal];
+    
+    NSString *currencySymbol = [AAAppGlobals sharedInstance].currency_symbol;
+    NSString *oldPrice  =[NSString stringWithFormat:@"%@%@",currencySymbol,itemOldPrice];
+    
+    NSString *price = [NSString stringWithFormat:@"%@ %@%@",oldPrice,currencySymbol,itemPrice];
+    NSRange range = [price rangeOfString:oldPrice];
+    NSMutableAttributedString *attributedText =[[NSMutableAttributedString alloc] initWithString:price];
+    
+    NSDictionary *attr = [NSDictionary dictionaryWithObjectsAndKeys:
+                          [NSNumber numberWithInteger:NSUnderlinePatternSolid | NSUnderlineStyleSingle],
+                          NSStrikethroughStyleAttributeName,
+                          [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:FONT_SIZE_OLD_PRICE],NSFontAttributeName,
+                          nil];
+    [attributedText setAttributes:attr range:range];
+
+    cell.lblItemTotal.font=[UIFont fontWithName:[AAAppGlobals sharedInstance].boldFont size:FONT_SIZE_NEW_PRICE];
+    cell.lblItemTotal.attributedText = attributedText;
     
     
     
@@ -208,99 +252,89 @@ static NSString *products = @"products";
     return cell;
 }
 -(void)populateOrderInfo{
-    NSString *orderId = [self.orderObj valueForKey:@"orderId"];
-    NSString *orderDate = [self.orderObj valueForKey:@"orderDate"];
-    NSString *discountAmt = [self.orderObj valueForKey:@"discountAmt"];
-    
-    NSString *reward_redeemed = [self.orderObj valueForKey:@"reward_redeemed"];
-    NSString *shippingAmt = [self.orderObj valueForKey:@"shippingAmt"];
-    NSString *orderTotal = [self.orderObj valueForKey:@"orderTotal"];
-    
-    
-    NSString *shippingStatus = [self.orderObj valueForKey:@"shippingStatus"];
-    NSString *deliverydate = [self.orderObj valueForKey:@"deliverydate"];
-    NSString *deliveryaddress = [self.orderObj valueForKey:@"deliveryaddress"];
-    
-    NSString *collectiondate = [self.orderObj valueForKey:@"collectiondate"];
-    NSString *collectionaddress = [self.orderObj valueForKey:@"collectionaddress"];
-    NSString *orderInstr = [self.orderObj valueForKey:@"orderInstr"];
-    
-    self.orderDetailView.lblOrderId.text = [NSString stringWithFormat:@"Order id: %@",orderId];
-    self.orderDetailView.lblOrderStatus.text = [NSString stringWithFormat:@"Order status: %@",shippingStatus];
-    self.orderDetailView.lblOrderDate.text = [NSString stringWithFormat:@"Order date: %@",orderDate];
-    
-    self.orderDetailView.lblOrderTotal.text = [NSString stringWithFormat:@"Total: %@",orderTotal];
-    self.orderDetailView.lblCreditRedeemed.text = [NSString stringWithFormat:@"Credit Redeemed: %@",reward_redeemed];
-    self.orderDetailView.lblDiscount.text = [NSString stringWithFormat:@"Discount: %@",discountAmt];
-    
-    self.orderDetailView.lblShippingFee.text = [NSString stringWithFormat:@"Shipping Fee: %@",shippingAmt];
-    @try {
-        if (deliverydate != nil && [deliveryaddress length]>0) {
-            self.orderDetailView.DeliveryDate.text = [NSString stringWithFormat:@"Delivery Date: %@",deliverydate];
-            self.orderDetailView.lblAddress.text = [NSString stringWithFormat:@"Delivery Address:"];
-            self.orderDetailView.lblAddressValue.text = [NSString stringWithFormat:@"%@",deliveryaddress];
-        }else{
-            self.orderDetailView.DeliveryDate.text = [NSString stringWithFormat:@"Collection Date: %@",collectiondate];
-            self.orderDetailView.lblAddress.text = [NSString stringWithFormat:@"Collection Address:"];
-            self.orderDetailView.lblAddressValue.text = [NSString stringWithFormat:@"%@",collectionaddress];
-        }
-    }
-    @catch (NSException *exception) {
-        
-    }
-    
-//    [self.orderDetailView.lblAddressValue sizeToFit];
-    if ([shippingStatus isEqualToString:@"Fulfilled"]) {
-        self.btnQRCode.hidden = true;
-    }
-    CGSize addressSize = [AAUtils getTextSizeWithFont:self.orderDetailView.lblAddressValue.font andText:self.orderDetailView.lblAddressValue.text andMaxWidth:self.orderDetailView.lblAddressValue.frame.size.width];
-    if (addressSize.height <25) {
-        addressSize.height = 25;
-    }
-    
-    
-    CGRect frame = self.orderDetailView.lblAddressValue.frame;
-    frame.size.height = addressSize.height;
-    self.orderDetailView.lblAddressValue.frame = frame;
-    CGFloat height = frame.origin.y+frame.size.height;
-    @try {
-        if (orderInstr != nil && [orderInstr length]) {
-            self.orderDetailView.lblInstruction.text = @"Instruction: ";
-            self.orderDetailView.lblInstruction.hidden = false;
-            self.orderDetailView.lblInstructionValue.text = orderInstr;
-            self.orderDetailView.lblInstructionValue.hidden = false;
-            CGSize instructionSize = [AAUtils getTextSizeWithFont:self.orderDetailView.lblInstructionValue.font andText:orderInstr andMaxWidth:self.orderDetailView.lblInstructionValue.frame.size.width];
-            if (instructionSize.height <25) {
-                instructionSize.height = 25;
-            }
-            frame = self.orderDetailView.lblInstruction.frame;
-            frame.origin.y = height;
-            self.orderDetailView.lblInstruction.frame = frame;
-            
-            frame = self.orderDetailView.lblInstructionValue.frame;
-            frame.origin.y = height;
-            frame.size.height = instructionSize.height;
-            self.orderDetailView.lblInstructionValue.frame = frame;
-            
-            height += instructionSize.height;
+    NSString *orderId = [self.orderObj valueForKey:@"qrCode"];
+//    NSString *orderDate = [self.orderObj valueForKey:@"orderDate"];
 
-
-        }else{
-            self.orderDetailView.lblInstruction.hidden = true;
-            self.orderDetailView.lblInstructionValue.hidden = true;
-        }
+    NSString *outletAddr = [self.orderObj valueForKey:@"outletAddr"];
+    NSString *outletContact = [self.orderObj valueForKey:@"outletContact"];
+    NSString *outletLat = [self.orderObj valueForKey:@"outletLat"];
+    NSString *outletLong = [self.orderObj valueForKey:@"outletLong"];
+    
+    NSString *orderStatus = [self.orderObj valueForKey:@"orderStatus"];
+    NSString *orderUsedOn = [self.orderObj valueForKey:@"orderUsedOn"];
+    NSString *orderExpiry = [self.orderObj valueForKey:@"orderExpiry"];
+    
+    if ([self.orderedItems count]) {
+        NSDictionary* item = [self.orderedItems objectAtIndex:0];
+        NSString *name = [item valueForKey:@"name"];
+        [self.orderDetailView.lblName
+         setAttributedText:[self getAttributedString:@"Resturant name" andValue:name]];
     }
-    @catch (NSException *exception) {
-        
+    if (outletLat != nil && outletLong != nil) {
+        NSString *distance = [[AAAppGlobals sharedInstance]
+                               getDisctanceFrom:[AAAppGlobals sharedInstance].locationHandler.currentLocation.coordinate.latitude
+                               andLong:[AAAppGlobals sharedInstance].locationHandler.currentLocation.coordinate.longitude
+                               toLat:[outletLat doubleValue]
+                               andLong:[outletLong doubleValue]];
+        [self.orderDetailView.lblDistance setAttributedText:[self getAttributedString:@"Distance" andValue:[NSString stringWithFormat:@"%@KM",distance]]];
     }
     
-    frame = self.orderDetailView.vwDevider.frame;
-    frame.origin.y = height+7;
+    
+    
+    [self.orderDetailView.lblOrderId
+     setText:[NSString stringWithFormat:@"Order %@",orderId]];
+    [self.orderDetailView.lblAddress
+     setAttributedText:[self getAttributedString:@"Address" andValue:outletAddr]];
+    [self.orderDetailView.lblTelephone
+     setAttributedText:[self getAttributedString:@"Telephone" andValue:outletContact]];
+//    [self.orderDetailView.lblDistance
+//     setAttributedText:[self getAttributedString:@"Telephone" andValue:outletContact]];
+    [self.orderDetailView.lblStatus
+     setAttributedText:[self getAttributedString:@"Status" andValue:orderStatus]];
+    
+    if ([orderStatus isEqualToString:@"Redeemed"]) {
+        self.orderDetailView.lblExpiry.attributedText =[self getAttributedString:@"Redeemed On" andValue:orderUsedOn];
+    }else if ([orderStatus isEqualToString:@"Expired"]){
+        NSString *date =  orderUsedOn;
+        NSArray *dateComp = [date componentsSeparatedByString:@" "];
+        if ([dateComp count]>0) {
+            date = [dateComp objectAtIndex:0];
+        }
+        self.orderDetailView.lblExpiry.attributedText = [self getAttributedString:@"Expired On" andValue:date];
+    }else{
+        NSString *date =  orderExpiry;
+        NSArray *dateComp = [date componentsSeparatedByString:@" "];
+        if ([dateComp count]>0) {
+            date = [dateComp objectAtIndex:0];
+        }
+        self.orderDetailView.lblExpiry.attributedText = [self getAttributedString:@"Expiry Date" andValue:date];
+        NSString *qrCodeUrl = [NSString stringWithFormat:@"https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=%@",orderId];
+        [self.imgQRCode setImageWithURL:[NSURL URLWithString:qrCodeUrl]
+                              completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+                                  NSLog(@"downloaded");
+                              }];
+    }
+    
+    
+    CGRect frame = self.orderDetailView.vwDevider.frame;
+    frame.origin.y = self.orderDetailView.lblExpiry.frame.origin.y + self.orderDetailView.lblExpiry.frame.size.height+10;
     self.orderDetailView.vwDevider.frame = frame;
     
     frame = self.orderDetailView.frame;
     frame.size.height =self.orderDetailView.vwDevider.frame.origin.y+1;
     self.orderDetailView.frame = frame;
     
+}
+-(NSAttributedString*)getAttributedString:(NSString*)boldString andValue:(NSString*)normalString{
+    NSString *myString = [NSString stringWithFormat:@"%@ %@",boldString,normalString];
+    NSDictionary *attrs = @{
+                            NSFontAttributeName:[UIFont fontWithName:[AAAppGlobals sharedInstance].boldFont size:ORDER_HISTORY_FONTSIZE]
+                            };
+    NSRange range = [myString rangeOfString:boldString];
+    
+    // Create the attributed string (text + attributes)
+    NSMutableAttributedString *attributedText =[[NSMutableAttributedString alloc] initWithString:myString];
+    [attributedText setAttributes:attrs range:range];
+    return attributedText;
 }
 @end

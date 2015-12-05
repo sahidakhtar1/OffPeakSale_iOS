@@ -35,6 +35,7 @@
 @property (nonatomic, strong) NSString *outletLong;
 @property (nonatomic, strong) NSString *offpeak_discount;
 @property (nonatomic, strong) NSMutableArray *outlets;
+@property (nonatomic, strong) NSString* outletId;
 
 @property (nonatomic,copy) NSString* previousProductPrice;
 @property (nonatomic,copy)

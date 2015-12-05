@@ -12,6 +12,7 @@
 @property (nonatomic,copy) NSString* name;
 @property (nonatomic,copy) NSString* storeAddress;
 @property (nonatomic,copy) NSString* storeContact;
+@property (nonatomic,copy) NSString* outletId;
 @property (nonatomic) CLLocationCoordinate2D location;
 +(AARetailerStores*)retailStoreFromDict:(NSDictionary*)dict;
 @end

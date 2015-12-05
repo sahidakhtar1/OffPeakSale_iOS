@@ -60,6 +60,7 @@
     [encoder encodeObject:self.outletLong forKey:@"outletLong"];
     [encoder encodeObject:self.offpeak_discount forKey:@"offpeak_discount"];
     [encoder encodeObject:self.outlets forKey:@"outlets"];
+    [encoder encodeObject:self.outletId forKey:@"outletId"];
     
      }
 
@@ -89,6 +90,7 @@
         self.outletLong = [decoder decodeObjectForKey:@"outletLong"];
         self.offpeak_discount = [decoder decodeObjectForKey:@"offpeak_discount"];
         self.outlets = [decoder decodeObjectForKey:@"outlets"];
+        self.outletId = [decoder decodeObjectForKey:@"outletId"];
         
     }
     return self;

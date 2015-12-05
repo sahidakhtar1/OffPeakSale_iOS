@@ -55,4 +55,80 @@ static NSString* const JSON_DATA_KEY = @"data";
              failure(error.description);
          }];
 }
++(void)getOrderDetail : (NSString*)emailID
+        merchantEmail : (NSString*)retailerMail
+               orderId:(NSString*)orderId
+  withCompletionBlock : (void(^)(NSDictionary *))success
+           andFailure : (void(^)(NSString*)) failure{
+    
+    NSDictionary* params = [[NSDictionary alloc]
+                            initWithObjectsAndKeys:RETAILER_ID,JSON_RETAILER_ID_KEY,
+                            emailID,@"email",
+                            retailerMail,@"retailerMail",
+                            orderId,@"orderId", nil];
+    [[AAAppGlobals sharedInstance].networkHandler
+     sendJSONRequestToServerWithEndpoint:@"getOrderDetails.php"
+     withParams:params
+     withSuccessBlock:^(NSDictionary *response) {
+         if([response objectForKey:JSON_ERROR_CODE_KEY])
+         {
+             if([[response objectForKey:JSON_ERROR_CODE_KEY] integerValue]==1)
+             {
+                 
+                 if([response objectForKey:JSON_DATA_KEY] )
+                 {
+                     NSDictionary *obj = [response objectForKey:JSON_DATA_KEY];
+                     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:obj];
+                     [[NSUserDefaults standardUserDefaults] setObject:data forKey:orderId];
+                     [[NSUserDefaults standardUserDefaults] synchronize];
+                     success(obj);
+                 }
+                 else
+                 {
+                     if([[NSUserDefaults standardUserDefaults] objectForKey:orderId])
+                     {
+                         NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:orderId];
+                         NSDictionary *obj = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+                         success(obj);
+                     }else{
+                         failure(@"Invalid input");
+                     }
+                 }
+             }
+             else
+             {
+                 if([[NSUserDefaults standardUserDefaults] objectForKey:orderId])
+                 {
+                     NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:orderId];
+                     NSDictionary *obj = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+                     success(obj);
+                 }else{
+                     failure(@"Invalid input");
+                 }
+             }
+             
+         }else
+         {
+             if([[NSUserDefaults standardUserDefaults] objectForKey:orderId])
+             {
+                 NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:orderId];
+                 NSDictionary *obj = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+                 success(obj);
+             }else{
+                 failure(@"Invalid input");
+             }
+         }
+     } withFailureBlock:^(NSError *error) {
+         if([[NSUserDefaults standardUserDefaults] objectForKey:orderId])
+         {
+             NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:orderId];
+             NSDictionary *obj = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+             success(obj);
+         }else{
+             failure(error.description);
+         }
+         
+     }];
+}
+
 @end

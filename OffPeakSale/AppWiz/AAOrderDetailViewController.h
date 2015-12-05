@@ -10,4 +10,5 @@
 
 @interface AAOrderDetailViewController : UIViewController
 @property (nonatomic,strong) NSDictionary *orderObj;
+@property (nonatomic,strong) NSString *pageTitle;
 @end

@@ -10,4 +10,7 @@
 
 @interface AAQRCodeViewController : UIViewController
 @property (nonatomic, strong) NSString *couponCode;
+
+@property (nonatomic, strong) NSDictionary *orderObj;
+@property (nonatomic, strong) NSString*pageTitle;
 @end
