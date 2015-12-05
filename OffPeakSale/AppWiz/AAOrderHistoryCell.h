@@ -12,10 +12,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblOrderId;
 @property (weak, nonatomic) IBOutlet UILabel *lblItemCount;
 @property (weak, nonatomic) IBOutlet UILabel *lblTotal;
-@property (weak, nonatomic) IBOutlet UILabel *lblDate;
+@property (weak, nonatomic) IBOutlet UILabel *lblDatePurchase;
 @property (weak, nonatomic) IBOutlet UILabel *lblStatus;
 @property (weak, nonatomic) IBOutlet UIImageView *lmgCircle1;
 @property (weak, nonatomic) IBOutlet UIImageView *imgCircle2;
-@property (weak, nonatomic) IBOutlet UILabel *lblOrderIdValue;
+@property (weak, nonatomic) IBOutlet UILabel *lblOrderExpiry;
 
 @end

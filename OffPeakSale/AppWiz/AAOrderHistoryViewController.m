@@ -16,8 +16,17 @@
 @property (weak, nonatomic) IBOutlet UIView *vwHeaderView;
 @property (weak, nonatomic) IBOutlet UITableView *tbOrderHstory;
 @property (nonatomic, strong) NSMutableArray *orders;
+@property (nonatomic, strong) NSDictionary *allRrders;
 @property (weak, nonatomic) IBOutlet UIButton *btnLogin;
 - (IBAction)btnLoginTapped:(id)sender;
+@property (weak, nonatomic) IBOutlet UIView *vwTopTab;
+@property (weak, nonatomic) IBOutlet UIButton *btnActive;
+@property (weak, nonatomic) IBOutlet UIButton *btnUsed;
+@property (weak, nonatomic) IBOutlet AAThemeView *vwSelectionUnderline;
+- (IBAction)btnActiveTapped:(id)sender;
+- (IBAction)btnUsedTapped:(id)sender;
+
+@property (nonatomic) int selectedIndex;
 
 @end
 
@@ -26,10 +35,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    self.selectedIndex = 0;
     AAHeaderView *headerView = [[AAHeaderView alloc] initWithFrame:self.vwHeaderView.frame];
     [self.vwHeaderView addSubview:headerView];
-    [headerView setTitle:@"My Orders"];
+    [headerView setTitle:self.pageTitle];
     headerView.showCart = false;
     headerView.showBack = false;
     [headerView setMenuIcons];
@@ -37,6 +46,10 @@
     if (!isLoggedIn) {
         [self showLoginView];
     }
+    self.vwTopTab.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"btn_tab_default"]];
+    [self adjustTabButtons];
+    [self.btnActive.titleLabel setFont:[UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:FONT_SIZE_OLD_PRICE]];
+    [self.btnUsed.titleLabel setFont:[UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:FONT_SIZE_OLD_PRICE]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -50,19 +63,39 @@
 //    email = @"pendyala.bhargavi@gmail.com";
     if (isLoggedIn) {
         [AAOrderHistoryHelper getOrderHostory:email
-                          withCompletionBlock:^(NSArray *obj) {
-                              weakSelf.orders = obj;
-                              [weakSelf.tbOrderHstory reloadData];
+                          withCompletionBlock:^(NSDictionary *obj) {
+                              weakSelf.allRrders = obj;
+                              [weakSelf refreshTableView];
                           }
                                    andFailure:^(NSString *error) {
                                        
                                    }];
         self.btnLogin.hidden = true;
         self.tbOrderHstory.hidden = false;
+        self.vwTopTab.hidden = false;
     }else{
         self.btnLogin.hidden = false;
         self.tbOrderHstory.hidden = true;
+        self.vwTopTab.hidden = true;
     }
+    
+}
+-(void)adjustTabButtons{
+    CGRect frame = self.btnActive.frame;
+    frame.size.width = self.view.frame.size.width/2;
+    self.btnActive.frame = frame;
+    
+    frame = self.btnUsed.frame;
+    frame.size.width = self.view.frame.size.width/2;
+    frame.origin.x = self.view.frame.size.width/2;
+    self.btnUsed.frame = frame;
+    [UIView animateWithDuration:.5 animations:^{
+        CGPoint center = self.vwSelectionUnderline.center;
+        center.x = self.btnActive.center.x;
+        self.vwSelectionUnderline.center = center;
+    }
+                     completion:nil];
+    
 }
 -(void)showLoginView{
     AAProfileViewController* profileViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AAProfileViewController"];
@@ -86,57 +119,30 @@
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     AAOrderHistoryCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AAOrderHistoryCell"];
     NSDictionary *dict = [self.orders objectAtIndex:indexPath.row];
-    NSString *orderId = [dict valueForKey:@"orderId"];
+    NSString *orderId = [dict valueForKey:@"qrCode"];
     NSArray *items = [dict objectForKey:@"products"];
     NSString *total = [dict valueForKey:@"orderTotal"];
-    NSString *date = [dict valueForKey:@"orderDate"];
-    NSString *status = [dict valueForKey:@"shippingStatus"];
-    NSArray *dateComp = [date componentsSeparatedByString:@" "];
-    if ([dateComp count]>0) {
-        date = [dateComp objectAtIndex:0];
+    NSString *purchaseDate = [dict valueForKey:@"orderDate"];
+    NSString *status = [dict valueForKey:@"orderStatus"];
+    NSString *orderUsedOn = [dict valueForKey:@"orderUsedOn"];
+    NSString *orderExpiry = [dict valueForKey:@"orderExpiry"];
+//    NSArray *dateComp = [date componentsSeparatedByString:@" "];
+//    if ([dateComp count]>0) {
+//        date = [dateComp objectAtIndex:0];
+//    }
+    cell.lblOrderId.text = [NSString stringWithFormat:@"Order %@",orderId];
+    cell.lblDatePurchase.text = [NSString stringWithFormat:@"Date of Purchase %@",purchaseDate];
+    
+    cell.lblTotal.text = [NSString stringWithFormat:@"Price %@%@",[AAAppGlobals sharedInstance].currency_symbol,total];
+    cell.lblStatus.text = [NSString stringWithFormat:@"Order Status %@",status];
+    if ([status isEqualToString:@"Redeemed"]) {
+       cell.lblOrderExpiry.text = [NSString stringWithFormat:@"Redeemed On %@",orderUsedOn];
+    }else if ([status isEqualToString:@"Expired"]){
+        cell.lblOrderExpiry.text = [NSString stringWithFormat:@"Expired On %@",orderUsedOn];
+    }else{
+        cell.lblOrderExpiry.text = [NSString stringWithFormat:@"Expiry Date %@",orderExpiry];
     }
-   
-    cell.lblOrderIdValue.text = orderId;
-    cell.lblItemCount.text = [NSString stringWithFormat:@"%lu Items",(unsigned long)[items count]];
-    cell.lblTotal.text = [NSString stringWithFormat:@"%@ %@",[AAAppGlobals sharedInstance].currency_code,total];
-    
-    cell.lblDate.text = [NSString stringWithFormat:@"%@",date];
-    
-    cell.lblStatus.text = [NSString stringWithFormat:@"Order status: %@",status];
-    
-    CGSize lblOrderIdSize = [AAUtils getTextSizeWithFont:cell.lblOrderId.font andText:cell.lblOrderId.text andMaxWidth:MAXFLOAT];
-    CGRect frameOrderId = cell.lblOrderId.frame;
-    frameOrderId.size.width = lblOrderIdSize.width;
-    cell.lblOrderId.frame = frameOrderId;
-    
-    CGRect frameOrderIdValue = cell.lblOrderIdValue.frame;
-    frameOrderIdValue.origin.x = frameOrderId.origin.x+ lblOrderIdSize.width+5;
-    cell.lblOrderIdValue.frame = frameOrderIdValue;
-    
-    CGSize lblItemCountSize = [AAUtils getTextSizeWithFont:cell.lblItemCount.font andText:cell.lblItemCount.text andMaxWidth:MAXFLOAT];
-    CGRect frameItemCount = cell.lblItemCount.frame;
-    frameItemCount.size.width = lblItemCountSize.width;
-    cell.lblItemCount.frame = frameItemCount;
-    
-    CGRect frameCircle1 = cell.lmgCircle1.frame;
-    frameCircle1.origin.x = frameItemCount.origin.x+ frameItemCount.size.width+5;
-    cell.lmgCircle1.frame = frameCircle1;
-    
-    CGSize lblTotalSize = [AAUtils getTextSizeWithFont:cell.lblTotal.font andText:cell.lblTotal.text andMaxWidth:MAXFLOAT];
-    CGRect frameTotal = cell.lblTotal.frame;
-    frameTotal.size.width = lblTotalSize.width;
-    frameTotal.origin.x = frameCircle1.origin.x+ frameCircle1.size.width+5;
-    cell.lblTotal.frame = frameTotal;
-    
-    CGRect frameCircle2 = cell.imgCircle2.frame;
-    frameCircle2.origin.x = frameTotal.origin.x+ frameTotal.size.width+5;
-    cell.imgCircle2.frame = frameCircle2;
-    
-    CGSize lblDateSize = [AAUtils getTextSizeWithFont:cell.lblDate.font andText:cell.lblDate.text andMaxWidth:MAXFLOAT];
-    CGRect frameDate = cell.lblDate.frame;
-    frameDate.size.width = lblDateSize.width;
-    frameDate.origin.x = frameCircle2.origin.x+ frameCircle2.size.width+5;
-    cell.lblDate.frame = frameDate;
+
     
     return cell;
 }
@@ -148,5 +154,39 @@
 }
 - (IBAction)btnLoginTapped:(id)sender {
     [self showLoginView];
+}
+- (IBAction)btnActiveTapped:(id)sender {
+    self.selectedIndex = 0;
+    [UIView animateWithDuration:.5 animations:^{
+                                    CGPoint center = self.vwSelectionUnderline.center;
+                                    center.x = self.btnActive.center.x;
+                                    self.vwSelectionUnderline.center = center;
+                                }
+                     completion:nil];
+    
+    [self refreshTableView];
+}
+
+- (IBAction)btnUsedTapped:(id)sender {
+    self.selectedIndex = 1;
+    [UIView animateWithDuration:.5 animations:^{
+                                    CGPoint center = self.vwSelectionUnderline.center;
+                                    center.x = self.btnUsed.center.x;
+                                    self.vwSelectionUnderline.center = center;
+                                }
+                     completion:nil];
+    [self refreshTableView];
+}
+-(void)refreshTableView{
+    if (self.selectedIndex == 0) {
+        self.orders = [self.allRrders objectForKey:@"active"];
+    }else{
+        self.orders = [self.allRrders objectForKey:@"used"];
+    }
+    [self.tbOrderHstory reloadData];
+}
+-(void)closeProfileViewController:(id)viewController
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 @end

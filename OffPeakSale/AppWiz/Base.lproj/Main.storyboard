@@ -826,6 +826,42 @@
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <view contentMode="scaleToFill" id="Ad8-uw-AbY">
+                                <rect key="frame" x="0.0" y="64" width="320" height="45"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Mb3-c4-BcL">
+                                        <rect key="frame" x="0.0" y="0.0" width="160" height="45"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <animations/>
+                                        <state key="normal" title="Active">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="btnActiveTapped:" destination="Y6r-Sd-rie" eventType="touchUpInside" id="eN3-7D-R6j"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="AZf-gV-wXv">
+                                        <rect key="frame" x="160" y="0.0" width="160" height="45"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <animations/>
+                                        <state key="normal" title="Inactive">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="btnUsedTapped:" destination="Y6r-Sd-rie" eventType="touchUpInside" id="hRK-bg-XqR"/>
+                                        </connections>
+                                    </button>
+                                    <view contentMode="scaleToFill" id="bGH-p6-e37" customClass="AAThemeView">
+                                        <rect key="frame" x="40" y="40" width="90" height="4"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Hhq-5h-zPU" customClass="AAThemeGlossyButton">
                                 <rect key="frame" x="96" y="189" width="127" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
@@ -835,85 +871,67 @@
                                     <action selector="btnLoginTapped:" destination="Y6r-Sd-rie" eventType="touchUpInside" id="man-I9-baz"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="105" sectionHeaderHeight="22" sectionFooterHeight="22" id="lUc-AB-aZp">
-                                <rect key="frame" x="0.0" y="65" width="320" height="414"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="126" sectionHeaderHeight="22" sectionFooterHeight="22" id="lUc-AB-aZp">
+                                <rect key="frame" x="0.0" y="108" width="320" height="371"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="AAOrderHistoryCell" rowHeight="105" id="MQ8-2V-SMY" customClass="AAOrderHistoryCell">
-                                        <rect key="frame" x="0.0" y="22" width="320" height="105"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="AAOrderHistoryCell" rowHeight="126" id="MQ8-2V-SMY" customClass="AAOrderHistoryCell">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="126"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MQ8-2V-SMY" id="HzN-uk-E1x">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="105"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="126"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Order id: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gN0-rr-Eoo">
-                                                    <rect key="frame" x="15" y="12" width="62" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <animations/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jzd-wE-JrM">
-                                                    <rect key="frame" x="81" y="12" width="62" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <animations/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 Items" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VnR-kN-kjp">
-                                                    <rect key="frame" x="15" y="41" width="62" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <animations/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 Items" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JsG-sY-GCc">
-                                                    <rect key="frame" x="15" y="68" width="267" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Order id " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gN0-rr-Eoo">
+                                                    <rect key="frame" x="15" y="9" width="267" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TLF-sS-sYm">
-                                                    <rect key="frame" x="102" y="41" width="72" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expiry Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JsG-sY-GCc">
+                                                    <rect key="frame" x="15" y="54" width="267" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bNH-g5-6mA">
-                                                    <rect key="frame" x="192" y="41" width="72" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6qS-03-whJ">
+                                                    <rect key="frame" x="15" y="74" width="267" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Order Status" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="c17-tW-zEY">
+                                                    <rect key="frame" x="15" y="94" width="267" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date of Purchase" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TLF-sS-sYm">
+                                                    <rect key="frame" x="15" y="34" width="266" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_arrow_right" id="WeZ-eT-Ghd">
-                                                    <rect key="frame" x="284" y="43" width="20" height="20"/>
+                                                    <rect key="frame" x="284" y="54" width="20" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                     <animations/>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_circle" id="Ubb-JC-mgw">
-                                                    <rect key="frame" x="178" y="47" width="8" height="8"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <animations/>
-                                                </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_circle" id="Hry-Dt-kyL">
-                                                    <rect key="frame" x="85" y="47" width="8" height="8"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <animations/>
-                                                </imageView>
                                                 <view contentMode="scaleToFill" id="JgL-oh-KKH">
-                                                    <rect key="frame" x="0.0" y="103" width="320" height="1"/>
+                                                    <rect key="frame" x="0.0" y="124" width="320" height="1"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                     <animations/>
                                                     <color key="backgroundColor" red="0.76078431372549016" green="0.76078431372549016" blue="0.76078431372549016" alpha="1" colorSpace="calibratedRGB"/>
@@ -923,14 +941,11 @@
                                         </tableViewCellContentView>
                                         <animations/>
                                         <connections>
-                                            <outlet property="imgCircle2" destination="Ubb-JC-mgw" id="f5P-Gy-22e"/>
-                                            <outlet property="lblDate" destination="bNH-g5-6mA" id="mna-Hf-IuY"/>
-                                            <outlet property="lblItemCount" destination="VnR-kN-kjp" id="ZK7-Ns-n3a"/>
+                                            <outlet property="lblDatePurchase" destination="TLF-sS-sYm" id="tBZ-VX-iWF"/>
+                                            <outlet property="lblOrderExpiry" destination="JsG-sY-GCc" id="xN1-7z-r1x"/>
                                             <outlet property="lblOrderId" destination="gN0-rr-Eoo" id="wfm-vZ-ccN"/>
-                                            <outlet property="lblOrderIdValue" destination="jzd-wE-JrM" id="X6f-E8-u2J"/>
-                                            <outlet property="lblStatus" destination="JsG-sY-GCc" id="r2z-KH-sow"/>
-                                            <outlet property="lblTotal" destination="TLF-sS-sYm" id="9jJ-2z-8FO"/>
-                                            <outlet property="lmgCircle1" destination="Hry-Dt-kyL" id="zot-KD-Ra5"/>
+                                            <outlet property="lblStatus" destination="c17-tW-zEY" id="l1B-Hp-SPo"/>
+                                            <outlet property="lblTotal" destination="6qS-03-whJ" id="tv5-S4-L7z"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -944,14 +959,18 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="btnActive" destination="Mb3-c4-BcL" id="DDq-UW-W10"/>
                         <outlet property="btnLogin" destination="Hhq-5h-zPU" id="GKa-pM-BH9"/>
+                        <outlet property="btnUsed" destination="AZf-gV-wXv" id="KRe-To-2pd"/>
                         <outlet property="tbOrderHstory" destination="lUc-AB-aZp" id="K9g-dn-t4W"/>
                         <outlet property="vwHeaderView" destination="ZLZ-O4-EE5" id="QGX-VA-dke"/>
+                        <outlet property="vwSelectionUnderline" destination="bGH-p6-e37" id="j7T-Y6-gse"/>
+                        <outlet property="vwTopTab" destination="Ad8-uw-AbY" id="ObH-Sr-0XM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VhY-Jq-HQG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1239" y="1953"/>
+            <point key="canvasLocation" x="1163" y="1891"/>
         </scene>
         <!--Order Detail View Controller-->
         <scene sceneID="sg8-1e-cm7">
@@ -2971,7 +2990,6 @@
         <image name="eshop_back" width="24" height="24"/>
         <image name="gift_icon" width="50" height="50"/>
         <image name="ic_arrow_right" width="128" height="128"/>
-        <image name="ic_circle" width="128" height="128"/>
         <image name="ic_heart" width="24" height="24"/>
         <image name="ic_location_filter_black" width="16" height="16"/>
         <image name="icon_cart.png" width="28" height="28"/>

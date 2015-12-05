@@ -10,6 +10,6 @@
 @class  AAOrderHistoryObject;
 @interface AAOrderHistoryHelper : NSObject
 +(void)getOrderHostory:(NSString*)emailID
-  withCompletionBlock : (void(^)(NSArray *))success
+  withCompletionBlock : (void(^)(NSDictionary *))success
            andFailure : (void(^)(NSString*)) failure;
 @end

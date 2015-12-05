@@ -242,6 +242,7 @@
             AAOrderHistoryViewController *orderHistoryVC = [self.storyboard instantiateViewControllerWithIdentifier:@"AAOrderHistoryViewController"];
             UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:orderHistoryVC];
             navigationController.navigationBarHidden=YES;
+            orderHistoryVC.pageTitle = menuItem.itemName;
             [self.revealViewController pushFrontViewController:navigationController animated:YES];
         }
             break;

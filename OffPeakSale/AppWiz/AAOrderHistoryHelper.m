@@ -12,11 +12,11 @@
 static NSString* const JSON_RETAILER_ID_KEY = @"retailerId";
 static NSString* const JSON_ERROR_CODE_KEY = @"errorCode";
 static NSString* const JSON_DATA_KEY = @"data";
-+(void)getOrderHostory:(NSString*)emailID withCompletionBlock : (void(^)(NSArray *))success andFailure : (void(^)(NSString*)) failure{
++(void)getOrderHostory:(NSString*)emailID withCompletionBlock : (void(^)(NSDictionary *))success andFailure : (void(^)(NSString*)) failure{
     if([[NSUserDefaults standardUserDefaults] objectForKey:USER_DEFAULTS_ORDERHISTORY_KEY])
     {
         NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:USER_DEFAULTS_ORDERHISTORY_KEY];
-        NSArray *obj = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        NSDictionary *obj = [NSKeyedUnarchiver unarchiveObjectWithData:data];
         success(obj);
     }
     NSDictionary* params = [[NSDictionary alloc] initWithObjectsAndKeys:RETAILER_ID,JSON_RETAILER_ID_KEY,emailID,@"email", nil];
@@ -31,7 +31,7 @@ static NSString* const JSON_DATA_KEY = @"data";
                      
                      if([response objectForKey:JSON_DATA_KEY] )
                      {
-                         NSArray *obj = [response objectForKey:JSON_DATA_KEY];
+                         NSDictionary *obj = [response objectForKey:JSON_DATA_KEY];
                          NSData *data = [NSKeyedArchiver archivedDataWithRootObject:obj];
                          [[NSUserDefaults standardUserDefaults] setObject:data forKey:USER_DEFAULTS_ORDERHISTORY_KEY];
                          [[NSUserDefaults standardUserDefaults] synchronize];

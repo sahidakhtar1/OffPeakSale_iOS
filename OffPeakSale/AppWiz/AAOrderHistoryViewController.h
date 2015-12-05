@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface AAOrderHistoryViewController : UIViewController
-
+@property(nonatomic,strong) NSString *pageTitle;
 @end

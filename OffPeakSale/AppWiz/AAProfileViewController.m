@@ -362,6 +362,7 @@ static NSString* const JSON_ERROR_CODE_KEY = @"errorCode";
     
      [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
     [AAConsumerProfileHelper saveConsumerProfileWithDictionary:dictConsumerProfile withCompletionBlock:^{
+         [self saveProfileToUserDefaults];
          [self logionSucessful];
          [[UIApplication sharedApplication] endIgnoringInteractionEvents];
         if([self.profileDelegate respondsToSelector:@selector(closeProfileViewController:)])
