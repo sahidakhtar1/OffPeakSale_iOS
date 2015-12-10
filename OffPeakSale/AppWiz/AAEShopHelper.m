@@ -282,8 +282,8 @@ static NSString* const JSON_PRODUCT_SHORT_DESCRIPTION_KEY = @"short_desc";
     if ([product objectForKey:@"reward_points"]) {
         eShopProduct.reward_points = [product objectForKey:@"reward_points"];
     }
-    if ([product objectForKey:@"availQty"]) {
-        eShopProduct.availQty = [product objectForKey:@"availQty"];
+    if ([product objectForKey:@"totalSold"]) {
+        eShopProduct.availQty = [product objectForKey:@"totalSold"];
     }
     if ([product objectForKey:@"onSale"]) {
         eShopProduct.onSale = [product objectForKey:@"onSale"];
