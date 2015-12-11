@@ -67,7 +67,7 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view contentMode="scaleToFill" id="lgu-ut-Age">
+                <view hidden="YES" contentMode="scaleToFill" id="lgu-ut-Age">
                     <rect key="frame" x="0.0" y="256" width="320" height="1"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <animations/>

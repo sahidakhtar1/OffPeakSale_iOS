@@ -33,7 +33,7 @@
 {
 //    [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_DEFAULTS_ESHOP_KEY];
 //    [[NSUserDefaults standardUserDefaults] synchronize];
-    //[self printFontNames];
+//    [self printFontNames];
     if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerUserNotificationSettings:)])
     {
         [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];

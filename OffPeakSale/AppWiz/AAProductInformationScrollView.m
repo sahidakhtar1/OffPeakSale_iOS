@@ -146,8 +146,7 @@ static NSInteger const CIRCULAR_VIEW_HEIGHT = 50.0;
                                                     0,
                                                     QTY_INDICATOR_WIDTH,
                                                     QTY_INDICATOR_HEIGHT)];
-    vwQtyIndicator.backgroundColor = [UIColor blackColor];
-    vwQtyIndicator.alpha = 0.5;
+    vwQtyIndicator.backgroundColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:.5f];
     
     lblQtyIndicator = [[UILabel alloc] initWithFrame:vwQtyIndicator.bounds];
     [lblQtyIndicator setTextAlignment:NSTextAlignmentCenter];

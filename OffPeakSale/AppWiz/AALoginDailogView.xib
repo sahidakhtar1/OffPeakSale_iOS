@@ -20,7 +20,7 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-Mail Address" minimumFontSize="17" id="kF8-e4-3df" customClass="AAThemeValidationTextField">
-                                    <rect key="frame" x="0.0" y="46" width="290" height="30"/>
+                                    <rect key="frame" x="15" y="46" width="260" height="30"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <animations/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -30,7 +30,7 @@
                                     </connections>
                                 </textField>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" id="bUG-VW-CMs" customClass="AAThemeValidationTextField">
-                                    <rect key="frame" x="0.0" y="85" width="290" height="30"/>
+                                    <rect key="frame" x="15" y="85" width="260" height="30"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <animations/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -40,7 +40,7 @@
                                     </connections>
                                 </textField>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="nrY-fy-Bbn">
-                                    <rect key="frame" x="168" y="312" width="114" height="39"/>
+                                    <rect key="frame" x="161" y="316" width="114" height="35"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                     <animations/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -54,7 +54,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8d1-dv-IEd">
-                                    <rect key="frame" x="2" y="316" width="137" height="34"/>
+                                    <rect key="frame" x="15" y="316" width="137" height="34"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <animations/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -74,11 +74,11 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view contentMode="scaleToFill" id="D0p-yR-7vl">
-                                    <rect key="frame" x="0.0" y="123" width="289" height="105"/>
+                                    <rect key="frame" x="15" y="123" width="260" height="78"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8WN-HY-ILA" customClass="AAThemeGlossyButton">
-                                            <rect key="frame" x="0.0" y="0.0" width="288" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="259" height="30"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -91,7 +91,7 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Dba-Zt-bf5">
-                                            <rect key="frame" x="0.0" y="53" width="289" height="44"/>
+                                            <rect key="frame" x="0.0" y="38" width="260" height="30"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                             <animations/>
                                             <color key="backgroundColor" red="0.34901960784313724" green="0.45882352941176469" blue="0.69019607843137254" alpha="1" colorSpace="calibratedRGB"/>
@@ -113,8 +113,8 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <animations/>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icon-60" id="hdg-QC-Z5r">
-                            <rect key="frame" x="120" y="60" width="80" height="80"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app_logo" id="hdg-QC-Z5r">
+                            <rect key="frame" x="110" y="60" width="100" height="100"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <animations/>
                         </imageView>
@@ -141,7 +141,7 @@
                 <outlet property="vwContainerView" destination="pzt-0p-SqU" id="Ims-TC-k2I"/>
                 <outlet property="vwForgotPassordTitleBG" destination="NuH-gC-1QP" id="GAo-6c-cHk"/>
             </connections>
-            <point key="canvasLocation" x="239" y="95"/>
+            <point key="canvasLocation" x="83" y="-13"/>
         </view>
         <view contentMode="scaleToFill" id="BQU-MZ-Xtd">
             <rect key="frame" x="0.0" y="0.0" width="280" height="148"/>
@@ -207,7 +207,7 @@
         </view>
     </objects>
     <resources>
-        <image name="Icon-60" width="60" height="60"/>
+        <image name="app_logo" width="256" height="256"/>
         <image name="login_top_bg" width="360" height="200"/>
     </resources>
 </document>

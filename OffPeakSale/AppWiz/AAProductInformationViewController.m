@@ -61,7 +61,7 @@ static NSString* const JSON_RETAILER_ID_KEY = @"retailerId";
     self.btnEnquiry.titleLabel.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].boldFont size:BUTTON_FONTSIZE];
     self.lblTitle.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].boldFont size:TITLE_FONTSIZE];
     self.lblCartTotal.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:CARTTOTAL_FONTSIZE];
-    self.lblTitle.text = @"Eshop";
+    self.lblTitle.text = [AAAppGlobals sharedInstance].retailer.retailerName;
     
     self.productTabs.eShopCategoryDelegate = self;
     self.productTabs.fontCategoryName = [AAFont eShopCategoryTextFont];
@@ -81,7 +81,7 @@ static NSString* const JSON_RETAILER_ID_KEY = @"retailerId";
     CGRect frameCurrentProductPrice = self.lblCurrentProductPrice.frame;
     frameCurrentProductPrice.size.width = self.lblQty.frame.origin.x-frameCurrentProductPrice.origin.x-5;
     self.lblCurrentProductPrice.frame = frameCurrentProductPrice;
-    [self.btnBuyProduct setTitle:@"Buy" forState:UIControlStateNormal];
+    [self.btnBuyProduct setTitle:@"Buy Now" forState:UIControlStateNormal];
     
 }
 -(void)setMenuIcons{

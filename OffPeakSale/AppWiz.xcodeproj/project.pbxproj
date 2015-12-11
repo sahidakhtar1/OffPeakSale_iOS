@@ -327,6 +327,8 @@
 		4A0534911AFE91F100BD8ED9 /* AARedeemRewardsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A0534901AFE91F100BD8ED9 /* AARedeemRewardsHelper.m */; };
 		4A0534951AFE9A5B00BD8ED9 /* AADeleveryScheduleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A0534941AFE9A5B00BD8ED9 /* AADeleveryScheduleView.m */; };
 		4A0534971AFE9A7000BD8ED9 /* AADeleveryScheduleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A0534961AFE9A7000BD8ED9 /* AADeleveryScheduleView.xib */; };
+		4A0E27921C1B2BCE0052E0B5 /* MYRIADPRO-REGULAR.OTF in Resources */ = {isa = PBXBuildFile; fileRef = 4A0E27901C1B2BCE0052E0B5 /* MYRIADPRO-REGULAR.OTF */; };
+		4A0E27931C1B2BCE0052E0B5 /* MYRIADPRO-SEMIBOLD.OTF in Resources */ = {isa = PBXBuildFile; fileRef = 4A0E27911C1B2BCE0052E0B5 /* MYRIADPRO-SEMIBOLD.OTF */; };
 		4A19EAC71C1211A10055C7C4 /* AATourItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A19EAC61C1211A10055C7C4 /* AATourItem.m */; };
 		4A19EACA1C12146A0055C7C4 /* AATourSlideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A19EAC91C12146A0055C7C4 /* AATourSlideView.m */; };
 		4A19EACC1C1214990055C7C4 /* TourSlideView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A19EACB1C1214990055C7C4 /* TourSlideView.xib */; };
@@ -784,6 +786,8 @@
 		4A0534931AFE9A5B00BD8ED9 /* AADeleveryScheduleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AADeleveryScheduleView.h; sourceTree = "<group>"; };
 		4A0534941AFE9A5B00BD8ED9 /* AADeleveryScheduleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AADeleveryScheduleView.m; sourceTree = "<group>"; };
 		4A0534961AFE9A7000BD8ED9 /* AADeleveryScheduleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AADeleveryScheduleView.xib; sourceTree = "<group>"; };
+		4A0E27901C1B2BCE0052E0B5 /* MYRIADPRO-REGULAR.OTF */ = {isa = PBXFileReference; lastKnownFileType = file; name = "MYRIADPRO-REGULAR.OTF"; path = "Fonts/MYRIADPRO-REGULAR.OTF"; sourceTree = "<group>"; };
+		4A0E27911C1B2BCE0052E0B5 /* MYRIADPRO-SEMIBOLD.OTF */ = {isa = PBXFileReference; lastKnownFileType = file; name = "MYRIADPRO-SEMIBOLD.OTF"; path = "Fonts/MYRIADPRO-SEMIBOLD.OTF"; sourceTree = "<group>"; };
 		4A19EAC51C1211A10055C7C4 /* AATourItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AATourItem.h; sourceTree = "<group>"; };
 		4A19EAC61C1211A10055C7C4 /* AATourItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AATourItem.m; sourceTree = "<group>"; };
 		4A19EAC81C12146A0055C7C4 /* AATourSlideView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AATourSlideView.h; sourceTree = "<group>"; };
@@ -2348,6 +2352,8 @@
 		F7990BA51940C4B3002579E4 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				4A0E27901C1B2BCE0052E0B5 /* MYRIADPRO-REGULAR.OTF */,
+				4A0E27911C1B2BCE0052E0B5 /* MYRIADPRO-SEMIBOLD.OTF */,
 				F7D95DFF19508F66001F0B0F /* Aleo-Bold.otf */,
 				F7D95E0019508F66001F0B0F /* Aleo-Regular.otf */,
 				F7D95E0119508F66001F0B0F /* Folks-Bold.ttf */,
@@ -2543,6 +2549,7 @@
 				A18E45051C01CB30007BF9DE /* logoSample.png in Resources */,
 				F75C30C1190B91A200C38212 /* AACertVeiwCell.xib in Resources */,
 				40CF5FC01883F92500806551 /* AAStoreInfoWindow.xib in Resources */,
+				4A0E27931C1B2BCE0052E0B5 /* MYRIADPRO-SEMIBOLD.OTF in Resources */,
 				F70F688A194366790089600E /* Arial.ttf in Resources */,
 				40CF5F97187EE99800806551 /* FBDialog.bundle in Resources */,
 				F70F6894194366790089600E /* Trebuchet MS-Bold.ttf in Resources */,
@@ -2551,6 +2558,7 @@
 				4ACFE1DE1AF4AE8E00CA9C63 /* AAHeaderView.xib in Resources */,
 				4AAF01121AFE6A3C00E890B8 /* triangle_icon.png in Resources */,
 				F70F6895194366790089600E /* Trebuchet MS.ttf in Resources */,
+				4A0E27921C1B2BCE0052E0B5 /* MYRIADPRO-REGULAR.OTF in Resources */,
 				4AA3B4BD1B02884D00D6A9DD /* icon_cart_black@2x.png in Resources */,
 				F7F3EC6F1A277BBD005074B8 /* BannerItem.xib in Resources */,
 				A18E45041C01CB30007BF9DE /* dropdown.png in Resources */,

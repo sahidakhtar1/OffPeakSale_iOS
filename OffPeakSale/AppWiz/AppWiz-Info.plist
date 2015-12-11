@@ -67,6 +67,8 @@
 		<string>Aleo-Regular.otf</string>
 		<string>Folks-Bold.ttf</string>
 		<string>Folks-Normal.ttf</string>
+		<string>MYRIADPRO-REGULAR.OTF</string>
+		<string>MYRIADPRO-SEMIBOLD.OTF</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>Main</string>

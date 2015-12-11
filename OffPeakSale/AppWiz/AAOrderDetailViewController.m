@@ -127,7 +127,7 @@ static NSString *products = @"products";
     float maxWidthForLbl = [UIScreen mainScreen].bounds.size.width - (MARGIN+PRODUCT_IMAGE_WIDTH+MARGIN + MARGIN+RIGHTITEM_WIDTH+MARGIN);
     CGSize productTextSize = [AAUtils getTextSizeWithFont:[UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:SHOPPINGCART_SHORTDESC_FONTSIZE] andText:productShortDescription andMaxWidth:maxWidthForLbl];
     height += productTextSize.height + ITEM_GAP;
-    if (discount != nil) {
+    if (discount != nil && [discount floatValue] >0) {
         height +=20+ITEM_GAP;
     }
     
@@ -236,7 +236,7 @@ static NSString *products = @"products";
     cell.lblItemTotal.frame = itemTotalFrame;
     
     cellHieght += 20+ITEM_GAP;
-    if (discount != nil) {
+    if (discount != nil && [discount floatValue] >0) {
         NSString *percentage = @"";
         cell.lblRewardPoints.attributedText = [self getAttributedString:@"Dicsocunt" andValue:[NSString stringWithFormat:@"%@%@",currencySymbol,discount]];
         cellHieght += 20+ITEM_GAP;
@@ -288,6 +288,8 @@ static NSString *products = @"products";
                                toLat:[outletLat doubleValue]
                                andLong:[outletLong doubleValue]];
         [self.orderDetailView.lblDistance setAttributedText:[self getAttributedString:@"Distance" andValue:[NSString stringWithFormat:@"%@KM",distance]]];
+    }else{
+       [self.orderDetailView.lblDistance setAttributedText:[self getAttributedString:@"Distance" andValue:@""]];
     }
     
     
@@ -338,7 +340,10 @@ static NSString *products = @"products";
     
 }
 -(NSAttributedString*)getAttributedString:(NSString*)boldString andValue:(NSString*)normalString{
-    NSString *myString = [NSString stringWithFormat:@"%@ %@",boldString,normalString];
+    if (normalString == nil) {
+        normalString = @"";
+    }
+    NSString *myString = [NSString stringWithFormat:@"%@  %@",boldString,normalString];
     NSDictionary *attrs = @{
                             NSFontAttributeName:[UIFont fontWithName:[AAAppGlobals sharedInstance].boldFont size:ORDER_HISTORY_FONTSIZE]
                             };

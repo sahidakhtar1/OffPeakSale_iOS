@@ -12,7 +12,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    self.lblOrderId.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:ORDER_HISTORY_FONTSIZE];
+    self.lblOrderId.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:ORDER_ID_FONTSIZE];
     self.lblOrderExpiry.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:ORDER_HISTORY_FONTSIZE];
     self.lblItemCount.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:ORDER_HISTORY_FONTSIZE];
     self.lblTotal.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:ORDER_HISTORY_FONTSIZE];

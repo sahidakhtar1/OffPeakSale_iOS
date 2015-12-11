@@ -16,13 +16,13 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <animations/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icon-60" id="4UJ-e0-Hxb">
-                    <rect key="frame" x="120" y="51" width="80" height="80"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app_logo" id="4UJ-e0-Hxb">
+                    <rect key="frame" x="110" y="46" width="100" height="100"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <animations/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jOQ-CJ-bII">
-                    <rect key="frame" x="22" y="154" width="275" height="30"/>
+                    <rect key="frame" x="22" y="171" width="275" height="30"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <animations/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -30,7 +30,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" id="DBu-Sm-bVA">
-                    <rect key="frame" x="22" y="192" width="275" height="209"/>
+                    <rect key="frame" x="22" y="209" width="275" height="209"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                     <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -47,10 +47,10 @@
                 <outlet property="lblDecription" destination="DBu-Sm-bVA" id="1rM-BC-XbW"/>
                 <outlet property="lblTitle" destination="jOQ-CJ-bII" id="m1K-QR-xYE"/>
             </connections>
-            <point key="canvasLocation" x="294" y="323"/>
+            <point key="canvasLocation" x="119" y="335"/>
         </view>
     </objects>
     <resources>
-        <image name="Icon-60" width="60" height="60"/>
+        <image name="app_logo" width="256" height="256"/>
     </resources>
 </document>
