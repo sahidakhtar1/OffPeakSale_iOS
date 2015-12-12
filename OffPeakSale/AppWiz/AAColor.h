@@ -23,6 +23,7 @@ extern NSString* const NOTIFICATION_THEME_CHANGED;
 @property (nonatomic,strong) UIColor* retailerThemeDarkColor;
 @property (nonatomic,strong) UIColor* profileTextFieldTextColor;
 @property (nonatomic,strong) UIColor* rbSelectedColor;
+@property (nonatomic,strong) UIColor* buttonBgColor;
 
 + (AAColor *)sharedInstance;
 @end

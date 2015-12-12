@@ -125,6 +125,7 @@ static NSString* const JSON_ERROR_CODE_KEY = @"errorCode";
     }
     [headerView setMenuIcons];
     [self setTfIcons];
+    [self.btnSaveConsumerProfile setBackgroundColor:[AAColor sharedInstance].retailerThemeBackgroundColor];
     
 }
 -(void)setTfIcons{

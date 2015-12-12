@@ -108,6 +108,7 @@
         [self.imgLocation setImage:[UIImage imageNamed:@"ic_location_filter_black"]];
     }
     self.nearByBtn.titleLabel.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:CATEGORY_FONTSIZE];
+    [self.nearByBtn setBackgroundColor:[AAColor sharedInstance].retailerThemeBackgroundColor];
 }
 -(void)locationViewPopUp
 {

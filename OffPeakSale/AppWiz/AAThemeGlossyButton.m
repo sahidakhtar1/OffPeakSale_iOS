@@ -42,7 +42,7 @@
 //    [self setGlossButtonBackgroundColor:[AAColor sharedInstance].retailerThemeBackgroundColor];
     [self setTitleColor:[AAColor sharedInstance].retailerThemeTextColor forState:UIControlStateNormal];
     [self.layer setCornerRadius:4.0];
-    [self setBackgroundColor:[AAColor sharedInstance].retailerThemeBackgroundColor];
+    [self setBackgroundColor:[AAColor sharedInstance].buttonBgColor];
 }
 
 -(void)changeTheme
