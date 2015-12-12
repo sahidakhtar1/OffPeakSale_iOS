@@ -741,8 +741,8 @@
                                                         </connections>
                                                     </switch>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="frr-ly-23s" customClass="AAThemeGlossyButton">
-                                                        <rect key="frame" x="70" y="49" width="170" height="30"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                        <rect key="frame" x="29" y="49" width="232" height="30"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                         <animations/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                         <state key="normal" title="Save">
