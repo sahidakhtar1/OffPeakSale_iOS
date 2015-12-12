@@ -68,6 +68,7 @@
 
 #define MAP_PIN_INFO_TITLE_FONT_SIZE 14
 #define MAP_PIN_INFO_DESC_FONT_SIZE 14
+#define CONATCT_FIELD_TEXT_SIZE 13
 
 #define BOARDER_COLOR [UIColor colorWithRed:182.0/255.0 green:182.0/255.0 blue:182.0/255.0 alpha:1]
 

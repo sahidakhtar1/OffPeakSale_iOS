@@ -104,6 +104,9 @@ NSString* const STOP_TIMER = @"startTimer";
     [encoder encodeObject:self.gift_price forKey:@"gift_price"];
     [encoder encodeObject:self.enableDiscovery forKey:@"enableDiscovery"];
     [encoder encodeObject:self.tutorialSlides forKey:@"tutorialSlides"];
+    [encoder encodeObject:self.button_color forKey:@"button_color"];
+    [encoder encodeObject:self.contactAddr forKey:@"contactAddr"];
+    [encoder encodeObject:self.contactPhone forKey:@"contactPhone"];
 
 }
 
@@ -164,6 +167,9 @@ NSString* const STOP_TIMER = @"startTimer";
         self.gift_price = [decoder decodeObjectForKey:@"gift_price"];
         self.enableDiscovery = [decoder decodeObjectForKey:@"enableDiscovery"];
         self.tutorialSlides = [decoder decodeObjectForKey:@"tutorialSlides"];
+        self.button_color = [decoder decodeObjectForKey:@"button_color"];
+        self.contactAddr = [decoder decodeObjectForKey:@"contactAddr"];
+        self.contactPhone = [decoder decodeObjectForKey:@"contactPhone"];
     }
     return self;
 }

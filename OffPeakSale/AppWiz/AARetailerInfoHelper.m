@@ -163,6 +163,19 @@ static NSString* const JSON_PRODUCT_SHORT_DESCRIPTION_KEY = @"short_desc";
                 {
                     retailer.calendarUrl = [dictRetailer objectForKey:@"calendarUrl"];
                 }
+    
+                if([dictRetailer objectForKey:@"button_color"])
+                {
+                    retailer.button_color = [dictRetailer objectForKey:@"button_color"];
+                }
+                if([dictRetailer objectForKey:@"contactAddr"])
+                {
+                    retailer.contactAddr = [dictRetailer objectForKey:@"contactAddr"];
+                }
+                if([dictRetailer objectForKey:@"contactPhone"])
+                {
+                    retailer.contactPhone = [dictRetailer objectForKey:@"contactPhone"];
+                }
 
 //                if ([dictRetailer objectForKey:JSON_ENABLEPASSWORD_KEY]) {
 //                    retailer.enablePassword = [dictRetailer objectForKey:JSON_ENABLEPASSWORD_KEY];

@@ -21,6 +21,7 @@
 #import "AAOrderHistoryViewController.h"
 #import "AACategoryDataModel.h"
 #import "AAEShopViewController.h"
+#import "contactVC.h"
 @interface AASideMenuViewController ()
 
 @end
@@ -182,15 +183,9 @@
             break;
         case ABOUTUS:
             {
-//                AASecondaryMenuViewController *secondaryOption = [self.storyboard instantiateViewControllerWithIdentifier:@"AASecondaryMenuViewController"];
-//                secondaryOption.itemType = ABOUTUS;
-//                [self.navigationController pushViewController:secondaryOption animated:YES];
                 
-                AAMenuWebViewController* vcRetailerStore = [self.storyboard instantiateViewControllerWithIdentifier:@"AAMenuWebViewController"];
-                    [vcRetailerStore setWebPageUrl:[AAAppGlobals sharedInstance].retailer.aboutUrl];
-                    [vcRetailerStore setWebPageTitle:menuItem.itemName];
-                
-                
+                contactVC* vcRetailerStore = [self.storyboard instantiateViewControllerWithIdentifier:@"contactVC"];
+                vcRetailerStore.pageTitle= menuItem.itemName;
                 UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:vcRetailerStore];
                 navigationController.navigationBarHidden=YES;
                 [self.revealViewController pushFrontViewController:navigationController     animated:YES];
@@ -217,12 +212,8 @@
         case CALENDAR:
         {
             AAMenuWebViewController* vcRetailerStore = [self.storyboard instantiateViewControllerWithIdentifier:@"AAMenuWebViewController"];
-            
-                [vcRetailerStore setWebPageUrl:[AAAppGlobals sharedInstance].retailer.calendarUrl];
-                [vcRetailerStore setWebPageTitle:[NSString stringWithFormat:menuItem.itemName,[AAAppGlobals sharedInstance].retailer.retailerName ]];
-            
-            
-            
+            [vcRetailerStore setWebPageUrl:[AAAppGlobals sharedInstance].retailer.calendarUrl];
+            [vcRetailerStore setWebPageTitle:[NSString stringWithFormat:menuItem.itemName,[AAAppGlobals sharedInstance].retailer.retailerName ]];
             UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:vcRetailerStore];
             navigationController.navigationBarHidden=YES;
             [self.revealViewController pushFrontViewController:navigationController     animated:YES];

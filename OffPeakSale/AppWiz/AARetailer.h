@@ -21,6 +21,7 @@ extern NSString* const STOP_TIMER;
 @property (nonatomic,copy) NSString* retailerFile;
 @property (nonatomic,copy) NSString* retailerTextColorHexString;
 @property (nonatomic,copy) NSString* retailerHeaderColorHexString;
+@property (nonatomic,copy) NSString* button_color;
 @property (nonatomic,copy) NSString* splashScreenURLString;
 @property (nonatomic,copy) NSString* companyLogo;
 @property (nonatomic, copy) NSString* backdropType;
@@ -70,6 +71,8 @@ extern NSString* const STOP_TIMER;
 @property (nonatomic, strong) NSArray *menuList;
 @property (nonatomic, strong) NSString *calendarUrl;
 @property (nonatomic, strong) NSMutableArray *tutorialSlides;
+@property (nonatomic, copy) NSString *contactAddr;
+@property (nonatomic, copy) NSString *contactPhone;
 
 -(void)addRetailerStore:(AARetailerStores*)retailerStore;
 @end
