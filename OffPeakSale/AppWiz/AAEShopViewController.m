@@ -338,6 +338,8 @@
     [keyWindow addSubview:self.filetrView];
 }
 -(void)filterAppliedWith:(NSInteger)filterIndex{
+    self.searchText = nil;
+    [headerView1 setTitle:[AAAppGlobals sharedInstance].retailer.retailerName];
     [self populateView];
     
 }

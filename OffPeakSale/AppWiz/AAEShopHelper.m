@@ -36,9 +36,9 @@ static NSString* const JSON_PRODUCT_SHORT_DESCRIPTION_KEY = @"short_desc";
 
     @try {
         if (keyword == nil ) {
-            if([[NSUserDefaults standardUserDefaults] objectForKey:cid])
+            if([[NSUserDefaults standardUserDefaults] objectForKey:@"getProducts.php"])
             {
-                NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:cid];
+                NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"getProducts.php"];
                 [AAAppGlobals sharedInstance].categoryList = [NSKeyedUnarchiver unarchiveObjectWithData:data];
                 success();
             }
@@ -77,7 +77,7 @@ static NSString* const JSON_PRODUCT_SHORT_DESCRIPTION_KEY = @"short_desc";
             
             NSData *data = [NSKeyedArchiver archivedDataWithRootObject:[AAAppGlobals sharedInstance].categoryList];
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-            [defaults setObject:data forKey:cid];
+            [defaults setObject:data forKey:@"getProducts.php"];
             [defaults synchronize];
             
         }
