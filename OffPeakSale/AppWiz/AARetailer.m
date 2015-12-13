@@ -198,7 +198,6 @@ NSString* const STOP_TIMER = @"startTimer";
     int hexRetailerTextColor = [AAUtils getHexFromHexString:retailerButtonColorHexString];
     [AAColor sharedInstance].buttonBgColor = UIColorFromRGB(hexRetailerTextColor);
     
-    retailerTextColorHexString_ = retailerButtonColorHexString;
     
 }
 

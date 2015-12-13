@@ -86,8 +86,8 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationUpdated:) name:NOTIFICATION_LOCATION_UPDATED object:nil];
         [AAAppGlobals sharedInstance].currentLat = [AAAppGlobals sharedInstance].locationHandler.currentLocation.coordinate.latitude;
         [AAAppGlobals sharedInstance].currentLong = [AAAppGlobals sharedInstance].locationHandler.currentLocation.coordinate.longitude;
-        [AAAppGlobals sharedInstance].targetLat = [AAAppGlobals sharedInstance].currentLat;
-        [AAAppGlobals sharedInstance].targetLong = [AAAppGlobals sharedInstance].currentLong;
+//        [AAAppGlobals sharedInstance].targetLat = [AAAppGlobals sharedInstance].currentLat;
+//        [AAAppGlobals sharedInstance].targetLong = [AAAppGlobals sharedInstance].currentLong;
         [self.imgLocation setHidden:false];
     }else{
         self.nearByBtn.hidden = true;
