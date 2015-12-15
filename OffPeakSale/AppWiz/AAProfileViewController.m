@@ -370,7 +370,7 @@ static NSString* const JSON_ERROR_CODE_KEY = @"errorCode";
         {
            
             [self saveProfileToUserDefaults];
-            [self.profileDelegate closeProfileViewController:self];
+//            [self.profileDelegate closeProfileViewController:self];
         }
         else
         {

@@ -183,7 +183,7 @@ static NSInteger const CIRCULAR_VIEW_HEIGHT = 50.0;
         lblSaleIndicator.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont
                                                      size:QTY_INDICATOR_FONT];
         [vwSaleIndicator addSubview:lblSaleIndicator];
-        [viewImgContainer addSubview:vwQtyIndicator];
+        [viewImgContainer addSubview:vwSaleIndicator];
         
     vwSaleIndicator.hidden = false;
     }else{

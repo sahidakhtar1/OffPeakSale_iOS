@@ -62,6 +62,7 @@
         [marker setIcon:[UIImage imageNamed:@"shoplocation"]];
         marker.userData = retailerStore;
         [self.mapView setSelectedMarker:marker];
+//        [self.mapView animateToLocation:retailerStore.location];
         [self addMarker:marker];
     }
     [self fitMapToMarkers];

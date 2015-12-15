@@ -12,4 +12,5 @@
 @property (nonatomic,strong) CLLocationManager* locationManager;
 @property (nonatomic,strong) CLLocation* currentLocation;
 extern NSString* const NOTIFICATION_LOCATION_UPDATED;
+extern NSString* const NOTIFICATION_LOCATION_DENIED;
 @end

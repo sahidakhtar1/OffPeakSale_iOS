@@ -122,12 +122,12 @@ static NSString *products = @"products";
     NSString *productShortDescription = [item valueForKey:name];
     NSString *oprionValue = [item valueForKey:prodOptions];
     NSString *rewardsValue = [item valueForKey:rewards];
-    NSString *discount = [item valueForKey:@"discountAmt"];
+    NSString *discount = [item valueForKey:@"offpeak_discount"];
     
     float maxWidthForLbl = [UIScreen mainScreen].bounds.size.width - (MARGIN+PRODUCT_IMAGE_WIDTH+MARGIN + MARGIN+RIGHTITEM_WIDTH+MARGIN);
     CGSize productTextSize = [AAUtils getTextSizeWithFont:[UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:SHOPPINGCART_SHORTDESC_FONTSIZE] andText:productShortDescription andMaxWidth:maxWidthForLbl];
     height += productTextSize.height + ITEM_GAP;
-    if (discount != nil && [discount floatValue] >0) {
+    if (discount != nil) {
         height +=20+ITEM_GAP;
     }
     
@@ -151,7 +151,7 @@ static NSString *products = @"products";
     NSString *imageUrl = [item valueForKey:product_img];
     NSString *itemOldPrice = [item valueForKey:@"old_price"];
     NSString *itemPrice = [item valueForKey:new_price];
-    NSString *discount = [self.orderObj valueForKey:@"discountAmt"];
+    NSString *discount = [item valueForKey:@"offpeak_discount"];
     
     
     float maxWidthForLbl = [UIScreen mainScreen].bounds.size.width - (MARGIN+PRODUCT_IMAGE_WIDTH+MARGIN + MARGIN+RIGHTITEM_WIDTH+MARGIN);
@@ -160,6 +160,7 @@ static NSString *products = @"products";
     frame.size.height = productTextSize.height;
     cell.lblDescription.frame  = frame;
     cell.lblDescription.text = productShortDescription;
+    cell.lblDescription.textColor = [AAColor sharedInstance].retailerThemeBackgroundColor;
     
     float cellHieght = frame.origin.y + frame.size.height+ITEM_GAP+5;
     if ([oprionValue length] == 0) {
@@ -236,9 +237,9 @@ static NSString *products = @"products";
     cell.lblItemTotal.frame = itemTotalFrame;
     
     cellHieght += 20+ITEM_GAP;
-    if (discount != nil && [discount floatValue] >0) {
-        NSString *percentage = @"";
-        cell.lblRewardPoints.attributedText = [self getAttributedString:@"Dicsocunt" andValue:[NSString stringWithFormat:@"%@%@",currencySymbol,discount]];
+    if (discount != nil ) {
+        NSString *percentage = @"%";
+        cell.lblRewardPoints.attributedText = [self getAttributedString:@"Discocunt" andValue:[NSString stringWithFormat:@"%@%@",discount,percentage]];
         cellHieght += 20+ITEM_GAP;
         CGRect frame = cell.lblRewardPoints.frame;
         frame.origin.x = cell.lblItemTotal.frame.origin.x;

@@ -69,11 +69,11 @@
     headerView1.delegate = self;
     [headerView1 setMenuIcons];
     if (self.searchText != nil) {
-        self.vwFilter.hidden = true;
-        CGRect frame = self.tableViewEShopProductList.frame;
-        frame.origin.y = frame.origin.y - self.vwFilter.frame.size.height;
-        frame.size.height = frame.size.height + self.vwFilter.frame.size.height;
-        self.tableViewEShopProductList.frame = frame;
+//        self.vwFilter.hidden = true;
+//        CGRect frame = self.tableViewEShopProductList.frame;
+//        frame.origin.y = frame.origin.y - self.vwFilter.frame.size.height;
+//        frame.size.height = frame.size.height + self.vwFilter.frame.size.height;
+//        self.tableViewEShopProductList.frame = frame;
         [headerView1 setTitle:self.searchText];
     }
     
@@ -84,11 +84,16 @@
     if ([[AAAppGlobals sharedInstance].retailer.enableDiscovery isEqualToString:@"1"]) {
         self.nearByBtn.hidden = false;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationUpdated:) name:NOTIFICATION_LOCATION_UPDATED object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationDenied) name:NOTIFICATION_LOCATION_DENIED object:nil];
         [AAAppGlobals sharedInstance].currentLat = [AAAppGlobals sharedInstance].locationHandler.currentLocation.coordinate.latitude;
         [AAAppGlobals sharedInstance].currentLong = [AAAppGlobals sharedInstance].locationHandler.currentLocation.coordinate.longitude;
 //        [AAAppGlobals sharedInstance].targetLat = [AAAppGlobals sharedInstance].currentLat;
 //        [AAAppGlobals sharedInstance].targetLong = [AAAppGlobals sharedInstance].currentLong;
         [self.imgLocation setHidden:false];
+        if ([AAAppGlobals sharedInstance].showLocationOffalert) {
+            [self showAlert];
+            [AAAppGlobals sharedInstance].showLocationOffalert = false;
+        }
     }else{
         self.nearByBtn.hidden = true;
         CGRect categoryFrame =self.vwFilter.frame;
@@ -364,4 +369,38 @@
         [self populateView];
     });
 }
+-(void)locationDenied
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        if ([AAAppGlobals sharedInstance].showLocationOffalert) {
+            [self showAlert];
+            [AAAppGlobals sharedInstance].showLocationOffalert = false;
+        }
+    });
+}
+-(void)showAlert{
+    if([[[UIDevice currentDevice] systemVersion] floatValue]<8.0)
+    {
+        UIAlertView* curr1=[[UIAlertView alloc] initWithTitle:@"This app does not have access to Location service" message:@"You can enable access in Settings->Privacy->Location->Location Services" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [curr1 show];
+    }
+    else
+    {
+        UIAlertView* curr2=[[UIAlertView alloc] initWithTitle:@"Information" message:@"Enable location services" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Enable", nil];
+        curr2.tag=121;
+        [curr2 show];
+    }
+    
+}
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 1) {
+        if (alertView.tag == 121 && buttonIndex == 1)
+        {
+            //code for opening settings app in iOS 8
+            [[UIApplication sharedApplication] openURL:[NSURL  URLWithString:UIApplicationOpenSettingsURLString]];
+        }
+    }
+}
+
 @end

@@ -153,7 +153,7 @@ NSInteger const RATING_VIEW_WEIDTH = 105;
                                                            green:46.0f/255.0f
                                                             blue:37.0f/255.0f
                                                            alpha:1];
-    //[self.viewMainContent addSubview:self.vwSaleIndicator];
+    [self.viewMainContent addSubview:self.vwSaleIndicator];
     
     self.lblSaleIndicator = [[UILabel alloc] initWithFrame:self.vwSaleIndicator.bounds];
     [self.lblSaleIndicator setTextAlignment:NSTextAlignmentCenter];

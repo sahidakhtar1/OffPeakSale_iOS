@@ -51,6 +51,22 @@
 -(void)populate{
     self.lblTitle.text = self.tourItem.headerTitle;
     self.lblDecription.text = self.tourItem.desc;
+    self.lblDecription.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:TOUR_DESC_FONT_SIZE];
+    CGSize descriptionSize = [AAUtils getTextSizeWithFont:self.lblDecription.font andText:self.lblDecription.text andMaxWidth:self.lblDecription.frame.size.width];
+    
+    CGRect descFrame = self.lblDecription.frame;
+    descFrame.size.height = descriptionSize.height+10;
+    self.lblDecription.frame = descFrame;
+    
+    CGRect frameView = self.vwContainer.frame;
+    frameView.size.height = descFrame.size.height + descFrame.origin.y;
+    self.vwContainer.frame = frameView;
+    
+
+    CGPoint center = self.vwContainer.center;
+    center.y = [UIScreen mainScreen].bounds.size.height/2;
+    self.vwContainer.center = center;
+    
     NSURL* imageUrl = [NSURL URLWithString: self.tourItem.imageUrl];
     [self.imgBg setImageWithURL:imageUrl completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
         

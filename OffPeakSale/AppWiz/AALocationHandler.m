@@ -10,6 +10,7 @@
 
 @implementation AALocationHandler
 NSString* const NOTIFICATION_LOCATION_UPDATED = @"loc_updt";
+NSString* const NOTIFICATION_LOCATION_DENIED = @"loc_denied";
 - (id)init
 {
     self = [super init];
@@ -43,6 +44,7 @@ NSString* const NOTIFICATION_LOCATION_UPDATED = @"loc_updt";
         NSLog(@"location updated started");
     }else{
         [AAAppGlobals sharedInstance].showLocationOffalert = true;
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_LOCATION_DENIED object:nil];
     }
 }
 -(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
@@ -58,6 +60,7 @@ NSString* const NOTIFICATION_LOCATION_UPDATED = @"loc_updt";
                 [AAAppGlobals sharedInstance].showLocationOffalert = true;
                 [self.locationManager stopUpdatingLocation];
                 self.locationManager.delegate = nil;
+                [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_LOCATION_DENIED object:nil];
                 break;
             }
                 
