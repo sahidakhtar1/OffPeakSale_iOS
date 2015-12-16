@@ -38,6 +38,10 @@ NSString* const NOTIFICATION_THEME_CHANGED = @"ThemeChanged";
     self.eShopCategoryTextColor = UIColorFromRGB(0x000000);
     self.eShopVerticalSeparatorColor = UIColorFromRGB(0xA3A3A3);
     self.rbSelectedColor = UIColorFromRGB(0x757575);
+    self.product_title_color = UIColorFromRGB(0x343434);
+    self.old_price_color = UIColorFromRGB(0x4d4d4d);
+    self.textFieldDefaultBorader= UIColorFromRGB(0x757575);
+    self.deviderColor = UIColorFromRGB(0x757575);
 
 }
 

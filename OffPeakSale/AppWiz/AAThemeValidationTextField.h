@@ -10,4 +10,7 @@
 
 @interface AAThemeValidationTextField : AAValidationTextField
 @property (nonatomic) IBInspectable BOOL lightTextColor;
+@property (nonatomic) IBInspectable BOOL useLightBoarder;
+@property (nonatomic) IBInspectable BOOL noBoarder;
+@property (nonatomic) IBInspectable BOOL noPadding;
 @end

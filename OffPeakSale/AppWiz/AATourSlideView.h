@@ -13,5 +13,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblTitle;
 @property (weak, nonatomic) IBOutlet UITextView *lblDecription;
 @property (weak, nonatomic) IBOutlet UIView *vwContainer;
+@property (weak, nonatomic) IBOutlet UIImageView *imgLogo;
 @property (nonatomic, strong) AATourItem *tourItem;
 @end

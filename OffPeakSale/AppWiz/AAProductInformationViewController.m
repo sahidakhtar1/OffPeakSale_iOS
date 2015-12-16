@@ -62,6 +62,8 @@ static NSString* const JSON_RETAILER_ID_KEY = @"retailerId";
     self.lblTitle.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].boldFont size:TITLE_FONTSIZE];
     self.lblCartTotal.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:CARTTOTAL_FONTSIZE];
     self.lblTitle.text = [AAAppGlobals sharedInstance].retailer.retailerName;
+    self.lblQty.textColor = [AAColor sharedInstance].product_title_color;
+    self.lblCurrentProductPrice.textColor = [AAColor sharedInstance].product_title_color;
     
     self.productTabs.eShopCategoryDelegate = self;
     self.productTabs.fontCategoryName = [AAFont eShopCategoryTextFont];

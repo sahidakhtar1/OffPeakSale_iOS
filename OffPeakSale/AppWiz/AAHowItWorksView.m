@@ -36,7 +36,7 @@
     return childView;
 }
 -(void)setFont{
-    self.lblHowItWorksHeading.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].boldFont size:PRODUCTDETAIL_HEADING_FONTSIZE];
+    self.lblHowItWorksHeading.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:PRODUCTDETAIL_HEADING_FONTSIZE];
     self.lblHowItWorksDetail.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:PRODUCTDETAIL_BODY_FONTSIZE];
 }
 -(void)setHowItWorks:(NSString*)text{

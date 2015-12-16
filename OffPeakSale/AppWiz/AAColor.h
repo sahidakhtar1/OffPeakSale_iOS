@@ -24,6 +24,10 @@ extern NSString* const NOTIFICATION_THEME_CHANGED;
 @property (nonatomic,strong) UIColor* profileTextFieldTextColor;
 @property (nonatomic,strong) UIColor* rbSelectedColor;
 @property (nonatomic,strong) UIColor* buttonBgColor;
+@property (nonatomic, strong) UIColor* old_price_color;
+@property (nonatomic, strong) UIColor* product_title_color;
+@property (nonatomic, strong) UIColor* textFieldDefaultBorader;
+@property (nonatomic, strong) UIColor* deviderColor;
 
 + (AAColor *)sharedInstance;
 @end

@@ -41,7 +41,7 @@
 
 -(void)updateTheme
 {
-    [self setViewStylingColor:[AAColor sharedInstance].retailerThemeBackgroundColor];
+    [self setViewStylingColor:[AAColor sharedInstance].deviderColor];
 }
 
 -(void)changeTheme

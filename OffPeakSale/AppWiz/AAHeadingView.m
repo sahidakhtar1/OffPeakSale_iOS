@@ -42,7 +42,7 @@ static NSInteger const LABEL_PADDING_TOP = 5;
     CGContextSetStrokeColorWithColor(context, self.viewStylingColor.CGColor);
     
    //horizontal line
-    CGContextSetLineWidth(context, 4.0);
+    CGContextSetLineWidth(context, 1.0);
     
     CGContextMoveToPoint(context, 0,self.bounds.origin.y + self.bounds.size.height); //start at this point
     

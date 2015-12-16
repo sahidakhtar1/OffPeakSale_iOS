@@ -130,29 +130,31 @@
 //    if ([dateComp count]>0) {
 //        date = [dateComp objectAtIndex:0];
 //    }
-    cell.lblOrderId.text = [NSString stringWithFormat:@"Order %@",orderId];
-    cell.lblDatePurchase.text = [NSString stringWithFormat:@"Date of Purchase %@",purchaseDate];
+    cell.lblOrderId.text = [NSString stringWithFormat:@"Order  %@",orderId];
+    cell.lblDatePurchase.text = [NSString stringWithFormat:@"Date of Purchase  %@",purchaseDate];
     
-    cell.lblTotal.text = [NSString stringWithFormat:@"Price %@%@",[AAAppGlobals sharedInstance].currency_symbol,total];
-    cell.lblStatus.text = [NSString stringWithFormat:@"Order Status %@",status];
+    cell.lblTotal.text = [NSString stringWithFormat:@"Price  %@%@",[AAAppGlobals sharedInstance].currency_symbol,total];
+    
+    NSString *statusValue = status;
     if ([status isEqualToString:@"Redeemed"]) {
-       cell.lblOrderExpiry.text = [NSString stringWithFormat:@"Redeemed On %@",orderUsedOn];
+       cell.lblOrderExpiry.text = [NSString stringWithFormat:@"Redeemed On  %@",orderUsedOn];
     }else if ([status isEqualToString:@"Expired"]){
         NSString *date =  orderUsedOn;
         NSArray *dateComp = [date componentsSeparatedByString:@" "];
         if ([dateComp count]>0) {
             date = [dateComp objectAtIndex:0];
         }
-        cell.lblOrderExpiry.text = [NSString stringWithFormat:@"Expired On %@",date];
+        cell.lblOrderExpiry.text = [NSString stringWithFormat:@"Expired On  %@",date];
     }else{
         NSString *date =  orderExpiry;
         NSArray *dateComp = [date componentsSeparatedByString:@" "];
         if ([dateComp count]>0) {
             date = [dateComp objectAtIndex:0];
         }
-        cell.lblOrderExpiry.text = [NSString stringWithFormat:@"Expiry Date %@",date];
+        cell.lblOrderExpiry.text = [NSString stringWithFormat:@"Expiry Date  %@",date];
+        statusValue = @"Active";
     }
-
+    cell.lblStatus.text = [NSString stringWithFormat:@"Order Status  %@",statusValue];
     
     return cell;
 }

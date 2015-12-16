@@ -48,6 +48,9 @@
     
      self.messageTextView.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:CONATCT_FIELD_TEXT_SIZE];
     
+    self.messageTextView.layer.borderColor = [AAColor sharedInstance].textFieldDefaultBorader.CGColor;
+    self.messageTextView.layer.backgroundColor = [UIColor whiteColor].CGColor;
+    
     self.addressLabel.text = [AAAppGlobals sharedInstance].retailer.contactAddr;
     [self.btnPhone setTitle:[NSString stringWithFormat:@"Phone  %@",[AAAppGlobals sharedInstance].retailer.contactPhone] forState:UIControlStateNormal];
     

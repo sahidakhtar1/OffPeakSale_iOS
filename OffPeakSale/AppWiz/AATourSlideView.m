@@ -54,18 +54,26 @@
     self.lblDecription.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:TOUR_DESC_FONT_SIZE];
     CGSize descriptionSize = [AAUtils getTextSizeWithFont:self.lblDecription.font andText:self.lblDecription.text andMaxWidth:self.lblDecription.frame.size.width];
     
+    
+    CGPoint titleCenter = self.lblTitle.center;
+    titleCenter.y = [UIScreen mainScreen].bounds.size.height/2;
+    self.lblTitle.center = titleCenter;
+    
+    
+    
     CGRect descFrame = self.lblDecription.frame;
+    descFrame.origin.y = self.lblTitle.frame.origin.y + self.lblTitle.frame.size.height+45;
     descFrame.size.height = descriptionSize.height+10;
     self.lblDecription.frame = descFrame;
     
-    CGRect frameView = self.vwContainer.frame;
-    frameView.size.height = descFrame.size.height + descFrame.origin.y;
-    self.vwContainer.frame = frameView;
+    CGRect frameView = self.imgLogo.frame;
+    frameView.origin.y = self.lblTitle.frame.origin.y - 55 - frameView.size.height;
+    self.imgLogo.frame = frameView;
     
 
-    CGPoint center = self.vwContainer.center;
-    center.y = [UIScreen mainScreen].bounds.size.height/2;
-    self.vwContainer.center = center;
+//    CGPoint center = self.vwContainer.center;
+//    center.y = [UIScreen mainScreen].bounds.size.height/2;
+//    self.vwContainer.center = center;
     
     NSURL* imageUrl = [NSURL URLWithString: self.tourItem.imageUrl];
     [self.imgBg setImageWithURL:imageUrl completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {

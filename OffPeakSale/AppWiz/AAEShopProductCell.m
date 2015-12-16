@@ -15,7 +15,7 @@ NSInteger const IMAGE_VIEW_PADDING = 0.0;
 NSInteger const LABEL_VIEW_LEFT_PADDING = 15.0;
 NSInteger const OVERLAY_TOP_PADDING = 8.0;
 NSInteger const PRICE_VIEW_HEIGHT = 40.0;
-static NSInteger const QTY_INDICATOR_WIDTH = 80.0;
+static NSInteger const QTY_INDICATOR_WIDTH = 100.0;
 static NSInteger const QTY_INDICATOR_HEIGHT = 30.0;
 static NSInteger const CIRCULAR_VIEW_WIDTH = 90.0;
 static NSInteger const CIRCULAR_VIEW_HEIGHT = 50.0;
@@ -113,6 +113,10 @@ NSInteger const RATING_VIEW_WEIDTH = 105;
                                                                  screenWidth+20,
                                                                  PRICE_VIEW_HEIGHT)];
     self.priceView.backgroundColor = [UIColor whiteColor];
+    self.lblProductPreviousPrice.textColor = [AAColor sharedInstance].old_price_color;
+    self.lblProductCurrentPrice.textColor = [AAColor sharedInstance].product_title_color;
+    self.lblProductShortDescription.textColor = [AAColor sharedInstance].product_title_color;
+    self.lblAddress.textColor = [AAColor sharedInstance].old_price_color;
 //    [self.priceView addSubview:self.ratingView];
     [self.priceView addSubview:self.lblProductPreviousPrice];
     [self.priceView addSubview:self.lblProductCurrentPrice];
@@ -149,9 +153,9 @@ NSInteger const RATING_VIEW_WEIDTH = 105;
                                                     0,
                                                     QTY_INDICATOR_WIDTH,
                                                     QTY_INDICATOR_HEIGHT)];
-    self.vwSaleIndicator.backgroundColor = [UIColor colorWithRed:230.0f/255.0f
-                                                           green:46.0f/255.0f
-                                                            blue:37.0f/255.0f
+    self.vwSaleIndicator.backgroundColor = [UIColor colorWithRed:221.0f/255.0f
+                                                           green:45.0f/255.0f
+                                                            blue:35.0f/255.0f
                                                            alpha:1];
     [self.viewMainContent addSubview:self.vwSaleIndicator];
     
@@ -235,7 +239,7 @@ NSInteger const RATING_VIEW_WEIDTH = 105;
                                                                               sharedInstance].targetLong
                                                                        toLat:[self.eshopProduct.outletLat doubleValue]
                                                                      andLong:[self.eshopProduct.outletLong doubleValue]];
-        self.lblDistance.text = [NSString stringWithFormat:@"%@KM",distance];
+        self.lblDistance.text = [NSString stringWithFormat:@"%@ KM",distance];
         disctanceSize = [AAUtils getTextSizeWithFont:self.lblDistance.font andText:self.lblDistance.text andMaxWidth:MAXFLOAT];
         self.lblDistance.frame = CGRectMake(self.imgViewProductImage.frame.size.width - disctanceSize.width-15, 5, disctanceSize.width, disctanceSize.height);
             self.lblDistance.hidden = false;
@@ -359,7 +363,7 @@ NSInteger const RATING_VIEW_WEIDTH = 105;
     self.lblProductPreviousPrice.center = center1;
     
     if (self.eshopProduct.availQty != nil) {
-        self.lblQtyIndicator.text = [NSString stringWithFormat:@"%@ sold",self.eshopProduct.availQty];
+        self.lblQtyIndicator.text = [NSString stringWithFormat:@"%@ Sold",self.eshopProduct.availQty];
         self.vwQtyIndicator.hidden = false;
 
     }else{

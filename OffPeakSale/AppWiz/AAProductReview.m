@@ -37,15 +37,16 @@
     return childView;
 }
 -(void)setFont{
-    self.lblAddReviewHeading.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].boldFont size:PRODUCTDETAIL_HEADING_FONTSIZE];
-    self.lblReadReviewHeading.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].boldFont size:PRODUCTDETAIL_HEADING_FONTSIZE];
+    self.lblAddReviewHeading.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:PRODUCTDETAIL_HEADING_FONTSIZE];
+    self.lblReadReviewHeading.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:PRODUCTDETAIL_HEADING_FONTSIZE];
     
     self.lblReviews.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:PRODUCTDETAIL_BODY_FONTSIZE];
     self.tvComment.placeHolderText = @"Comments (200 characters)";
     self.tvComment.validationDelegate  = self;
 //    [self setReviews];
     
-    
+    self.tvComment.layer.borderColor = [AAColor sharedInstance].textFieldDefaultBorader.CGColor;
+    self.tvComment.layer.backgroundColor = [UIColor whiteColor].CGColor;
 }
 -(void)showProductReview{
   [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(setReviews) userInfo:nil repeats:NO];

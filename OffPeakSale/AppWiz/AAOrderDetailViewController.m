@@ -288,7 +288,7 @@ static NSString *products = @"products";
                                andLong:[AAAppGlobals sharedInstance].locationHandler.currentLocation.coordinate.longitude
                                toLat:[outletLat doubleValue]
                                andLong:[outletLong doubleValue]];
-        [self.orderDetailView.lblDistance setAttributedText:[self getAttributedString:@"Distance" andValue:[NSString stringWithFormat:@"%@KM",distance]]];
+        [self.orderDetailView.lblDistance setAttributedText:[self getAttributedString:@"Distance" andValue:[NSString stringWithFormat:@"%@ KM",distance]]];
     }else{
        [self.orderDetailView.lblDistance setAttributedText:[self getAttributedString:@"Distance" andValue:@""]];
     }
@@ -303,9 +303,8 @@ static NSString *products = @"products";
      setAttributedText:[self getAttributedString:@"Telephone" andValue:outletContact]];
 //    [self.orderDetailView.lblDistance
 //     setAttributedText:[self getAttributedString:@"Telephone" andValue:outletContact]];
-    [self.orderDetailView.lblStatus
-     setAttributedText:[self getAttributedString:@"Status" andValue:orderStatus]];
     
+    NSString *statusValue = orderStatus;
     if ([orderStatus isEqualToString:@"Redeemed"]) {
         self.orderDetailView.lblExpiry.attributedText =[self getAttributedString:@"Redeemed On" andValue:orderUsedOn];
         [self.imgQRCode setImage:[UIImage imageNamed:@"redeemed_icon"]];
@@ -328,8 +327,10 @@ static NSString *products = @"products";
         [self.imgQRCode setImageWithURL:[NSURL URLWithString:qrCodeUrl]
                               completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
                               }];
+        statusValue = @"Active";
     }
-    
+    [self.orderDetailView.lblStatus
+     setAttributedText:[self getAttributedString:@"Status" andValue:statusValue]];
     
     CGRect frame = self.orderDetailView.vwDevider.frame;
     frame.origin.y = self.orderDetailView.lblExpiry.frame.origin.y + self.orderDetailView.lblExpiry.frame.size.height+10;

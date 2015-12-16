@@ -26,7 +26,7 @@ static NSInteger const PRODUCT__SHORT_DESCRIPTION_CONTAINER_MARGIN = 15;
 static NSInteger const PRODUCT__SHORT_DESCRIPTION_LABEL_TEXT_MARGIN = 5;
 static NSInteger const PRODUCT_HEADING_MARGIN = 20;
 static NSInteger const PRODOCT_BODY_MARGIN = 15;
-static NSInteger const QTY_INDICATOR_WIDTH = 80.0;
+static NSInteger const QTY_INDICATOR_WIDTH = 100.0;
 static NSInteger const QTY_INDICATOR_HEIGHT = 30.0;
 static NSInteger const CIRCULAR_VIEW_WIDTH = 90.0;
 static NSInteger const CIRCULAR_VIEW_HEIGHT = 50.0;
@@ -53,7 +53,7 @@ static NSInteger const CIRCULAR_VIEW_HEIGHT = 50.0;
 
 -(void)initValues
 {
-    self.fontHeading = [UIFont fontWithName:[AAAppGlobals sharedInstance].boldFont size:PRODUCTDETAIL_HEADING_FONTSIZE];//[UIFont boldSystemFontOfSize:15.0];
+    self.fontHeading = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:PRODUCTDETAIL_HEADING_FONTSIZE];//[UIFont boldSystemFontOfSize:15.0];
     self.fontBody = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:PRODUCTDETAIL_BODY_FONTSIZE];// [UIFont systemFontOfSize:12.0];
     self.fontProductShortDescription = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:PRODUCTDETAIL_SHORTDESC_FONTSIZE];//[UIFont systemFontOfSize:17.0];
 }
@@ -157,7 +157,7 @@ static NSInteger const CIRCULAR_VIEW_HEIGHT = 50.0;
 
     [viewImgContainer addSubview:vwQtyIndicator];
     
-    lblQtyIndicator.text = [NSString stringWithFormat:@"%@ sold",self.product.availQty];
+    lblQtyIndicator.text = [NSString stringWithFormat:@"%@ Sold",self.product.availQty];
     vwQtyIndicator.hidden = false;
         
     }else{
@@ -171,9 +171,9 @@ static NSInteger const CIRCULAR_VIEW_HEIGHT = 50.0;
                                                          0,
                                                          QTY_INDICATOR_WIDTH,
                                                          QTY_INDICATOR_HEIGHT)];
-        vwSaleIndicator.backgroundColor = [UIColor colorWithRed:230.0f/255.0f
-                                                               green:46.0f/255.0f
-                                                                blue:37.0f/255.0f
+        vwSaleIndicator.backgroundColor = [UIColor colorWithRed:221.0f/255.0f
+                                                               green:45.0f/255.0f
+                                                                blue:35.0f/255.0f
                                                                alpha:1];
         
         lblSaleIndicator = [[UILabel alloc] initWithFrame:vwSaleIndicator.bounds];
@@ -250,7 +250,7 @@ static NSInteger const CIRCULAR_VIEW_HEIGHT = 50.0;
                                                                               sharedInstance].targetLong
                                                                        toLat:[self.product.outletLat doubleValue]
                                                                      andLong:[self.product.outletLong doubleValue]];
-        lblDistance.text = [NSString stringWithFormat:@"%@KM",distance];
+        lblDistance.text = [NSString stringWithFormat:@"%@ KM",distance];
         disctanceSize = [AAUtils getTextSizeWithFont:lblDistance.font andText:lblDistance.text andMaxWidth:MAXFLOAT];
         lblDistance.frame = CGRectMake(self.frame.size.width - disctanceSize.width-15, orgY, disctanceSize.width, disctanceSize.height);
         [self addSubview:lblDistance];
@@ -269,6 +269,8 @@ static NSInteger const CIRCULAR_VIEW_HEIGHT = 50.0;
     [lblProductShortDescription setText:self.product.productShortDescription];
     [lblProductShortDescription setNumberOfLines:0];
     [viewProductDescriptionContainer addSubview:lblProductShortDescription];
+    lblProductShortDescription.textColor = [AAColor sharedInstance].product_title_color;
+    
     [self addSubview:viewProductDescriptionContainer];
     
     
@@ -330,6 +332,7 @@ static NSInteger const CIRCULAR_VIEW_HEIGHT = 50.0;
         [lblProductPreviousPrice setAutoresizingMask:UIViewAutoresizingFlexibleTopMargin];
         lblProductPreviousPrice.hidden = false;
         currentPriceOriginX = lblProductPreviousPrice.frame.origin.x + lblProductPreviousPrice.frame.size.width + 3;
+        lblProductPreviousPrice.textColor = [AAColor sharedInstance].old_price_color;
     }else{
         lblProductPreviousPrice.hidden = true;
         currentPriceOriginX = LABEL_VIEW_LEFT_PADDING;
@@ -344,11 +347,13 @@ static NSInteger const CIRCULAR_VIEW_HEIGHT = 50.0;
     [lblProductCurrentPrice setBackgroundColor:[UIColor clearColor]];
     lblAddress.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont
                                       size:ADDRESS_FONTSIZE];
+    lblProductCurrentPrice.textColor = [AAColor sharedInstance].product_title_color;
     
     UIImageView *imgPin = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
     [imgPin setImage:[UIImage imageNamed:@"locate_us"]];
 
     lblAddress.text = self.product.outletName;
+    lblAddress.textColor = [AAColor sharedInstance].old_price_color;
     float maxwidth = SCREEN_WIDTH - lblProductCurrentPrice.frame.origin.x + currentPricelabelSize.width+10 - (2*LABEL_VIEW_LEFT_PADDING);
     CGSize addressSize = [AAUtils getTextSizeWithFont:lblAddress.font andText:lblAddress.text andMaxWidth:maxwidth];
     lblAddress.frame = CGRectMake(SCREEN_WIDTH-LABEL_VIEW_LEFT_PADDING-addressSize.width, orgY, addressSize.width, 20);
@@ -357,6 +362,7 @@ static NSInteger const CIRCULAR_VIEW_HEIGHT = 50.0;
     imgFrame.origin.y = lblAddress.frame.origin.y;
     imgPin.frame = imgFrame;
     [self addSubview:imgPin];
+    
     
     CGPoint centerPrevPrice = lblProductPreviousPrice.center;
     CGPoint centerCurrectPrice = lblProductCurrentPrice.center;
@@ -398,7 +404,7 @@ static NSInteger const CIRCULAR_VIEW_HEIGHT = 50.0;
 
 -(CGFloat)addProductDetails : (CGFloat)orgY
 {
-    CGFloat currentY = orgY;
+    CGFloat currentY = orgY+20;
     
     if(![self.product.productDescription isEqualToString:@""])
     {
