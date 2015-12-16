@@ -668,6 +668,20 @@
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="lightTextColor" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm Email Address" minimumFontSize="17" id="QBe-Kf-haO" customClass="AAThemeValidationTextField">
+                                                <rect key="frame" x="0.0" y="91" width="290" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                <animations/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="lightTextColor" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <outlet property="delegate" destination="Ftm-FZ-b4P" id="SgI-U3-xws"/>
+                                                </connections>
+                                            </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Country" minimumFontSize="17" id="5Sz-RL-0cu" customClass="AAThemeValidationTextField">
                                                 <rect key="frame" x="0.0" y="129" width="290" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -787,6 +801,7 @@
                         <outlet property="pnSwitch" destination="GcB-Vr-lEX" id="Dsu-GR-yD5"/>
                         <outlet property="scrollViewFieldsContainter" destination="GXb-dH-gUp" id="18t-zR-T6r"/>
                         <outlet property="tfCnfPwd" destination="I6y-6c-Dgh" id="rMh-AQ-Cwi"/>
+                        <outlet property="tfConfirmEmail" destination="QBe-Kf-haO" id="bqw-30-weH"/>
                         <outlet property="tfCountry" destination="5Sz-RL-0cu" id="uqb-ou-lQI"/>
                         <outlet property="tfEmail" destination="VqF-u4-4tE" id="Rc8-Js-R1h"/>
                         <outlet property="tfFirstName" destination="Slu-bU-NQ5" id="YZD-1H-RWp"/>

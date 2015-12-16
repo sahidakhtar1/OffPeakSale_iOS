@@ -24,6 +24,7 @@ static NSString* const COD_CHECKOUT = @"enquiryMail.php";
 #define FOOTER_OPTIONS_FONTSIZE 14.0
 @interface AAProfileViewController ()
 @property (nonatomic,strong) AAValidationTextField *tf;
+@property (weak, nonatomic) IBOutlet AAThemeValidationTextField *tfConfirmEmail;
 @property (nonatomic, strong) AALoginDailogView *loginView;
 @end
 
@@ -133,6 +134,8 @@ static NSString* const JSON_ERROR_CODE_KEY = @"errorCode";
     self.tfFirstName.leftViewMode = UITextFieldViewModeAlways;
     self.tfEmail.leftView = [self getLeftImageViewWithImage:@"email_white"];
     self.tfEmail.leftViewMode = UITextFieldViewModeAlways;
+    self.tfConfirmEmail.leftView = [self getLeftImageViewWithImage:@"email_white"];
+    self.tfConfirmEmail.leftViewMode = UITextFieldViewModeAlways;
     self.tfMobileNumber.leftView = [self getLeftImageViewWithImage:@"phone_white"];
     self.tfMobileNumber.leftViewMode = UITextFieldViewModeAlways;
     self.tfCountry.leftView = [self getLeftImageViewWithImage:@"country_white"];
@@ -440,7 +443,15 @@ static NSString* const JSON_ERROR_CODE_KEY = @"errorCode";
     BOOL isLoggedIn = [[NSUserDefaults standardUserDefaults] boolForKey:KEY_IS_LOGGED_IN];;
     if (!isLoggedIn) {
         NSString *password = self.tfPwd.text;
-        if (password == nil || [password length] == 0) {
+        NSString *confEmail = self.tfConfirmEmail.text;
+        if (confEmail == nil || [confEmail length] == 0) {
+            isValid = false;
+            self.tf = self.tfConfirmEmail;
+            
+        }else if(![confEmail isEqualToString:self.tfEmail.text]){
+            isValid = false;
+            self.tf = self.tfConfirmEmail;
+        }else if (password == nil || [password length] == 0) {
             isValid = false;
             self.tf = self.tfPwd;
         }else if(![password isEqualToString:self.tfCnfPwd.text]){
@@ -941,7 +952,18 @@ static NSString* const JSON_ERROR_CODE_KEY = @"errorCode";
     CGRect frame = self.viewFieldsContainer.frame;
     frame.origin.y = self.btnShowLoginForm.frame.size.height+8;
     self.viewFieldsContainer.frame = frame;
+    self.tfConfirmEmail.hidden = false;
+    CGRect tfFrame = self.tfConfirmEmail.frame;
+    tfFrame.origin.y = self.tfEmail.frame.origin.y + self.tfEmail.frame.size.height+8;
+    self.tfConfirmEmail.frame = tfFrame;
     
+    tfFrame = self.tfMobileNumber.frame;
+    tfFrame.origin.y = self.tfConfirmEmail.frame.origin.y + self.tfConfirmEmail.frame.size.height+8;
+    self.tfMobileNumber.frame = tfFrame;
+    
+    tfFrame = self.tfCountry.frame;
+    tfFrame.origin.y = self.tfMobileNumber.frame.origin.y + self.tfMobileNumber.frame.size.height+8;
+    self.tfCountry.frame = tfFrame;
     
     self.vwCreatePassword.hidden = false;
     frame = self.vwCreatePassword.frame;
@@ -982,6 +1004,15 @@ static NSString* const JSON_ERROR_CODE_KEY = @"errorCode";
     
     
     self.vwCreatePassword.hidden = true;
+    self.tfConfirmEmail.hidden = true;
+    
+    CGRect tfframe = self.tfMobileNumber.frame;
+    tfframe.origin.y = self.tfEmail.frame.origin.y + self.tfEmail.frame.size.height +8;
+    self.tfMobileNumber.frame = tfframe;
+    
+    tfframe = self.tfCountry.frame ;
+    tfframe.origin.y = self.tfMobileNumber.frame.origin.y + self.tfMobileNumber.frame.size.height +8;
+    self.tfCountry.frame = tfframe;
     
     frame = self.vwProfileinfo.frame;
     frame.origin.y = self.tfCountry.frame.origin.y + self.tfCountry.frame.size.height+8;
