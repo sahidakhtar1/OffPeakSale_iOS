@@ -845,7 +845,7 @@
                                 <rect key="frame" x="0.0" y="64" width="320" height="35"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Mb3-c4-BcL">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Mb3-c4-BcL">
                                         <rect key="frame" x="0.0" y="0.0" width="160" height="35"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <animations/>
@@ -856,7 +856,7 @@
                                             <action selector="btnActiveTapped:" destination="Y6r-Sd-rie" eventType="touchUpInside" id="eN3-7D-R6j"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="AZf-gV-wXv">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="AZf-gV-wXv">
                                         <rect key="frame" x="160" y="0.0" width="160" height="35"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <animations/>
@@ -878,7 +878,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Hhq-5h-zPU" customClass="AAThemeGlossyButton">
-                                <rect key="frame" x="96" y="189" width="127" height="44"/>
+                                <rect key="frame" x="96" y="189" width="127" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <animations/>
                                 <state key="normal" title="Login"/>
@@ -2310,7 +2310,7 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_location_filter_black" id="lUI-3G-aaJ">
-                                <rect key="frame" x="291" y="72" width="24" height="24"/>
+                                <rect key="frame" x="280" y="72" width="24" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                 <animations/>
                             </imageView>
@@ -2993,11 +2993,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" id="PHb-aT-JAS">
-                                <rect key="frame" x="15" y="250" width="290" height="230"/>
+                                <rect key="frame" x="15" y="262" width="290" height="203"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="WNN-4u-OhD" customClass="AAThemeGlossyButton">
-                                        <rect key="frame" x="70" y="190" width="150" height="30"/>
+                                        <rect key="frame" x="70" y="153" width="150" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <animations/>
                                         <color key="backgroundColor" red="0.53708969419999997" green="0.65310088850000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -3019,19 +3019,6 @@
                                             <outlet property="delegate" destination="2LF-kv-vGy" id="Tac-SH-E7Z"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" tag="302" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Subject" textAlignment="natural" minimumFontSize="17" id="bJv-o9-v0C" customClass="AAThemeValidationTextField">
-                                        <rect key="frame" x="1" y="74" width="290" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                        <animations/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="useLightBoarder" value="YES"/>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <outlet property="delegate" destination="2LF-kv-vGy" id="9Ks-tV-zci"/>
-                                        </connections>
-                                    </textField>
                                     <textField opaque="NO" clipsSubviews="YES" tag="301" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" id="TLB-Qm-ffM" customClass="AAThemeValidationTextField">
                                         <rect key="frame" x="1" y="38" width="290" height="30"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -3046,7 +3033,7 @@
                                         </connections>
                                     </textField>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="GHH-3Q-QRd" customClass="AAThemeValidationTextView">
-                                        <rect key="frame" x="0.0" y="112" width="290" height="67"/>
+                                        <rect key="frame" x="0.0" y="72" width="290" height="67"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <animations/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -3059,6 +3046,15 @@
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1mr-qF-0w1">
                                 <rect key="frame" x="15" y="102" width="290" height="81"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <animations/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Instruction" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4cX-dZ-ilH">
+                                <rect key="frame" x="15" y="236" width="290" height="24"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -3099,10 +3095,10 @@
                         <outlet property="addressLabel" destination="1mr-qF-0w1" id="vJz-Hh-MXJ"/>
                         <outlet property="btnPhone" destination="ZJb-if-1cn" id="ZkL-Iy-i9T"/>
                         <outlet property="emailTextField" destination="TLB-Qm-ffM" id="P5d-DQ-BbL"/>
+                        <outlet property="lblInstruction" destination="4cX-dZ-ilH" id="KQa-Ad-xnr"/>
                         <outlet property="menuView" destination="ssb-ZK-PbE" id="LD2-CC-ffB"/>
                         <outlet property="messageTextView" destination="GHH-3Q-QRd" id="lp3-JJ-t0K"/>
                         <outlet property="nameTextFiled" destination="kdJ-bO-dal" id="3tf-aM-3L2"/>
-                        <outlet property="subjectTextfield" destination="bJv-o9-v0C" id="K2x-QS-jQN"/>
                         <outlet property="titleLabel" destination="1wq-JC-aRj" id="UAK-EJ-MCb"/>
                         <outlet property="vwFormContainer" destination="PHb-aT-JAS" id="Yud-cW-JAO"/>
                     </connections>
@@ -3128,7 +3124,7 @@
         <image name="gift_icon" width="50" height="50"/>
         <image name="ic_arrow_right" width="128" height="128"/>
         <image name="ic_heart" width="24" height="24"/>
-        <image name="ic_location_filter_black" width="16" height="16"/>
+        <image name="ic_location_filter_black" width="30" height="30"/>
         <image name="icon_cart.png" width="28" height="28"/>
         <image name="instagramlogo" width="130" height="33"/>
         <image name="menu_button" width="24" height="24"/>

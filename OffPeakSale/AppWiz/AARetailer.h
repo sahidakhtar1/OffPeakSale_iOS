@@ -73,6 +73,9 @@ extern NSString* const STOP_TIMER;
 @property (nonatomic, strong) NSMutableArray *tutorialSlides;
 @property (nonatomic, copy) NSString *contactAddr;
 @property (nonatomic, copy) NSString *contactPhone;
+@property (nonatomic, strong) NSString *contactName;
+@property (nonatomic, strong) NSString *contactInstr;
+
 
 -(void)addRetailerStore:(AARetailerStores*)retailerStore;
 @end

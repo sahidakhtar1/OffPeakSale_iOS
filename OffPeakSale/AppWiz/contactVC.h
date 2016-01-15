@@ -19,6 +19,7 @@
 @property (nonatomic,retain) IBOutlet AAThemeValidationTextView *messageTextView;
 
 @property (nonatomic,retain) IBOutlet UILabel *addressLabel;
+@property (weak, nonatomic) IBOutlet UILabel *lblInstruction;
 @property (weak, nonatomic) IBOutlet UIButton *btnPhone;
 - (IBAction)submitButton:(id)sender;
 - (IBAction)btnPhoneTapped:(id)sender;

@@ -48,8 +48,12 @@
     }
     self.vwTopTab.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"btn_tab_default"]];
     [self adjustTabButtons];
-    [self.btnActive.titleLabel setFont:[UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:FONT_SIZE_OLD_PRICE]];
-    [self.btnUsed.titleLabel setFont:[UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:FONT_SIZE_OLD_PRICE]];
+    [self.btnActive.titleLabel setFont:[UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:CATEGORY_FONTSIZE]];
+    [self.btnUsed.titleLabel setFont:[UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:CATEGORY_FONTSIZE]];
+    
+    [self.btnActive setTitleColor:[AAColor sharedInstance].retailerThemeBackgroundColor forState:UIControlStateSelected];
+    [self.btnUsed setTitleColor:[AAColor sharedInstance].retailerThemeBackgroundColor forState:UIControlStateSelected];
+    self.btnActive.selected = YES;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -181,6 +185,8 @@
 }
 - (IBAction)btnActiveTapped:(id)sender {
     self.selectedIndex = 0;
+    self.btnActive.selected = YES;
+    self.btnUsed.selected = NO;
     [UIView animateWithDuration:.5 animations:^{
                                     CGPoint center = self.vwSelectionUnderline.center;
                                     center.x = self.btnActive.center.x;
@@ -193,6 +199,8 @@
 
 - (IBAction)btnUsedTapped:(id)sender {
     self.selectedIndex = 1;
+    self.btnActive.selected = NO;
+    self.btnUsed.selected = YES;
     [UIView animateWithDuration:.5 animations:^{
                                     CGPoint center = self.vwSelectionUnderline.center;
                                     center.x = self.btnUsed.center.x;

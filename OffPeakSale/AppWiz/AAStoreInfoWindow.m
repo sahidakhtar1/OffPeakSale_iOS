@@ -42,6 +42,7 @@ static NSInteger const PADDING  = 10;
 
 -(void)updateContainerSize:(CGFloat)maxWidth
 {
+    
     self.lblStoreName.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].boldFont size:MAP_PIN_INFO_TITLE_FONT_SIZE];
     self.lblStoreAddress.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:MAP_PIN_INFO_DESC_FONT_SIZE];
     self.lblStoreContactNumber.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:MAP_PIN_INFO_DESC_FONT_SIZE];
@@ -51,7 +52,7 @@ static NSInteger const PADDING  = 10;
     self.backgroundColor = [UIColor clearColor];
     CGFloat containerHeight = 0;
     CGFloat containerWidth = 0;
-   maxWidth = maxWidth - 3*PADDING;
+   maxWidth = maxWidth/2;
     CGSize lblStoreNameSize = [AAUtils getTextSizeWithFont:self.lblStoreName.font andText:self.lblStoreName.text andMaxWidth:maxWidth];
      CGSize lblStoreAddressSize = [AAUtils getTextSizeWithFont:self.lblStoreAddress.font andText:self.lblStoreAddress.text andMaxWidth:maxWidth];
      CGSize lblStoreContactSize = [AAUtils getTextSizeWithFont:self.lblStoreContactNumber.font andText:self.lblStoreContactNumber.text andMaxWidth:maxWidth];

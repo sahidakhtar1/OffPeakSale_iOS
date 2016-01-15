@@ -55,7 +55,7 @@ static NSInteger const CIRCULAR_VIEW_HEIGHT = 50.0;
 {
     self.fontHeading = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:PRODUCTDETAIL_HEADING_FONTSIZE];//[UIFont boldSystemFontOfSize:15.0];
     self.fontBody = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:PRODUCTDETAIL_BODY_FONTSIZE];// [UIFont systemFontOfSize:12.0];
-    self.fontProductShortDescription = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:PRODUCTDETAIL_SHORTDESC_FONTSIZE];//[UIFont systemFontOfSize:17.0];
+    self.fontProductShortDescription = [UIFont fontWithName:[AAAppGlobals sharedInstance].boldFont size:SHORTDESC_FONTSIZE];//[UIFont systemFontOfSize:17.0];
 }
 
 /*
@@ -151,7 +151,7 @@ static NSInteger const CIRCULAR_VIEW_HEIGHT = 50.0;
     lblQtyIndicator = [[UILabel alloc] initWithFrame:vwQtyIndicator.bounds];
     [lblQtyIndicator setTextAlignment:NSTextAlignmentCenter];
     lblQtyIndicator.textColor = [UIColor whiteColor];
-    lblQtyIndicator.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont
+    lblQtyIndicator.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].boldFont
                                                 size:QTY_INDICATOR_FONT];
     [vwQtyIndicator addSubview:lblQtyIndicator];
 
@@ -179,8 +179,8 @@ static NSInteger const CIRCULAR_VIEW_HEIGHT = 50.0;
         lblSaleIndicator = [[UILabel alloc] initWithFrame:vwSaleIndicator.bounds];
         [lblSaleIndicator setTextAlignment:NSTextAlignmentCenter];
         lblSaleIndicator.textColor = [UIColor whiteColor];
-        lblSaleIndicator.text = @"Sale";
-        lblSaleIndicator.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont
+        lblSaleIndicator.text = @"Hot Deal";
+        lblSaleIndicator.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].boldFont
                                                      size:QTY_INDICATOR_FONT];
         [vwSaleIndicator addSubview:lblSaleIndicator];
         [viewImgContainer addSubview:vwSaleIndicator];
@@ -252,8 +252,8 @@ static NSInteger const CIRCULAR_VIEW_HEIGHT = 50.0;
                                                                      andLong:[self.product.outletLong doubleValue]];
         lblDistance.text = [NSString stringWithFormat:@"%@ KM",distance];
         disctanceSize = [AAUtils getTextSizeWithFont:lblDistance.font andText:lblDistance.text andMaxWidth:MAXFLOAT];
-        lblDistance.frame = CGRectMake(self.frame.size.width - disctanceSize.width-15, orgY, disctanceSize.width, disctanceSize.height);
-        [self addSubview:lblDistance];
+        
+        
     }else{
         disctanceSize.width = 0;
         disctanceSize.height = 0;
@@ -261,7 +261,7 @@ static NSInteger const CIRCULAR_VIEW_HEIGHT = 50.0;
     
     CGSize productTextSize = [AAUtils getTextSizeWithFont:self.fontProductShortDescription andText:self.product.productShortDescription andMaxWidth:self.frame.size.width - 2*PRODUCT__SHORT_DESCRIPTION_CONTAINER_MARGIN - disctanceSize.width-10];
     
-    UIView* viewProductDescriptionContainer = [[UIView alloc] initWithFrame:CGRectMake(PRODUCT__SHORT_DESCRIPTION_CONTAINER_MARGIN, orgY, self.frame.size.width - 2*PRODUCT__SHORT_DESCRIPTION_CONTAINER_MARGIN- disctanceSize.width-10, productTextSize.height + PRODUCT__SHORT_DESCRIPTION_LABEL_TEXT_MARGIN*2)];
+    UIView* viewProductDescriptionContainer = [[UIView alloc] initWithFrame:CGRectMake(PRODUCT__SHORT_DESCRIPTION_CONTAINER_MARGIN, orgY, self.frame.size.width - 2*PRODUCT__SHORT_DESCRIPTION_CONTAINER_MARGIN, productTextSize.height + PRODUCT__SHORT_DESCRIPTION_LABEL_TEXT_MARGIN*2)];
     [viewProductDescriptionContainer setBackgroundColor:[UIColor whiteColor]];
 
     UILabel* lblProductShortDescription = [[UILabel alloc] initWithFrame:CGRectMake(0, PRODUCT__SHORT_DESCRIPTION_LABEL_TEXT_MARGIN, productTextSize.width, productTextSize.height )];
@@ -269,9 +269,14 @@ static NSInteger const CIRCULAR_VIEW_HEIGHT = 50.0;
     [lblProductShortDescription setText:self.product.productShortDescription];
     [lblProductShortDescription setNumberOfLines:0];
     [viewProductDescriptionContainer addSubview:lblProductShortDescription];
-    lblProductShortDescription.textColor = [AAColor sharedInstance].product_title_color;
+//    lblProductShortDescription.textColor = [AAColor sharedInstance].product_title_color;
     
     [self addSubview:viewProductDescriptionContainer];
+    lblDistance.frame = CGRectMake(viewProductDescriptionContainer.frame.size.width - disctanceSize.width, orgY, disctanceSize.width, disctanceSize.height);
+    CGPoint center = lblDistance.center;
+    center.y = lblProductShortDescription.center.y;
+    lblDistance.center = center;
+    [viewProductDescriptionContainer addSubview:lblDistance];
     
     
     

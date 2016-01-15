@@ -13,7 +13,7 @@
 @implementation AAEShopCategoriesScrollView
 NSInteger const BUTTON_TEXT_PADDING = 20;
 NSInteger  MAX_BUTTON_WIDTH = 180;
-NSInteger const SELECTIONINDICATOR_HEIGHT = 5;
+NSInteger const SELECTIONINDICATOR_HEIGHT = 3;
 
 @synthesize selectedCategory = selectedCategory_;
 @synthesize selectedIndicator;
@@ -58,6 +58,12 @@ NSInteger const SELECTIONINDICATOR_HEIGHT = 5;
 
 -(void)categorySelected: (id)sender
 {
+    if([self.categories indexOfObject:self.selectedCategory]!=NSNotFound)
+    {
+        NSInteger indexOfSelectedCat = [self.categories indexOfObject:self.selectedCategory];
+        AATabButton* btnSelectedCategory = [arrButtonViews_ objectAtIndex:[self.categories indexOfObject:self.selectedCategory]];
+        [btnSelectedCategory setSelected:NO];
+    }
     NSUInteger indexOfButton = [arrButtonViews_ indexOfObject:sender];
     UIButton *btn = (UIButton*)sender;
     
@@ -140,7 +146,7 @@ NSInteger const SELECTIONINDICATOR_HEIGHT = 5;
     if ([self.categories count]<=2) {
          MAX_BUTTON_WIDTH = [UIScreen mainScreen].bounds.size.width/2;
     }else{
-        MAX_BUTTON_WIDTH = [UIScreen mainScreen].bounds.size.width/2 - 45;
+         MAX_BUTTON_WIDTH = [UIScreen mainScreen].bounds.size.width/2 - 45;
     }
     
     frame.size.width = MAX_BUTTON_WIDTH;
@@ -158,9 +164,10 @@ NSInteger const SELECTIONINDICATOR_HEIGHT = 5;
     
     AATabButton* btnCategory  =[[AATabButton alloc] init];
     [btnCategory setTitleColor:[AAColor sharedInstance].eShopCategoryTextColor forState:UIControlStateNormal];
+    [btnCategory setTitleColor:[AAColor sharedInstance].retailerThemeBackgroundColor forState:UIControlStateSelected];
     [btnCategory setBackgroundColor:[UIColor whiteColor]];
     //[btnCategory setBackgroundImage:[UIImage imageNamed:@"first.png"] forState:UIControlStateNormal];
-     [btnCategory.titleLabel setFont:[UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:FONT_SIZE_OLD_PRICE]];
+     [btnCategory.titleLabel setFont:[UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:CATEGORY_FONTSIZE]];
     [btnCategory setTitle:categoryName forState:UIControlStateNormal];
     
     [btnCategory addTarget:self action:@selector(categorySelected:) forControlEvents:UIControlEventTouchUpInside];
@@ -170,6 +177,7 @@ NSInteger const SELECTIONINDICATOR_HEIGHT = 5;
     
     [btnCategory setBackgroundImage:[selectedBackgroundImage resizableImageWithCapInsets:UIEdgeInsetsMake(0,0,0,0)] forState:UIControlStateSelected];
 //    [btnCategory setBackgroundImage:nil forState:UIControlStateSelected];
+    
     return btnCategory;
 }
 
@@ -199,20 +207,6 @@ NSInteger const SELECTIONINDICATOR_HEIGHT = 5;
             }
             contentOffset.x = targetOffsetX;
             [self setContentOffset:contentOffset animated:YES];
-//            switch (indexOfSelectedCat) {
-//                case 0:
-//                    [self setContentOffset:CGPointMake(0, 0) animated:YES];
-//                    break;
-//                case 1
-//                    [self setContentOffset:CGPointMake(self.contentSize.width/2-[UIScreen mainScreen].bounds.size.width/2, 0) animated:YES];
-//                    break;
-//                case 2:
-//                    [self setContentOffset:CGPointMake(self.contentSize.width-[UIScreen mainScreen].bounds.size.width, 0) animated:YES];
-//                    break;
-//                    
-//                default:
-//                    break;
-//            }
             
         }
     

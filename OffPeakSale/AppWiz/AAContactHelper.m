@@ -22,7 +22,7 @@ static NSString* const JSON_DATA_KEY = @"data";
     NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
     [params setObject:name forKey:@"name"];
     [params setObject:emailId forKey:@"email"];
-    [params setObject:subject forKey:@"subjects"];
+//    [params setObject:subject forKey:@"subjects"];
     [params setObject:msg forKey:@"comments"];
     [params setObject:RETAILER_ID forKey:JSON_RETAILER_ID_KEY];
     

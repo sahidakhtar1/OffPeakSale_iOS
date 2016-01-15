@@ -112,7 +112,7 @@
     }else{
         [self.imgLocation setImage:[UIImage imageNamed:@"ic_location_filter_black"]];
     }
-    self.nearByBtn.titleLabel.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:CATEGORY_FONTSIZE];
+    self.nearByBtn.titleLabel.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].boldFont size:CATEGORY_FONTSIZE];
     [self.nearByBtn setBackgroundColor:[AAColor sharedInstance].retailerThemeBackgroundColor];
 }
 -(void)locationViewPopUp
@@ -255,8 +255,8 @@
                                  NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]
                                  };
     
-    CGSize shortDescriptionLabelSize = [AAUtils getTextSizeWithFont:[UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:SHORTDESC_FONTSIZE] andText:product.productShortDescription andMaxWidth:self.view.frame.size.width- 30 ];
-    return [[AAAppGlobals sharedInstance] getImageHeight] +shortDescriptionLabelSize.height+  50;
+    CGSize shortDescriptionLabelSize = [AAUtils getTextSizeWithFont:[UIFont fontWithName:[AAAppGlobals sharedInstance].boldFont size:SHORTDESC_FONTSIZE] andText:product.productShortDescription andMaxWidth:self.view.frame.size.width- 30 ];
+    return [[AAAppGlobals sharedInstance] getImageHeight] +shortDescriptionLabelSize.height+  70;
 }
 
 #pragma mark - Helpers

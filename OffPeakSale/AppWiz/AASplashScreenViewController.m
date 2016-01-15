@@ -31,7 +31,7 @@
     [self.view setBackgroundColor:[UIColor blackColor]];
    if(self.splashScreenImageURL)
     {
-        [self adjustLabels];
+//        [self adjustLabels];
         NSString *compLogoName = [self.splashScreenImageURL lastPathComponent];
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
         NSString *path = [paths objectAtIndex:0];
@@ -40,8 +40,8 @@
         UIImage *logoImage;
         if ([filemanager fileExistsAtPath:path]) {
             logoImage = [UIImage imageWithContentsOfFile:path];
-            [self.lblRetailerPoweredBy setHidden:NO];
-            [self.lblPoweredBy setHidden:NO];
+            [self.lblRetailerPoweredBy setHidden:YES];
+            [self.lblPoweredBy setHidden:YES];
             [self setUpTimer];
         }else{
             [self startImageDownload:self.splashScreenImageURL forIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
@@ -93,8 +93,8 @@
                 [filemanager createFileAtPath:path contents:imageData attributes:nil];
             }
             self.imgViewSplashScreenImage.image = prodImage;
-            [self.lblRetailerPoweredBy setHidden:NO];
-            [self.lblPoweredBy setHidden:NO];
+            [self.lblRetailerPoweredBy setHidden:YES];
+            [self.lblPoweredBy setHidden:YES];
             [self setUpTimer];
         }
     }

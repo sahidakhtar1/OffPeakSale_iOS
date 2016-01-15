@@ -22,7 +22,7 @@ NSString* const BASE_URL = @"http://inceptionlive.com/"
 //NSString* const BASE_URL = @"http://appwizlive.com/";
 //NSString* const BASE_URL = @"http://appwiz.cloudapp.net/";
 //NSString* const BASE_URL = @"http://inceptionlive.com//";
-NSString* const BASE_URL = @"http://119.81.207.44/";
+NSString* const BASE_URL = @"http://uberthis.co/";
 //NSString* const BASE_URL = @"http://119.81.207.36/";
 #endif
 NSString* const ITUNES_URL = @"https://itunes.apple.com/app/id793924538?ls=1&mt=8";

@@ -176,6 +176,14 @@ static NSString* const JSON_PRODUCT_SHORT_DESCRIPTION_KEY = @"short_desc";
                 {
                     retailer.contactPhone = [dictRetailer objectForKey:@"contactPhone"];
                 }
+                if([dictRetailer objectForKey:@"contactName"])
+                {
+                    retailer.contactName = [dictRetailer objectForKey:@"contactName"];
+                }
+                if([dictRetailer objectForKey:@"contactInstr"])
+                {
+                    retailer.contactInstr = [dictRetailer objectForKey:@"contactInstr"];
+                }
 
 //                if ([dictRetailer objectForKey:JSON_ENABLEPASSWORD_KEY]) {
 //                    retailer.enablePassword = [dictRetailer objectForKey:JSON_ENABLEPASSWORD_KEY];

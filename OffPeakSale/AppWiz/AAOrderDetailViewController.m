@@ -263,6 +263,9 @@ static NSString *products = @"products";
     cell.frame = deviderFrame;
     return cell;
 }
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [self nameTappaed];
+}
 -(void)populateOrderInfo{
     NSString *orderId = [self.orderObj valueForKey:@"qrCode"];
 //    NSString *orderDate = [self.orderObj valueForKey:@"orderDate"];
@@ -282,16 +285,16 @@ static NSString *products = @"products";
         [self.orderDetailView.lblName
          setAttributedText:[self getAttributedString:@"Resturant name" andValue:name]];
     }
-    if (outletLat != nil && outletLong != nil) {
-        NSString *distance = [[AAAppGlobals sharedInstance]
-                               getDisctanceFrom:[AAAppGlobals sharedInstance].locationHandler.currentLocation.coordinate.latitude
-                               andLong:[AAAppGlobals sharedInstance].locationHandler.currentLocation.coordinate.longitude
-                               toLat:[outletLat doubleValue]
-                               andLong:[outletLong doubleValue]];
-        [self.orderDetailView.lblDistance setAttributedText:[self getAttributedString:@"Distance" andValue:[NSString stringWithFormat:@"%@ KM",distance]]];
-    }else{
-       [self.orderDetailView.lblDistance setAttributedText:[self getAttributedString:@"Distance" andValue:@""]];
-    }
+//    if (outletLat != nil && outletLong != nil) {
+//        NSString *distance = [[AAAppGlobals sharedInstance]
+//                               getDisctanceFrom:[AAAppGlobals sharedInstance].locationHandler.currentLocation.coordinate.latitude
+//                               andLong:[AAAppGlobals sharedInstance].locationHandler.currentLocation.coordinate.longitude
+//                               toLat:[outletLat doubleValue]
+//                               andLong:[outletLong doubleValue]];
+//        [self.orderDetailView.lblDistance setAttributedText:[self getAttributedString:@"Distance" andValue:[NSString stringWithFormat:@"%@ KM",distance]]];
+//    }else{
+//       [self.orderDetailView.lblDistance setAttributedText:[self getAttributedString:@"Distance" andValue:@""]];
+//    }
     
     
     
@@ -332,7 +335,45 @@ static NSString *products = @"products";
     [self.orderDetailView.lblStatus
      setAttributedText:[self getAttributedString:@"Status" andValue:statusValue]];
     
-    CGRect frame = self.orderDetailView.vwDevider.frame;
+    CGSize size = [AAUtils getTextSizeWithFont:self.orderDetailView.lblName.font andText:self.orderDetailView.lblName.text andMaxWidth:self.orderDetailView.lblName.frame.size.width];
+    CGRect frame = self.orderDetailView.lblName.frame;
+    frame.size.height =size.height;
+    self.orderDetailView.lblName.frame = frame;
+    
+    float itemGap = 5;
+    float yCod = frame.origin.y+frame.size.height + itemGap;
+    
+    size =  [AAUtils getTextSizeWithFont:self.orderDetailView.lblAddress.font andText:self.orderDetailView.lblAddress.text andMaxWidth:self.orderDetailView.lblAddress.frame.size.width];
+    frame = self.orderDetailView.lblAddress.frame;
+    frame.size.height =size.height;
+    frame.origin.y = yCod;
+    self.orderDetailView.lblAddress.frame = frame;
+    yCod += frame.size.height + itemGap;
+    
+    size =  [AAUtils getTextSizeWithFont:self.orderDetailView.lblTelephone.font andText:self.orderDetailView.lblTelephone.text andMaxWidth:self.orderDetailView.lblTelephone.frame.size.width];
+    frame = self.orderDetailView.lblTelephone.frame;
+    frame.size.height =size.height;
+    frame.origin.y = yCod;
+    self.orderDetailView.lblTelephone.frame = frame;
+    yCod += frame.size.height + itemGap;
+    
+    size =  [AAUtils getTextSizeWithFont:self.orderDetailView.lblStatus.font andText:self.orderDetailView.lblStatus.text andMaxWidth:self.orderDetailView.lblStatus.frame.size.width];
+    frame = self.orderDetailView.lblStatus.frame;
+    frame.size.height =size.height;
+    frame.origin.y = yCod;
+    self.orderDetailView.lblStatus.frame = frame;
+    yCod += frame.size.height + itemGap;
+    
+    size =  [AAUtils getTextSizeWithFont:self.orderDetailView.lblExpiry.font andText:self.orderDetailView.lblExpiry.text andMaxWidth:self.orderDetailView.lblExpiry.frame.size.width];
+    frame = self.orderDetailView.lblExpiry.frame;
+    frame.size.height =size.height;
+    frame.origin.y = yCod;
+    self.orderDetailView.lblExpiry.frame = frame;
+    yCod += frame.size.height + itemGap;
+    
+    
+    
+    frame = self.orderDetailView.vwDevider.frame;
     frame.origin.y = self.orderDetailView.lblExpiry.frame.origin.y + self.orderDetailView.lblExpiry.frame.size.height+10;
     self.orderDetailView.vwDevider.frame = frame;
     

@@ -107,6 +107,8 @@ NSString* const STOP_TIMER = @"startTimer";
     [encoder encodeObject:self.button_color forKey:@"button_color"];
     [encoder encodeObject:self.contactAddr forKey:@"contactAddr"];
     [encoder encodeObject:self.contactPhone forKey:@"contactPhone"];
+    [encoder encodeObject:self.contactName forKey:@"contactName"];
+    [encoder encodeObject:self.contactInstr forKey:@"contactInstr"];
 
 }
 
@@ -170,6 +172,8 @@ NSString* const STOP_TIMER = @"startTimer";
         self.button_color = [decoder decodeObjectForKey:@"button_color"];
         self.contactAddr = [decoder decodeObjectForKey:@"contactAddr"];
         self.contactPhone = [decoder decodeObjectForKey:@"contactPhone"];
+        self.contactName = [decoder decodeObjectForKey:@"contactName"];
+        self.contactInstr = [decoder decodeObjectForKey:@"contactInstr"];
     }
     return self;
 }
