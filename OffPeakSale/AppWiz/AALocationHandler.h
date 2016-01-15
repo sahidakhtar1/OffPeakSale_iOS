@@ -11,6 +11,9 @@
 @interface AALocationHandler : NSObject <CLLocationManagerDelegate>
 @property (nonatomic,strong) CLLocationManager* locationManager;
 @property (nonatomic,strong) CLLocation* currentLocation;
+@property (nonatomic) BOOL isFetchLocationContinously;
 extern NSString* const NOTIFICATION_LOCATION_UPDATED;
 extern NSString* const NOTIFICATION_LOCATION_DENIED;
+-(void)startContinuesLocationUpdate;
+-(void)endContinuesLocationUpdate;
 @end

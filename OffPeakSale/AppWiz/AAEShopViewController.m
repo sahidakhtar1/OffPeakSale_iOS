@@ -43,7 +43,7 @@
     [super viewDidLoad];
     
     self.filterKey = @"rate";
-    self.selectedFilterIndex = 1;
+    self.selectedFilterIndex = 0;
     selectedCategoryIndex = 1;
     [AAAppGlobals sharedInstance].products  = nil;
     [self.navigationController setNavigationBarHidden:YES];
@@ -85,6 +85,7 @@
         self.nearByBtn.hidden = false;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationUpdated:) name:NOTIFICATION_LOCATION_UPDATED object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationDenied) name:NOTIFICATION_LOCATION_DENIED object:nil];
+        [[AAAppGlobals sharedInstance].locationHandler startContinuesLocationUpdate];
         [AAAppGlobals sharedInstance].currentLat = [AAAppGlobals sharedInstance].locationHandler.currentLocation.coordinate.latitude;
         [AAAppGlobals sharedInstance].currentLong = [AAAppGlobals sharedInstance].locationHandler.currentLocation.coordinate.longitude;
 //        [AAAppGlobals sharedInstance].targetLat = [AAAppGlobals sharedInstance].currentLat;
@@ -161,6 +162,11 @@
     
     [super viewWillAppear:animated];
     //[self refreshView];
+    if (self.selectedFilterIndex == 0) {
+        [[AAAppGlobals sharedInstance].locationHandler startContinuesLocationUpdate];
+    }else{
+        [[AAAppGlobals sharedInstance].locationHandler endContinuesLocationUpdate];
+    }
     [self cat_viewDidAppear:YES];
     [self.tableViewEShopProductList reloadData];
     if ([AAAppGlobals sharedInstance].targetLat == 0 && [AAAppGlobals sharedInstance].targetLong == 0) {
@@ -174,6 +180,11 @@
     
     
 }
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [[AAAppGlobals sharedInstance].locationHandler endContinuesLocationUpdate];
+}
+
 -(void)reloadTable{
     [self.tableViewEShopProductList reloadData];
 }
@@ -344,8 +355,14 @@
 }
 -(void)filterAppliedWith:(NSInteger)filterIndex{
     self.searchText = nil;
+    self.selectedFilterIndex = filterIndex;
     [headerView1 setTitle:[AAAppGlobals sharedInstance].retailer.retailerName];
     [self populateView];
+    if (self.selectedFilterIndex == 0) {
+        [[AAAppGlobals sharedInstance].locationHandler startContinuesLocationUpdate];
+    }else{
+        [[AAAppGlobals sharedInstance].locationHandler endContinuesLocationUpdate];
+    }
     
 }
 - (void)cartButtonTapped {

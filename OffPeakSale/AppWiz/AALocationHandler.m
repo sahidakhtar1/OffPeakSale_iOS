@@ -79,12 +79,25 @@ NSString* const NOTIFICATION_LOCATION_DENIED = @"loc_denied";
 {
     CLLocation *location = [locations lastObject];
     self.currentLocation = location;
-    [self.locationManager stopUpdatingLocation];
-    self.locationManager.delegate = nil;
+    if (self.isFetchLocationContinously) {
+        
+    }else{
+        [self.locationManager stopUpdatingLocation];
+        self.locationManager.delegate = nil;
+    }
     NSLog(@"==================");
      NSLog(@"location updated");
      NSLog(@"==================");
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_LOCATION_UPDATED object:nil];
     [AAAppGlobals sharedInstance].showLocationOffalert = false;
+}
+-(void)startContinuesLocationUpdate{
+    self.isFetchLocationContinously = true;
+    [self intializeDefaults];
+}
+-(void)endContinuesLocationUpdate{
+    self.isFetchLocationContinously = false;
+    [self.locationManager stopUpdatingLocation];
+    self.locationManager.delegate = nil;
 }
 @end
