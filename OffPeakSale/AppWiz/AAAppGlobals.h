@@ -105,6 +105,7 @@ extern NSString* const GOOGLE_MAPS_API_KEY;
 @property (nonatomic) double targetLong;
 @property (nonatomic,strong) NSString *tagetedAddress;
 @property (nonatomic, strong) NSString *currentAddress;
+@property (nonatomic) NSInteger selectedFilterIndex;
 @property (nonatomic, strong) NSString *profileTitle;
 
 @property (nonatomic, strong) AAEarliestSchedule *earlieastSchedule;

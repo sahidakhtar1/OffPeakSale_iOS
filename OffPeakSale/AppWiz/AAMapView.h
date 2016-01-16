@@ -14,6 +14,7 @@
 @property (nonatomic,strong) NSMutableArray* markersArray;
 @property (nonatomic,strong) GMSMapView* mapView;
 @property (nonatomic,strong) GMSMarker* markerCurrentLocation;
+@property (nonatomic, strong) GMSMarker* markerTargetLocation;
 @property (nonatomic,strong) GMSMarker* selectedRetailerMarker;
 @property (nonatomic,strong) GMSMarker* currentLocationMarker;
 @property (nonatomic,strong) UITapGestureRecognizer* phoneNumberTap;
@@ -30,6 +31,7 @@
 
 //Adds a special marker for the user's current location give the coordinate,title and icon
 -(void)addCurrentLocationMarkerWithCoordinate:(CLLocationCoordinate2D)coordinate withTitle:(NSString *)title andIcon : (UIImage*)icon;
+-(void)addTargetLocationMarker;
 
 //Update the current location marker given a coordinate
 -(void)updateCurrentLocationMarkerCoordinate: (CLLocationCoordinate2D) coordinate;

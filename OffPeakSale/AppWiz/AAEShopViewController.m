@@ -44,6 +44,7 @@
     
     self.filterKey = @"rate";
     self.selectedFilterIndex = 0;
+    [AAAppGlobals sharedInstance].selectedFilterIndex = self.selectedFilterIndex;
     selectedCategoryIndex = 1;
     [AAAppGlobals sharedInstance].products  = nil;
     [self.navigationController setNavigationBarHidden:YES];
@@ -356,6 +357,7 @@
 -(void)filterAppliedWith:(NSInteger)filterIndex{
     self.searchText = nil;
     self.selectedFilterIndex = filterIndex;
+    [AAAppGlobals sharedInstance].selectedFilterIndex = self.selectedFilterIndex;
     [headerView1 setTitle:[AAAppGlobals sharedInstance].retailer.retailerName];
     [self populateView];
     if (self.selectedFilterIndex == 0) {

@@ -26,6 +26,7 @@
 @property (nonatomic, strong) AAGiftWrapViewController *giftWrapDialog;
 @property (nonatomic,strong) AAOrderSucessView *orderSucessAlert;
 @property (nonatomic, strong) AACouponView *couponView;
+@property (nonatomic, strong) AAMapView *mvRetailerStores;
 - (IBAction)btnCouponTapped:(id)sender;
 @end
 
@@ -44,6 +45,7 @@ static NSString* const JSON_RETAILER_ID_KEY = @"retailerId";
 {
     [super viewDidLoad];
      self.tfQty.text = @"1";
+    
 	// Do any additional setup after loading the view.
     [self styleSeparators];
     
@@ -104,6 +106,7 @@ static NSString* const JSON_RETAILER_ID_KEY = @"retailerId";
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationUpdated:) name:NOTIFICATION_LOCATION_UPDATED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(couponApplied)
                                                  name:@"couponApplied"
@@ -141,7 +144,7 @@ static NSString* const JSON_RETAILER_ID_KEY = @"retailerId";
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:@"hideEnterCode" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"couponApplied" object:nil];
-//    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"couponApplied" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFICATION_LOCATION_UPDATED object:nil];
 }
 -(void)refreshView
 {
@@ -518,11 +521,11 @@ static NSString* const JSON_RETAILER_ID_KEY = @"retailerId";
     UIView *mapContainer = [[UIView alloc] initWithFrame:CGRectMake(3*width+15, 15, width-30, self.ProductScroolView.frame.size.height-15)];
     [self.ProductScroolView addSubview:mapContainer];
     
-    AAMapView *mvRetailerStores = [[AAMapView alloc] initWithFrame:CGRectMake(0,0, mapContainer.frame.size.width , mapContainer.frame.size.height )];
-    [mapContainer addSubview:mvRetailerStores];
-    [self putPinsOnMap:mvRetailerStores];
-    mvRetailerStores.storeName = self.product.productShortDescription;
-    [mvRetailerStores addMarkerWithTitle:self.product.productShortDescription address:self.product.outletAddr andConatct:self.product.outletContact atLat:self.product.outletLat lng:self.product.outletLong];
+    self.mvRetailerStores = [[AAMapView alloc] initWithFrame:CGRectMake(0,0, mapContainer.frame.size.width , mapContainer.frame.size.height )];
+    [mapContainer addSubview:self.mvRetailerStores];
+    [self putPinsOnMap:self.mvRetailerStores];
+    self.mvRetailerStores.storeName = self.product.productShortDescription;
+    [self.mvRetailerStores addMarkerWithTitle:self.product.productShortDescription address:self.product.outletAddr andConatct:self.product.outletContact atLat:self.product.outletLat lng:self.product.outletLong];
 
     
     CGRect frame = self.scrollViewProductInformation.frame;
@@ -535,12 +538,16 @@ static NSString* const JSON_RETAILER_ID_KEY = @"retailerId";
     
 }
 -(void)putPinsOnMap:(AAMapView*)map{
+   
     CLLocationCoordinate2D currentLocation =
     CLLocationCoordinate2DMake([AAAppGlobals sharedInstance].targetLat,
                                [AAAppGlobals sharedInstance].targetLong);
     [map addCurrentLocationMarkerWithCoordinate:[AAAppGlobals sharedInstance].locationHandler.currentLocation.coordinate
                                       withTitle:@"Current Location"
                                         andIcon:[UIImage imageNamed:@"current_location_marker"]];
+    if ([AAAppGlobals sharedInstance].selectedFilterIndex == 1) {
+        [map addTargetLocationMarker];
+    }
     [map setStores:self.product.outlets];
 }
 
@@ -550,12 +557,16 @@ static NSString* const JSON_RETAILER_ID_KEY = @"retailerId";
     CGPoint offset = self.ProductScroolView.contentOffset;
     if ([categoryName isEqualToString:@"Reviews"]) {
         offset.x = 0;
+        [[AAAppGlobals sharedInstance].locationHandler endContinuesLocationUpdate];
     }else if ([categoryName isEqualToString:@"Details"]){
         offset.x = self.ProductScroolView.frame.size.width;
+        [[AAAppGlobals sharedInstance].locationHandler endContinuesLocationUpdate];
     }else if ([categoryName isEqualToString:@"How It Works"]){
         offset.x = 2*self.ProductScroolView.frame.size.width;
+        [[AAAppGlobals sharedInstance].locationHandler endContinuesLocationUpdate];
     }else if ([categoryName isEqualToString:@"Map"]){
         offset.x = 3*self.ProductScroolView.frame.size.width;
+        [[AAAppGlobals sharedInstance].locationHandler startContinuesLocationUpdate];
     }
     [self.ProductScroolView setContentOffset:offset animated:YES];
 }
@@ -650,6 +661,7 @@ static NSString* const JSON_RETAILER_ID_KEY = @"retailerId";
     self.productTabs.selectedCategory = @"Map";
     [self.productTabs refreshScrollView];
     [self onCategeorySelected:self.productTabs.selectedCategory];
+    [[AAAppGlobals sharedInstance].locationHandler startContinuesLocationUpdate];
 }
 #pragma mark -
 #pragma mark Search bar delegate
@@ -904,5 +916,12 @@ static NSString* const JSON_RETAILER_ID_KEY = @"retailerId";
 }
 -(void)couponApplied{
     [self performSelectorOnMainThread:@selector(populateProductPrices) withObject:nil waitUntilDone:NO];
+}
+-(void)locationUpdated:(NSNotification*)notification
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.mvRetailerStores updateCurrentLocationMarkerCoordinate:[AAAppGlobals sharedInstance].locationHandler.currentLocation.coordinate];
+        
+    });
 }
 @end

@@ -129,6 +129,23 @@
     
     self.coordinateBounds = [self.coordinateBounds includingCoordinate: self.markerCurrentLocation.position];
 }
+-(void)addTargetLocationMarker
+{
+    
+    CLLocationCoordinate2D coordinate =
+    CLLocationCoordinate2DMake([AAAppGlobals sharedInstance].targetLat, [AAAppGlobals sharedInstance].targetLong);
+    self.markerTargetLocation = [[GMSMarker alloc] init];
+    self.markerTargetLocation.position = coordinate;
+    self.markerTargetLocation.title = @"Target Location";
+    self.markerTargetLocation.snippet = @"";
+    self.markerTargetLocation.icon = [UIImage imageNamed:@"customerlocation"];
+    self.markerTargetLocation.appearAnimation = NO;
+    self.markerTargetLocation.map = self.mapView;
+    [self.markersArray addObject: self.markerTargetLocation];
+    [self.markerTargetLocation setIcon:[UIImage imageNamed:@"customerlocation"]];
+    
+    self.coordinateBounds = [self.coordinateBounds includingCoordinate:self.markerTargetLocation.position];
+}
 
 -(void)updateCurrentLocationMarkerCoordinate:(CLLocationCoordinate2D)coordinate
 {
@@ -138,7 +155,7 @@
 -(UIView *)mapView:(GMSMapView *)mapView markerInfoWindow:(GMSMarker *)marker
 {
     
-    if((marker!=self.currentLocationMarker)&&(marker!=self.markerCurrentLocation))
+    if((marker!=self.currentLocationMarker)&&(marker!=self.markerCurrentLocation) && (marker != self.markerTargetLocation))
     {
         AAStoreInfoWindow* storeInfoWindow = [[[NSBundle mainBundle] loadNibNamed:@"AAStoreInfoWindow" owner:self options:nil] objectAtIndex:0];
         AARetailerStores* retailerStore =  marker.userData;
