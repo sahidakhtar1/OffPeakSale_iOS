@@ -32,7 +32,7 @@
 //        [self.lblAddressValue setContentHuggingPriority:UILayoutPriorityRequired forAxis:(UILayoutConstraintAxisHorizontal)];
 //        [self.lblAddressValue setContentHuggingPriority:UILayoutPriorityRequired forAxis:(UILayoutConstraintAxisVertical)];
         
-        self.lblOrderId.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:ORDER_ID_FONTSIZE];
+        self.lblOrderId.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].boldFont size:ORDER_ID_FONTSIZE];
          self.lblName.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:ORDER_HISTORY_FONTSIZE];
          self.lblAddress.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:ORDER_HISTORY_FONTSIZE];
          self.lblTelephone.font = [UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:ORDER_HISTORY_FONTSIZE];

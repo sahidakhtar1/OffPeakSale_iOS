@@ -283,7 +283,7 @@ static NSString *products = @"products";
         NSDictionary* item = [self.orderedItems objectAtIndex:0];
         NSString *name = [item valueForKey:@"name"];
         [self.orderDetailView.lblName
-         setAttributedText:[self getAttributedString:@"Resturant name" andValue:name]];
+         setAttributedText:[self getAttributedString:@"Resturant Name" andValue:name]];
     }
 //    if (outletLat != nil && outletLong != nil) {
 //        NSString *distance = [[AAAppGlobals sharedInstance]
@@ -299,7 +299,7 @@ static NSString *products = @"products";
     
     
     [self.orderDetailView.lblOrderId
-     setText:[NSString stringWithFormat:@"Order %@",orderId]];
+     setText:[NSString stringWithFormat:@"Order # %@",orderId]];
     [self.orderDetailView.lblAddress
      setAttributedText:[self getAttributedString:@"Address" andValue:outletAddr]];
     [self.orderDetailView.lblTelephone

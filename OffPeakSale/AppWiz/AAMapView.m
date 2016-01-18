@@ -138,11 +138,11 @@
     self.markerTargetLocation.position = coordinate;
     self.markerTargetLocation.title = @"Target Location";
     self.markerTargetLocation.snippet = @"";
-    self.markerTargetLocation.icon = [UIImage imageNamed:@"customerlocation"];
+    self.markerTargetLocation.icon = [UIImage imageNamed:@"targetlocation"];
     self.markerTargetLocation.appearAnimation = NO;
     self.markerTargetLocation.map = self.mapView;
     [self.markersArray addObject: self.markerTargetLocation];
-    [self.markerTargetLocation setIcon:[UIImage imageNamed:@"customerlocation"]];
+    [self.markerTargetLocation setIcon:[UIImage imageNamed:@"targetlocation"]];
     
     self.coordinateBounds = [self.coordinateBounds includingCoordinate:self.markerTargetLocation.position];
 }
