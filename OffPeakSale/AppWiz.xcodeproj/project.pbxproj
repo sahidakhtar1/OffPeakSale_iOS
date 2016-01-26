@@ -3176,7 +3176,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.offpeaksale.consumer;
 				PRODUCT_NAME = OffPeakSale;
-				PROVISIONING_PROFILE = "23b143c3-9a09-4974-9dab-1094368c7151";
+				PROVISIONING_PROFILE = "4f86bf6b-9833-4098-8902-591b68be4bb3";
 				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;
 			};
@@ -3231,7 +3231,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.offpeaksale.consumer;
 				PRODUCT_NAME = OffPeakSale;
-				PROVISIONING_PROFILE = "23b143c3-9a09-4974-9dab-1094368c7151";
+				PROVISIONING_PROFILE = "4f86bf6b-9833-4098-8902-591b68be4bb3";
 				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;
 			};

@@ -134,7 +134,7 @@
 //    if ([dateComp count]>0) {
 //        date = [dateComp objectAtIndex:0];
 //    }
-    cell.lblOrderId.text = [NSString stringWithFormat:@"Order # %@",orderId];
+    cell.lblOrderId.text = [NSString stringWithFormat:@"Order  %@",orderId];
     cell.lblDatePurchase.text = [NSString stringWithFormat:@"Date of Purchase  %@",purchaseDate];
     
     cell.lblTotal.text = [NSString stringWithFormat:@"Total Order  %@%@",[AAAppGlobals sharedInstance].currency_symbol,total];

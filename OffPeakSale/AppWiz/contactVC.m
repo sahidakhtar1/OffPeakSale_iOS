@@ -55,7 +55,11 @@
     self.titleLabel.text = [AAAppGlobals sharedInstance].retailer.contactName;
     self.addressLabel.text = [AAAppGlobals sharedInstance].retailer.contactAddr;
     self.lblInstruction.text = [AAAppGlobals sharedInstance].retailer.contactInstr;
-    [self.btnPhone setTitle:[NSString stringWithFormat:@"Phone  %@",[AAAppGlobals sharedInstance].retailer.contactPhone] forState:UIControlStateNormal];
+    if ([AAAppGlobals sharedInstance].retailer.contactPhone != nil && [[AAAppGlobals sharedInstance].retailer.contactPhone length]>0) {
+        [self.btnPhone setTitle:[NSString stringWithFormat:@"Phone  %@",[AAAppGlobals sharedInstance].retailer.contactPhone] forState:UIControlStateNormal];
+    }else{
+        self.btnPhone.hidden = true;
+    }
     
     CGSize lblRetailerPoweredBySize = [AAUtils
                                        getTextSizeWithFont:self.addressLabel.font
@@ -76,7 +80,11 @@
                                        andMaxWidth:self.lblInstruction.frame.size.width];
     
     CGRect instructionFrame = self.lblInstruction.frame;
-    instructionFrame.origin.y = phoneFrame.origin.y + phoneFrame.size.height + 15;
+    if (self.btnPhone.hidden) {
+        instructionFrame.origin.y = phoneFrame.origin.y;
+    }else{
+        instructionFrame.origin.y = phoneFrame.origin.y + phoneFrame.size.height + 15;
+    }
     instructionFrame.size.height = lblInstructionSize.height;
     self.lblInstruction.frame = instructionFrame;
     

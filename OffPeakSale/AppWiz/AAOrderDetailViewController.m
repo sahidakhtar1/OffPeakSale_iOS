@@ -299,7 +299,7 @@ static NSString *products = @"products";
     
     
     [self.orderDetailView.lblOrderId
-     setText:[NSString stringWithFormat:@"Order # %@",orderId]];
+     setText:[NSString stringWithFormat:@"Order  %@",orderId]];
     [self.orderDetailView.lblAddress
      setAttributedText:[self getAttributedString:@"Address" andValue:outletAddr]];
     [self.orderDetailView.lblTelephone
