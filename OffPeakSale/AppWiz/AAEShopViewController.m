@@ -268,7 +268,7 @@
                                  };
     
     CGSize shortDescriptionLabelSize = [AAUtils getTextSizeWithFont:[UIFont fontWithName:[AAAppGlobals sharedInstance].boldFont size:SHORTDESC_FONTSIZE] andText:product.productShortDescription andMaxWidth:self.view.frame.size.width- 30 ];
-    return [[AAAppGlobals sharedInstance] getImageHeight] +shortDescriptionLabelSize.height+  70;
+    return [[AAAppGlobals sharedInstance] getImageHeight] +shortDescriptionLabelSize.height+  60;
 }
 
 #pragma mark - Helpers
@@ -307,6 +307,13 @@
     AAEshopCategory* selectedCategory = [[AAAppGlobals sharedInstance].categoryList getCategoryWithCategoryName:categoryName];
     productList_ = [selectedCategory getProductList];
     self.selectedCategoryName = selectedCategory.categoryName;
+    NSArray *categoryNames = [[AAAppGlobals sharedInstance].categoryList getCategoryNames];
+    for (int i = 0;i<[categoryNames count];i++) {
+      if ([self.selectedCategoryName isEqualToString:[categoryNames objectAtIndex:i]]) {
+            selectedCategoryIndex = i;
+          break;
+        }
+    }
     [self.tableViewEShopProductList reloadData];
     if ([productList_ count] == 0) {
         self.lblNoSearchFoundText.hidden = false;

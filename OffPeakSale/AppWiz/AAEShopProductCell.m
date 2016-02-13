@@ -169,6 +169,11 @@ NSInteger const RATING_VIEW_WEIDTH = 105;
                                            size:ADDRESS_FONTSIZE];
     [self.vwSaleIndicator addSubview:self.lblSaleIndicator];
     
+    self.vwDevider = [[UIView alloc] initWithFrame:CGRectMake(0, self.viewMainContent.frame.size.height-10, width, 10)];
+    [self.vwDevider setBackgroundColor:[UIColor grayColor]];
+    [self.viewMainContent addSubview:self.vwDevider];
+    
+    
    
 }
 -(void)setEshopProduct:(AAEShopProduct *)eshopProduct
@@ -338,6 +343,10 @@ NSInteger const RATING_VIEW_WEIDTH = 105;
     [self.lblProductShortDescription setBackgroundColor:[UIColor clearColor]];
     [self.lblProductShortDescription setTextColor:[UIColor blackColor]];
     [self.lblProductShortDescription setAutoresizingMask:UIViewAutoresizingFlexibleTopMargin];
+    
+    CGRect dividerFrame  = self.vwDevider.frame;
+    dividerFrame.origin.y = self.priceView.frame.origin.y+self.priceView.frame.size.height + 30;
+    self.vwDevider.frame = dividerFrame;
 
     
     CGFloat overlayViewHeight = self.imgViewProductImage.frame.size.height - self.lblProductShortDescription.frame.origin.y + OVERLAY_TOP_PADDING + IMAGE_VIEW_PADDING;

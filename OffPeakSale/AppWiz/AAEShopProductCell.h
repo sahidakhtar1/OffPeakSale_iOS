@@ -34,6 +34,7 @@
 @property (nonatomic, strong) UIImageView *imgPin;
 @property (nonatomic, strong) AAThemeCircularView *discountView;
 @property (nonatomic, strong) UILabel *lblDiscountPercentage;
+@property (nonatomic, strong) UIView *vwDevider;
 
 
 @property (nonatomic,strong) UIView* overlayView;

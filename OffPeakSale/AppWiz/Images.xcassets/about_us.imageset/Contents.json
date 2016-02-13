@@ -2,12 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "contact_36*36.png",
+      "filename" : "contact_menu-1.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "contact_72*72.png",
+      "filename" : "contact_menu.png",
       "scale" : "2x"
     },
     {

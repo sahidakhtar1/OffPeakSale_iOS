@@ -270,8 +270,8 @@
             AAMenuItem *myOrder = [[AAMenuItem alloc] init];
             myOrder.itemName = itemDisplayName;
             myOrder.itemType = MYORDER;
-            myOrder.showArrow = YES;
-            myOrder.iconName = @"icon_cart_black.png";
+            myOrder.showArrow = NO;
+            myOrder.iconName = @"icon_cart_black";
             [arrMenuItems addObject:myOrder];
         }
         if ([itemOrgName compare:@"myprofile" options:NSCaseInsensitiveSearch] == NSOrderedSame) {

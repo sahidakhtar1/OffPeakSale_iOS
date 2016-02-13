@@ -2,12 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "voucher_36*36.png",
+      "filename" : "voucher-1.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "voucher_72*72.png",
+      "filename" : "voucher.png",
       "scale" : "2x"
     },
     {
