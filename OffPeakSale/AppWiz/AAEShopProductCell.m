@@ -170,7 +170,7 @@ NSInteger const RATING_VIEW_WEIDTH = 105;
     [self.vwSaleIndicator addSubview:self.lblSaleIndicator];
     
     self.vwDevider = [[UIView alloc] initWithFrame:CGRectMake(0, self.viewMainContent.frame.size.height-10, width, 10)];
-    [self.vwDevider setBackgroundColor:[UIColor grayColor]];
+    [self.vwDevider setBackgroundColor:[UIColor colorWithRed:240.0/255.0 green:240.0/255.0 blue:240.0/255.0 alpha:1]];
     [self.viewMainContent addSubview:self.vwDevider];
     
     

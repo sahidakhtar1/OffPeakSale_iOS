@@ -25,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet AAThemeView *vwSelectionUnderline;
 - (IBAction)btnActiveTapped:(id)sender;
 - (IBAction)btnUsedTapped:(id)sender;
+@property (weak, nonatomic) IBOutlet UILabel *lblLoginInfo;
 
 @property (nonatomic) int selectedIndex;
 
@@ -50,6 +51,7 @@
     [self adjustTabButtons];
     [self.btnActive.titleLabel setFont:[UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:CATEGORY_FONTSIZE]];
     [self.btnUsed.titleLabel setFont:[UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:CATEGORY_FONTSIZE]];
+    [self.lblLoginInfo setFont:[UIFont fontWithName:[AAAppGlobals sharedInstance].normalFont size:CATEGORY_FONTSIZE]];
     
     [self.btnActive setTitleColor:[AAColor sharedInstance].retailerThemeBackgroundColor forState:UIControlStateSelected];
     [self.btnUsed setTitleColor:[AAColor sharedInstance].retailerThemeBackgroundColor forState:UIControlStateSelected];
@@ -77,10 +79,12 @@
         self.btnLogin.hidden = true;
         self.tbOrderHstory.hidden = false;
         self.vwTopTab.hidden = false;
+        self.lblLoginInfo.hidden = true;
     }else{
         self.btnLogin.hidden = false;
         self.tbOrderHstory.hidden = true;
         self.vwTopTab.hidden = true;
+        self.lblLoginInfo.hidden = false;
     }
     
 }

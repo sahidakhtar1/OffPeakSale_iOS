@@ -127,7 +127,29 @@
     bgLbl.backgroundColor = [UIColor blackColor];
     bgLbl.alpha = 0.3;
     [self.locationAlertView addSubview:bgLbl];
+    [self checkAppUpdateStatus];
 
+}
+-(void)checkAppUpdateStatus{
+    @try {
+        NSString *appVersion =  [NSString stringWithFormat:@"%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
+        if (![AAAppGlobals sharedInstance].appUpdateAlertShown &&
+            [AAAppGlobals sharedInstance].retailer.iosVersion != nil &&
+            ![[AAAppGlobals sharedInstance].retailer.iosVersion isEqualToString:appVersion]) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"New version is available in Itunes. Do You want to download it now? " delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+            alert.tag = 1002;
+            [alert show];
+            [AAAppGlobals sharedInstance].appUpdateAlertShown = true;
+        }
+    }
+    @catch (NSException *exception) {
+        
+    }
+    @finally {
+        
+    }
+    
+    
 }
 -(void)populateCategories
 {
@@ -245,6 +267,11 @@
     AAEShopProductCell* productCell = [self.tableViewEShopProductList dequeueReusableCellWithIdentifier:@"EShopProductCell" forIndexPath:indexPath];
     productCell.selectionStyle = UITableViewCellSelectionStyleNone;
     productCell.eshopProduct = [productList_ objectAtIndex:indexPath.row];
+    if (indexPath.row == [productList_ count]-1) {
+        productCell.vwDevider.hidden = true;
+    }else{
+        productCell.vwDevider.hidden = false;
+    }
     return productCell;
 }
 

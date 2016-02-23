@@ -214,7 +214,7 @@
          [AAAppGlobals sharedInstance].consumer.deviceToken = binaryString;
      }
     NSLog(@"Token %@",binaryString);
-    //[[[UIAlertView alloc] initWithTitle:@"Info" message:binaryString delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil] show];
+//    [[[UIAlertView alloc] initWithTitle:@"Info" message:binaryString delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil] show];
     
          [AAAppGlobals sharedInstance].deviceToken = binaryString;
      

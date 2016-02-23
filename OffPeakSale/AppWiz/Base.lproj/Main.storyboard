@@ -879,13 +879,21 @@
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Hhq-5h-zPU" customClass="AAThemeGlossyButton">
                                 <rect key="frame" x="96" y="189" width="127" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <animations/>
                                 <state key="normal" title="Login"/>
                                 <connections>
                                     <action selector="btnLoginTapped:" destination="Y6r-Sd-rie" eventType="touchUpInside" id="man-I9-baz"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please login to proceed" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hwH-vq-dR7">
+                                <rect key="frame" x="20" y="244" width="280" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="126" sectionHeaderHeight="22" sectionFooterHeight="22" id="lUc-AB-aZp">
                                 <rect key="frame" x="0.0" y="98" width="320" height="381"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -977,6 +985,7 @@
                         <outlet property="btnActive" destination="Mb3-c4-BcL" id="DDq-UW-W10"/>
                         <outlet property="btnLogin" destination="Hhq-5h-zPU" id="GKa-pM-BH9"/>
                         <outlet property="btnUsed" destination="AZf-gV-wXv" id="KRe-To-2pd"/>
+                        <outlet property="lblLoginInfo" destination="hwH-vq-dR7" id="kq2-eK-iZ7"/>
                         <outlet property="tbOrderHstory" destination="lUc-AB-aZp" id="K9g-dn-t4W"/>
                         <outlet property="vwHeaderView" destination="ZLZ-O4-EE5" id="QGX-VA-dke"/>
                         <outlet property="vwSelectionUnderline" destination="bGH-p6-e37" id="j7T-Y6-gse"/>
